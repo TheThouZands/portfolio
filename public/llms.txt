@@ -1,0 +1,7 @@
+# Portfolio
+
+> Placeholder llms.txt file.
+
+- Replace this with a short site summary.
+- Add canonical docs or important URLs.
+- Add any model-facing usage guidance you want published.

@@ -1,0 +1,8 @@
+/* TEAM */
+Name: Paulo Sánchez
+Site: thouzands.co
+Contact: thouzands@thouzands.co
+
+/* SITE */
+Stack: Next.js 16, React 19, TypeScript, Sass
+Status: Placeholder

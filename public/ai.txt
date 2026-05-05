@@ -1,0 +1,2 @@
+This is a placeholder ai.txt file.
+Replace this with site-specific guidance for AI agents, crawlers, and dataset builders.
