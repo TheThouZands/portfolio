@@ -1,0 +1,33 @@
+{
+  "Metadata": {
+    "title": "ThouZands - Ingeniero Fullstack - Portafolio",
+    "description": "Sitio personal de portafolio"
+  },
+  "WhoamiHero": {
+    "title": "Thouzands",
+    "values": [
+      "Sistemas",
+      "Estabilidad",
+      "Mantenibilidad",
+      "Adaptabilidad",
+      "Accesibilidad",
+      "Eficiencia",
+      "Herramientas, no solo sitios web"
+    ]
+  },
+  "HomePage": {
+    "introTitle": "Soy Paulo S\u00e1nchez",
+    "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web"
+  },
+  "NotFoundPage": {
+    "title": "404 - P\u00e1gina no encontrada"
+  },
+  "Error": {
+    "title": "Algo sali\u00f3 mal",
+    "retry": "Intentar de nuevo"
+  },
+  "GlobalError": {
+    "title": "Algo sali\u00f3 mal globalmente.",
+    "retry": "Intentar de nuevo"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "Metadata": {
+    "title": "ThouZands - Fullstack Engineer - Portfolio Site",
+    "description": "Personal portfolio site"
+  },
+  "WhoamiHero": {
+    "title": "Thouzands",
+    "values": [
+      "Systems",
+      "Stability",
+      "Maintainability",
+      "Responsiveness",
+      "Accessibility",
+      "Efficiency",
+      "Tools, not just websites"
+    ]
+  },
+  "HomePage": {
+    "introTitle": "I am Paulo S\u00e1nchez",
+    "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems"
+  },
+  "NotFoundPage": {
+    "title": "404 - Page Not Found"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "retry": "Try again"
+  },
+  "GlobalError": {
+    "title": "Something went wrong globally!",
+    "retry": "Try again"
+  }
+}
