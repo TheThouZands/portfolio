@@ -8,48 +8,6 @@
       "when": 1780869268946,
       "tag": "0000_normal_selene",
       "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1780888922907,
-      "tag": "0001_sparkling_norman_osborn",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1780892817214,
-      "tag": "0002_mean_magdalene",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1780896004834,
-      "tag": "0003_colorful_power_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1780966546890,
-      "tag": "0004_goofy_stardust",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1780971167637,
-      "tag": "0005_peaceful_marvel_apes",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1781324888087,
-      "tag": "0006_handy_vapor",
-      "breakpoints": true
     }
   ]
 }
