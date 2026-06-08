@@ -231,12 +231,18 @@ export const blogPosts = pgTable(
     excerpt: text(),
     cover_asset_id: integer().references(() => mediaAssets.id),
     status: statusCMS().notNull().default("draft"),
+    featured: boolean().notNull().default(false),
     published_at: timestamp({ withTimezone: true }),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     uniqueIndex("blog_posts_slug_idx").on(table.slug),
+    index("blog_posts_featured_status_published_at_idx").on(
+      table.featured,
+      table.status,
+      table.published_at,
+    ),
     index("blog_posts_status_published_at_idx").on(table.status, table.published_at),
   ],
 );
