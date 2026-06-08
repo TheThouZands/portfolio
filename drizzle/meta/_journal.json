@@ -15,6 +15,13 @@
       "when": 1780888922907,
       "tag": "0001_sparkling_norman_osborn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780892817214,
+      "tag": "0002_mean_magdalene",
+      "breakpoints": true
     }
   ]
 }

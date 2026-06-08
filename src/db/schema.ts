@@ -33,7 +33,7 @@ export type WriterDocument = {
 export const locationType = pgEnum("location_type", ["remote", "hybrid", "onsite"]);
 
 /** Publication lifecycle shared by CMS-managed content. */
-export const statusCMS = pgEnum("status_cms", ["published", "hidden", "draft"]);
+export const statusCMS = pgEnum("status_cms", ["published", "hidden", "draft", "testing"]);
 
 /** Employment relationship used to classify CV experience. */
 export const employmentType = pgEnum("employment_type", [
