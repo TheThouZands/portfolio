@@ -1,0 +1,608 @@
+import { neon } from "@neondatabase/serverless";
+import { config } from "dotenv";
+
+config({ path: ".env.local" });
+config();
+
+const databaseUrl = process.env.pf_DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error("Missing pf_DATABASE_URL environment variable.");
+}
+
+const sql = neon(databaseUrl);
+
+const blobUrls = [
+  {
+    url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g50-1.webp",
+    altText: "Demo Jane portfolio image at grade 50.",
+  },
+  {
+    url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g80-1.webp",
+    altText: "Demo Jane portfolio image at grade 80.",
+  },
+  {
+    url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g90-1.webp",
+    altText: "Demo Jane portfolio image at grade 90.",
+  },
+];
+
+const demoBlogSlugs = [
+  "designing-portfolio-cms-product-surface",
+  "experience-entries-more-than-timeline",
+];
+
+function toBlobAsset({ url, altText }) {
+  const parsedUrl = new URL(url);
+  const pathname = parsedUrl.pathname.replace(/^\//, "");
+  const filename = pathname.split("/").pop();
+
+  return {
+    access: "public",
+    altText,
+    blobStoreId: parsedUrl.hostname.split(".")[0],
+    contentDisposition: `inline; filename="${filename}"`,
+    contentType: "image/webp",
+    downloadUrl: `${url}?download=1`,
+    pathname,
+    url,
+  };
+}
+
+async function upsertMediaAsset(asset) {
+  const [row] = await sql`
+    INSERT INTO media_assets (
+      pathname,
+      url,
+      download_url,
+      access,
+      blob_store_id,
+      alt_text,
+      content_type,
+      content_disposition,
+      uploaded_at
+    )
+    VALUES (
+      ${asset.pathname},
+      ${asset.url},
+      ${asset.downloadUrl},
+      ${asset.access},
+      ${asset.blobStoreId},
+      ${asset.altText},
+      ${asset.contentType},
+      ${asset.contentDisposition},
+      now()
+    )
+    ON CONFLICT (pathname) DO UPDATE SET
+      url = excluded.url,
+      download_url = excluded.download_url,
+      access = excluded.access,
+      blob_store_id = excluded.blob_store_id,
+      alt_text = excluded.alt_text,
+      content_type = excluded.content_type,
+      content_disposition = excluded.content_disposition,
+      updated_at = now()
+    RETURNING id
+  `;
+
+  return Number(row.id);
+}
+
+async function upsertCompany(company) {
+  const [row] = await sql`
+    INSERT INTO companies (
+      company_name,
+      slug,
+      website_url,
+      summary,
+      logo_asset_id
+    )
+    VALUES (
+      ${company.name},
+      ${company.slug},
+      ${company.websiteUrl},
+      ${company.summary},
+      ${company.logoAssetId}
+    )
+    ON CONFLICT (slug) DO UPDATE SET
+      company_name = excluded.company_name,
+      website_url = excluded.website_url,
+      summary = excluded.summary,
+      logo_asset_id = excluded.logo_asset_id,
+      updated_at = now()
+    RETURNING id
+  `;
+
+  return Number(row.id);
+}
+
+async function upsertSkill(skill) {
+  const [row] = await sql`
+    INSERT INTO skills (
+      name,
+      slug,
+      category
+    )
+    VALUES (
+      ${skill.name},
+      ${skill.slug},
+      ${skill.category}
+    )
+    ON CONFLICT (slug) DO UPDATE SET
+      name = excluded.name,
+      category = excluded.category
+    RETURNING id
+  `;
+
+  return Number(row.id);
+}
+
+async function insertExperience(entry) {
+  const [row] = await sql`
+    INSERT INTO experience (
+      position_title,
+      employment_type,
+      is_current,
+      company_id,
+      start_date,
+      end_date,
+      location_label,
+      location_type,
+      role_summary,
+      company_context,
+      sort_order,
+      status,
+      featured
+    )
+    VALUES (
+      ${entry.positionTitle},
+      ${entry.employmentType},
+      ${entry.isCurrent},
+      ${entry.companyId},
+      ${entry.startDate},
+      ${entry.endDate},
+      ${entry.locationLabel},
+      ${entry.locationType},
+      ${entry.roleSummary},
+      ${entry.companyContext},
+      ${entry.sortOrder},
+      ${entry.status},
+      ${entry.featured}
+    )
+    RETURNING id
+  `;
+
+  return Number(row.id);
+}
+
+async function insertExperienceChildren(experienceId, entry, skillIds) {
+  for (const [sortOrder, bullet] of entry.bullets.entries()) {
+    await sql`
+      INSERT INTO experience_bullets (
+        experience_id,
+        type,
+        body,
+        sort_order
+      )
+      VALUES (
+        ${experienceId},
+        ${bullet.type},
+        ${bullet.body},
+        ${sortOrder}
+      )
+    `;
+  }
+
+  for (const [sortOrder, skillSlug] of entry.skillSlugs.entries()) {
+    await sql`
+      INSERT INTO experience_skills (
+        experience_id,
+        skill_id,
+        sort_order
+      )
+      VALUES (
+        ${experienceId},
+        ${skillIds[skillSlug]},
+        ${sortOrder}
+      )
+    `;
+  }
+
+  for (const [sortOrder, media] of entry.media.entries()) {
+    await sql`
+      INSERT INTO experience_media (
+        experience_id,
+        media_asset_id,
+        role,
+        caption,
+        sort_order
+      )
+      VALUES (
+        ${experienceId},
+        ${media.assetId},
+        ${media.role},
+        ${media.caption},
+        ${sortOrder}
+      )
+    `;
+  }
+}
+
+function createBlogRevision(post, coverAssetId, inlineAssetId, inlineAssetUrl) {
+  const sourceJson = {
+    type: "doc",
+    blocks: [
+      {
+        id: "title",
+        level: 2,
+        text: post.title,
+        type: "heading",
+      },
+      {
+        id: "intro",
+        text: post.intro,
+        type: "paragraph",
+      },
+      {
+        assetId: inlineAssetId,
+        caption: post.imageCaption,
+        id: "inline-demo-image",
+        type: "image",
+      },
+      {
+        id: "body",
+        text: post.body,
+        type: "paragraph",
+      },
+    ],
+  };
+
+  return {
+    assetManifest: [
+      {
+        assetId: coverAssetId,
+        role: "cover",
+      },
+      {
+        assetId: inlineAssetId,
+        blockId: "inline-demo-image",
+        role: "inline",
+      },
+    ],
+    renderedCss: `[data-post-slug="${post.slug}"] figure { margin: 1.5rem 0; } [data-post-slug="${post.slug}"] img { max-width: 100%; height: auto; }`,
+    renderedHtml: [
+      `<article data-post-slug="${post.slug}">`,
+      `<h2 data-block-id="title">${post.title}</h2>`,
+      `<p data-block-id="intro">${post.intro}</p>`,
+      `<figure data-block-id="inline-demo-image">`,
+      `<img src="${inlineAssetUrl}" data-media-asset-id="${inlineAssetId}" alt="${post.imageCaption}">`,
+      `<figcaption>${post.imageCaption}</figcaption>`,
+      "</figure>",
+      `<p data-block-id="body">${post.body}</p>`,
+      "</article>",
+    ].join(""),
+    sourceJson,
+  };
+}
+
+async function insertBlogPost(post) {
+  const [blogPost] = await sql`
+    INSERT INTO blog_posts (
+      title,
+      slug,
+      excerpt,
+      cover_asset_id,
+      status,
+      published_at
+    )
+    VALUES (
+      ${post.title},
+      ${post.slug},
+      ${post.excerpt},
+      ${post.coverAssetId},
+      ${post.status},
+      ${post.publishedAt}
+    )
+    RETURNING id
+  `;
+
+  const revision = createBlogRevision(
+    post,
+    post.coverAssetId,
+    post.inlineAssetId,
+    post.inlineAssetUrl,
+  );
+
+  const [blogRevision] = await sql`
+    INSERT INTO blog_post_revisions (
+      blog_post_id,
+      version,
+      is_current,
+      source_json,
+      rendered_html,
+      rendered_css,
+      asset_manifest
+    )
+    VALUES (
+      ${blogPost.id},
+      1,
+      true,
+      ${JSON.stringify(revision.sourceJson)}::jsonb,
+      ${revision.renderedHtml},
+      ${revision.renderedCss},
+      ${JSON.stringify(revision.assetManifest)}::jsonb
+    )
+    RETURNING id
+  `;
+
+  for (const [sortOrder, asset] of revision.assetManifest.entries()) {
+    await sql`
+      INSERT INTO blog_post_assets (
+        blog_post_revision_id,
+        media_asset_id,
+        block_id,
+        role,
+        sort_order
+      )
+      VALUES (
+        ${blogRevision.id},
+        ${asset.assetId},
+        ${asset.blockId ?? null},
+        ${asset.role},
+        ${sortOrder}
+      )
+    `;
+  }
+
+  return Number(blogPost.id);
+}
+
+async function seed() {
+  const assets = blobUrls.map(toBlobAsset);
+  const assetIds = {};
+
+  for (const asset of assets) {
+    assetIds[asset.pathname] = await upsertMediaAsset(asset);
+  }
+
+  const companies = [
+    {
+      logoAssetId: assetIds["jane10-g50-1.webp"],
+      name: "Cascade Systems",
+      slug: "cascade-systems",
+      summary: "A demo product company focused on internal CMS and operations tooling.",
+      websiteUrl: "https://example.com/cascade-systems",
+    },
+    {
+      logoAssetId: assetIds["jane10-g80-1.webp"],
+      name: "Atlas Product Studio",
+      slug: "atlas-product-studio",
+      summary: "A demo studio used for portfolio case-study and experience rendering.",
+      websiteUrl: "https://example.com/atlas-product-studio",
+    },
+  ];
+
+  const companyIds = {};
+
+  for (const company of companies) {
+    companyIds[company.slug] = await upsertCompany(company);
+  }
+
+  const skills = [
+    { category: "language", name: "TypeScript", slug: "typescript" },
+    { category: "frontend", name: "React", slug: "react" },
+    { category: "frontend", name: "Next.js", slug: "next-js" },
+    { category: "database", name: "PostgreSQL", slug: "postgresql" },
+    { category: "database", name: "Drizzle ORM", slug: "drizzle-orm" },
+    { category: "cms", name: "CMS Architecture", slug: "cms-architecture" },
+    { category: "design", name: "Design Systems", slug: "design-systems" },
+    { category: "platform", name: "Vercel", slug: "vercel" },
+  ];
+
+  const skillIds = {};
+
+  for (const skill of skills) {
+    skillIds[skill.slug] = await upsertSkill(skill);
+  }
+
+  await sql`
+    DELETE FROM blog_posts
+    WHERE slug IN (
+      ${demoBlogSlugs[0]},
+      ${demoBlogSlugs[1]}
+    )
+  `;
+
+  await sql`
+    DELETE FROM experience
+    WHERE company_id IN (
+      ${companyIds["cascade-systems"]},
+      ${companyIds["atlas-product-studio"]}
+    )
+  `;
+
+  const experienceEntries = [
+    {
+      bullets: [
+        {
+          body: "Modeled CMS content as relational records with reusable media and revisioned editorial output.",
+          type: "achievement",
+        },
+        {
+          body: "Built portfolio-facing data shapes that can render timelines, detail pages, and filtered skill views.",
+          type: "responsibility",
+        },
+        {
+          body: "Kept media placement explicit so blog content can reference assets by writer block.",
+          type: "highlight",
+        },
+      ],
+      companyContext: "Cascade Systems is seeded demo content for testing CMS-backed portfolio sections.",
+      companyId: companyIds["cascade-systems"],
+      employmentType: "contract",
+      endDate: null,
+      featured: true,
+      isCurrent: true,
+      locationLabel: "Remote",
+      locationType: "remote",
+      media: [
+        {
+          assetId: assetIds["jane10-g50-1.webp"],
+          caption: "Demo cover asset for the CMS architecture experience.",
+          role: "cover",
+        },
+        {
+          assetId: assetIds["jane10-g90-1.webp"],
+          caption: "Supporting gallery asset for experience detail views.",
+          role: "gallery",
+        },
+      ],
+      positionTitle: "CMS Platform Architect",
+      roleSummary: "Designed the backend content model for a dynamic portfolio CMS.",
+      skillSlugs: ["typescript", "postgresql", "drizzle-orm", "cms-architecture"],
+      sortOrder: 10,
+      startDate: "2025-01-01",
+      status: "testing",
+    },
+    {
+      bullets: [
+        {
+          body: "Created reusable UI content concepts for experience cards, feature callouts, and project summaries.",
+          type: "responsibility",
+        },
+        {
+          body: "Connected editorial structure with design-system language so sections can be rendered consistently.",
+          type: "achievement",
+        },
+        {
+          body: "Prepared demo data for testing status, sorting, skill chips, and media roles.",
+          type: "highlight",
+        },
+      ],
+      companyContext: "Atlas Product Studio is seeded demo content for testing experience history.",
+      companyId: companyIds["atlas-product-studio"],
+      employmentType: "freelance",
+      endDate: "2024-12-31",
+      featured: false,
+      isCurrent: false,
+      locationLabel: "Bogota, Colombia",
+      locationType: "hybrid",
+      media: [
+        {
+          assetId: assetIds["jane10-g80-1.webp"],
+          caption: "Demo logo/cover asset for product studio experience.",
+          role: "cover",
+        },
+      ],
+      positionTitle: "Frontend Systems Designer",
+      roleSummary: "Shaped frontend content patterns for a portfolio CMS demonstration.",
+      skillSlugs: ["react", "next-js", "design-systems", "vercel"],
+      sortOrder: 20,
+      startDate: "2023-03-01",
+      status: "testing",
+    },
+  ];
+
+  const experienceIds = [];
+
+  for (const entry of experienceEntries) {
+    const experienceId = await insertExperience(entry);
+    await insertExperienceChildren(experienceId, entry, skillIds);
+    experienceIds.push(experienceId);
+  }
+
+  const blogPosts = [
+    {
+      body: "This placeholder revision proves the eventual writer can keep source JSON, compiled HTML, CSS, and asset references aligned without guessing where images belong.",
+      coverAssetId: assetIds["jane10-g50-1.webp"],
+      excerpt: "A seeded post for testing the CMS writer output model before the editor exists.",
+      imageCaption: "Inline demo image placed by writer block id.",
+      inlineAssetId: assetIds["jane10-g90-1.webp"],
+      inlineAssetUrl: assets[2].url,
+      intro: "A portfolio CMS should make the editing surface feel like part of the product, not a bolted-on admin form.",
+      publishedAt: "2026-06-01T12:00:00.000Z",
+      slug: "designing-portfolio-cms-product-surface",
+      status: "testing",
+      title: "Designing a Portfolio CMS as a Product Surface",
+    },
+    {
+      body: "The child tables let one entry support bullets, media roles, skill filtering, and richer detail pages while keeping the main experience record readable.",
+      coverAssetId: assetIds["jane10-g80-1.webp"],
+      excerpt: "A seeded post for testing experience content as structured data instead of a static CV.",
+      imageCaption: "Inline demo image reused from the shared asset library.",
+      inlineAssetId: assetIds["jane10-g50-1.webp"],
+      inlineAssetUrl: assets[0].url,
+      intro: "Experience entries can become timelines, case-study previews, and skill maps when the backend stores the right structure.",
+      publishedAt: "2026-06-03T12:00:00.000Z",
+      slug: "experience-entries-more-than-timeline",
+      status: "testing",
+      title: "Making Experience Entries More Than a Timeline",
+    },
+  ];
+
+  const blogPostIds = [];
+
+  for (const post of blogPosts) {
+    blogPostIds.push(await insertBlogPost(post));
+  }
+
+  const [childCounts] = await sql`
+    SELECT
+      (
+        SELECT count(*)::int
+        FROM experience_bullets
+        WHERE experience_id IN (
+          ${experienceIds[0]},
+          ${experienceIds[1]}
+        )
+      ) AS experience_bullets,
+      (
+        SELECT count(*)::int
+        FROM experience_media
+        WHERE experience_id IN (
+          ${experienceIds[0]},
+          ${experienceIds[1]}
+        )
+      ) AS experience_media,
+      (
+        SELECT count(*)::int
+        FROM experience_skills
+        WHERE experience_id IN (
+          ${experienceIds[0]},
+          ${experienceIds[1]}
+        )
+      ) AS experience_skills,
+      (
+        SELECT count(*)::int
+        FROM blog_post_revisions
+        WHERE blog_post_id IN (
+          ${blogPostIds[0]},
+          ${blogPostIds[1]}
+        )
+      ) AS blog_post_revisions,
+      (
+        SELECT count(*)::int
+        FROM blog_post_assets
+        WHERE blog_post_revision_id IN (
+          SELECT id
+          FROM blog_post_revisions
+          WHERE blog_post_id IN (
+            ${blogPostIds[0]},
+            ${blogPostIds[1]}
+          )
+        )
+      ) AS blog_post_assets
+  `;
+
+  console.log("Seeded demo CMS data.");
+  console.log(`Media assets upserted: ${Object.keys(assetIds).length}`);
+  console.log(`Experience entries inserted: ${experienceIds.length}`);
+  console.log(`Experience bullets inserted: ${childCounts.experience_bullets}`);
+  console.log(`Experience media links inserted: ${childCounts.experience_media}`);
+  console.log(`Experience skill links inserted: ${childCounts.experience_skills}`);
+  console.log(`Blog posts inserted: ${blogPostIds.length}`);
+  console.log(`Blog revisions inserted: ${childCounts.blog_post_revisions}`);
+  console.log(`Blog asset placements inserted: ${childCounts.blog_post_assets}`);
+}
+
+await seed();

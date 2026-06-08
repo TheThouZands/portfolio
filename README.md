@@ -41,6 +41,7 @@ npm run db:pull
 npm run db:generate
 npm run db:check
 npm run db:migrate
+npm run db:seed:demo
 npm run db:studio
 ```
 
