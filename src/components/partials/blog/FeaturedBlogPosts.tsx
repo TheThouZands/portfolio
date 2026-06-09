@@ -1,8 +1,8 @@
 import { and, desc, eq, inArray } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
+import BlogPostCard from "@/components/cards/blog/BlogPostCard";
 import { db } from "@/db/client";
 import { blogPosts, blogPostTranslations } from "@/db/schema";
-import BlogPostCard from "./BlogPostCard";
 
 const publicStatuses = ["published"] as const;
 const developmentStatuses = ["published", "testing"] as const;

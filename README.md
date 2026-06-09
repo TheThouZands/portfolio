@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thouzands' fullstack portfolio
+
+This is a personal portfolio that displays fullstack capabilities using Next.js, and PostgreSQL via Neon serverless DB, handled with Drizzle ORM for DB versioning bound to repo.
+
+It is hosted in Vercel, but is fully runnable as standalone server, likewise, via Drizzle, it is compatible with self-served databases.
 
 ## Getting Started
 
@@ -8,7 +12,7 @@ Use the project Node version before installing or running scripts:
 nvm use 25.9.0
 ```
 
-On this Windows setup, bare `nvm use` does not read `.nvmrc`, so `npm run node:use` is available as a project shortcut. This repo also includes `.nvmrc` and `.node-version` for tools that read those conventions.
+On some Windows setups, bare `nvm use` does not read `.nvmrc`, so `npm run node:use` is available as a project shortcut. This repo also includes `.nvmrc` and `.node-version` for tools that read those conventions.
 
 First, run the development server:
 
@@ -24,11 +28,9 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the localized homepage by modifying `src/app/[locale]/page.tsx`. The page auto-updates as you edit the file.
-
 ## Database Migrations
 
-Drizzle is configured for the Neon PostgreSQL database in `.env.local` via `pf_DATABASE_URL`.
+Drizzle is configured for a Neon PostgreSQL database in `.env.local` via `pf_DATABASE_URL`.
 
 The source of truth for schema changes is `src/db/schema.ts`. Make table additions, removals, and modifications there, generate a reviewable SQL migration with `npm run db:generate`, then apply committed migrations with `npm run db:migrate`.
 
@@ -44,5 +46,3 @@ npm run db:migrate
 npm run db:seed:demo
 npm run db:studio
 ```
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
