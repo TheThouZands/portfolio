@@ -364,6 +364,7 @@ export const blogPostTranslations = pgTable(
   (table) => [
     primaryKey({ columns: [table.blog_post_id, table.locale] }),
     uniqueIndex("blog_post_translations_locale_slug_idx").on(table.locale, table.slug),
+    index("blog_post_translations_slug_idx").on(table.slug),
   ],
 );
 
