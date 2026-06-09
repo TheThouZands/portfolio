@@ -10,7 +10,7 @@ stay close to layout and routing concerns:
 - light synchronization needed by the route itself
 
 Prefer moving section behavior into `components/partials`. Partials may fetch data, join CMS tables, decide empty
-states, and render reusable regions. Smaller presentational pieces such as cards should live outside partials and be
+states, and render reusable regions. Smaller repeated display pieces should live in `components/repeatables` and be
 passed shaped data.
 
 A route should read like a table of contents for the page.

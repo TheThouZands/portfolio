@@ -1,4 +1,4 @@
-type BlogPostCardPost = {
+export type BlogPostCardPost = {
   excerpt: string | null;
   publishedAt: Date | null;
   slug: string;

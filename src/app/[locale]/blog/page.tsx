@@ -1,7 +1,7 @@
 import { hasLocale } from "next-intl";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import FeaturedBlogPosts from "@/components/partials/blog/FeaturedBlogPosts";
+import BlogIndexPosts from "@/components/partials/blog/BlogIndexPosts";
 import { routing } from "@/i18n/routing";
 
 type BlogIndexProps = {
@@ -26,7 +26,7 @@ export default async function BlogIndex({ params }: BlogIndexProps) {
   return (
     <main>
       <h1>{t("title")}</h1>
-      <FeaturedBlogPosts locale={locale} />
+      <BlogIndexPosts locale={locale} />
     </main>
   );
 }
