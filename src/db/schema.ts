@@ -104,6 +104,22 @@ export const mediaAssets = pgTable(
   ],
 );
 
+/** Localized alt text and discoverability copy for reusable media assets. */
+export const mediaAssetTranslations = pgTable(
+  "media_asset_translations",
+  {
+    media_asset_id: integer()
+      .references(() => mediaAssets.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    alt_text: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.media_asset_id, table.locale] }),
+    index("media_asset_translations_locale_idx").on(table.locale),
+  ],
+);
+
 /** Organizations that can be referenced by experience entries and other CMS content. */
 export const companies = pgTable(
   "companies",
@@ -119,6 +135,24 @@ export const companies = pgTable(
   },
   (table) => [
     uniqueIndex("companies_slug_idx").on(table.slug),
+  ],
+);
+
+/** Locale-specific organization display copy while keeping the company identity shared. */
+export const companyTranslations = pgTable(
+  "company_translations",
+  {
+    company_id: integer()
+      .references(() => companies.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    company_name: varchar({ length: 100 }).notNull(),
+    slug: varchar({ length: 120 }).notNull(),
+    summary: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.company_id, table.locale] }),
+    uniqueIndex("company_translations_locale_slug_idx").on(table.locale, table.slug),
   ],
 );
 
@@ -150,6 +184,25 @@ export const experience = pgTable(
   ],
 );
 
+/** Locale-specific CV copy for an experience entry. */
+export const experienceTranslations = pgTable(
+  "experience_translations",
+  {
+    experience_id: integer()
+      .references(() => experience.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    position_title: varchar({ length: 100 }).notNull(),
+    location_label: varchar({ length: 120 }),
+    role_summary: text(),
+    company_context: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.experience_id, table.locale] }),
+    index("experience_translations_locale_idx").on(table.locale),
+  ],
+);
+
 /** Ordered responsibilities, achievements, or highlights belonging to one experience entry. */
 export const experienceBullets = pgTable(
   "experience_bullets",
@@ -167,6 +220,22 @@ export const experienceBullets = pgTable(
   ],
 );
 
+/** Locale-specific body text for an ordered experience bullet. */
+export const experienceBulletTranslations = pgTable(
+  "experience_bullet_translations",
+  {
+    experience_bullet_id: integer()
+      .references(() => experienceBullets.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    body: text().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.experience_bullet_id, table.locale] }),
+    index("experience_bullet_translations_locale_idx").on(table.locale),
+  ],
+);
+
 /** Reusable skill/tag vocabulary for filtering and grouping portfolio content. */
 export const skills = pgTable(
   "skills",
@@ -179,6 +248,23 @@ export const skills = pgTable(
   },
   (table) => [
     uniqueIndex("skills_slug_idx").on(table.slug),
+  ],
+);
+
+/** Locale-specific display labels for reusable skills. */
+export const skillTranslations = pgTable(
+  "skill_translations",
+  {
+    skill_id: integer()
+      .references(() => skills.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    name: varchar({ length: 80 }).notNull(),
+    category_label: varchar({ length: 80 }),
+  },
+  (table) => [
+    primaryKey({ columns: [table.skill_id, table.locale] }),
+    index("skill_translations_locale_idx").on(table.locale),
   ],
 );
 
@@ -221,6 +307,22 @@ export const experienceMedia = pgTable(
   ],
 );
 
+/** Locale-specific caption copy for experience media attachments. */
+export const experienceMediaTranslations = pgTable(
+  "experience_media_translations",
+  {
+    experience_media_id: integer()
+      .references(() => experienceMedia.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    caption: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.experience_media_id, table.locale] }),
+    index("experience_media_translations_locale_idx").on(table.locale),
+  ],
+);
+
 /** Blog/article metadata; the body itself lives in revision records. */
 export const blogPosts = pgTable(
   "blog_posts",
@@ -247,6 +349,24 @@ export const blogPosts = pgTable(
   ],
 );
 
+/** Locale-specific blog metadata; rendered body content lives in localized revisions. */
+export const blogPostTranslations = pgTable(
+  "blog_post_translations",
+  {
+    blog_post_id: integer()
+      .references(() => blogPosts.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    title: varchar({ length: 160 }).notNull(),
+    slug: varchar({ length: 180 }).notNull(),
+    excerpt: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.blog_post_id, table.locale] }),
+    uniqueIndex("blog_post_translations_locale_slug_idx").on(table.locale, table.slug),
+  ],
+);
+
 /** Versioned writer output for a blog post, keeping editable source plus compiled HTML/CSS. */
 export const blogPostRevisions = pgTable(
   "blog_post_revisions",
@@ -255,6 +375,7 @@ export const blogPostRevisions = pgTable(
     blog_post_id: integer()
       .references(() => blogPosts.id, { onDelete: "cascade" })
       .notNull(),
+    locale: varchar({ length: 16 }).notNull().default("en"),
     version: integer().notNull().default(1),
     is_current: boolean().notNull().default(false),
     source_json: jsonb().$type<WriterDocument>().notNull(),
@@ -266,7 +387,11 @@ export const blogPostRevisions = pgTable(
   },
   (table) => [
     index("blog_post_revisions_blog_post_id_idx").on(table.blog_post_id),
-    uniqueIndex("blog_post_revisions_post_version_idx").on(table.blog_post_id, table.version),
+    uniqueIndex("blog_post_revisions_post_locale_version_idx").on(
+      table.blog_post_id,
+      table.locale,
+      table.version,
+    ),
   ],
 );
 
