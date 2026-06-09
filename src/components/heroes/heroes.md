@@ -7,3 +7,5 @@ Heroes can be heavier than a card because they often carry animation, media, or 
 API intentional, and keep route validation, redirects, metadata, and locale setup in `src/app`.
 
 If a component is not meant for the top of a page, prefer a partial or a smaller component category.
+
+SEO-wise, should be assumed these are H1s
