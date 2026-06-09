@@ -17,7 +17,8 @@
   },
   "HomePage": {
     "introTitle": "Soy Paulo S\u00e1nchez",
-    "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web"
+    "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web",
+    "featuredPostsTitle": "Publicaciones destacadas"
   },
   "NotFoundPage": {
     "title": "404 - P\u00e1gina no encontrada"

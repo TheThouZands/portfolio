@@ -2,6 +2,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import WhoamiHero from "@/components/heroes/whoami";
+import FeaturedBlogPosts from "@/components/partials/blog/FeaturedBlogPosts";
 import ExperienceChart from "@/components/partials/jobs/expChart";
 import { routing } from "@/i18n/routing";
 
@@ -10,6 +11,8 @@ type HomeProps = {
     locale: string;
   }>;
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function Home({ params }: HomeProps) {
   const { locale } = await params;
@@ -33,6 +36,7 @@ export default async function Home({ params }: HomeProps) {
         {/* TODO: add portrait image. */}
       </section>
       <ExperienceChart />
+      <FeaturedBlogPosts locale={locale} />
     </main>
   );
 }

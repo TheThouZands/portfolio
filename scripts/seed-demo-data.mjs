@@ -228,30 +228,30 @@ async function insertExperienceChildren(experienceId, entry, skillIds) {
   }
 }
 
-function createBlogRevision(post, coverAssetId, inlineAssetId, inlineAssetUrl) {
+function createBlogRevision(translation, coverAssetId, inlineAssetId, inlineAssetUrl) {
   const sourceJson = {
     type: "doc",
     blocks: [
       {
         id: "title",
         level: 2,
-        text: post.title,
+        text: translation.title,
         type: "heading",
       },
       {
         id: "intro",
-        text: post.intro,
+        text: translation.intro,
         type: "paragraph",
       },
       {
         assetId: inlineAssetId,
-        caption: post.imageCaption,
+        caption: translation.imageCaption,
         id: "inline-demo-image",
         type: "image",
       },
       {
         id: "body",
-        text: post.body,
+        text: translation.body,
         type: "paragraph",
       },
     ],
@@ -269,16 +269,16 @@ function createBlogRevision(post, coverAssetId, inlineAssetId, inlineAssetUrl) {
         role: "inline",
       },
     ],
-    renderedCss: `[data-post-slug="${post.slug}"] figure { margin: 1.5rem 0; } [data-post-slug="${post.slug}"] img { max-width: 100%; height: auto; }`,
+    renderedCss: `[data-post-slug="${translation.slug}"] figure { margin: 1.5rem 0; } [data-post-slug="${translation.slug}"] img { max-width: 100%; height: auto; }`,
     renderedHtml: [
-      `<article data-post-slug="${post.slug}">`,
-      `<h2 data-block-id="title">${post.title}</h2>`,
-      `<p data-block-id="intro">${post.intro}</p>`,
+      `<article data-post-slug="${translation.slug}">`,
+      `<h2 data-block-id="title">${translation.title}</h2>`,
+      `<p data-block-id="intro">${translation.intro}</p>`,
       `<figure data-block-id="inline-demo-image">`,
-      `<img src="${inlineAssetUrl}" data-media-asset-id="${inlineAssetId}" alt="${post.imageCaption}">`,
-      `<figcaption>${post.imageCaption}</figcaption>`,
+      `<img src="${inlineAssetUrl}" data-media-asset-id="${inlineAssetId}" alt="${translation.imageCaption}">`,
+      `<figcaption>${translation.imageCaption}</figcaption>`,
       "</figure>",
-      `<p data-block-id="body">${post.body}</p>`,
+      `<p data-block-id="body">${translation.body}</p>`,
       "</article>",
     ].join(""),
     sourceJson,
@@ -286,72 +286,97 @@ function createBlogRevision(post, coverAssetId, inlineAssetId, inlineAssetUrl) {
 }
 
 async function insertBlogPost(post) {
+  const defaultTranslation = post.translations.en;
+
   const [blogPost] = await sql`
     INSERT INTO blog_posts (
       title,
       slug,
       excerpt,
       cover_asset_id,
+      featured,
       status,
       published_at
     )
     VALUES (
-      ${post.title},
-      ${post.slug},
-      ${post.excerpt},
+      ${defaultTranslation.title},
+      ${defaultTranslation.slug},
+      ${defaultTranslation.excerpt},
       ${post.coverAssetId},
+      ${post.featured},
       ${post.status},
       ${post.publishedAt}
     )
     RETURNING id
   `;
 
-  const revision = createBlogRevision(
-    post,
-    post.coverAssetId,
-    post.inlineAssetId,
-    post.inlineAssetUrl,
-  );
-
-  const [blogRevision] = await sql`
-    INSERT INTO blog_post_revisions (
-      blog_post_id,
-      version,
-      is_current,
-      source_json,
-      rendered_html,
-      rendered_css,
-      asset_manifest
-    )
-    VALUES (
-      ${blogPost.id},
-      1,
-      true,
-      ${JSON.stringify(revision.sourceJson)}::jsonb,
-      ${revision.renderedHtml},
-      ${revision.renderedCss},
-      ${JSON.stringify(revision.assetManifest)}::jsonb
-    )
-    RETURNING id
-  `;
-
-  for (const [sortOrder, asset] of revision.assetManifest.entries()) {
+  for (const [locale, translation] of Object.entries(post.translations)) {
     await sql`
-      INSERT INTO blog_post_assets (
-        blog_post_revision_id,
-        media_asset_id,
-        block_id,
-        role,
-        sort_order
+      INSERT INTO blog_post_translations (
+        blog_post_id,
+        locale,
+        title,
+        slug,
+        excerpt
       )
       VALUES (
-        ${blogRevision.id},
-        ${asset.assetId},
-        ${asset.blockId ?? null},
-        ${asset.role},
-        ${sortOrder}
+        ${blogPost.id},
+        ${locale},
+        ${translation.title},
+        ${translation.slug},
+        ${translation.excerpt}
       )
     `;
+
+    const revision = createBlogRevision(
+      translation,
+      post.coverAssetId,
+      post.inlineAssetId,
+      post.inlineAssetUrl,
+    );
+
+    const [blogRevision] = await sql`
+      INSERT INTO blog_post_revisions (
+        blog_post_id,
+        locale,
+        version,
+        is_current,
+        source_json,
+        rendered_html,
+        rendered_css,
+        asset_manifest
+      )
+      VALUES (
+        ${blogPost.id},
+        ${locale},
+        1,
+        true,
+        ${JSON.stringify(revision.sourceJson)}::jsonb,
+        ${revision.renderedHtml},
+        ${revision.renderedCss},
+        ${JSON.stringify(revision.assetManifest)}::jsonb
+      )
+      RETURNING id
+    `;
+
+    for (const [sortOrder, asset] of revision.assetManifest.entries()) {
+      await sql`
+        INSERT INTO blog_post_assets (
+          blog_post_revision_id,
+          media_asset_id,
+          block_id,
+          role,
+          sort_order
+        )
+        VALUES (
+          ${blogRevision.id},
+          ${asset.assetId},
+          ${asset.blockId ?? null},
+          ${asset.role},
+          ${sortOrder}
+        )
+      `;
+    }
   }
 
   return Number(blogPost.id);
@@ -513,30 +538,56 @@ async function seed() {
 
   const blogPosts = [
     {
-      body: "This placeholder revision proves the eventual writer can keep source JSON, compiled HTML, CSS, and asset references aligned without guessing where images belong.",
       coverAssetId: assetIds["jane10-g50-1.webp"],
-      excerpt: "A seeded post for testing the CMS writer output model before the editor exists.",
-      imageCaption: "Inline demo image placed by writer block id.",
+      featured: true,
       inlineAssetId: assetIds["jane10-g90-1.webp"],
       inlineAssetUrl: assets[2].url,
-      intro: "A portfolio CMS should make the editing surface feel like part of the product, not a bolted-on admin form.",
       publishedAt: "2026-06-01T12:00:00.000Z",
-      slug: "designing-portfolio-cms-product-surface",
       status: "testing",
-      title: "Designing a Portfolio CMS as a Product Surface",
+      translations: {
+        en: {
+          body: "This placeholder revision proves the eventual writer can keep source JSON, compiled HTML, CSS, and asset references aligned without guessing where images belong.",
+          excerpt: "A seeded post for testing the CMS writer output model before the editor exists.",
+          imageCaption: "Inline demo image placed by writer block id.",
+          intro: "A portfolio CMS should make the editing surface feel like part of the product, not a bolted-on admin form.",
+          slug: "designing-portfolio-cms-product-surface",
+          title: "Designing a Portfolio CMS as a Product Surface",
+        },
+        es: {
+          body: "Esta revision provisional demuestra que el escritor podra mantener alineados el JSON fuente, el HTML compilado, el CSS y las referencias de assets sin adivinar donde pertenecen las imagenes.",
+          excerpt: "Una publicacion sembrada para probar el modelo de salida del escritor CMS antes de que exista el editor.",
+          imageCaption: "Imagen demo insertada por id de bloque del escritor.",
+          intro: "Un CMS de portafolio deberia hacer que la superficie de edicion se sienta como parte del producto, no como un formulario administrativo pegado despues.",
+          slug: "disenando-un-cms-de-portafolio-como-superficie-de-producto",
+          title: "Disenando un CMS de portafolio como superficie de producto",
+        },
+      },
     },
     {
-      body: "The child tables let one entry support bullets, media roles, skill filtering, and richer detail pages while keeping the main experience record readable.",
       coverAssetId: assetIds["jane10-g80-1.webp"],
-      excerpt: "A seeded post for testing experience content as structured data instead of a static CV.",
-      imageCaption: "Inline demo image reused from the shared asset library.",
+      featured: true,
       inlineAssetId: assetIds["jane10-g50-1.webp"],
       inlineAssetUrl: assets[0].url,
-      intro: "Experience entries can become timelines, case-study previews, and skill maps when the backend stores the right structure.",
       publishedAt: "2026-06-03T12:00:00.000Z",
-      slug: "experience-entries-more-than-timeline",
       status: "testing",
-      title: "Making Experience Entries More Than a Timeline",
+      translations: {
+        en: {
+          body: "The child tables let one entry support bullets, media roles, skill filtering, and richer detail pages while keeping the main experience record readable.",
+          excerpt: "A seeded post for testing experience content as structured data instead of a static CV.",
+          imageCaption: "Inline demo image reused from the shared asset library.",
+          intro: "Experience entries can become timelines, case-study previews, and skill maps when the backend stores the right structure.",
+          slug: "experience-entries-more-than-timeline",
+          title: "Making Experience Entries More Than a Timeline",
+        },
+        es: {
+          body: "Las tablas hijas permiten que una entrada soporte bullets, roles de media, filtros por habilidad y paginas de detalle mas ricas sin volver ilegible el registro principal de experiencia.",
+          excerpt: "Una publicacion sembrada para probar contenido de experiencia como datos estructurados en vez de un CV estatico.",
+          imageCaption: "Imagen demo reutilizada desde la biblioteca compartida de assets.",
+          intro: "Las entradas de experiencia pueden convertirse en lineas de tiempo, vistas previas de casos y mapas de habilidades cuando el backend guarda la estructura correcta.",
+          slug: "entradas-de-experiencia-mas-que-una-linea-de-tiempo",
+          title: "Entradas de experiencia: mas que una linea de tiempo",
+        },
+      },
     },
   ];
 
@@ -574,6 +625,14 @@ async function seed() {
       ) AS experience_skills,
       (
         SELECT count(*)::int
+        FROM blog_post_translations
+        WHERE blog_post_id IN (
+          ${blogPostIds[0]},
+          ${blogPostIds[1]}
+        )
+      ) AS blog_post_translations,
+      (
+        SELECT count(*)::int
         FROM blog_post_revisions
         WHERE blog_post_id IN (
           ${blogPostIds[0]},
@@ -601,6 +660,7 @@ async function seed() {
   console.log(`Experience media links inserted: ${childCounts.experience_media}`);
   console.log(`Experience skill links inserted: ${childCounts.experience_skills}`);
   console.log(`Blog posts inserted: ${blogPostIds.length}`);
+  console.log(`Blog translations inserted: ${childCounts.blog_post_translations}`);
   console.log(`Blog revisions inserted: ${childCounts.blog_post_revisions}`);
   console.log(`Blog asset placements inserted: ${childCounts.blog_post_assets}`);
 }

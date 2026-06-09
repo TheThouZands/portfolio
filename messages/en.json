@@ -17,7 +17,8 @@
   },
   "HomePage": {
     "introTitle": "I am Paulo S\u00e1nchez",
-    "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems"
+    "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems",
+    "featuredPostsTitle": "Featured posts"
   },
   "NotFoundPage": {
     "title": "404 - Page Not Found"
