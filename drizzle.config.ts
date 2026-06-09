@@ -4,7 +4,7 @@ import { defineConfig } from "drizzle-kit";
 config({ path: ".env.local" });
 config();
 
-const databaseUrl = process.env.pf_DATABASE_URL;
+const databaseUrl = process.env.PF_DATABASE_URL;
 
 if (!databaseUrl) {
   throw new Error(
