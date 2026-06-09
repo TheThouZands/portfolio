@@ -35,7 +35,7 @@ export default async function Home({ params }: HomeProps) {
         </header>
         {/* TODO: add portrait image. */}
       </section>
-      <ExperienceChart />
+      <ExperienceChart locale={locale} />
       <FeaturedBlogPosts locale={locale} />
     </main>
   );

@@ -3,9 +3,7 @@ import "server-only";
 import { and, desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db/client";
 import { blogPosts, blogPostTranslations } from "@/db/schema";
-
-const publicStatuses = ["published"] as const;
-const developmentStatuses = ["published", "testing"] as const;
+import { getVisibleCmsStatuses } from "@/db/queries/cms";
 
 type GetBlogPostPreviewsOptions = {
   featured?: boolean;
@@ -13,12 +11,8 @@ type GetBlogPostPreviewsOptions = {
   locale: string;
 };
 
-function canShowTestingContent() {
-  return process.env.NODE_ENV !== "production" || process.env.VERCEL_ENV === "preview";
-}
-
 export function getVisibleBlogStatuses() {
-  return canShowTestingContent() ? developmentStatuses : publicStatuses;
+  return getVisibleCmsStatuses();
 }
 
 export async function getBlogPostPreviews({

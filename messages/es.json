@@ -16,6 +16,8 @@
     ]
   },
   "HomePage": {
+    "experienceCurrent": "Presente",
+    "experienceTitle": "Experiencia",
     "introTitle": "Soy Paulo S\u00e1nchez",
     "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web",
     "featuredPostsTitle": "Publicaciones destacadas"

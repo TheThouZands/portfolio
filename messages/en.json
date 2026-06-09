@@ -16,6 +16,8 @@
     ]
   },
   "HomePage": {
+    "experienceCurrent": "Present",
+    "experienceTitle": "Experience",
     "introTitle": "I am Paulo S\u00e1nchez",
     "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems",
     "featuredPostsTitle": "Featured posts"

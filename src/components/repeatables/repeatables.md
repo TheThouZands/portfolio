@@ -14,6 +14,7 @@ Use `singles` for one repeated item:
 Use `collections` for a presentational arrangement of repeated items:
 
 - a grid of blog post previews
+- an ordered list of experience summaries
 - a horizontal rail of projects
 - a compact list of media results
 
