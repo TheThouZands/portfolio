@@ -8,9 +8,13 @@ stay close to layout and routing concerns:
 - route-level caching or dynamic/static policy
 - page/layout composition
 - light synchronization needed by the route itself
+- development-only well-known integrations that must live at a specific URL
 
 Prefer moving section behavior into `components/partials`. Partials may fetch data, join CMS tables, decide empty
 states, and render reusable regions. Smaller repeated display pieces should live in `components/repeatables` and be
 passed shaped data.
+
+The Chrome DevTools workspace route at `/.well-known/appspecific/com.chrome.devtools.json` is intentionally kept here
+because the URL is prescribed by DevTools. It should return data only in local development.
 
 A route should read like a table of contents for the page.
