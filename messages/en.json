@@ -30,5 +30,9 @@
   "GlobalError": {
     "title": "Something went wrong globally!",
     "retry": "Try again"
+  },
+  "Blog": {
+    "title": "Blog",
+    "allPosts": "All Posts"
   }
 }

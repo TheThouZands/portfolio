@@ -30,5 +30,9 @@
   "GlobalError": {
     "title": "Algo sali\u00f3 mal globalmente.",
     "retry": "Intentar de nuevo"
+  },
+  "Blog": {
+    "title": "Blog",
+    "allPosts": "Todas las publicaciones"
   }
 }
