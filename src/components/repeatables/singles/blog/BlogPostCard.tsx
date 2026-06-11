@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type BlogPostCardPost = {
   excerpt: string | null;
   publishedAt: Date | null;
@@ -18,7 +20,9 @@ export default function BlogPostCard({ locale, post }: BlogPostCardProps) {
   return (
     <article>
       <header>
-        <h3>{post.title}</h3>
+        <h3>
+          <Link href={`/${locale}/blog/${post.slug}`}>{post.title}</Link>
+        </h3>
         {publishedAt && post.publishedAt ? (
           <time dateTime={post.publishedAt.toISOString()}>{publishedAt}</time>
         ) : null}
