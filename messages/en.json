@@ -35,6 +35,8 @@
   },
   "Blog": {
     "title": "Blog",
-    "allPosts": "All Posts"
+    "allPosts": "All Posts",
+    "notFoundTitle": "Blog post not found",
+    "notFoundDescription": "We could not find that blog post."
   }
 }

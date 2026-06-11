@@ -35,6 +35,8 @@
   },
   "Blog": {
     "title": "Blog",
-    "allPosts": "Todas las publicaciones"
+    "allPosts": "Todas las publicaciones",
+    "notFoundTitle": "Publicacion no encontrada",
+    "notFoundDescription": "No encontramos esa publicacion."
   }
 }
