@@ -35,6 +35,11 @@ type GetBlogPostTranslationSlugOptions = {
   locale: string;
 };
 
+export type BlogPostTranslationSlug = {
+  locale: string;
+  slug: string;
+};
+
 export function getVisibleBlogStatuses() {
   return getVisibleCmsStatuses();
 }
@@ -154,7 +159,7 @@ export async function findBlogPostIdsBySlug({
 
 export async function getBlogPostTranslationSlugs({
   id,
-}: GetBlogPostTranslationSlugsOptions) {
+}: GetBlogPostTranslationSlugsOptions): Promise<BlogPostTranslationSlug[]> {
   return db
     .select({
       locale: blogPostTranslations.locale,
