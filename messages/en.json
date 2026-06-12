@@ -35,6 +35,9 @@
     "skillsTitle": "Skills",
     "title": "Experience"
   },
+  "Skills": {
+    "title": "Skills"
+  },
   "NotFoundPage": {
     "title": "404 - Page Not Found"
   },

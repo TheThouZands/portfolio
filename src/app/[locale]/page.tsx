@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
+import SkillsIndex from "@/components/partials/skills/Index";
 import { routing } from "@/i18n/routing";
 
 type HomeProps = {
@@ -35,6 +36,7 @@ export default async function Home({ params }: HomeProps) {
         </header>
         {/* TODO: add portrait image. */}
       </section>
+      <SkillsIndex locale={locale} />
       <JobsChart locale={locale} />
       <FeaturedPosts locale={locale} />
     </main>
