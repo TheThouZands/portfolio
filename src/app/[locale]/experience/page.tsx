@@ -1,10 +1,10 @@
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import ExperienceIndex from "@/components/partials/jobs/ExperienceIndex";
+import JobsIndex from "@/components/partials/jobs/Index";
 import { routing } from "@/i18n/routing";
 
-type ExperienceIndexPageProps = {
+type PageProps = {
   params: Promise<{
     locale: string;
   }>;
@@ -12,9 +12,9 @@ type ExperienceIndexPageProps = {
 
 export const dynamic = "force-dynamic";
 
-export default async function ExperienceIndexPage({
+export default async function Page({
   params,
-}: ExperienceIndexPageProps) {
+}: PageProps) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -28,7 +28,7 @@ export default async function ExperienceIndexPage({
   return (
     <main>
       <h1>{t("title")}</h1>
-      <ExperienceIndex locale={locale} />
+      <JobsIndex locale={locale} />
     </main>
   );
 }

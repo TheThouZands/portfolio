@@ -1,16 +1,16 @@
 import { getTranslations } from "next-intl/server";
-import ExperienceList from "@/components/repeatables/collections/jobs/ExperienceList";
+import List from "@/components/repeatables/collections/jobs/List";
 import { getExperiencePreviews } from "@/db/queries/experience";
 
-type ExperienceIndexProps = {
+type IndexProps = {
   locale: string;
 };
 
-export default async function ExperienceIndex({ locale }: ExperienceIndexProps) {
+export default async function Index({ locale }: IndexProps) {
   const t = await getTranslations("Experience");
-  const experiences = await getExperiencePreviews({ limit: null, locale });
+  const jobs = await getExperiencePreviews({ limit: null, locale });
 
-  if (experiences.length === 0) {
+  if (jobs.length === 0) {
     return null;
   }
 
@@ -19,9 +19,9 @@ export default async function ExperienceIndex({ locale }: ExperienceIndexProps) 
       <header>
         <h2>{t("allJobs")}</h2>
       </header>
-      <ExperienceList
+      <List
         currentLabel={t("current")}
-        experiences={experiences}
+        jobs={jobs}
         locale={locale}
       />
     </section>

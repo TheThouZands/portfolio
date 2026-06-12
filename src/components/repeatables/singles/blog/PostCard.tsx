@@ -1,18 +1,18 @@
 import Link from "next/link";
 
-export type BlogPostCardPost = {
+export type PostCardData = {
   excerpt: string | null;
   publishedAt: Date | null;
   slug: string;
   title: string;
 };
 
-type BlogPostCardProps = {
+type PostCardProps = {
   locale: string;
-  post: BlogPostCardPost;
+  post: PostCardData;
 };
 
-export default function BlogPostCard({ locale, post }: BlogPostCardProps) {
+export default function PostCard({ locale, post }: PostCardProps) {
   const publishedAt = post.publishedAt
     ? new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(post.publishedAt)
     : null;

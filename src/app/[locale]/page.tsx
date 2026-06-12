@@ -2,8 +2,8 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import WhoamiHero from "@/components/heroes/whoami";
-import FeaturedBlogPosts from "@/components/partials/blog/FeaturedBlogPosts";
-import ExperienceChart from "@/components/partials/jobs/expChart";
+import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
+import JobsChart from "@/components/partials/jobs/Chart";
 import { routing } from "@/i18n/routing";
 
 type HomeProps = {
@@ -35,8 +35,8 @@ export default async function Home({ params }: HomeProps) {
         </header>
         {/* TODO: add portrait image. */}
       </section>
-      <ExperienceChart locale={locale} />
-      <FeaturedBlogPosts locale={locale} />
+      <JobsChart locale={locale} />
+      <FeaturedPosts locale={locale} />
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import FeaturedBlogPosts from "@/components/partials/blog/FeaturedBlogPosts";
+import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 
 export default async function BlogNotFound() {
   const locale = await getLocale();
@@ -13,7 +13,7 @@ export default async function BlogNotFound() {
           <p>{t("notFoundDescription")}</p>
         </header>
       </section>
-      <FeaturedBlogPosts locale={locale} />
+      <FeaturedPosts locale={locale} />
     </main>
   );
 }

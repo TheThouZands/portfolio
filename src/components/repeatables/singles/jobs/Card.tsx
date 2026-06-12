@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export type ExperienceCardExperience = {
+export type CardData = {
   companyName: string;
   companySlug: string;
   companyWebsiteUrl: string | null;
@@ -15,9 +15,9 @@ export type ExperienceCardExperience = {
   startDate: Date | string;
 };
 
-type ExperienceCardProps = {
+type CardProps = {
   currentLabel: string;
-  experience: ExperienceCardExperience;
+  job: CardData;
   locale: string;
 };
 
@@ -37,7 +37,7 @@ function getDateTimeValue(date: Date | string) {
   return date;
 }
 
-function formatExperienceDate(locale: string, date: Date | string) {
+function formatDate(locale: string, date: Date | string) {
   return new Intl.DateTimeFormat(locale, {
     month: "short",
     timeZone: "UTC",
@@ -49,48 +49,48 @@ function formatEnumLabel(value: string) {
   return value.replaceAll("_", " ");
 }
 
-export default function ExperienceCard({
+export default function Card({
   currentLabel,
-  experience,
+  job,
   locale,
-}: ExperienceCardProps) {
-  const startLabel = formatExperienceDate(locale, experience.startDate);
-  const endLabel = experience.isCurrent
+}: CardProps) {
+  const startLabel = formatDate(locale, job.startDate);
+  const endLabel = job.isCurrent
     ? currentLabel
-    : experience.endDate
-      ? formatExperienceDate(locale, experience.endDate)
+    : job.endDate
+      ? formatDate(locale, job.endDate)
       : null;
 
   return (
     <article>
       <header>
         <h3>
-          <Link href={`/${locale}/experience/${experience.id}`}>
-            {experience.positionTitle}
+          <Link href={`/${locale}/experience/${job.id}`}>
+            {job.positionTitle}
           </Link>
         </h3>
         <p>
-          {experience.companyWebsiteUrl ? (
-            <a href={experience.companyWebsiteUrl}>{experience.companyName}</a>
+          {job.companyWebsiteUrl ? (
+            <a href={job.companyWebsiteUrl}>{job.companyName}</a>
           ) : (
-            experience.companyName
+            job.companyName
           )}
         </p>
         <p>
-          <time dateTime={getDateTimeValue(experience.startDate)}>{startLabel}</time>
+          <time dateTime={getDateTimeValue(job.startDate)}>{startLabel}</time>
           {endLabel ? " - " : null}
-          {experience.endDate && !experience.isCurrent ? (
-            <time dateTime={getDateTimeValue(experience.endDate)}>{endLabel}</time>
+          {job.endDate && !job.isCurrent ? (
+            <time dateTime={getDateTimeValue(job.endDate)}>{endLabel}</time>
           ) : (
             endLabel
           )}
         </p>
       </header>
-      {experience.roleSummary ? <p>{experience.roleSummary}</p> : null}
+      {job.roleSummary ? <p>{job.roleSummary}</p> : null}
       <p>
-        {formatEnumLabel(experience.employmentType)}
-        {experience.locationLabel ? ` | ${experience.locationLabel}` : null}
-        {` | ${formatEnumLabel(experience.locationType)}`}
+        {formatEnumLabel(job.employmentType)}
+        {job.locationLabel ? ` | ${job.locationLabel}` : null}
+        {` | ${formatEnumLabel(job.locationType)}`}
       </p>
     </article>
   );

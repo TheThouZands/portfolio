@@ -1,5 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import ExperienceChart from "@/components/partials/jobs/expChart";
+import JobsChart from "@/components/partials/jobs/Chart";
 
 export default async function ExperienceNotFound() {
   const locale = await getLocale();
@@ -13,7 +13,7 @@ export default async function ExperienceNotFound() {
           <p>{t("notFoundDescription")}</p>
         </header>
       </section>
-      <ExperienceChart locale={locale} />
+      <JobsChart locale={locale} />
     </main>
   );
 }

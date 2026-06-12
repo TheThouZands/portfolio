@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound, permanentRedirect } from "next/navigation";
-import FeaturedBlogPosts from "@/components/partials/blog/FeaturedBlogPosts";
+import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import Post from "@/components/partials/blog/Post";
 import { resolveBlogPostMetadata, resolveBlogPostRoute } from "@/cms/blog";
 import { routing } from "@/i18n/routing";
@@ -56,7 +56,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
   return (
     <main>
       <Post blogPostId={postRoute.id} locale={locale} />
-      <FeaturedBlogPosts locale={locale} />
+      <FeaturedPosts locale={locale} />
     </main>
   );
 }

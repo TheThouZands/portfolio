@@ -5,8 +5,8 @@ import {
   type ExperienceDetail,
 } from "@/db/queries/experience";
 
-type ExperienceDetailsProps = {
-  experienceId: number;
+type DetailsProps = {
+  jobId: number;
   locale: string;
 };
 
@@ -26,7 +26,7 @@ function getDateTimeValue(date: Date | string) {
   return date;
 }
 
-function formatExperienceDate(locale: string, date: Date | string) {
+function formatDate(locale: string, date: Date | string) {
   return new Intl.DateTimeFormat(locale, {
     month: "long",
     timeZone: "UTC",
@@ -38,16 +38,16 @@ function formatEnumLabel(value: string) {
   return value.replaceAll("_", " ");
 }
 
-function getExperienceDateRange(
-  experience: ExperienceDetail,
+function getDateRange(
+  job: ExperienceDetail,
   locale: string,
   currentLabel: string,
 ) {
-  const startLabel = formatExperienceDate(locale, experience.startDate);
-  const endLabel = experience.isCurrent
+  const startLabel = formatDate(locale, job.startDate);
+  const endLabel = job.isCurrent
     ? currentLabel
-    : experience.endDate
-      ? formatExperienceDate(locale, experience.endDate)
+    : job.endDate
+      ? formatDate(locale, job.endDate)
       : null;
 
   return {
@@ -56,19 +56,19 @@ function getExperienceDateRange(
   };
 }
 
-export default async function ExperienceDetails({
-  experienceId,
+export default async function Details({
+  jobId,
   locale,
-}: ExperienceDetailsProps) {
+}: DetailsProps) {
   const t = await getTranslations("Experience");
-  const experience = await getExperienceById({ id: experienceId, locale });
+  const job = await getExperienceById({ id: jobId, locale });
 
-  if (!experience) {
+  if (!job) {
     notFound();
   }
 
-  const { endLabel, startLabel } = getExperienceDateRange(
-    experience,
+  const { endLabel, startLabel } = getDateRange(
+    job,
     locale,
     t("current"),
   );
@@ -76,21 +76,21 @@ export default async function ExperienceDetails({
   return (
     <article>
       <header>
-        <h1>{experience.positionTitle}</h1>
+        <h1>{job.positionTitle}</h1>
         <p>
-          {experience.companyWebsiteUrl ? (
-            <a href={experience.companyWebsiteUrl}>{experience.companyName}</a>
+          {job.companyWebsiteUrl ? (
+            <a href={job.companyWebsiteUrl}>{job.companyName}</a>
           ) : (
-            experience.companyName
+            job.companyName
           )}
         </p>
         <p>
-          <time dateTime={getDateTimeValue(experience.startDate)}>
+          <time dateTime={getDateTimeValue(job.startDate)}>
             {startLabel}
           </time>
           {endLabel ? " - " : null}
-          {experience.endDate && !experience.isCurrent ? (
-            <time dateTime={getDateTimeValue(experience.endDate)}>
+          {job.endDate && !job.isCurrent ? (
+            <time dateTime={getDateTimeValue(job.endDate)}>
               {endLabel}
             </time>
           ) : (
@@ -98,31 +98,31 @@ export default async function ExperienceDetails({
           )}
         </p>
         <p>
-          {formatEnumLabel(experience.employmentType)}
-          {experience.locationLabel ? ` | ${experience.locationLabel}` : null}
-          {` | ${formatEnumLabel(experience.locationType)}`}
+          {formatEnumLabel(job.employmentType)}
+          {job.locationLabel ? ` | ${job.locationLabel}` : null}
+          {` | ${formatEnumLabel(job.locationType)}`}
         </p>
       </header>
 
-      {experience.roleSummary ? (
+      {job.roleSummary ? (
         <section>
           <h2>{t("overviewTitle")}</h2>
-          <p>{experience.roleSummary}</p>
+          <p>{job.roleSummary}</p>
         </section>
       ) : null}
 
-      {experience.companyContext ? (
+      {job.companyContext ? (
         <section>
           <h2>{t("companyContextTitle")}</h2>
-          <p>{experience.companyContext}</p>
+          <p>{job.companyContext}</p>
         </section>
       ) : null}
 
-      {experience.bullets.length > 0 ? (
+      {job.bullets.length > 0 ? (
         <section>
           <h2>{t("highlightsTitle")}</h2>
           <ul>
-            {experience.bullets.map((bullet) => (
+            {job.bullets.map((bullet) => (
               <li key={bullet.id}>
                 <strong>{formatEnumLabel(bullet.type)}</strong>
                 {`: ${bullet.body}`}
@@ -132,11 +132,11 @@ export default async function ExperienceDetails({
         </section>
       ) : null}
 
-      {experience.skills.length > 0 ? (
+      {job.skills.length > 0 ? (
         <section>
           <h2>{t("skillsTitle")}</h2>
           <ul>
-            {experience.skills.map((skill) => (
+            {job.skills.map((skill) => (
               <li key={skill.id}>
                 {skill.name}
                 {skill.categoryLabel ? ` | ${skill.categoryLabel}` : null}
@@ -146,11 +146,11 @@ export default async function ExperienceDetails({
         </section>
       ) : null}
 
-      {experience.media.length > 0 ? (
+      {job.media.length > 0 ? (
         <section>
           <h2>{t("mediaTitle")}</h2>
           <div>
-            {experience.media.map((media) => (
+            {job.media.map((media) => (
               <figure key={media.id}>
                 {/* CMS media can come from arbitrary public asset URLs without Next image dimensions. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}

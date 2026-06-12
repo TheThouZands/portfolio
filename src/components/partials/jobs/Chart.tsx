@@ -1,16 +1,16 @@
 import { getTranslations } from "next-intl/server";
-import ExperienceList from "@/components/repeatables/collections/jobs/ExperienceList";
+import List from "@/components/repeatables/collections/jobs/List";
 import { getExperiencePreviews } from "@/db/queries/experience";
 
-type ExperienceChartProps = {
+type ChartProps = {
   locale: string;
 };
 
-export default async function ExperienceChart({ locale }: ExperienceChartProps) {
+export default async function Chart({ locale }: ChartProps) {
   const t = await getTranslations("HomePage");
-  const experiences = await getExperiencePreviews({ locale });
+  const jobs = await getExperiencePreviews({ locale });
 
-  if (experiences.length === 0) {
+  if (jobs.length === 0) {
     return null;
   }
 
@@ -19,9 +19,9 @@ export default async function ExperienceChart({ locale }: ExperienceChartProps) 
       <header>
         <h2>{t("experienceTitle")}</h2>
       </header>
-      <ExperienceList
+      <List
         currentLabel={t("experienceCurrent")}
-        experiences={experiences}
+        jobs={jobs}
         locale={locale}
       />
     </section>
