@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type ExperienceCardExperience = {
   companyName: string;
   companySlug: string;
@@ -62,7 +64,11 @@ export default function ExperienceCard({
   return (
     <article>
       <header>
-        <h3>{experience.positionTitle}</h3>
+        <h3>
+          <Link href={`/${locale}/experience/${experience.id}`}>
+            {experience.positionTitle}
+          </Link>
+        </h3>
         <p>
           {experience.companyWebsiteUrl ? (
             <a href={experience.companyWebsiteUrl}>{experience.companyName}</a>

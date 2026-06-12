@@ -22,6 +22,19 @@
     "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems",
     "featuredPostsTitle": "Featured posts"
   },
+  "Experience": {
+    "allJobs": "All jobs",
+    "companyContextTitle": "Company context",
+    "current": "Present",
+    "highlightsTitle": "Highlights",
+    "mediaTitle": "Media",
+    "metadataTitle": "{positionTitle} at {companyName}",
+    "notFoundTitle": "Experience not found",
+    "notFoundDescription": "We could not find that experience entry.",
+    "overviewTitle": "Overview",
+    "skillsTitle": "Skills",
+    "title": "Experience"
+  },
   "NotFoundPage": {
     "title": "404 - Page Not Found"
   },

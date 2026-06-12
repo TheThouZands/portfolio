@@ -22,6 +22,19 @@
     "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web",
     "featuredPostsTitle": "Publicaciones destacadas"
   },
+  "Experience": {
+    "allJobs": "Todos los trabajos",
+    "companyContextTitle": "Contexto de la compa\u00f1\u00eda",
+    "current": "Presente",
+    "highlightsTitle": "Puntos destacados",
+    "mediaTitle": "Medios",
+    "metadataTitle": "{positionTitle} en {companyName}",
+    "notFoundTitle": "Experiencia no encontrada",
+    "notFoundDescription": "No encontramos esa entrada de experiencia.",
+    "overviewTitle": "Resumen",
+    "skillsTitle": "Habilidades",
+    "title": "Experiencia"
+  },
   "NotFoundPage": {
     "title": "404 - P\u00e1gina no encontrada"
   },
