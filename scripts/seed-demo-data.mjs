@@ -15,15 +15,36 @@ const sql = neon(databaseUrl);
 const blobUrls = [
   {
     url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g50-1.webp",
-    altText: "Demo Jane portfolio image at grade 50.",
+    translations: {
+      en: {
+        altText: "Demo Jane portfolio image at grade 50.",
+      },
+      es: {
+        altText: "Imagen demo Jane de portafolio en calidad 50.",
+      },
+    },
   },
   {
     url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g80-1.webp",
-    altText: "Demo Jane portfolio image at grade 80.",
+    translations: {
+      en: {
+        altText: "Demo Jane portfolio image at grade 80.",
+      },
+      es: {
+        altText: "Imagen demo Jane de portafolio en calidad 80.",
+      },
+    },
   },
   {
     url: "https://gh6jcohtaeos2is5.public.blob.vercel-storage.com/jane10-g90-1.webp",
-    altText: "Demo Jane portfolio image at grade 90.",
+    translations: {
+      en: {
+        altText: "Demo Jane portfolio image at grade 90.",
+      },
+      es: {
+        altText: "Imagen demo Jane de portafolio en calidad 90.",
+      },
+    },
   },
 ];
 
@@ -32,19 +53,21 @@ const demoBlogSlugs = [
   "experience-entries-more-than-timeline",
 ];
 
-function toBlobAsset({ url, altText }) {
+function toBlobAsset({ translations, url }) {
   const parsedUrl = new URL(url);
   const pathname = parsedUrl.pathname.replace(/^\//, "");
   const filename = pathname.split("/").pop();
+  const defaultTranslation = translations.en;
 
   return {
     access: "public",
-    altText,
+    altText: defaultTranslation.altText,
     blobStoreId: parsedUrl.hostname.split(".")[0],
     contentDisposition: `inline; filename="${filename}"`,
     contentType: "image/webp",
     downloadUrl: `${url}?download=1`,
     pathname,
+    translations,
     url,
   };
 }
@@ -88,7 +111,28 @@ async function upsertMediaAsset(asset) {
   return Number(row.id);
 }
 
+async function upsertMediaAssetTranslations(assetId, asset) {
+  for (const [locale, translation] of Object.entries(asset.translations)) {
+    await sql`
+      INSERT INTO media_asset_translations (
+        media_asset_id,
+        locale,
+        alt_text
+      )
+      VALUES (
+        ${assetId},
+        ${locale},
+        ${translation.altText}
+      )
+      ON CONFLICT (media_asset_id, locale) DO UPDATE SET
+        alt_text = excluded.alt_text
+    `;
+  }
+}
+
 async function upsertCompany(company) {
+  const defaultTranslation = company.translations.en;
+
   const [row] = await sql`
     INSERT INTO companies (
       company_name,
@@ -98,10 +142,10 @@ async function upsertCompany(company) {
       logo_asset_id
     )
     VALUES (
-      ${company.name},
-      ${company.slug},
+      ${defaultTranslation.name},
+      ${defaultTranslation.slug},
       ${company.websiteUrl},
-      ${company.summary},
+      ${defaultTranslation.summary},
       ${company.logoAssetId}
     )
     ON CONFLICT (slug) DO UPDATE SET
@@ -114,6 +158,31 @@ async function upsertCompany(company) {
   `;
 
   return Number(row.id);
+}
+
+async function upsertCompanyTranslations(companyId, company) {
+  for (const [locale, translation] of Object.entries(company.translations)) {
+    await sql`
+      INSERT INTO company_translations (
+        company_id,
+        locale,
+        company_name,
+        slug,
+        summary
+      )
+      VALUES (
+        ${companyId},
+        ${locale},
+        ${translation.name},
+        ${translation.slug},
+        ${translation.summary}
+      )
+      ON CONFLICT (company_id, locale) DO UPDATE SET
+        company_name = excluded.company_name,
+        slug = excluded.slug,
+        summary = excluded.summary
+    `;
+  }
 }
 
 async function upsertSkill(skill) {
@@ -138,6 +207,8 @@ async function upsertSkill(skill) {
 }
 
 async function insertExperience(entry) {
+  const defaultTranslation = entry.translations.en;
+
   const [row] = await sql`
     INSERT INTO experience (
       position_title,
@@ -155,16 +226,16 @@ async function insertExperience(entry) {
       featured
     )
     VALUES (
-      ${entry.positionTitle},
+      ${defaultTranslation.positionTitle},
       ${entry.employmentType},
       ${entry.isCurrent},
       ${entry.companyId},
       ${entry.startDate},
       ${entry.endDate},
-      ${entry.locationLabel},
+      ${defaultTranslation.locationLabel},
       ${entry.locationType},
-      ${entry.roleSummary},
-      ${entry.companyContext},
+      ${defaultTranslation.roleSummary},
+      ${defaultTranslation.companyContext},
       ${entry.sortOrder},
       ${entry.status},
       ${entry.featured}
@@ -175,9 +246,33 @@ async function insertExperience(entry) {
   return Number(row.id);
 }
 
+async function insertExperienceTranslations(experienceId, entry) {
+  for (const [locale, translation] of Object.entries(entry.translations)) {
+    await sql`
+      INSERT INTO experience_translations (
+        experience_id,
+        locale,
+        position_title,
+        location_label,
+        role_summary,
+        company_context
+      )
+      VALUES (
+        ${experienceId},
+        ${locale},
+        ${translation.positionTitle},
+        ${translation.locationLabel},
+        ${translation.roleSummary},
+        ${translation.companyContext}
+      )
+    `;
+  }
+}
+
 async function insertExperienceChildren(experienceId, entry, skillIds) {
   for (const [sortOrder, bullet] of entry.bullets.entries()) {
-    await sql`
+    const defaultTranslation = bullet.translations.en;
+    const [experienceBullet] = await sql`
       INSERT INTO experience_bullets (
         experience_id,
         type,
@@ -187,10 +282,26 @@ async function insertExperienceChildren(experienceId, entry, skillIds) {
       VALUES (
         ${experienceId},
         ${bullet.type},
-        ${bullet.body},
+        ${defaultTranslation.body},
         ${sortOrder}
       )
+      RETURNING id
     `;
+
+    for (const [locale, translation] of Object.entries(bullet.translations)) {
+      await sql`
+        INSERT INTO experience_bullet_translations (
+          experience_bullet_id,
+          locale,
+          body
+        )
+        VALUES (
+          ${experienceBullet.id},
+          ${locale},
+          ${translation.body}
+        )
+      `;
+    }
   }
 
   for (const [sortOrder, skillSlug] of entry.skillSlugs.entries()) {
@@ -209,7 +320,8 @@ async function insertExperienceChildren(experienceId, entry, skillIds) {
   }
 
   for (const [sortOrder, media] of entry.media.entries()) {
-    await sql`
+    const defaultTranslation = media.translations.en;
+    const [experienceMedia] = await sql`
       INSERT INTO experience_media (
         experience_id,
         media_asset_id,
@@ -221,10 +333,26 @@ async function insertExperienceChildren(experienceId, entry, skillIds) {
         ${experienceId},
         ${media.assetId},
         ${media.role},
-        ${media.caption},
+        ${defaultTranslation.caption},
         ${sortOrder}
       )
+      RETURNING id
     `;
+
+    for (const [locale, translation] of Object.entries(media.translations)) {
+      await sql`
+        INSERT INTO experience_media_translations (
+          experience_media_id,
+          locale,
+          caption
+        )
+        VALUES (
+          ${experienceMedia.id},
+          ${locale},
+          ${translation.caption}
+        )
+      `;
+    }
   }
 }
 
@@ -387,22 +515,43 @@ async function seed() {
   const assetIds = {};
 
   for (const asset of assets) {
-    assetIds[asset.pathname] = await upsertMediaAsset(asset);
+    const assetId = await upsertMediaAsset(asset);
+
+    assetIds[asset.pathname] = assetId;
+    await upsertMediaAssetTranslations(assetId, asset);
   }
 
   const companies = [
     {
       logoAssetId: assetIds["jane10-g50-1.webp"],
-      name: "Cascade Systems",
-      slug: "cascade-systems",
-      summary: "A demo product company focused on internal CMS and operations tooling.",
+      translations: {
+        en: {
+          name: "Cascade Systems",
+          slug: "cascade-systems",
+          summary: "A demo product company focused on internal CMS and operations tooling.",
+        },
+        es: {
+          name: "Cascade Systems",
+          slug: "cascade-systems",
+          summary: "Una empresa demo de producto enfocada en CMS internos y herramientas de operaciones.",
+        },
+      },
       websiteUrl: "https://example.com/cascade-systems",
     },
     {
       logoAssetId: assetIds["jane10-g80-1.webp"],
-      name: "Atlas Product Studio",
-      slug: "atlas-product-studio",
-      summary: "A demo studio used for portfolio case-study and experience rendering.",
+      translations: {
+        en: {
+          name: "Atlas Product Studio",
+          slug: "atlas-product-studio",
+          summary: "A demo studio used for portfolio case-study and experience rendering.",
+        },
+        es: {
+          name: "Atlas Product Studio",
+          slug: "atlas-product-studio",
+          summary: "Un estudio demo usado para renderizar casos de portafolio y experiencia.",
+        },
+      },
       websiteUrl: "https://example.com/atlas-product-studio",
     },
   ];
@@ -410,7 +559,10 @@ async function seed() {
   const companyIds = {};
 
   for (const company of companies) {
-    companyIds[company.slug] = await upsertCompany(company);
+    const companyId = await upsertCompany(company);
+
+    companyIds[company.translations.en.slug] = companyId;
+    await upsertCompanyTranslations(companyId, company);
   }
 
   const skills = [
@@ -450,81 +602,164 @@ async function seed() {
     {
       bullets: [
         {
-          body: "Modeled CMS content as relational records with reusable media and revisioned editorial output.",
+          translations: {
+            en: {
+              body: "Modeled CMS content as relational records with reusable media and revisioned editorial output.",
+            },
+            es: {
+              body: "Modele contenido CMS como registros relacionales con media reutilizable y salida editorial versionada.",
+            },
+          },
           type: "achievement",
         },
         {
-          body: "Built portfolio-facing data shapes that can render timelines, detail pages, and filtered skill views.",
+          translations: {
+            en: {
+              body: "Built portfolio-facing data shapes that can render timelines, detail pages, and filtered skill views.",
+            },
+            es: {
+              body: "Construi formas de datos para el portafolio que pueden renderizar lineas de tiempo, paginas de detalle y vistas filtradas por habilidad.",
+            },
+          },
           type: "responsibility",
         },
         {
-          body: "Kept media placement explicit so blog content can reference assets by writer block.",
+          translations: {
+            en: {
+              body: "Kept media placement explicit so blog content can reference assets by writer block.",
+            },
+            es: {
+              body: "Mantuve la ubicacion de media explicita para que el contenido del blog pueda referenciar assets por bloque del escritor.",
+            },
+          },
           type: "highlight",
         },
       ],
-      companyContext: "Cascade Systems is seeded demo content for testing CMS-backed portfolio sections.",
       companyId: companyIds["cascade-systems"],
       employmentType: "contract",
       endDate: null,
       featured: true,
       isCurrent: true,
-      locationLabel: "Remote",
       locationType: "remote",
       media: [
         {
           assetId: assetIds["jane10-g50-1.webp"],
-          caption: "Demo cover asset for the CMS architecture experience.",
           role: "cover",
+          translations: {
+            en: {
+              caption: "Demo cover asset for the CMS architecture experience.",
+            },
+            es: {
+              caption: "Asset demo de portada para la experiencia de arquitectura CMS.",
+            },
+          },
         },
         {
           assetId: assetIds["jane10-g90-1.webp"],
-          caption: "Supporting gallery asset for experience detail views.",
           role: "gallery",
+          translations: {
+            en: {
+              caption: "Supporting gallery asset for experience detail views.",
+            },
+            es: {
+              caption: "Asset de galeria de soporte para vistas de detalle de experiencia.",
+            },
+          },
         },
       ],
-      positionTitle: "CMS Platform Architect",
-      roleSummary: "Designed the backend content model for a dynamic portfolio CMS.",
       skillSlugs: ["typescript", "postgresql", "drizzle-orm", "cms-architecture"],
       sortOrder: 10,
       startDate: "2025-01-01",
       status: "testing",
+      translations: {
+        en: {
+          companyContext: "Cascade Systems is seeded demo content for testing CMS-backed portfolio sections.",
+          locationLabel: "Remote",
+          positionTitle: "CMS Platform Architect",
+          roleSummary: "Designed the backend content model for a dynamic portfolio CMS.",
+        },
+        es: {
+          companyContext: "Cascade Systems es contenido demo para probar secciones de portafolio respaldadas por CMS.",
+          locationLabel: "Remoto",
+          positionTitle: "Arquitecto de plataforma CMS",
+          roleSummary: "Disene el modelo de contenido backend para un CMS de portafolio dinamico.",
+        },
+      },
     },
     {
       bullets: [
         {
-          body: "Created reusable UI content concepts for experience cards, feature callouts, and project summaries.",
+          translations: {
+            en: {
+              body: "Created reusable UI content concepts for experience cards, feature callouts, and project summaries.",
+            },
+            es: {
+              body: "Cree conceptos de contenido UI reutilizable para tarjetas de experiencia, llamados de funciones y resumenes de proyectos.",
+            },
+          },
           type: "responsibility",
         },
         {
-          body: "Connected editorial structure with design-system language so sections can be rendered consistently.",
+          translations: {
+            en: {
+              body: "Connected editorial structure with design-system language so sections can be rendered consistently.",
+            },
+            es: {
+              body: "Conecte la estructura editorial con el lenguaje del sistema de diseno para que las secciones se rendericen de forma consistente.",
+            },
+          },
           type: "achievement",
         },
         {
-          body: "Prepared demo data for testing status, sorting, skill chips, and media roles.",
+          translations: {
+            en: {
+              body: "Prepared demo data for testing status, sorting, skill chips, and media roles.",
+            },
+            es: {
+              body: "Prepare datos demo para probar estado, ordenamiento, chips de habilidades y roles de media.",
+            },
+          },
           type: "highlight",
         },
       ],
-      companyContext: "Atlas Product Studio is seeded demo content for testing experience history.",
       companyId: companyIds["atlas-product-studio"],
       employmentType: "freelance",
       endDate: "2024-12-31",
       featured: false,
       isCurrent: false,
-      locationLabel: "Bogota, Colombia",
       locationType: "hybrid",
       media: [
         {
           assetId: assetIds["jane10-g80-1.webp"],
-          caption: "Demo logo/cover asset for product studio experience.",
           role: "cover",
+          translations: {
+            en: {
+              caption: "Demo logo/cover asset for product studio experience.",
+            },
+            es: {
+              caption: "Asset demo de logo/portada para la experiencia de estudio de producto.",
+            },
+          },
         },
       ],
-      positionTitle: "Frontend Systems Designer",
-      roleSummary: "Shaped frontend content patterns for a portfolio CMS demonstration.",
       skillSlugs: ["react", "next-js", "design-systems", "vercel"],
       sortOrder: 20,
       startDate: "2023-03-01",
       status: "testing",
+      translations: {
+        en: {
+          companyContext: "Atlas Product Studio is seeded demo content for testing experience history.",
+          locationLabel: "Bogota, Colombia",
+          positionTitle: "Frontend Systems Designer",
+          roleSummary: "Shaped frontend content patterns for a portfolio CMS demonstration.",
+        },
+        es: {
+          companyContext: "Atlas Product Studio es contenido demo para probar el historial de experiencia.",
+          locationLabel: "Bogota, Colombia",
+          positionTitle: "Disenador de sistemas frontend",
+          roleSummary: "Modele patrones de contenido frontend para una demostracion de CMS de portafolio.",
+        },
+      },
     },
   ];
 
@@ -532,6 +767,8 @@ async function seed() {
 
   for (const entry of experienceEntries) {
     const experienceId = await insertExperience(entry);
+
+    await insertExperienceTranslations(experienceId, entry);
     await insertExperienceChildren(experienceId, entry, skillIds);
     experienceIds.push(experienceId);
   }
@@ -609,6 +846,18 @@ async function seed() {
       ) AS experience_bullets,
       (
         SELECT count(*)::int
+        FROM experience_bullet_translations
+        WHERE experience_bullet_id IN (
+          SELECT id
+          FROM experience_bullets
+          WHERE experience_id IN (
+            ${experienceIds[0]},
+            ${experienceIds[1]}
+          )
+        )
+      ) AS experience_bullet_translations,
+      (
+        SELECT count(*)::int
         FROM experience_media
         WHERE experience_id IN (
           ${experienceIds[0]},
@@ -617,12 +866,49 @@ async function seed() {
       ) AS experience_media,
       (
         SELECT count(*)::int
+        FROM experience_media_translations
+        WHERE experience_media_id IN (
+          SELECT id
+          FROM experience_media
+          WHERE experience_id IN (
+            ${experienceIds[0]},
+            ${experienceIds[1]}
+          )
+        )
+      ) AS experience_media_translations,
+      (
+        SELECT count(*)::int
         FROM experience_skills
         WHERE experience_id IN (
           ${experienceIds[0]},
           ${experienceIds[1]}
         )
       ) AS experience_skills,
+      (
+        SELECT count(*)::int
+        FROM experience_translations
+        WHERE experience_id IN (
+          ${experienceIds[0]},
+          ${experienceIds[1]}
+        )
+      ) AS experience_translations,
+      (
+        SELECT count(*)::int
+        FROM company_translations
+        WHERE company_id IN (
+          ${companyIds["cascade-systems"]},
+          ${companyIds["atlas-product-studio"]}
+        )
+      ) AS company_translations,
+      (
+        SELECT count(*)::int
+        FROM media_asset_translations
+        WHERE media_asset_id IN (
+          ${assetIds["jane10-g50-1.webp"]},
+          ${assetIds["jane10-g80-1.webp"]},
+          ${assetIds["jane10-g90-1.webp"]}
+        )
+      ) AS media_asset_translations,
       (
         SELECT count(*)::int
         FROM blog_post_translations
@@ -655,9 +941,14 @@ async function seed() {
 
   console.log("Seeded demo CMS data.");
   console.log(`Media assets upserted: ${Object.keys(assetIds).length}`);
+  console.log(`Media asset translations upserted: ${childCounts.media_asset_translations}`);
+  console.log(`Company translations upserted: ${childCounts.company_translations}`);
   console.log(`Experience entries inserted: ${experienceIds.length}`);
+  console.log(`Experience translations inserted: ${childCounts.experience_translations}`);
   console.log(`Experience bullets inserted: ${childCounts.experience_bullets}`);
+  console.log(`Experience bullet translations inserted: ${childCounts.experience_bullet_translations}`);
   console.log(`Experience media links inserted: ${childCounts.experience_media}`);
+  console.log(`Experience media translations inserted: ${childCounts.experience_media_translations}`);
   console.log(`Experience skill links inserted: ${childCounts.experience_skills}`);
   console.log(`Blog posts inserted: ${blogPostIds.length}`);
   console.log(`Blog translations inserted: ${childCounts.blog_post_translations}`);
