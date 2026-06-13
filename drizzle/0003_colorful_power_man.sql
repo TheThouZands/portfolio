@@ -1,0 +1,2 @@
+ALTER TABLE "blog_posts" ADD COLUMN "featured" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+CREATE INDEX "blog_posts_featured_status_published_at_idx" ON "blog_posts" USING btree ("featured","status","published_at");

@@ -1,0 +1,1 @@
+CREATE INDEX "blog_post_translations_slug_idx" ON "blog_post_translations" USING btree ("slug");
