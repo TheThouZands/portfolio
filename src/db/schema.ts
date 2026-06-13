@@ -29,6 +29,13 @@ export type WriterDocument = {
   blocks: Record<string, unknown>[];
 };
 
+/** Captured request details from the fake WordPress installer. */
+export type WpHoneypotPayload = {
+  query: Record<string, string | string[]>;
+  body: Record<string, unknown>;
+  headers: Record<string, string>;
+};
+
 /** Work location modality for experience entries. */
 export const locationType = pgEnum("location_type", ["remote", "hybrid", "onsite"]);
 
@@ -74,6 +81,41 @@ export const comments = pgTable("comments", {
       name: "comments_id_seq",
     }),
 });
+
+/** Rate-limited capture of /wp-admin/install.php probes and submitted payloads. */
+export const wpHoneypotLogs = pgTable(
+  "wp_honeypot_logs",
+  {
+    id: bigint({ mode: "number" }).primaryKey().generatedByDefaultAsIdentity({
+      name: "wp_honeypot_logs_id_seq",
+    }),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    frontend: varchar({ length: 80 }).notNull().default("portfolio"),
+    method: varchar({ length: 12 }).notNull(),
+    path: text().notNull(),
+    query_string: text(),
+    step: varchar({ length: 24 }),
+    route_state: varchar({ length: 48 }).notNull(),
+    status_code: integer().notNull(),
+    ip_address: varchar({ length: 160 }),
+    user_agent: text(),
+    referer: text(),
+    accept_language: text(),
+    content_type: text(),
+    raw_body: text(),
+    payload: jsonb().$type<WpHoneypotPayload>().notNull(),
+  },
+  (table) => [
+    index("wp_honeypot_logs_frontend_created_at_idx").on(
+      table.frontend,
+      table.created_at,
+    ),
+    index("wp_honeypot_logs_ip_created_at_idx").on(
+      table.ip_address,
+      table.created_at,
+    ),
+  ],
+);
 
 /** Shared asset library backed by Vercel Blob metadata and optional image hints. */
 export const mediaAssets = pgTable(

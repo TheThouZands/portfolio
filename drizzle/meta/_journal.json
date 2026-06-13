@@ -43,6 +43,13 @@
       "when": 1780971167637,
       "tag": "0005_peaceful_marvel_apes",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1781324888087,
+      "tag": "0006_handy_vapor",
+      "breakpoints": true
     }
   ]
 }
