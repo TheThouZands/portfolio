@@ -30,15 +30,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Database Migrations
 
-Drizzle is configured for a Neon PostgreSQL database in `.env.local` via `pf_DATABASE_URL`.
+Drizzle is configured for a Neon PostgreSQL database in `.env.local` via `PF_DATABASE_URL_UNPOOLED` or `PF_DATABASE_URL`.
 
 The source of truth for schema changes is `src/db/schema.ts`. Make table additions, removals, and modifications there, generate a reviewable SQL migration with `npm run db:generate`, then apply committed migrations with `npm run db:migrate`.
 
 Use `npm run db:pull` only when you need to introspect an existing database state for review or bootstrap work. Normal development should stay codebase-first so `drizzle/` contains the SQL migration history and snapshots that belong in version control.
 
+Vercel uses `npm run build:vercel`, which applies committed Drizzle migrations before `next build`. With Neon preview branching enabled, preview deployments receive branch-scoped database URLs from Neon before that migration step runs.
+
+For local branch-isolated development, create a Neon API key and make it available as `NEON_API_KEY` in your shell or ignored `.env.local`, then run:
+
+```bash
+npm run db:branch:sync
+npm run db:migrate
+```
+
+The sync command creates or reuses a Neon branch named `local/<current-git-branch>`, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together.
+
 Useful commands:
 
 ```bash
+npm run db:branch:sync
+npm run db:branch:migrate
 npm run db:pull
 npm run db:generate
 npm run db:check

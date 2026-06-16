@@ -4,11 +4,12 @@ import { defineConfig } from "drizzle-kit";
 config({ path: ".env.local" });
 config();
 
-const databaseUrl = process.env.PF_DATABASE_URL;
+const databaseUrl =
+  process.env.PF_DATABASE_URL_UNPOOLED ?? process.env.PF_DATABASE_URL;
 
 if (!databaseUrl) {
   throw new Error(
-    "Missing pf_DATABASE_URL. Add it to .env.local before running Drizzle commands.",
+    "Missing PF_DATABASE_URL_UNPOOLED or PF_DATABASE_URL. Add it to .env.local before running Drizzle commands.",
   );
 }
 
