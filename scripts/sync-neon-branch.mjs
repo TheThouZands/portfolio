@@ -13,6 +13,7 @@ if (args.includes("--help") || args.includes("-h")) {
   console.log(`
 Usage:
   npm run db:branch:sync
+  npm run db:branch:sync -- --list
   npm run db:branch:sync -- --branch feature/backend
   npm run db:branch:sync -- --neon-branch local/feature/backend
   npm run db:branch:sync -- --parent main
@@ -33,11 +34,17 @@ for (const envFile of [
   ".vercel/.env.development.local",
   ".env",
 ]) {
-  config({ path: resolve(rootDir, envFile) });
+  config({ path: resolve(rootDir, envFile), quiet: true });
 }
 
 const projectId = requireEnv("PF_NEON_PROJECT_ID");
 const apiKey = requireEnv("NEON_API_KEY");
+
+if (args.includes("--list")) {
+  listBranches();
+  process.exit(0);
+}
+
 const existingDatabaseUrl =
   process.env.PF_DATABASE_URL_UNPOOLED ?? process.env.PF_DATABASE_URL;
 const databaseUrl = parseOptionalUrl(existingDatabaseUrl);
@@ -84,7 +91,9 @@ console.log(`Updated ${relativeEnvPath(envFilePath)} for Neon branch "${existing
 console.log("Run npm run db:migrate to apply committed migrations to this branch.");
 
 async function ensureBranch(branchName, parent) {
-  const branches = parseJson(runNeon(["branches", "list"], { json: true }));
+  const branches = normalizeBranches(
+    parseJson(runNeon(["branches", "list"], { json: true })),
+  );
   const existing = branches.find((branch) => branch.name === branchName);
 
   if (existing) {
@@ -101,6 +110,24 @@ async function ensureBranch(branchName, parent) {
 
   const created = parseJson(runNeon(createArgs, { json: true }));
   return created.branch ?? created;
+}
+
+function listBranches() {
+  const branches = normalizeBranches(
+    parseJson(runNeon(["branches", "list"], { json: true })),
+  );
+
+  if (branches.length === 0) {
+    console.log("No Neon branches found.");
+    return;
+  }
+
+  for (const branch of branches) {
+    const marker = branch.primary ? "*" : " ";
+    const state = branch.current_state ?? branch.state ?? "unknown";
+
+    console.log(`${marker} ${branch.name} (${branch.id}) - ${state}`);
+  }
 }
 
 async function waitForBranchReady(branchName) {
@@ -207,7 +234,7 @@ function run(command, commandArgs, options = {}) {
   const result = spawnSync(command, commandArgs, {
     cwd: rootDir,
     encoding: "utf8",
-    shell: false,
+    shell: process.platform === "win32" && command.endsWith(".cmd"),
     ...options,
   });
 
@@ -294,6 +321,26 @@ function parseJson(value) {
       cause: error,
     });
   }
+}
+
+function normalizeBranches(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (Array.isArray(value?.branches)) {
+    return value.branches;
+  }
+
+  if (value?.branch) {
+    return [value.branch];
+  }
+
+  if (value?.id && value?.name) {
+    return [value];
+  }
+
+  throw new Error(`Unexpected Neon branches response:\n${JSON.stringify(value, null, 2)}`);
 }
 
 function addSearchParam(url, key, value) {
