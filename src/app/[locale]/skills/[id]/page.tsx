@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { parseId } from "@/cms/params";
 import { resolveSkillMetadata } from "@/cms/skills";
-import SkillDetails from "@/components/partials/skills/Details";
+import RelatedJobs from "@/components/repeatables/collections/skills/RelatedJobs";
+import SkillDetails from "@/components/repeatables/singles/skills/Details";
+import { getExperiencePreviewsBySkillId } from "@/db/queries/experience";
+import { getSkillById } from "@/db/queries/skills";
 import { routing } from "@/i18n/routing";
 
 type PageProps = {
@@ -55,9 +58,26 @@ export default async function Page({ params }: PageProps) {
 
   setRequestLocale(locale);
 
+  const [experienceT, jobs, skill, skillT] = await Promise.all([
+    getTranslations("Experience"),
+    getExperiencePreviewsBySkillId({ locale, skillId }),
+    getSkillById({ id: skillId, locale }),
+    getTranslations("Skills"),
+  ]);
+
+  if (!skill) {
+    notFound();
+  }
+
   return (
     <main>
-      <SkillDetails id={skillId} locale={locale} />
+      <SkillDetails skill={skill} />
+      <RelatedJobs
+        currentLabel={experienceT("current")}
+        jobs={jobs}
+        locale={locale}
+        title={skillT("relatedJobsTitle")}
+      />
     </main>
   );
 }

@@ -30,6 +30,12 @@ type GetExperienceByIdOptions = {
   locale: string;
 };
 
+type GetExperiencePreviewsBySkillIdOptions = {
+  limit?: number | null;
+  locale: string;
+  skillId: number;
+};
+
 type ExperienceBase = {
   companyContext: string | null;
   companyName: string;
@@ -122,6 +128,69 @@ export async function getExperiencePreviews({
       ),
     )
     .where(featuredFilter ? and(featuredFilter, visibilityFilter) : visibilityFilter)
+    .orderBy(asc(experience.sort_order), desc(experience.start_date));
+
+  if (limit === null) {
+    return query;
+  }
+
+  return query.limit(limit);
+}
+
+export async function getExperiencePreviewsBySkillId({
+  limit = null,
+  locale,
+  skillId,
+}: GetExperiencePreviewsBySkillIdOptions) {
+  const visibleStatuses = getVisibleCmsStatuses();
+
+  const query = db
+    .select({
+      companyName: sql<string>`coalesce(${companyTranslations.company_name}, ${companies.company_name})`,
+      companySlug: sql<string>`coalesce(${companyTranslations.slug}, ${companies.slug})`,
+      companyWebsiteUrl: companies.website_url,
+      employmentType: experience.employment_type,
+      endDate: experience.end_date,
+      id: experience.id,
+      isCurrent: experience.is_current,
+      locationLabel: sql<string | null>`coalesce(
+        ${experienceTranslations.location_label},
+        ${experience.location_label}
+      )`,
+      locationType: experience.location_type,
+      positionTitle: sql<string>`coalesce(
+        ${experienceTranslations.position_title},
+        ${experience.position_title}
+      )`,
+      roleSummary: sql<string | null>`coalesce(
+        ${experienceTranslations.role_summary},
+        ${experience.role_summary}
+      )`,
+      startDate: experience.start_date,
+    })
+    .from(experienceSkills)
+    .innerJoin(experience, eq(experience.id, experienceSkills.experience_id))
+    .innerJoin(companies, eq(companies.id, experience.company_id))
+    .leftJoin(
+      experienceTranslations,
+      and(
+        eq(experienceTranslations.experience_id, experience.id),
+        eq(experienceTranslations.locale, locale),
+      ),
+    )
+    .leftJoin(
+      companyTranslations,
+      and(
+        eq(companyTranslations.company_id, companies.id),
+        eq(companyTranslations.locale, locale),
+      ),
+    )
+    .where(
+      and(
+        eq(experienceSkills.skill_id, skillId),
+        inArray(experience.status, visibleStatuses),
+      ),
+    )
     .orderBy(asc(experience.sort_order), desc(experience.start_date));
 
   if (limit === null) {
