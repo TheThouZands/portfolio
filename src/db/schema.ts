@@ -367,6 +367,135 @@ export const experienceMediaTranslations = pgTable(
   ],
 );
 
+/** Portfolio project/case-study metadata shown in project lists and detail pages. */
+export const projects = pgTable(
+  "projects",
+  {
+    id: smallserial().primaryKey(),
+    title: varchar({ length: 160 }).notNull(),
+    slug: varchar({ length: 180 }).notNull(),
+    short_description: text(),
+    overview: text(),
+    cover_asset_id: integer().references(() => mediaAssets.id),
+    project_url: text(),
+    source_url: text(),
+    status: statusCMS().notNull().default("draft"),
+    featured: boolean().notNull().default(false),
+    started_on: date(),
+    completed_on: date(),
+    sort_order: integer().notNull().default(0),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("projects_slug_idx").on(table.slug),
+    index("projects_status_sort_order_idx").on(table.status, table.sort_order),
+    index("projects_featured_status_sort_order_idx").on(
+      table.featured,
+      table.status,
+      table.sort_order,
+    ),
+  ],
+);
+
+/** Locale-specific project metadata while keeping shared project identity stable. */
+export const projectTranslations = pgTable(
+  "project_translations",
+  {
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    title: varchar({ length: 160 }).notNull(),
+    slug: varchar({ length: 180 }).notNull(),
+    short_description: text(),
+    overview: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_id, table.locale] }),
+    uniqueIndex("project_translations_locale_slug_idx").on(table.locale, table.slug),
+    index("project_translations_slug_idx").on(table.slug),
+  ],
+);
+
+/** Ordered project highlights rendered as quick evidence before long-form content. */
+export const projectHighlights = pgTable(
+  "project_highlights",
+  {
+    id: smallserial().primaryKey(),
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    body: text().notNull(),
+    sort_order: integer().notNull().default(0),
+  },
+  (table) => [
+    index("project_highlights_project_id_idx").on(table.project_id),
+  ],
+);
+
+/** Locale-specific body text for an ordered project highlight. */
+export const projectHighlightTranslations = pgTable(
+  "project_highlight_translations",
+  {
+    project_highlight_id: integer()
+      .references(() => projectHighlights.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    body: text().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_highlight_id, table.locale] }),
+    index("project_highlight_translations_locale_idx").on(table.locale),
+  ],
+);
+
+/** Many-to-many link between portfolio projects and reusable skills. */
+export const projectSkills = pgTable(
+  "project_skills",
+  {
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    skill_id: integer()
+      .references(() => skills.id, { onDelete: "cascade" })
+      .notNull(),
+    sort_order: integer().notNull().default(0),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_id, table.skill_id] }),
+    index("project_skills_skill_id_idx").on(table.skill_id),
+  ],
+);
+
+/** Versioned project narrative content, storing editable source plus rendered text-only output. */
+export const projectRevisions = pgTable(
+  "project_revisions",
+  {
+    id: smallserial().primaryKey(),
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull().default("en"),
+    version: integer().notNull().default(1),
+    is_current: boolean().notNull().default(false),
+    source_json: jsonb().$type<WriterDocument>().notNull(),
+    rendered_html: text().notNull(),
+    rendered_text: text().notNull(),
+    rendered_css: text(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("project_revisions_project_id_idx").on(table.project_id),
+    uniqueIndex("project_revisions_project_locale_version_idx").on(
+      table.project_id,
+      table.locale,
+      table.version,
+    ),
+  ],
+);
+
 /** Blog/article metadata; the body itself lives in revision records. */
 export const blogPosts = pgTable(
   "blog_posts",
