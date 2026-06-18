@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type SkillListItem = {
   categoryLabel: string | null;
   id: number;
@@ -5,15 +7,16 @@ export type SkillListItem = {
 };
 
 type ListProps = {
+  locale: string;
   skills: SkillListItem[];
 };
 
-export default function List({ skills }: ListProps) {
+export default function List({ locale, skills }: ListProps) {
   return (
     <ul>
       {skills.map((skill) => (
         <li key={skill.id}>
-          {skill.name}
+          <Link href={`/${locale}/skills/${skill.id}`}>{skill.name}</Link>
           {skill.categoryLabel ? ` | ${skill.categoryLabel}` : null}
         </li>
       ))}

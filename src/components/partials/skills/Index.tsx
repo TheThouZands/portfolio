@@ -19,7 +19,7 @@ export default async function Index({ locale }: IndexProps) {
       <header>
         <h2>{t("title")}</h2>
       </header>
-      <List skills={skills} />
+      <List locale={locale} skills={skills} />
     </section>
   );
 }
