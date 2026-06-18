@@ -50,6 +50,13 @@
       "when": 1781324888087,
       "tag": "0006_handy_vapor",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1781753816967,
+      "tag": "0007_add_skill_descriptions",
+      "breakpoints": true
     }
   ]
 }

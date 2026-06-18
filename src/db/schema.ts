@@ -286,6 +286,7 @@ export const skills = pgTable(
     name: varchar({ length: 80 }).notNull(),
     slug: varchar({ length: 100 }).notNull(),
     category: varchar({ length: 80 }),
+    description: text(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
@@ -303,6 +304,7 @@ export const skillTranslations = pgTable(
     locale: varchar({ length: 16 }).notNull(),
     name: varchar({ length: 80 }).notNull(),
     category_label: varchar({ length: 80 }),
+    description: text(),
   },
   (table) => [
     primaryKey({ columns: [table.skill_id, table.locale] }),
