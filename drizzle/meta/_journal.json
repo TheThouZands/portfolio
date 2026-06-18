@@ -64,6 +64,13 @@
       "when": 1781759566770,
       "tag": "0008_add_projects",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1781761375209,
+      "tag": "0009_ambitious_golden_guardian",
+      "breakpoints": true
     }
   ]
 }

@@ -42,6 +42,15 @@ export const locationType = pgEnum("location_type", ["remote", "hybrid", "onsite
 /** Publication lifecycle shared by CMS-managed content. */
 export const statusCMS = pgEnum("status_cms", ["published", "hidden", "draft", "testing"]);
 
+/** Common identity types for portfolio objects that can be referenced by rich content. */
+export const contentEntityType = pgEnum("content_entity_type", [
+  "blog_post",
+  "company",
+  "experience",
+  "project",
+  "skill",
+]);
+
 /** Employment relationship used to classify CV experience. */
 export const employmentType = pgEnum("employment_type", [
   "full_time",
@@ -117,6 +126,21 @@ export const wpHoneypotLogs = pgTable(
   ],
 );
 
+/** Shared identity row for content that can be referenced across CMS surfaces. */
+export const contentEntities = pgTable(
+  "content_entities",
+  {
+    id: integer().primaryKey().generatedByDefaultAsIdentity({
+      name: "content_entities_id_seq",
+    }),
+    type: contentEntityType().notNull(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("content_entities_type_idx").on(table.type),
+  ],
+);
+
 /** Shared asset library backed by Vercel Blob metadata and optional image hints. */
 export const mediaAssets = pgTable(
   "media_assets",
@@ -167,6 +191,9 @@ export const companies = pgTable(
   "companies",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     company_name: varchar({ length: 100 }).notNull(),
     slug: varchar({ length: 120 }).notNull(),
     website_url: text(),
@@ -176,6 +203,7 @@ export const companies = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("companies_entity_id_idx").on(table.entity_id),
     uniqueIndex("companies_slug_idx").on(table.slug),
   ],
 );
@@ -203,6 +231,9 @@ export const experience = pgTable(
   "experience",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     position_title: varchar({ length: 100 }).notNull(),
     employment_type: employmentType().notNull().default("full_time"),
     is_current: boolean().notNull().default(false),
@@ -221,6 +252,7 @@ export const experience = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("experience_entity_id_idx").on(table.entity_id),
     index("experience_company_id_idx").on(table.company_id),
     index("experience_status_sort_order_idx").on(table.status, table.sort_order),
   ],
@@ -283,6 +315,9 @@ export const skills = pgTable(
   "skills",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     name: varchar({ length: 80 }).notNull(),
     slug: varchar({ length: 100 }).notNull(),
     category: varchar({ length: 80 }),
@@ -290,6 +325,7 @@ export const skills = pgTable(
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("skills_entity_id_idx").on(table.entity_id),
     uniqueIndex("skills_slug_idx").on(table.slug),
   ],
 );
@@ -372,6 +408,9 @@ export const projects = pgTable(
   "projects",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     title: varchar({ length: 160 }).notNull(),
     slug: varchar({ length: 180 }).notNull(),
     short_description: text(),
@@ -388,6 +427,7 @@ export const projects = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("projects_entity_id_idx").on(table.entity_id),
     uniqueIndex("projects_slug_idx").on(table.slug),
     index("projects_status_sort_order_idx").on(table.status, table.sort_order),
     index("projects_featured_status_sort_order_idx").on(
@@ -501,6 +541,9 @@ export const blogPosts = pgTable(
   "blog_posts",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     title: varchar({ length: 160 }).notNull(),
     slug: varchar({ length: 180 }).notNull(),
     excerpt: text(),
@@ -512,6 +555,7 @@ export const blogPosts = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("blog_posts_entity_id_idx").on(table.entity_id),
     uniqueIndex("blog_posts_slug_idx").on(table.slug),
     index("blog_posts_featured_status_published_at_idx").on(
       table.featured,
@@ -565,6 +609,33 @@ export const blogPostRevisions = pgTable(
       table.blog_post_id,
       table.locale,
       table.version,
+    ),
+  ],
+);
+
+/** Entity references extracted from rendered blog writer content. */
+export const blogPostMentions = pgTable(
+  "blog_post_mentions",
+  {
+    id: integer().primaryKey().generatedByDefaultAsIdentity({
+      name: "blog_post_mentions_id_seq",
+    }),
+    blog_post_revision_id: integer()
+      .references(() => blogPostRevisions.id, { onDelete: "cascade" })
+      .notNull(),
+    mentioned_entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
+    source_block_id: varchar({ length: 120 }),
+    sort_order: integer().notNull().default(0),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("blog_post_mentions_revision_id_idx").on(table.blog_post_revision_id),
+    index("blog_post_mentions_entity_id_idx").on(table.mentioned_entity_id),
+    uniqueIndex("blog_post_mentions_revision_entity_idx").on(
+      table.blog_post_revision_id,
+      table.mentioned_entity_id,
     ),
   ],
 );
