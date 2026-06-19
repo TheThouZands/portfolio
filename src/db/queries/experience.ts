@@ -271,75 +271,77 @@ export async function getExperienceById({
     return null;
   }
 
-  const bullets = await db
-    .select({
-      body: sql<string>`coalesce(${experienceBulletTranslations.body}, ${experienceBullets.body})`,
-      id: experienceBullets.id,
-      type: experienceBullets.type,
-    })
-    .from(experienceBullets)
-    .leftJoin(
-      experienceBulletTranslations,
-      and(
-        eq(
-          experienceBulletTranslations.experience_bullet_id,
-          experienceBullets.id,
+  // bullets, skills, and media are independent of each other; fetch them
+  // concurrently instead of three sequential round-trips.
+  const [bullets, entrySkills, media] = await Promise.all([
+    db
+      .select({
+        body: sql<string>`coalesce(${experienceBulletTranslations.body}, ${experienceBullets.body})`,
+        id: experienceBullets.id,
+        type: experienceBullets.type,
+      })
+      .from(experienceBullets)
+      .leftJoin(
+        experienceBulletTranslations,
+        and(
+          eq(
+            experienceBulletTranslations.experience_bullet_id,
+            experienceBullets.id,
+          ),
+          eq(experienceBulletTranslations.locale, locale),
         ),
-        eq(experienceBulletTranslations.locale, locale),
-      ),
-    )
-    .where(eq(experienceBullets.experience_id, id))
-    .orderBy(asc(experienceBullets.sort_order), asc(experienceBullets.id));
-
-  const entrySkills = await db
-    .select({
-      category: skills.category,
-      categoryLabel: sql<string | null>`coalesce(${skillTranslations.category_label}, ${skills.category})`,
-      id: skills.id,
-      name: sql<string>`coalesce(${skillTranslations.name}, ${skills.name})`,
-      slug: skills.slug,
-    })
-    .from(experienceSkills)
-    .innerJoin(skills, eq(skills.id, experienceSkills.skill_id))
-    .leftJoin(
-      skillTranslations,
-      and(
-        eq(skillTranslations.skill_id, skills.id),
-        eq(skillTranslations.locale, locale),
-      ),
-    )
-    .where(eq(experienceSkills.experience_id, id))
-    .orderBy(asc(experienceSkills.sort_order), asc(skills.name));
-
-  const media = await db
-    .select({
-      altText: sql<string | null>`coalesce(${mediaAssetTranslations.alt_text}, ${mediaAssets.alt_text})`,
-      caption: sql<string | null>`coalesce(${experienceMediaTranslations.caption}, ${experienceMedia.caption})`,
-      contentType: mediaAssets.content_type,
-      height: mediaAssets.height,
-      id: experienceMedia.id,
-      role: experienceMedia.role,
-      url: mediaAssets.url,
-      width: mediaAssets.width,
-    })
-    .from(experienceMedia)
-    .innerJoin(mediaAssets, eq(mediaAssets.id, experienceMedia.media_asset_id))
-    .leftJoin(
-      experienceMediaTranslations,
-      and(
-        eq(experienceMediaTranslations.experience_media_id, experienceMedia.id),
-        eq(experienceMediaTranslations.locale, locale),
-      ),
-    )
-    .leftJoin(
-      mediaAssetTranslations,
-      and(
-        eq(mediaAssetTranslations.media_asset_id, mediaAssets.id),
-        eq(mediaAssetTranslations.locale, locale),
-      ),
-    )
-    .where(eq(experienceMedia.experience_id, id))
-    .orderBy(asc(experienceMedia.sort_order), asc(experienceMedia.id));
+      )
+      .where(eq(experienceBullets.experience_id, id))
+      .orderBy(asc(experienceBullets.sort_order), asc(experienceBullets.id)),
+    db
+      .select({
+        category: skills.category,
+        categoryLabel: sql<string | null>`coalesce(${skillTranslations.category_label}, ${skills.category})`,
+        id: skills.id,
+        name: sql<string>`coalesce(${skillTranslations.name}, ${skills.name})`,
+        slug: skills.slug,
+      })
+      .from(experienceSkills)
+      .innerJoin(skills, eq(skills.id, experienceSkills.skill_id))
+      .leftJoin(
+        skillTranslations,
+        and(
+          eq(skillTranslations.skill_id, skills.id),
+          eq(skillTranslations.locale, locale),
+        ),
+      )
+      .where(eq(experienceSkills.experience_id, id))
+      .orderBy(asc(experienceSkills.sort_order), asc(skills.name)),
+    db
+      .select({
+        altText: sql<string | null>`coalesce(${mediaAssetTranslations.alt_text}, ${mediaAssets.alt_text})`,
+        caption: sql<string | null>`coalesce(${experienceMediaTranslations.caption}, ${experienceMedia.caption})`,
+        contentType: mediaAssets.content_type,
+        height: mediaAssets.height,
+        id: experienceMedia.id,
+        role: experienceMedia.role,
+        url: mediaAssets.url,
+        width: mediaAssets.width,
+      })
+      .from(experienceMedia)
+      .innerJoin(mediaAssets, eq(mediaAssets.id, experienceMedia.media_asset_id))
+      .leftJoin(
+        experienceMediaTranslations,
+        and(
+          eq(experienceMediaTranslations.experience_media_id, experienceMedia.id),
+          eq(experienceMediaTranslations.locale, locale),
+        ),
+      )
+      .leftJoin(
+        mediaAssetTranslations,
+        and(
+          eq(mediaAssetTranslations.media_asset_id, mediaAssets.id),
+          eq(mediaAssetTranslations.locale, locale),
+        ),
+      )
+      .where(eq(experienceMedia.experience_id, id))
+      .orderBy(asc(experienceMedia.sort_order), asc(experienceMedia.id)),
+  ]);
 
   return {
     ...entry,

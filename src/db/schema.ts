@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   bigint,
   boolean,
@@ -533,6 +534,10 @@ export const projectRevisions = pgTable(
       table.locale,
       table.version,
     ),
+    // At most one current revision per project + locale.
+    uniqueIndex("project_revisions_current_idx")
+      .on(table.project_id, table.locale)
+      .where(sql`${table.is_current}`),
   ],
 );
 
@@ -610,6 +615,10 @@ export const blogPostRevisions = pgTable(
       table.locale,
       table.version,
     ),
+    // At most one current revision per blog post + locale.
+    uniqueIndex("blog_post_revisions_current_idx")
+      .on(table.blog_post_id, table.locale)
+      .where(sql`${table.is_current}`),
   ],
 );
 

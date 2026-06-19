@@ -7,7 +7,7 @@ config();
 const databaseUrl = process.env.PF_DATABASE_URL;
 
 if (!databaseUrl) {
-  throw new Error("Missing pf_DATABASE_URL environment variable.");
+  throw new Error("Missing PF_DATABASE_URL environment variable.");
 }
 
 const sql = neon(databaseUrl);

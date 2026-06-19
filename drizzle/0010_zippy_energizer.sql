@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX "blog_post_revisions_current_idx" ON "blog_post_revisions" USING btree ("blog_post_id","locale") WHERE "blog_post_revisions"."is_current";--> statement-breakpoint
+CREATE UNIQUE INDEX "project_revisions_current_idx" ON "project_revisions" USING btree ("project_id","locale") WHERE "project_revisions"."is_current";
