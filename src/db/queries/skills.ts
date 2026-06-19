@@ -36,6 +36,7 @@ export async function getSkillById({ id, locale }: GetSkillByIdOptions) {
     .select({
       categoryLabel: sql<string | null>`coalesce(${skillTranslations.category_label}, ${skills.category})`,
       description: sql<string | null>`coalesce(${skillTranslations.description}, ${skills.description})`,
+      entityId: skills.entity_id,
       id: skills.id,
       name: sql<string>`coalesce(${skillTranslations.name}, ${skills.name})`,
     })

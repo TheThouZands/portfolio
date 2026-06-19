@@ -53,6 +53,7 @@
   "Blog": {
     "title": "Blog",
     "allPosts": "Todas las publicaciones",
+    "mentioningPostsTitle": "Visto en",
     "notFoundTitle": "Publicacion no encontrada",
     "notFoundDescription": "No encontramos esa publicacion."
   }

@@ -1,12 +1,17 @@
-import { getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
-import {
-  getExperienceById,
-  type ExperienceDetail,
-} from "@/db/queries/experience";
+import { type ExperienceDetail } from "@/db/queries/experience";
+
+type DetailsLabels = {
+  companyContextTitle: string;
+  current: string;
+  highlightsTitle: string;
+  mediaTitle: string;
+  overviewTitle: string;
+  skillsTitle: string;
+};
 
 type DetailsProps = {
-  jobId: number;
+  job: ExperienceDetail;
+  labels: DetailsLabels;
   locale: string;
 };
 
@@ -56,21 +61,15 @@ function getDateRange(
   };
 }
 
-export default async function Details({
-  jobId,
+export default function Details({
+  job,
+  labels,
   locale,
 }: DetailsProps) {
-  const t = await getTranslations("Experience");
-  const job = await getExperienceById({ id: jobId, locale });
-
-  if (!job) {
-    notFound();
-  }
-
   const { endLabel, startLabel } = getDateRange(
     job,
     locale,
-    t("current"),
+    labels.current,
   );
 
   return (
@@ -106,21 +105,21 @@ export default async function Details({
 
       {job.roleSummary ? (
         <section>
-          <h2>{t("overviewTitle")}</h2>
+          <h2>{labels.overviewTitle}</h2>
           <p>{job.roleSummary}</p>
         </section>
       ) : null}
 
       {job.companyContext ? (
         <section>
-          <h2>{t("companyContextTitle")}</h2>
+          <h2>{labels.companyContextTitle}</h2>
           <p>{job.companyContext}</p>
         </section>
       ) : null}
 
       {job.bullets.length > 0 ? (
         <section>
-          <h2>{t("highlightsTitle")}</h2>
+          <h2>{labels.highlightsTitle}</h2>
           <ul>
             {job.bullets.map((bullet) => (
               <li key={bullet.id}>
@@ -134,7 +133,7 @@ export default async function Details({
 
       {job.skills.length > 0 ? (
         <section>
-          <h2>{t("skillsTitle")}</h2>
+          <h2>{labels.skillsTitle}</h2>
           <ul>
             {job.skills.map((skill) => (
               <li key={skill.id}>
@@ -148,7 +147,7 @@ export default async function Details({
 
       {job.media.length > 0 ? (
         <section>
-          <h2>{t("mediaTitle")}</h2>
+          <h2>{labels.mediaTitle}</h2>
           <div>
             {job.media.map((media) => (
               <figure key={media.id}>

@@ -42,6 +42,7 @@ type ExperienceBase = {
   companySlug: string;
   companySummary: string | null;
   companyWebsiteUrl: string | null;
+  entityId: number;
   employmentType: string;
   endDate: Date | string | null;
   id: number;
@@ -216,6 +217,7 @@ async function getExperienceBaseById({
       companySlug: sql<string>`coalesce(${companyTranslations.slug}, ${companies.slug})`,
       companySummary: sql<string | null>`coalesce(${companyTranslations.summary}, ${companies.summary})`,
       companyWebsiteUrl: companies.website_url,
+      entityId: experience.entity_id,
       employmentType: experience.employment_type,
       endDate: experience.end_date,
       id: experience.id,

@@ -2,12 +2,23 @@ import "server-only";
 
 import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db/client";
-import { blogPostRevisions, blogPosts, blogPostTranslations } from "@/db/schema";
+import {
+  blogPostMentions,
+  blogPostRevisions,
+  blogPosts,
+  blogPostTranslations,
+} from "@/db/schema";
 import { getVisibleCmsStatuses } from "@/db/queries/cms";
 
 type GetBlogPostPreviewsOptions = {
   featured?: boolean;
-  limit?: number;
+  limit?: number | null;
+  locale: string;
+};
+
+type GetBlogPostPreviewsMentioningEntityOptions = {
+  entityId: number;
+  limit?: number | null;
   locale: string;
 };
 
@@ -53,7 +64,7 @@ export async function getBlogPostPreviews({
   const visibilityFilter = inArray(blogPosts.status, visibleStatuses);
   const featuredFilter = featured === undefined ? undefined : eq(blogPosts.featured, featured);
 
-  return db
+  const query = db
     .select({
       excerpt: blogPostTranslations.excerpt,
       publishedAt: blogPosts.published_at,
@@ -69,8 +80,60 @@ export async function getBlogPostPreviews({
       ),
     )
     .where(featuredFilter ? and(featuredFilter, visibilityFilter) : visibilityFilter)
-    .orderBy(desc(blogPosts.published_at), desc(blogPosts.created_at))
-    .limit(limit);
+    .orderBy(desc(blogPosts.published_at), desc(blogPosts.created_at));
+
+  if (limit === null) {
+    return query;
+  }
+
+  return query.limit(limit);
+}
+
+export async function getBlogPostPreviewsMentioningEntity({
+  entityId,
+  limit = 12,
+  locale,
+}: GetBlogPostPreviewsMentioningEntityOptions) {
+  const visibleStatuses = getVisibleBlogStatuses();
+
+  const query = db
+    .select({
+      excerpt: blogPostTranslations.excerpt,
+      publishedAt: blogPosts.published_at,
+      slug: blogPostTranslations.slug,
+      title: blogPostTranslations.title,
+    })
+    .from(blogPostMentions)
+    .innerJoin(
+      blogPostRevisions,
+      and(
+        eq(blogPostRevisions.id, blogPostMentions.blog_post_revision_id),
+        eq(blogPostRevisions.is_current, true),
+        eq(blogPostRevisions.locale, locale),
+      ),
+    )
+    .innerJoin(
+      blogPosts,
+      and(
+        eq(blogPosts.id, blogPostRevisions.blog_post_id),
+        inArray(blogPosts.status, visibleStatuses),
+      ),
+    )
+    .innerJoin(
+      blogPostTranslations,
+      and(
+        eq(blogPostTranslations.blog_post_id, blogPosts.id),
+        eq(blogPostTranslations.locale, locale),
+      ),
+    )
+    .where(eq(blogPostMentions.mentioned_entity_id, entityId))
+    .orderBy(desc(blogPosts.published_at), desc(blogPosts.created_at));
+
+  if (limit === null) {
+    return query;
+  }
+
+  return query.limit(limit);
 }
 
 export async function getBlogPostById({ id, locale }: GetBlogPostByIdOptions) {
