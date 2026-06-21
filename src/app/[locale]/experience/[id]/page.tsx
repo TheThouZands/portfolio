@@ -4,7 +4,9 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { parseId } from "@/cms/params";
 import { resolveExperienceMetadata } from "@/cms/experience";
+import MentioningPosts from "@/components/partials/blog/MentioningPosts";
 import JobDetails from "@/components/partials/jobs/Details";
+import { getExperienceMentionTargetById } from "@/db/queries/experience";
 import { routing } from "@/i18n/routing";
 
 type PageProps = {
@@ -55,9 +57,12 @@ export default async function Page({ params }: PageProps) {
 
   setRequestLocale(locale);
 
+  const mentionTarget = await getExperienceMentionTargetById({ id: jobId });
+
   return (
     <main>
       <JobDetails jobId={jobId} locale={locale} />
+      <MentioningPosts entityId={mentionTarget?.entityId ?? null} locale={locale} />
     </main>
   );
 }

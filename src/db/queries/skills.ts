@@ -13,6 +13,10 @@ type GetSkillByIdOptions = {
   locale: string;
 };
 
+type GetSkillMentionTargetByIdOptions = {
+  id: number;
+};
+
 export async function getSkills({ locale }: GetSkillsOptions) {
   return db
     .select({
@@ -48,6 +52,21 @@ export async function getSkillById({ id, locale }: GetSkillByIdOptions) {
         eq(skillTranslations.locale, locale),
       ),
     )
+    .where(eq(skills.id, id))
+    .limit(1);
+
+  return skill ?? null;
+}
+
+export async function getSkillMentionTargetById({
+  id,
+}: GetSkillMentionTargetByIdOptions) {
+  const [skill] = await db
+    .select({
+      entityId: skills.entity_id,
+      id: skills.id,
+    })
+    .from(skills)
     .where(eq(skills.id, id))
     .limit(1);
 

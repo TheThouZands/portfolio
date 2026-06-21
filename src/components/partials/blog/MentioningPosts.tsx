@@ -3,7 +3,7 @@ import MentioningPostsView from "@/components/repeatables/collections/blog/Menti
 import { getBlogPostPreviewsMentioningEntity } from "@/db/queries/blog";
 
 type MentioningPostsProps = {
-  entityId: number;
+  entityId: number | null;
   locale: string;
 };
 
@@ -11,6 +11,10 @@ export default async function MentioningPosts({
   entityId,
   locale,
 }: MentioningPostsProps) {
+  if (entityId === null) {
+    return null;
+  }
+
   const [posts, t] = await Promise.all([
     getBlogPostPreviewsMentioningEntity({ entityId, locale }),
     getTranslations("Blog"),

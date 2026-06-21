@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import MentioningPosts from "@/components/partials/blog/MentioningPosts";
 import JobDetailsView from "@/components/repeatables/singles/jobs/Details";
 import { getExperienceById } from "@/db/queries/experience";
 
@@ -20,20 +19,17 @@ export default async function Details({ jobId, locale }: DetailsProps) {
   }
 
   return (
-    <>
-      <JobDetailsView
-        job={job}
-        labels={{
-          companyContextTitle: experienceT("companyContextTitle"),
-          current: experienceT("current"),
-          highlightsTitle: experienceT("highlightsTitle"),
-          mediaTitle: experienceT("mediaTitle"),
-          overviewTitle: experienceT("overviewTitle"),
-          skillsTitle: experienceT("skillsTitle"),
-        }}
-        locale={locale}
-      />
-      <MentioningPosts entityId={job.entityId} locale={locale} />
-    </>
+    <JobDetailsView
+      job={job}
+      labels={{
+        companyContextTitle: experienceT("companyContextTitle"),
+        current: experienceT("current"),
+        highlightsTitle: experienceT("highlightsTitle"),
+        mediaTitle: experienceT("mediaTitle"),
+        overviewTitle: experienceT("overviewTitle"),
+        skillsTitle: experienceT("skillsTitle"),
+      }}
+      locale={locale}
+    />
   );
 }

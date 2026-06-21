@@ -4,7 +4,10 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { parseId } from "@/cms/params";
 import { resolveSkillMetadata } from "@/cms/skills";
+import MentioningPosts from "@/components/partials/blog/MentioningPosts";
 import SkillDetails from "@/components/partials/skills/Details";
+import RelatedJobs from "@/components/partials/skills/RelatedJobs";
+import { getSkillMentionTargetById } from "@/db/queries/skills";
 import { routing } from "@/i18n/routing";
 
 type PageProps = {
@@ -55,9 +58,13 @@ export default async function Page({ params }: PageProps) {
 
   setRequestLocale(locale);
 
+  const mentionTarget = await getSkillMentionTargetById({ id: skillId });
+
   return (
     <main>
       <SkillDetails locale={locale} skillId={skillId} />
+      <RelatedJobs locale={locale} skillId={skillId} />
+      <MentioningPosts entityId={mentionTarget?.entityId ?? null} locale={locale} />
     </main>
   );
 }

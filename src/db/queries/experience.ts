@@ -36,6 +36,10 @@ type GetExperiencePreviewsBySkillIdOptions = {
   skillId: number;
 };
 
+type GetExperienceMentionTargetByIdOptions = {
+  id: number;
+};
+
 type ExperienceBase = {
   companyContext: string | null;
   companyName: string;
@@ -199,6 +203,23 @@ export async function getExperiencePreviewsBySkillId({
   }
 
   return query.limit(limit);
+}
+
+export async function getExperienceMentionTargetById({
+  id,
+}: GetExperienceMentionTargetByIdOptions) {
+  const visibleStatuses = getVisibleCmsStatuses();
+
+  const [entry] = await db
+    .select({
+      entityId: experience.entity_id,
+      id: experience.id,
+    })
+    .from(experience)
+    .where(and(eq(experience.id, id), inArray(experience.status, visibleStatuses)))
+    .limit(1);
+
+  return entry ?? null;
 }
 
 async function getExperienceBaseById({
