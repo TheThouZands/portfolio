@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
-import SkillsIndex from "@/components/repeatables/collections/skills/Index";
-import { getSkills } from "@/db/queries/skills";
+import SkillsIndex from "@/components/partials/skills/Index";
 import { routing } from "@/i18n/routing";
 
 type HomeProps = {
@@ -25,11 +24,7 @@ export default async function Home({ params }: HomeProps) {
 
   setRequestLocale(locale);
 
-  const [skills, skillsT, t] = await Promise.all([
-    getSkills({ locale }),
-    getTranslations("Skills"),
-    getTranslations("HomePage"),
-  ]);
+  const t = await getTranslations("HomePage");
 
   return (
     <main>
@@ -41,11 +36,7 @@ export default async function Home({ params }: HomeProps) {
         </header>
         {/* TODO: add portrait image. */}
       </section>
-      <SkillsIndex
-        locale={locale}
-        skills={skills}
-        title={skillsT("title")}
-      />
+      <SkillsIndex locale={locale} />
       <JobsChart locale={locale} />
       <FeaturedPosts locale={locale} />
     </main>
