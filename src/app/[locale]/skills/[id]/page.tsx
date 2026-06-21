@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { parseId } from "@/cms/params";
 import { resolveSkillMetadata } from "@/cms/skills";
-import MentioningPosts from "@/components/repeatables/collections/blog/MentioningPosts";
-import RelatedJobs from "@/components/repeatables/collections/skills/RelatedJobs";
-import SkillDetails from "@/components/repeatables/singles/skills/Details";
-import { getBlogPostPreviewsMentioningEntity } from "@/db/queries/blog";
-import { getExperiencePreviewsBySkillId } from "@/db/queries/experience";
-import { getSkillById } from "@/db/queries/skills";
+import SkillDetails from "@/components/partials/skills/Details";
 import { routing } from "@/i18n/routing";
 
 type PageProps = {
@@ -60,37 +55,9 @@ export default async function Page({ params }: PageProps) {
 
   setRequestLocale(locale);
 
-  const [blogT, experienceT, jobs, skill, skillT] = await Promise.all([
-    getTranslations("Blog"),
-    getTranslations("Experience"),
-    getExperiencePreviewsBySkillId({ locale, skillId }),
-    getSkillById({ id: skillId, locale }),
-    getTranslations("Skills"),
-  ]);
-
-  if (!skill) {
-    notFound();
-  }
-
-  const mentioningPosts = await getBlogPostPreviewsMentioningEntity({
-    entityId: skill.entityId,
-    locale,
-  });
-
   return (
     <main>
-      <SkillDetails skill={skill} />
-      <RelatedJobs
-        currentLabel={experienceT("current")}
-        jobs={jobs}
-        locale={locale}
-        title={skillT("relatedJobsTitle")}
-      />
-      <MentioningPosts
-        locale={locale}
-        posts={mentioningPosts}
-        title={blogT("mentioningPostsTitle")}
-      />
+      <SkillDetails locale={locale} skillId={skillId} />
     </main>
   );
 }
