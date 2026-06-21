@@ -36,6 +36,8 @@
     "title": "Experience"
   },
   "Skills": {
+    "notFoundTitle": "I haven't learnt that yet",
+    "notFoundDescription": "That skill is not in the portfolio yet.",
     "relatedJobsTitle": "Related jobs",
     "title": "Skills"
   },

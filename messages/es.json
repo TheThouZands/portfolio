@@ -36,6 +36,8 @@
     "title": "Experiencia"
   },
   "Skills": {
+    "notFoundTitle": "A\u00fan no he aprendido eso",
+    "notFoundDescription": "Esa habilidad todav\u00eda no est\u00e1 en el portafolio.",
     "relatedJobsTitle": "Trabajos relacionados",
     "title": "Habilidades"
   },
