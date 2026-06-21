@@ -25,7 +25,7 @@ export default async function Post({ blogPostId, locale }: PostProps) {
         )}
         {post.excerpt ? <p>{post.excerpt}</p> : null}
       </header>
-      <section dangerouslySetInnerHTML={{ __html: post.renderedHtml }} />
+      <section dangerouslySetInnerHTML={{ __html: post.renderedHtml }} /> {/* trusted given full in-house posting, even if not ideal allows for cool things without a rendering engine based on a new md lang */}
     </article>
   );
 }
