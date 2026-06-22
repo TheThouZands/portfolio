@@ -413,12 +413,9 @@ export const projects = pgTable(
       .references(() => contentEntities.id, { onDelete: "cascade" })
       .notNull(),
     title: varchar({ length: 160 }).notNull(),
-    slug: varchar({ length: 180 }).notNull(),
     short_description: text(),
     overview: text(),
     cover_asset_id: integer().references(() => mediaAssets.id),
-    project_url: text(),
-    source_url: text(),
     status: statusCMS().notNull().default("draft"),
     featured: boolean().notNull().default(false),
     started_on: date(),
@@ -429,7 +426,6 @@ export const projects = pgTable(
   },
   (table) => [
     uniqueIndex("projects_entity_id_idx").on(table.entity_id),
-    uniqueIndex("projects_slug_idx").on(table.slug),
     index("projects_status_sort_order_idx").on(table.status, table.sort_order),
     index("projects_featured_status_sort_order_idx").on(
       table.featured,
@@ -448,14 +444,11 @@ export const projectTranslations = pgTable(
       .notNull(),
     locale: varchar({ length: 16 }).notNull(),
     title: varchar({ length: 160 }).notNull(),
-    slug: varchar({ length: 180 }).notNull(),
     short_description: text(),
     overview: text(),
   },
   (table) => [
     primaryKey({ columns: [table.project_id, table.locale] }),
-    uniqueIndex("project_translations_locale_slug_idx").on(table.locale, table.slug),
-    index("project_translations_slug_idx").on(table.slug),
   ],
 );
 
