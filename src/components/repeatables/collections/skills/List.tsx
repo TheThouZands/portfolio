@@ -1,14 +1,10 @@
-import Link from "next/link";
-
-export type SkillListItem = {
-  categoryLabel: string | null;
-  id: number;
-  name: string;
-};
+import Item, {
+  type SkillItemData,
+} from "@/components/repeatables/singles/skills/Item";
 
 type ListProps = {
   locale: string;
-  skills: SkillListItem[];
+  skills: SkillItemData[];
 };
 
 export default function List({ locale, skills }: ListProps) {
@@ -16,8 +12,7 @@ export default function List({ locale, skills }: ListProps) {
     <ul>
       {skills.map((skill) => (
         <li key={skill.id}>
-          <Link href={`/${locale}/skills/${skill.id}`}>{skill.name}</Link>
-          {skill.categoryLabel ? ` | ${skill.categoryLabel}` : null}
+          <Item locale={locale} skill={skill} />
         </li>
       ))}
     </ul>
