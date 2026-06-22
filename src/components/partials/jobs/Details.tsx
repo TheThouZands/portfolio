@@ -1,22 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import {
-  type ExperienceDetail,
-  getExperienceById,
-} from "@/db/queries/experience";
+import { type ExperienceDetail, getExperienceById } from "@/db/queries/experience";
 
 type DetailsProps = {
   jobId: number;
   locale: string;
-};
-
-type DetailsLabels = {
-  companyContextTitle: string;
-  current: string;
-  highlightsTitle: string;
-  mediaTitle: string;
-  overviewTitle: string;
-  skillsTitle: string;
 };
 
 function getDateValue(date: Date | string) {
@@ -65,19 +53,20 @@ function getDateRange(
   };
 }
 
-function DetailsArticle({
-  job,
-  labels,
-  locale,
-}: {
-  job: ExperienceDetail;
-  labels: DetailsLabels;
-  locale: string;
-}) {
+export default async function Details({ jobId, locale }: DetailsProps) {
+  const [experienceT, job] = await Promise.all([
+    getTranslations("Experience"),
+    getExperienceById({ id: jobId, locale }),
+  ]);
+
+  if (!job) {
+    notFound();
+  }
+
   const { endLabel, startLabel } = getDateRange(
     job,
     locale,
-    labels.current,
+    experienceT("current"),
   );
 
   return (
@@ -113,21 +102,21 @@ function DetailsArticle({
 
       {job.roleSummary ? (
         <section>
-          <h2>{labels.overviewTitle}</h2>
+          <h2>{experienceT("overviewTitle")}</h2>
           <p>{job.roleSummary}</p>
         </section>
       ) : null}
 
       {job.companyContext ? (
         <section>
-          <h2>{labels.companyContextTitle}</h2>
+          <h2>{experienceT("companyContextTitle")}</h2>
           <p>{job.companyContext}</p>
         </section>
       ) : null}
 
       {job.bullets.length > 0 ? (
         <section>
-          <h2>{labels.highlightsTitle}</h2>
+          <h2>{experienceT("highlightsTitle")}</h2>
           <ul>
             {job.bullets.map((bullet) => (
               <li key={bullet.id}>
@@ -141,7 +130,7 @@ function DetailsArticle({
 
       {job.skills.length > 0 ? (
         <section>
-          <h2>{labels.skillsTitle}</h2>
+          <h2>{experienceT("skillsTitle")}</h2>
           <ul>
             {job.skills.map((skill) => (
               <li key={skill.id}>
@@ -155,7 +144,7 @@ function DetailsArticle({
 
       {job.media.length > 0 ? (
         <section>
-          <h2>{labels.mediaTitle}</h2>
+          <h2>{experienceT("mediaTitle")}</h2>
           <div>
             {job.media.map((media) => (
               <figure key={media.id}>
@@ -178,31 +167,5 @@ function DetailsArticle({
         </section>
       ) : null}
     </article>
-  );
-}
-
-export default async function Details({ jobId, locale }: DetailsProps) {
-  const [experienceT, job] = await Promise.all([
-    getTranslations("Experience"),
-    getExperienceById({ id: jobId, locale }),
-  ]);
-
-  if (!job) {
-    notFound();
-  }
-
-  return (
-    <DetailsArticle
-      job={job}
-      labels={{
-        companyContextTitle: experienceT("companyContextTitle"),
-        current: experienceT("current"),
-        highlightsTitle: experienceT("highlightsTitle"),
-        mediaTitle: experienceT("mediaTitle"),
-        overviewTitle: experienceT("overviewTitle"),
-        skillsTitle: experienceT("skillsTitle"),
-      }}
-      locale={locale}
-    />
   );
 }

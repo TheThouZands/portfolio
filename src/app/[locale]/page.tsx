@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
+import FeaturedProjects from "@/components/partials/projects/FeaturedProjects";
 import SkillsIndex from "@/components/partials/skills/Index";
 import { routing } from "@/i18n/routing";
 
@@ -38,6 +39,7 @@ export default async function Home({ params }: HomeProps) {
       </section>
       <SkillsIndex locale={locale} />
       <JobsChart locale={locale} />
+      <FeaturedProjects locale={locale} />
       <FeaturedPosts locale={locale} />
     </main>
   );

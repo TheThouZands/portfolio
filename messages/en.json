@@ -18,6 +18,7 @@
   "HomePage": {
     "experienceCurrent": "Present",
     "experienceTitle": "Experience",
+    "featuredProjectsTitle": "Featured projects",
     "introTitle": "I am Paulo S\u00e1nchez",
     "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems",
     "featuredPostsTitle": "Featured posts"
@@ -40,6 +41,15 @@
     "notFoundDescription": "That skill is not in the portfolio yet.",
     "relatedJobsTitle": "Related jobs",
     "title": "Skills"
+  },
+  "Projects": {
+    "allProjects": "All projects",
+    "highlightsTitle": "Highlights",
+    "notFoundTitle": "Project not found",
+    "notFoundDescription": "We could not find that project.",
+    "overviewTitle": "Overview",
+    "skillsTitle": "Skills",
+    "title": "Projects"
   },
   "NotFoundPage": {
     "title": "404 - Page Not Found"
