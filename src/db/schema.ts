@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  type AnyPgColumn,
   bigint,
   boolean,
   date,
@@ -81,16 +82,6 @@ export const mediaRole = pgEnum("media_role", [
 
 /** Access mode for assets stored in Vercel Blob. */
 export const blobAccess = pgEnum("blob_access", ["public", "private"]);
-
-/** Existing simple comments table from the starting database. */
-export const comments = pgTable("comments", {
-  comment: text(),
-  id: bigint({ mode: "number" })
-    .primaryKey()
-    .generatedByDefaultAsIdentity({
-      name: "comments_id_seq",
-    }),
-});
 
 /** Rate-limited capture of /wp-admin/install.php probes and submitted payloads. */
 export const wpHoneypotLogs = pgTable(
@@ -561,6 +552,38 @@ export const blogPosts = pgTable(
       table.published_at,
     ),
     index("blog_posts_status_published_at_idx").on(table.status, table.published_at),
+  ],
+);
+
+/** Reader comments attached to a blog post, optionally nested as replies. */
+export const comments = pgTable(
+  "comments",
+  {
+    id: bigint({ mode: "number" })
+      .primaryKey()
+      .generatedByDefaultAsIdentity({
+        name: "comments_id_seq",
+      }),
+    blog_post_id: integer()
+      .references(() => blogPosts.id, { onDelete: "cascade" })
+      .notNull(),
+    parent_comment_id: bigint({ mode: "number" }).references(
+      (): AnyPgColumn => comments.id,
+      { onDelete: "cascade" },
+    ),
+    body: text("comment").notNull(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("comments_blog_post_created_at_idx").on(
+      table.blog_post_id,
+      table.created_at,
+    ),
+    index("comments_parent_comment_created_at_idx").on(
+      table.parent_comment_id,
+      table.created_at,
+    ),
   ],
 );
 
