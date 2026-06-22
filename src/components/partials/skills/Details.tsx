@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import SkillDetailsView from "@/components/repeatables/singles/skills/Details";
 import { getSkillById } from "@/db/queries/skills";
 
 type DetailsProps = {
@@ -14,5 +13,13 @@ export default async function Details({ locale, skillId }: DetailsProps) {
     notFound();
   }
 
-  return <SkillDetailsView skill={skill} />;
+  return (
+    <article>
+      <header>
+        <h1>{skill.name}</h1>
+        {skill.categoryLabel ? <p>{skill.categoryLabel}</p> : null}
+      </header>
+      {skill.description ? <p>{skill.description}</p> : null}
+    </article>
+  );
 }
