@@ -730,12 +730,69 @@ async function upsertBlogPost(post) {
   };
 }
 
+async function insertCommentTree({
+  blogPostId,
+  comments,
+  parentCommentId = null,
+  sequence,
+  startedAt,
+}) {
+  for (const comment of comments) {
+    sequence.value += 1;
+
+    const createdAt = new Date(
+      startedAt.getTime() + sequence.value * 60 * 60 * 1000,
+    ).toISOString();
+    const [commentRow] = await sql`
+      INSERT INTO comments (
+        blog_post_id,
+        parent_comment_id,
+        comment,
+        created_at,
+        updated_at
+      )
+      VALUES (
+        ${blogPostId},
+        ${parentCommentId},
+        ${comment.body},
+        ${createdAt},
+        ${createdAt}
+      )
+      RETURNING id
+    `;
+
+    if (comment.replies?.length) {
+      await insertCommentTree({
+        blogPostId,
+        comments: comment.replies,
+        parentCommentId: commentRow.id,
+        sequence,
+        startedAt,
+      });
+    }
+  }
+}
+
+async function seedBlogPostComments(blogPostId, post) {
+  await sql`
+    DELETE FROM comments
+    WHERE blog_post_id = ${blogPostId}
+  `;
+
+  await insertCommentTree({
+    blogPostId,
+    comments: post.comments,
+    sequence: { value: 0 },
+    startedAt: new Date(post.publishedAt),
+  });
+}
+
 async function upsertProject(project, skillIds) {
   const defaultTranslation = project.translations.en;
   const [existingProject] = await sql`
     SELECT id, entity_id
     FROM projects
-    WHERE slug = ${defaultTranslation.slug}
+    WHERE title = ${defaultTranslation.title}
     LIMIT 1
   `;
 
@@ -749,8 +806,6 @@ async function upsertProject(project, skillIds) {
         short_description = ${defaultTranslation.shortDescription},
         overview = ${defaultTranslation.overview},
         cover_asset_id = ${project.coverAssetId},
-        project_url = ${project.projectUrl},
-        source_url = ${project.sourceUrl},
         status = ${project.status},
         featured = ${project.featured},
         started_on = ${project.startedOn},
@@ -767,12 +822,9 @@ async function upsertProject(project, skillIds) {
       INSERT INTO projects (
         entity_id,
         title,
-        slug,
         short_description,
         overview,
         cover_asset_id,
-        project_url,
-        source_url,
         status,
         featured,
         started_on,
@@ -782,12 +834,9 @@ async function upsertProject(project, skillIds) {
       VALUES (
         ${entityId},
         ${defaultTranslation.title},
-        ${defaultTranslation.slug},
         ${defaultTranslation.shortDescription},
         ${defaultTranslation.overview},
         ${project.coverAssetId},
-        ${project.projectUrl},
-        ${project.sourceUrl},
         ${project.status},
         ${project.featured},
         ${project.startedOn},
@@ -806,7 +855,6 @@ async function upsertProject(project, skillIds) {
         project_id,
         locale,
         title,
-        slug,
         short_description,
         overview
       )
@@ -814,13 +862,11 @@ async function upsertProject(project, skillIds) {
         ${projectId},
         ${locale},
         ${translation.title},
-        ${translation.slug},
         ${translation.shortDescription},
         ${translation.overview}
       )
       ON CONFLICT (project_id, locale) DO UPDATE SET
         title = excluded.title,
-        slug = excluded.slug,
         short_description = excluded.short_description,
         overview = excluded.overview
     `;
@@ -1295,7 +1341,7 @@ async function seed() {
           },
         },
       ],
-      projectUrl: "https://example.com/portfolio-content-graph",
+      key: "portfolio-content-graph",
       skillSlugs: [
         "typescript",
         "next-js",
@@ -1305,20 +1351,17 @@ async function seed() {
         "vercel",
       ],
       sortOrder: 5,
-      sourceUrl: "https://example.com/portfolio-content-graph/source",
       startedOn: "2026-06-10",
       status: "testing",
       translations: {
         en: {
           overview: "A seeded portfolio project that demonstrates content entities, revision-scoped blog mentions, project skills, and translated project copy without adding any presentation UI yet.",
           shortDescription: "A seeded project for testing entity mentions between blog posts and portfolio records.",
-          slug: "portfolio-content-graph",
           title: "Portfolio Content Graph",
         },
         es: {
           overview: "Un proyecto sembrado de portafolio que demuestra entidades de contenido, menciones de blog por revision, habilidades de proyecto y copia traducida sin agregar todavia UI de presentacion.",
           shortDescription: "Un proyecto sembrado para probar menciones de entidades entre publicaciones y registros del portafolio.",
-          slug: "grafo-de-contenido-del-portafolio",
           title: "Grafo de contenido del portafolio",
         },
       },
@@ -1332,11 +1375,37 @@ async function seed() {
     const projectRecord = await upsertProject(project, skillIds);
 
     projectIds.push(projectRecord.id);
-    projectRecords[project.translations.en.slug] = projectRecord;
+    projectRecords[project.key] = projectRecord;
   }
 
   const blogPosts = [
     {
+      comments: [
+        {
+          body: "This makes the writer model feel testable before the editor exists.",
+          replies: [
+            {
+              body: "The source JSON plus rendered HTML split is the first thing I would inspect.",
+              replies: [
+                {
+                  body: "Same; a preview diff would make CMS changes feel much less mysterious.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          body: "I like that assets are part of the revision instead of being inferred later.",
+          replies: [
+            {
+              body: "It should make image cleanup safer once drafts start changing.",
+            },
+          ],
+        },
+        {
+          body: "The next missing piece is authoring workflow, but this seed already shows the contract.",
+        },
+      ],
       coverAssetId: assetIds["jane10-g50-1.webp"],
       featured: true,
       inlineAssetId: assetIds["jane10-g90-1.webp"],
@@ -1363,6 +1432,32 @@ async function seed() {
       },
     },
     {
+      comments: [
+        {
+          body: "This is much easier to reason about than a static timeline.",
+          replies: [
+            {
+              body: "The media roles and skill joins make the entry useful in more than one layout.",
+              replies: [
+                {
+                  body: "Exactly; the same row can feed a detail page, a skill page, and a homepage section.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          body: "The company context field feels like the right place for the human background.",
+          replies: [
+            {
+              body: "And keeping highlights separate means they can be scanned without losing the story.",
+            },
+          ],
+        },
+        {
+          body: "This gives the frontend enough structure to stay calm even as the content grows.",
+        },
+      ],
       coverAssetId: assetIds["jane10-g80-1.webp"],
       featured: true,
       inlineAssetId: assetIds["jane10-g50-1.webp"],
@@ -1389,6 +1484,32 @@ async function seed() {
       },
     },
     {
+      comments: [
+        {
+          body: "The mention rows make the portfolio graph feel intentional instead of decorative.",
+          replies: [
+            {
+              body: "I especially like that mentions belong to the revision that produced them.",
+              replies: [
+                {
+                  body: "That should make stale references easier to audit when a post changes.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          body: "This is the kind of backend shape that can power related-content UI without hand curation.",
+          replies: [
+            {
+              body: "And it keeps the referenced project and job independent enough to stand alone.",
+            },
+          ],
+        },
+        {
+          body: "Once comments render, this thread is a nice stress test for recursive replies too.",
+        },
+      ],
       coverAssetId: assetIds["jane10-g90-1.webp"],
       featured: true,
       inlineAssetId: assetIds["jane10-g80-1.webp"],
@@ -1454,6 +1575,7 @@ async function seed() {
     const blogPostRecord = await upsertBlogPost(post);
 
     blogPostIds.push(blogPostRecord.id);
+    await seedBlogPostComments(blogPostRecord.id, post);
   }
 
   const [childCounts] = await sql`
@@ -1583,6 +1705,15 @@ async function seed() {
       ) AS blog_post_mentions,
       (
         SELECT count(*)::int
+        FROM comments
+        WHERE blog_post_id IN (
+          ${blogPostIds[0]},
+          ${blogPostIds[1]},
+          ${blogPostIds[2]}
+        )
+      ) AS blog_comments,
+      (
+        SELECT count(*)::int
         FROM project_translations
         WHERE project_id = ${projectIds[0]}
       ) AS project_translations,
@@ -1634,6 +1765,7 @@ async function seed() {
   console.log(`Blog revisions upserted: ${childCounts.blog_post_revisions}`);
   console.log(`Blog asset placements seeded: ${childCounts.blog_post_assets}`);
   console.log(`Blog mentions seeded: ${childCounts.blog_post_mentions}`);
+  console.log(`Blog comments seeded: ${childCounts.blog_comments}`);
 }
 
 await seed();
