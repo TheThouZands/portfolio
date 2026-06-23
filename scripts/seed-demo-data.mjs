@@ -97,9 +97,10 @@ function createTextNode(content) {
   };
 }
 
-function createParagraph(id, content) {
+function createParagraph(id, content, attrs = {}) {
   return {
     attrs: {
+      ...attrs,
       id,
     },
     content: createTextNode(content),
@@ -183,6 +184,7 @@ function createMentionCardSource(translation, mentionBlocks) {
 function createDeepNestingSource(translation) {
   return createStructuralDocument({
     attrs: {
+      class: "deep-root-class-alias",
       data: {
         "seed-shape": "deep-nesting",
       },
@@ -191,25 +193,34 @@ function createDeepNestingSource(translation) {
       createTextNode(translation.intro),
       {
         attrs: {
+          className: "deep-section-class-name-alias",
           id: "deep-section",
         },
         content: [
-          createParagraph("deep-first-paragraph", translation.body),
+          createParagraph("deep-first-paragraph", translation.body, {
+            for: "deep-for-target",
+          }),
           {
             attrs: {
               id: "deep-sibling-group",
+              tabindex: 0,
             },
             content: [
               {
+                attrs: {
+                  readonly: true,
+                },
                 content: "Bare primitive string inside an element.",
                 type: "p",
               },
               {
                 attrs: {
                   id: "deep-nested-element",
+                  tabIndex: 1,
                 },
                 content: {
                   attrs: {
+                    htmlFor: "deep-html-for-target",
                     id: "deep-inner-element",
                   },
                   content: [
@@ -232,8 +243,11 @@ function createDeepNestingSource(translation) {
       {
         attrs: {
           id: "deep-footer",
+          readOnly: true,
         },
-        content: createParagraph("deep-footer-copy", translation.footer),
+        content: createParagraph("deep-footer-copy", translation.footer, {
+          className: "deep-footer-copy-class-name-alias",
+        }),
         type: "footer",
       },
     ],
