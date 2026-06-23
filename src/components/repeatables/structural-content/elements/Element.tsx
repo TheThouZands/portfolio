@@ -1,80 +1,23 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import Div from "@/components/repeatables/structural-content/elements/Div";
+import Figure from "@/components/repeatables/structural-content/elements/Figure";
+import Image from "@/components/repeatables/structural-content/elements/Image";
+import Paragraph from "@/components/repeatables/structural-content/elements/Paragraph";
+import type {
+  StructuralElementComponent,
+  StructuralElementProps,
+} from "@/components/repeatables/structural-content/elements/types";
 
-type ElementProps = {
-  attrs?: StructuralElementAttributes;
-  children?: ReactNode;
-  type: string;
+export type { StructuralElementAttributes } from "@/components/repeatables/structural-content/elements/attributes";
+
+const ELEMENTS: Record<string, StructuralElementComponent> = {
+  div: Div,
+  figure: Figure,
+  img: Image,
+  p: Paragraph,
 };
 
-export type StructuralElementAttributes = Record<string, unknown>;
+export default function Element({ attrs, children, type }: StructuralElementProps) {
+  const Component = ELEMENTS[type] ?? Div;
 
-type StructuralElementAttributeValue = boolean | number | string;
-type ElementHtmlAttributes = HTMLAttributes<HTMLDivElement> &
-  Record<string, StructuralElementAttributeValue>;
-
-const ATTRIBUTE_NAME_OVERRIDES: Record<string, string> = {
-  class: "className",
-  className: "className",
-  for: "htmlFor",
-  htmlFor: "htmlFor",
-  readonly: "readOnly",
-  readOnly: "readOnly",
-  tabindex: "tabIndex",
-  tabIndex: "tabIndex",
-};
-
-function isAttributeValue(value: unknown): value is StructuralElementAttributeValue {
-  return (
-    typeof value === "boolean" ||
-    typeof value === "number" ||
-    typeof value === "string"
-  );
-}
-
-function isAttributeName(name: string) {
-  return /^[A-Za-z_:][\w:.-]*$/.test(name);
-}
-
-function getAttributeName(name: string) {
-  return ATTRIBUTE_NAME_OVERRIDES[name] ?? name.toLowerCase();
-}
-
-function shouldRenderAttribute(
-  name: string,
-  value: unknown,
-): value is StructuralElementAttributeValue {
-  return (
-    isAttributeValue(value) &&
-    isAttributeName(name) &&
-    name !== "children" &&
-    name !== "dangerouslySetInnerHTML" &&
-    name !== "key" &&
-    name !== "ref" &&
-    name !== "style" &&
-    !name.toLowerCase().startsWith("on")
-  );
-}
-
-function getHtmlAttributes(attrs?: StructuralElementAttributes): ElementHtmlAttributes {
-  const htmlAttributes: ElementHtmlAttributes = {};
-
-  if (!attrs) {
-    return htmlAttributes;
-  }
-
-  for (const [name, value] of Object.entries(attrs)) {
-    if (shouldRenderAttribute(name, value)) {
-      htmlAttributes[getAttributeName(name)] = value;
-    }
-  }
-
-  return htmlAttributes;
-}
-
-export default function Element({ attrs, children, type }: ElementProps) {
-  return (
-    <div {...getHtmlAttributes(attrs)} data-structural-type={type}>
-      {children}
-    </div>
-  );
+  return <Component attrs={attrs} type={type}>{children}</Component>;
 }
