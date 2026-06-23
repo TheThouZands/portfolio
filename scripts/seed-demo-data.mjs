@@ -11,6 +11,7 @@ if (!databaseUrl) {
 }
 
 const sql = neon(databaseUrl);
+const structuralContentVersion = 1;
 
 const blobUrls = [
   {
@@ -67,15 +68,6 @@ function toBlobAsset({ translations, url }) {
   };
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
-
 async function createContentEntity(type) {
   const [row] = await sql`
     INSERT INTO content_entities (
@@ -88,6 +80,137 @@ async function createContentEntity(type) {
   `;
 
   return Number(row.id);
+}
+
+function createStructuralDocument(content) {
+  return {
+    content,
+    type: "structural-content",
+    version: structuralContentVersion,
+  };
+}
+
+function createTextNode(content) {
+  return {
+    content,
+    type: "text",
+  };
+}
+
+function createParagraph(id, content) {
+  return {
+    attrs: {
+      id,
+    },
+    content: createTextNode(content),
+    type: "p",
+  };
+}
+
+function createArticleParagraphSource(translation) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "article-paragraphs",
+      },
+    },
+    content: [
+      createParagraph("intro", translation.intro),
+      createParagraph("body", translation.body),
+    ],
+    type: "article",
+  });
+}
+
+function createNestedDivSource(translation) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "nested-divs",
+      },
+      id: "nested-demo",
+    },
+    content: [
+      createTextNode(translation.intro),
+      {
+        attrs: {
+          id: "nested-body-shell",
+        },
+        content: {
+          attrs: {
+            id: "nested-body",
+          },
+          content: createTextNode(translation.body),
+          type: "div",
+        },
+        type: "div",
+      },
+    ],
+    type: "div",
+  });
+}
+
+function createMentionCardSource(translation, mentionBlocks) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "mention-cards",
+      },
+    },
+    content: [
+      createParagraph("intro", translation.intro),
+      ...mentionBlocks.map((mention) => ({
+        attrs: {
+          data: {
+            "content-entity-id": mention.entityId,
+            "content-entity-type": mention.entityType,
+            "content-reference-card": true,
+          },
+          id: mention.id,
+        },
+        content: [
+          createParagraph(`${mention.id}-title`, mention.title),
+          createParagraph(`${mention.id}-description`, mention.description),
+        ],
+        type: "div",
+      })),
+      createParagraph("body", translation.body),
+    ],
+    type: "div",
+  });
+}
+
+function createBlogSourceJson(translation, mentionBlocks, sourceShape) {
+  if (sourceShape === "nested-divs") {
+    return createNestedDivSource(translation);
+  }
+
+  if (sourceShape === "mention-cards") {
+    return createMentionCardSource(translation, mentionBlocks);
+  }
+
+  return createArticleParagraphSource(translation);
+}
+
+function createProjectSourceJson(translation) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "project-section",
+      },
+    },
+    content: [
+      createParagraph("project-overview", translation.overview),
+      {
+        attrs: {
+          id: "project-summary",
+        },
+        content: createParagraph("project-summary-copy", translation.shortDescription),
+        type: "section",
+      },
+    ],
+    type: "section",
+  });
 }
 
 async function upsertMediaAsset(asset) {
@@ -479,10 +602,9 @@ async function insertExperienceChildren(experienceId, entry, skillIds) {
 function createBlogRevision(
   translation,
   coverAssetId,
-  inlineAssetId,
-  inlineAssetUrl,
   mentions = [],
   locale = "en",
+  sourceShape = "article-paragraphs",
 ) {
   const mentionBlocks = mentions.map((mention) => {
     const mentionTranslation = mention.translations[locale] ?? mention.translations.en;
@@ -497,68 +619,15 @@ function createBlogRevision(
     };
   });
 
-  const sourceJson = {
-    type: "doc",
-    blocks: [
-      {
-        id: "title",
-        level: 2,
-        text: translation.title,
-        type: "heading",
-      },
-      {
-        id: "intro",
-        text: translation.intro,
-        type: "paragraph",
-      },
-      {
-        assetId: inlineAssetId,
-        caption: translation.imageCaption,
-        id: "inline-demo-image",
-        type: "image",
-      },
-      ...mentionBlocks,
-      {
-        id: "body",
-        text: translation.body,
-        type: "paragraph",
-      },
-    ],
-  };
-  const renderedMentionCards = mentionBlocks.map((mention) => [
-    `<aside data-block-id="${escapeHtml(mention.id)}" data-content-reference-card data-content-entity-id="${mention.entityId}" data-content-entity-type="${escapeHtml(mention.entityType)}">`,
-    `<h3>${escapeHtml(mention.title)}</h3>`,
-    `<p>${escapeHtml(mention.description)}</p>`,
-    "</aside>",
-  ].join(""));
-
   return {
     assetManifest: [
       {
         assetId: coverAssetId,
         role: "cover",
       },
-      {
-        assetId: inlineAssetId,
-        blockId: "inline-demo-image",
-        role: "inline",
-      },
     ],
-    renderedCss: `[data-post-slug="${translation.slug}"] figure { margin: 1.5rem 0; } [data-post-slug="${translation.slug}"] img { max-width: 100%; height: auto; } [data-content-reference-card] { border: 1px solid currentColor; padding: 1rem; }`,
-    renderedHtml: [
-      `<article data-post-slug="${escapeHtml(translation.slug)}">`,
-      `<h2 data-block-id="title">${escapeHtml(translation.title)}</h2>`,
-      `<p data-block-id="intro">${escapeHtml(translation.intro)}</p>`,
-      `<figure data-block-id="inline-demo-image">`,
-      `<img src="${escapeHtml(inlineAssetUrl)}" data-media-asset-id="${inlineAssetId}" alt="${escapeHtml(translation.imageCaption)}">`,
-      `<figcaption>${escapeHtml(translation.imageCaption)}</figcaption>`,
-      "</figure>",
-      ...renderedMentionCards,
-      `<p data-block-id="body">${escapeHtml(translation.body)}</p>`,
-      "</article>",
-    ].join(""),
     mentions: mentionBlocks,
-    sourceJson,
+    sourceJson: createBlogSourceJson(translation, mentionBlocks, sourceShape),
   };
 }
 
@@ -640,10 +709,9 @@ async function upsertBlogPost(post) {
     const revision = createBlogRevision(
       translation,
       post.coverAssetId,
-      post.inlineAssetId,
-      post.inlineAssetUrl,
       post.mentions,
       locale,
+      post.sourceShape,
     );
 
     const [blogRevision] = await sql`
@@ -653,8 +721,6 @@ async function upsertBlogPost(post) {
         version,
         is_current,
         source_json,
-        rendered_html,
-        rendered_css,
         asset_manifest
       )
       VALUES (
@@ -663,15 +729,11 @@ async function upsertBlogPost(post) {
         1,
         true,
         ${JSON.stringify(revision.sourceJson)}::jsonb,
-        ${revision.renderedHtml},
-        ${revision.renderedCss},
         ${JSON.stringify(revision.assetManifest)}::jsonb
       )
       ON CONFLICT (blog_post_id, locale, version) DO UPDATE SET
         is_current = excluded.is_current,
         source_json = excluded.source_json,
-        rendered_html = excluded.rendered_html,
-        rendered_css = excluded.rendered_css,
         asset_manifest = excluded.asset_manifest,
         compiled_at = now()
       RETURNING id
@@ -930,16 +992,7 @@ async function upsertProject(project, skillIds) {
   }
 
   for (const [locale, translation] of Object.entries(project.translations)) {
-    const sourceJson = {
-      type: "doc",
-      blocks: [
-        {
-          id: "overview",
-          text: translation.overview,
-          type: "paragraph",
-        },
-      ],
-    };
+    const sourceJson = createProjectSourceJson(translation);
 
     await sql`
       INSERT INTO project_revisions (
@@ -948,9 +1001,7 @@ async function upsertProject(project, skillIds) {
         version,
         is_current,
         source_json,
-        rendered_html,
-        rendered_text,
-        rendered_css
+        rendered_text
       )
       VALUES (
         ${projectId},
@@ -958,16 +1009,12 @@ async function upsertProject(project, skillIds) {
         1,
         true,
         ${JSON.stringify(sourceJson)}::jsonb,
-        ${`<article><p>${escapeHtml(translation.overview)}</p></article>`},
-        ${translation.overview},
-        ${null}
+        ${translation.overview}
       )
       ON CONFLICT (project_id, locale, version) DO UPDATE SET
         is_current = excluded.is_current,
         source_json = excluded.source_json,
-        rendered_html = excluded.rendered_html,
         rendered_text = excluded.rendered_text,
-        rendered_css = excluded.rendered_css,
         compiled_at = now()
     `;
   }
@@ -1323,10 +1370,10 @@ async function seed() {
         {
           translations: {
             en: {
-              body: "Stores blog mentions as relational rows tied to the rendered revision that produced them.",
+              body: "Stores blog mentions as relational rows tied to the structural revision that produced them.",
             },
             es: {
-              body: "Guarda menciones del blog como filas relacionales ligadas a la revision renderizada que las produjo.",
+              body: "Guarda menciones del blog como filas relacionales ligadas a la revision estructural que las produjo.",
             },
           },
         },
@@ -1385,7 +1432,7 @@ async function seed() {
           body: "This makes the writer model feel testable before the editor exists.",
           replies: [
             {
-              body: "The source JSON plus rendered HTML split is the first thing I would inspect.",
+              body: "The structural JSON tree is the first thing I would inspect.",
               replies: [
                 {
                   body: "Same; a preview diff would make CMS changes feel much less mysterious.",
@@ -1408,23 +1455,20 @@ async function seed() {
       ],
       coverAssetId: assetIds["jane10-g50-1.webp"],
       featured: true,
-      inlineAssetId: assetIds["jane10-g90-1.webp"],
-      inlineAssetUrl: assets[2].url,
       publishedAt: "2026-06-01T12:00:00.000Z",
+      sourceShape: "article-paragraphs",
       status: "testing",
       translations: {
         en: {
-          body: "This placeholder revision proves the eventual writer can keep source JSON, compiled HTML, CSS, and asset references aligned without guessing where images belong.",
+          body: "This placeholder revision proves the eventual writer can keep structural JSON and asset references aligned without guessing where content belongs.",
           excerpt: "A seeded post for testing the CMS writer output model before the editor exists.",
-          imageCaption: "Inline demo image placed by writer block id.",
           intro: "A portfolio CMS should make the editing surface feel like part of the product, not a bolted-on admin form.",
           slug: "designing-portfolio-cms-product-surface",
           title: "Designing a Portfolio CMS as a Product Surface",
         },
         es: {
-          body: "Esta revision provisional demuestra que el escritor podra mantener alineados el JSON fuente, el HTML compilado, el CSS y las referencias de assets sin adivinar donde pertenecen las imagenes.",
+          body: "Esta revision provisional demuestra que el escritor podra mantener alineados el JSON estructural y las referencias de assets sin adivinar donde pertenece cada contenido.",
           excerpt: "Una publicacion sembrada para probar el modelo de salida del escritor CMS antes de que exista el editor.",
-          imageCaption: "Imagen demo insertada por id de bloque del escritor.",
           intro: "Un CMS de portafolio deberia hacer que la superficie de edicion se sienta como parte del producto, no como un formulario administrativo pegado despues.",
           slug: "disenando-un-cms-de-portafolio-como-superficie-de-producto",
           title: "Disenando un CMS de portafolio como superficie de producto",
@@ -1460,15 +1504,13 @@ async function seed() {
       ],
       coverAssetId: assetIds["jane10-g80-1.webp"],
       featured: true,
-      inlineAssetId: assetIds["jane10-g50-1.webp"],
-      inlineAssetUrl: assets[0].url,
       publishedAt: "2026-06-03T12:00:00.000Z",
+      sourceShape: "nested-divs",
       status: "testing",
       translations: {
         en: {
           body: "The child tables let one entry support bullets, media roles, skill filtering, and richer detail pages while keeping the main experience record readable.",
           excerpt: "A seeded post for testing experience content as structured data instead of a static CV.",
-          imageCaption: "Inline demo image reused from the shared asset library.",
           intro: "Experience entries can become timelines, case-study previews, and skill maps when the backend stores the right structure.",
           slug: "experience-entries-more-than-timeline",
           title: "Making Experience Entries More Than a Timeline",
@@ -1476,7 +1518,6 @@ async function seed() {
         es: {
           body: "Las tablas hijas permiten que una entrada soporte bullets, roles de media, filtros por habilidad y paginas de detalle mas ricas sin volver ilegible el registro principal de experiencia.",
           excerpt: "Una publicacion sembrada para probar contenido de experiencia como datos estructurados en vez de un CV estatico.",
-          imageCaption: "Imagen demo reutilizada desde la biblioteca compartida de assets.",
           intro: "Las entradas de experiencia pueden convertirse en lineas de tiempo, vistas previas de casos y mapas de habilidades cuando el backend guarda la estructura correcta.",
           slug: "entradas-de-experiencia-mas-que-una-linea-de-tiempo",
           title: "Entradas de experiencia: mas que una linea de tiempo",
@@ -1512,8 +1553,6 @@ async function seed() {
       ],
       coverAssetId: assetIds["jane10-g90-1.webp"],
       featured: true,
-      inlineAssetId: assetIds["jane10-g80-1.webp"],
-      inlineAssetUrl: assets[1].url,
       mentions: [
         {
           blockId: "portfolio-content-graph-card",
@@ -1547,21 +1586,20 @@ async function seed() {
         },
       ],
       publishedAt: "2026-06-18T12:00:00.000Z",
+      sourceShape: "mention-cards",
       status: "testing",
       translations: {
         en: {
           body: "The seed now proves the storage-side contract: rich content can render a reference card while the referenced project and job can later query which blog revisions mentioned them.",
           excerpt: "A seeded post for testing project and job mentions through shared content entities.",
-          imageCaption: "Inline demo image for the content mention seed.",
-          intro: "Cross-content links become more useful when the relationship is stored beside the rendered writer output.",
+          intro: "Cross-content links become more useful when the relationship is stored beside the structural content source.",
           slug: "tracing-portfolio-work-with-content-mentions",
           title: "Tracing Portfolio Work with Content Mentions",
         },
         es: {
           body: "La semilla ahora prueba el contrato del lado de almacenamiento: el contenido enriquecido puede renderizar una tarjeta de referencia mientras el proyecto y el trabajo referenciados luego pueden consultar que revisiones del blog los mencionaron.",
           excerpt: "Una publicacion sembrada para probar menciones de proyecto y trabajo mediante entidades de contenido compartidas.",
-          imageCaption: "Imagen demo inline para la semilla de menciones de contenido.",
-          intro: "Los enlaces cruzados entre contenidos se vuelven mas utiles cuando la relacion se guarda junto a la salida renderizada del escritor.",
+          intro: "Los enlaces cruzados entre contenidos se vuelven mas utiles cuando la relacion se guarda junto al contenido estructural fuente.",
           slug: "rastreando-trabajo-de-portafolio-con-menciones-de-contenido",
           title: "Rastreando trabajo de portafolio con menciones de contenido",
         },
