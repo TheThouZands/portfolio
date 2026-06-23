@@ -23,8 +23,10 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.6.20",
     "@neondatabase/serverless": "^1.1.0",
     "argon2": "^0.44.0",
+    "better-auth": "^1.6.20",
     "drizzle-orm": "^0.45.2",
     "next": "16.2.9",
     "next-intl": "^4.13.0",
