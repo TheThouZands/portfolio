@@ -2,14 +2,14 @@
 
 This is a personal portfolio that displays fullstack capabilities using Next.js, and PostgreSQL via Neon serverless DB, handled with Drizzle ORM for DB versioning bound to repo.
 
-It is hosted in Vercel, but is fully runnable as standalone server, likewise, via Drizzle, it is compatible with self-served databases.
+It is hosted in Vercel, but is fully runnable as standalone server, only needs adapting (if not using neon, switching driver dependency), likewise, via Drizzle, it is compatible with self-served databases.
 
 ## Getting Started
 
-Use the project Node version before installing or running scripts:
+Use the project Node version or upper before installing or running scripts:
 
 ```bash
-nvm use 25.9.0
+nvm use 24
 ```
 
 On some Windows setups, bare `nvm use` does not read `.nvmrc`, so `npm run node:use` is available as a project shortcut. This repo also includes `.nvmrc` and `.node-version` for tools that read those conventions.
