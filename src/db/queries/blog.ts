@@ -143,10 +143,9 @@ export async function getBlogPostById({ id, locale }: GetBlogPostByIdOptions) {
     .select({
       excerpt: blogPostTranslations.excerpt,
       publishedAt: blogPosts.published_at,
-      renderedCss: blogPostRevisions.rendered_css,
-      renderedHtml: blogPostRevisions.rendered_html,
       revisionId: blogPostRevisions.id,
       slug: blogPostTranslations.slug,
+      sourceJson: blogPostRevisions.source_json,
       title: blogPostTranslations.title,
     })
     .from(blogPosts)

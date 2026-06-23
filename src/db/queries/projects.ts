@@ -51,8 +51,7 @@ export type ProjectDetail = ProjectBase & {
     id: number;
   }[];
   revision: {
-    renderedCss: string | null;
-    renderedHtml: string;
+    sourceJson: unknown;
   } | null;
   skills: {
     category: string | null;
@@ -215,8 +214,7 @@ export async function getProjectById({
       .orderBy(asc(projectSkills.sort_order), asc(skills.name)),
     db
       .select({
-        renderedCss: projectRevisions.rendered_css,
-        renderedHtml: projectRevisions.rendered_html,
+        sourceJson: projectRevisions.source_json,
       })
       .from(projectRevisions)
       .where(

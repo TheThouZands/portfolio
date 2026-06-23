@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Content from "@/components/repeatables/structural-content/Content";
 import { getBlogPostById } from "@/db/queries/blog";
 
 type PostProps = {
@@ -15,7 +16,6 @@ export default async function Post({ blogPostId, locale }: PostProps) {
 
   return (
     <article>
-      {post.renderedCss ? <style>{post.renderedCss}</style> : null}
       <header>
         <h1>{post.title}</h1>
         {post.publishedAt && (
@@ -25,7 +25,9 @@ export default async function Post({ blogPostId, locale }: PostProps) {
         )}
         {post.excerpt ? <p>{post.excerpt}</p> : null}
       </header>
-      <section dangerouslySetInnerHTML={{ __html: post.renderedHtml }} /> {/* trusted given full in-house posting, even if not ideal allows for cool things without a rendering engine based on a new md lang */}
+      <section>
+        <Content value={post.sourceJson} />
+      </section>
     </article>
   );
 }

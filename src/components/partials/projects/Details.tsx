@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import SkillsList from "@/components/repeatables/collections/skills/List";
+import Content from "@/components/repeatables/structural-content/Content";
 import { getProjectById } from "@/db/queries/projects";
 
 type DetailsProps = {
@@ -49,7 +50,6 @@ export default async function Details({ locale, projectId }: DetailsProps) {
 
   return (
     <article>
-      {project.revision?.renderedCss ? <style>{project.revision.renderedCss}</style> : null}
       <header>
         <h1>{project.title}</h1>
         {project.shortDescription ? <p>{project.shortDescription}</p> : null}
@@ -100,7 +100,9 @@ export default async function Details({ locale, projectId }: DetailsProps) {
       ) : null}
 
       {project.revision ? (
-        <section dangerouslySetInnerHTML={{ __html: project.revision.renderedHtml }} />
+        <section>
+          <Content value={project.revision.sourceJson} />
+        </section>
       ) : project.overview ? (
         <section>
           <h2>{t("overviewTitle")}</h2>
