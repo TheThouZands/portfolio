@@ -161,6 +161,29 @@ export const verification = pgTable(
   ],
 );
 
+/** CMS-owned login identity, kept separate from Better Auth's session user shape. */
+export const authIdentities = pgTable(
+  "auth_identities",
+  {
+    userId: text("user_id")
+      .primaryKey()
+      .references(() => user.id, { onDelete: "cascade" }),
+    username: varchar({ length: 80 }).notNull(),
+    usernameNormalized: varchar("username_normalized", { length: 80 }).notNull(),
+    email: text(),
+    emailNormalized: text("email_normalized"),
+    emailVerifiedAt: timestamp("email_verified_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("auth_identities_username_normalized_idx").on(
+      table.usernameNormalized,
+    ),
+    uniqueIndex("auth_identities_email_normalized_idx").on(table.emailNormalized),
+  ],
+);
+
 /** Rate-limited capture of /wp-admin/install.php probes and submitted payloads. */
 export const wpHoneypotLogs = pgTable(
   "wp_honeypot_logs",
