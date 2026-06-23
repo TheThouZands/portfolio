@@ -241,9 +241,58 @@ function createDeepNestingSource(translation) {
   });
 }
 
-function createBlogSourceJson(translation, mentionBlocks, sourceShape) {
+function createImageElementSource(translation, inlineAssetId, inlineAssetUrl) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "image-elements",
+      },
+    },
+    content: [
+      createParagraph("image-intro", translation.intro),
+      {
+        attrs: {
+          id: "image-figure",
+        },
+        content: [
+          {
+            attrs: {
+              alt: translation.imageAltText,
+              assetId: inlineAssetId,
+              id: "image-asset",
+              src: inlineAssetUrl,
+            },
+            type: "img",
+          },
+          {
+            attrs: {
+              id: "image-caption",
+            },
+            content: createTextNode(translation.imageCaption),
+            type: "figcaption",
+          },
+        ],
+        type: "figure",
+      },
+      createParagraph("image-body", translation.body),
+    ],
+    type: "div",
+  });
+}
+
+function createBlogSourceJson(
+  translation,
+  mentionBlocks,
+  sourceShape,
+  inlineAssetId,
+  inlineAssetUrl,
+) {
   if (sourceShape === "deep-nesting") {
     return createDeepNestingSource(translation);
+  }
+
+  if (sourceShape === "image-elements") {
+    return createImageElementSource(translation, inlineAssetId, inlineAssetUrl);
   }
 
   if (sourceShape === "nested-divs") {
@@ -670,6 +719,8 @@ function createBlogRevision(
   mentions = [],
   locale = "en",
   sourceShape = "article-paragraphs",
+  inlineAssetId,
+  inlineAssetUrl,
 ) {
   const mentionBlocks = mentions.map((mention) => {
     const mentionTranslation = mention.translations[locale] ?? mention.translations.en;
@@ -684,15 +735,31 @@ function createBlogRevision(
     };
   });
 
+  const assetManifest = [
+    {
+      assetId: coverAssetId,
+      role: "cover",
+    },
+  ];
+
+  if (inlineAssetId) {
+    assetManifest.push({
+      assetId: inlineAssetId,
+      blockId: "image-asset",
+      role: "inline",
+    });
+  }
+
   return {
-    assetManifest: [
-      {
-        assetId: coverAssetId,
-        role: "cover",
-      },
-    ],
+    assetManifest,
     mentions: mentionBlocks,
-    sourceJson: createBlogSourceJson(translation, mentionBlocks, sourceShape),
+    sourceJson: createBlogSourceJson(
+      translation,
+      mentionBlocks,
+      sourceShape,
+      inlineAssetId,
+      inlineAssetUrl,
+    ),
   };
 }
 
@@ -777,6 +844,8 @@ async function upsertBlogPost(post) {
       post.mentions,
       locale,
       post.sourceShape,
+      post.inlineAssetId,
+      post.inlineAssetUrl,
     );
 
     const [blogRevision] = await sql`
@@ -1696,6 +1765,36 @@ async function seed() {
         },
       },
     },
+    {
+      comments: [],
+      coverAssetId: assetIds["jane10-g80-1.webp"],
+      featured: false,
+      inlineAssetId: assetIds["jane10-g90-1.webp"],
+      inlineAssetUrl: assets[2].url,
+      publishedAt: "2026-06-22T12:00:00.000Z",
+      sourceShape: "image-elements",
+      status: "testing",
+      translations: {
+        en: {
+          body: "The fallback renderer should keep walking when it sees an image element, even before image rendering is specialized.",
+          excerpt: "A non-featured seeded post for testing image-shaped structural content.",
+          imageAltText: "Demo Jane portfolio image referenced by structural content.",
+          imageCaption: "Image element carrying both an asset reference and a public URL.",
+          intro: "Image nodes should be ordinary structural content until a specialized element handles them.",
+          slug: "stress-testing-structural-content-images",
+          title: "Stress Testing Structural Content Images",
+        },
+        es: {
+          body: "El renderizador fallback deberia seguir recorriendo cuando encuentra un elemento de imagen, incluso antes de especializar el render de imagenes.",
+          excerpt: "Una publicacion sembrada no destacada para probar contenido estructural con forma de imagen.",
+          imageAltText: "Imagen demo Jane de portafolio referenciada por contenido estructural.",
+          imageCaption: "Elemento de imagen con referencia de asset y URL publica.",
+          intro: "Los nodos de imagen deberian ser contenido estructural normal hasta que un elemento especializado los maneje.",
+          slug: "probando-imagenes-de-contenido-estructural",
+          title: "Probando imagenes de contenido estructural",
+        },
+      },
+    },
   ];
 
   const blogPostIds = [];
@@ -1795,7 +1894,8 @@ async function seed() {
           ${blogPostIds[0]},
           ${blogPostIds[1]},
           ${blogPostIds[2]},
-          ${blogPostIds[3]}
+          ${blogPostIds[3]},
+          ${blogPostIds[4]}
         )
       ) AS blog_post_translations,
       (
@@ -1805,7 +1905,8 @@ async function seed() {
           ${blogPostIds[0]},
           ${blogPostIds[1]},
           ${blogPostIds[2]},
-          ${blogPostIds[3]}
+          ${blogPostIds[3]},
+          ${blogPostIds[4]}
         )
       ) AS blog_post_revisions,
       (
@@ -1818,7 +1919,8 @@ async function seed() {
             ${blogPostIds[0]},
             ${blogPostIds[1]},
             ${blogPostIds[2]},
-            ${blogPostIds[3]}
+            ${blogPostIds[3]},
+            ${blogPostIds[4]}
           )
         )
       ) AS blog_post_assets,
@@ -1832,7 +1934,8 @@ async function seed() {
             ${blogPostIds[0]},
             ${blogPostIds[1]},
             ${blogPostIds[2]},
-            ${blogPostIds[3]}
+            ${blogPostIds[3]},
+            ${blogPostIds[4]}
           )
         )
       ) AS blog_post_mentions,
@@ -1843,7 +1946,8 @@ async function seed() {
           ${blogPostIds[0]},
           ${blogPostIds[1]},
           ${blogPostIds[2]},
-          ${blogPostIds[3]}
+          ${blogPostIds[3]},
+          ${blogPostIds[4]}
         )
       ) AS blog_comments,
       (
