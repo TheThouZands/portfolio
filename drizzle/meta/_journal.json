@@ -99,6 +99,13 @@
       "when": 1782179516223,
       "tag": "0013_drop_blog_revision_rendered_output",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1782179584005,
+      "tag": "0014_drop_project_revision_rendered_output",
+      "breakpoints": true
     }
   ]
 }
