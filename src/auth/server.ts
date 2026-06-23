@@ -4,6 +4,7 @@ import { drizzleAdapter } from "@better-auth/drizzle-adapter";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 
+import { portfolioAuthFlow } from "@/auth/portfolio-flow";
 import { db } from "@/db/client";
 import * as schema from "@/db/schema";
 
@@ -26,5 +27,5 @@ export const auth = betterAuth({
       strategy: "jwe",
     },
   },
-  plugins: [nextCookies()],
+  plugins: [portfolioAuthFlow(), nextCookies()],
 });
