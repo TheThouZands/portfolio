@@ -2,16 +2,16 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import SignUpForm from "@/app/[locale]/auth/sign-up/SignUpForm";
+import IdentifierForm from "@/app/[locale]/auth/IdentifierForm";
 import { routing } from "@/i18n/routing";
 
-type SignUpPageProps = {
+type AuthPageProps = {
   params: Promise<{
     locale: string;
   }>;
 };
 
-export default async function SignUpPage({ params }: SignUpPageProps) {
+export default async function AuthPage({ params }: AuthPageProps) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -22,8 +22,8 @@ export default async function SignUpPage({ params }: SignUpPageProps) {
 
   return (
     <main>
-      <h1>Sign up</h1>
-      <SignUpForm />
+      <h1>Continue</h1>
+      <IdentifierForm locale={locale} />
     </main>
   );
 }

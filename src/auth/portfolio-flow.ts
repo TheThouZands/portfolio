@@ -5,8 +5,9 @@ import { APIError, createAuthEndpoint } from "better-auth/api";
 import { setSessionCookie } from "better-auth/cookies";
 import { z } from "zod";
 
-import { hashPassword } from "@/auth/password";
+import { hashPassword, verifyPassword } from "@/auth/password";
 import {
+  getAuthIdentifierKind,
   findAuthIdentityByIdentifier,
   normalizeAuthIdentifier,
   resolveAuthIdentifierForFlow,
@@ -23,15 +24,119 @@ const signUpUsernameBody = z.object({
   password: z.string(),
 });
 
+const signUpIdentifierBody = z.object({
+  identifier: z.string(),
+  otherIdentifier: z.string().optional(),
+  password: z.string(),
+});
+
+const signInIdentifierBody = z.object({
+  identifier: z.string(),
+  password: z.string(),
+});
+
 const USERNAME_TAKEN = {
   code: "USERNAME_TAKEN",
   message: "That username is already taken.",
+} as const;
+
+const EMAIL_TAKEN = {
+  code: "EMAIL_TAKEN",
+  message: "That email is already taken.",
 } as const;
 
 const SIGN_UP_FAILED = {
   code: "SIGN_UP_FAILED",
   message: "Could not create the account.",
 } as const;
+
+const SIGN_IN_FAILED = {
+  code: "SIGN_IN_FAILED",
+  message: "Could not sign in.",
+} as const;
+
+type CreateIdentifierAccountInput = {
+  username: string;
+  email: string | null;
+  password: string;
+  ctx: Parameters<typeof setSessionCookie>[0];
+};
+
+async function createIdentifierAccount({
+  username,
+  email,
+  password,
+  ctx,
+}: CreateIdentifierAccountInput) {
+  const usernameNormalized = normalizeAuthIdentifier(username);
+  const emailNormalized = email ? normalizeAuthIdentifier(email) : null;
+
+  if (!username || usernameNormalized.includes("@") || !password) {
+    throw APIError.from("BAD_REQUEST", {
+      code: "INVALID_SIGN_UP",
+      message: "Username and password are required.",
+    });
+  }
+
+  if (await findAuthIdentityByIdentifier(usernameNormalized)) {
+    throw APIError.from("CONFLICT", USERNAME_TAKEN);
+  }
+
+  if (emailNormalized && (await findAuthIdentityByIdentifier(emailNormalized))) {
+    throw APIError.from("CONFLICT", EMAIL_TAKEN);
+  }
+
+  const userId = crypto.randomUUID();
+  let createdUserId: string | null = null;
+
+  try {
+    const createdUser = await ctx.context.internalAdapter.createUser({
+      id: userId,
+      name: username,
+      email: email ?? `${userId}@users.invalid`,
+      emailVerified: false,
+    });
+    createdUserId = createdUser.id;
+
+    await ctx.context.internalAdapter.linkAccount({
+      userId: createdUser.id,
+      providerId: "credential",
+      accountId: createdUser.id,
+      password: await hashPassword(password),
+    });
+
+    await db.insert(authIdentities).values({
+      userId: createdUser.id,
+      username,
+      usernameNormalized,
+      email,
+      emailNormalized,
+    });
+
+    const session = await ctx.context.internalAdapter.createSession(createdUser.id);
+
+    await setSessionCookie(ctx, {
+      session,
+      user: createdUser,
+    });
+
+    return {
+      userId: createdUser.id,
+      username,
+    };
+  } catch (error) {
+    if (createdUserId) {
+      await ctx.context.internalAdapter.deleteUser(createdUserId);
+    }
+
+    if (error instanceof APIError) {
+      throw error;
+    }
+
+    ctx.context.logger.error("Failed to create identifier account", error);
+    throw APIError.from("BAD_REQUEST", SIGN_UP_FAILED);
+  }
+}
 
 export const portfolioAuthFlow = () =>
   ({
@@ -55,77 +160,85 @@ export const portfolioAuthFlow = () =>
           });
         },
       ),
+      signInIdentifier: createAuthEndpoint.serverOnly(
+        {
+          method: "POST",
+          body: signInIdentifierBody,
+        },
+        async (ctx) => {
+          const identity = await findAuthIdentityByIdentifier(ctx.body.identifier);
+          const password = ctx.body.password;
+
+          if (!identity || !password) {
+            throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
+          }
+
+          const credentialAccount = (
+            await ctx.context.internalAdapter.findAccounts(identity.userId)
+          ).find((account) => account.providerId === "credential");
+
+          if (
+            !credentialAccount?.password ||
+            !(await verifyPassword({
+              password,
+              passwordHash: credentialAccount.password,
+            }))
+          ) {
+            throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
+          }
+
+          const user = await ctx.context.internalAdapter.findUserById(identity.userId);
+
+          if (!user) {
+            throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
+          }
+
+          const session = await ctx.context.internalAdapter.createSession(user.id);
+
+          await setSessionCookie(ctx, {
+            session,
+            user,
+          });
+
+          return {
+            userId: identity.userId,
+            username: identity.username,
+          };
+        },
+      ),
+      signUpIdentifier: createAuthEndpoint.serverOnly(
+        {
+          method: "POST",
+          body: signUpIdentifierBody,
+        },
+        async (ctx) => {
+          const identifier = ctx.body.identifier.trim();
+          const otherIdentifier = ctx.body.otherIdentifier?.trim() ?? "";
+          const identifierKind = getAuthIdentifierKind(identifier);
+          const username =
+            identifierKind === "username" ? identifier : otherIdentifier;
+          const email = identifierKind === "email" ? identifier : otherIdentifier;
+
+          return createIdentifierAccount({
+            username,
+            email: email || null,
+            password: ctx.body.password,
+            ctx,
+          });
+        },
+      ),
       signUpUsername: createAuthEndpoint.serverOnly(
         {
           method: "POST",
           body: signUpUsernameBody,
         },
         async (ctx) => {
-          const username = ctx.body.username.trim();
-          const usernameNormalized = normalizeAuthIdentifier(username);
-          const password = ctx.body.password;
-
-          if (!username || usernameNormalized.includes("@") || !password) {
-            throw APIError.from("BAD_REQUEST", {
-              code: "INVALID_SIGN_UP",
-              message: "Username and password are required.",
-            });
-          }
-
-          if (await findAuthIdentityByIdentifier(usernameNormalized)) {
-            throw APIError.from("CONFLICT", USERNAME_TAKEN);
-          }
-
-          const userId = crypto.randomUUID();
-          let createdUserId: string | null = null;
-
-          try {
-            const createdUser = await ctx.context.internalAdapter.createUser({
-              id: userId,
-              name: username,
-              email: `${userId}@users.invalid`,
-              emailVerified: false,
-            });
-            createdUserId = createdUser.id;
-
-            await ctx.context.internalAdapter.linkAccount({
-              userId: createdUser.id,
-              providerId: "credential",
-              accountId: createdUser.id,
-              password: await hashPassword(password),
-            });
-
-            await db.insert(authIdentities).values({
-              userId: createdUser.id,
-              username,
-              usernameNormalized,
-            });
-
-            const session = await ctx.context.internalAdapter.createSession(
-              createdUser.id,
-            );
-
-            await setSessionCookie(ctx, {
-              session,
-              user: createdUser,
-            });
-
-            return {
-              userId: createdUser.id,
-              username,
-            };
-          } catch (error) {
-            if (createdUserId) {
-              await ctx.context.internalAdapter.deleteUser(createdUserId);
-            }
-
-            if (error instanceof APIError) {
-              throw error;
-            }
-
-            ctx.context.logger.error("Failed to create username account", error);
-            throw APIError.from("BAD_REQUEST", SIGN_UP_FAILED);
-          }
+          return createIdentifierAccount({
+            username: ctx.body.username.trim(),
+            email: null,
+            password: ctx.body.password,
+            ctx,
+          });
         },
       ),
     },

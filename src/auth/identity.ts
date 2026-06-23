@@ -49,16 +49,6 @@ export async function resolveAuthIdentifierForFlow(
   const normalizedIdentifier = normalizeAuthIdentifier(identifier);
   const kind = getAuthIdentifierKind(normalizedIdentifier);
 
-  if (kind === "email") {
-    return {
-      kind,
-      normalizedIdentifier,
-      identity: null,
-      exposesExistence: false,
-      nextStep: "email-otp",
-    };
-  }
-
   const identity = await findAuthIdentityByIdentifier(normalizedIdentifier);
 
   return {
