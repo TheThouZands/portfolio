@@ -6,6 +6,9 @@ security-focused surface instead of depending on low-level primitives directly.
 Better Auth reads `BETTER_AUTH_SECRET` and `BETTER_AUTH_URL` from the environment. Generate a secret with
 `npx auth@latest secret` or `openssl rand -base64 32` before using real accounts.
 
+Auth-owned ids are Postgres UUID columns. Better Auth is configured with `advanced.database.generateId: "uuid"`,
+so generated primary keys should come from the database defaults on the Drizzle schema.
+
 The CMS-owned flow keeps username/email decisions in `authIdentities` instead of Better Auth's default user table.
 `POST /api/auth/portfolio-auth/resolve-identifier` returns the next auth step for a custom entry UI:
 
