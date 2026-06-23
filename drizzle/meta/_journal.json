@@ -92,6 +92,13 @@
       "when": 1782098933919,
       "tag": "0012_fixed_mad_thinker",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1782179516223,
+      "tag": "0013_drop_blog_revision_rendered_output",
+      "breakpoints": true
     }
   ]
 }

@@ -606,7 +606,7 @@ export const blogPostTranslations = pgTable(
   ],
 );
 
-/** Versioned writer output for a blog post, keeping editable source plus compiled HTML/CSS. */
+/** Versioned structural content for a blog post, keeping editable source plus extracted assets. */
 export const blogPostRevisions = pgTable(
   "blog_post_revisions",
   {
@@ -618,8 +618,6 @@ export const blogPostRevisions = pgTable(
     version: integer().notNull().default(1),
     is_current: boolean().notNull().default(false),
     source_json: jsonb().$type<WriterDocument>().notNull(),
-    rendered_html: text().notNull(),
-    rendered_css: text(),
     asset_manifest: jsonb().$type<WriterAssetReference[]>().notNull(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
     compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
