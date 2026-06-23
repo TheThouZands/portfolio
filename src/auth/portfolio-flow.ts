@@ -55,12 +55,46 @@ const SIGN_IN_FAILED = {
   message: "Could not sign in.",
 } as const;
 
+type AuthEndpointContext = Parameters<typeof setSessionCookie>[0];
+
 type CreateIdentifierAccountInput = {
   username: string;
   email: string | null;
   password: string;
-  ctx: Parameters<typeof setSessionCookie>[0];
+  ctx: AuthEndpointContext;
 };
+
+async function getCurrentSessionToken(ctx: AuthEndpointContext) {
+  const sessionToken = await ctx.getSignedCookie(
+    ctx.context.authCookies.sessionToken.name,
+    ctx.context.secret,
+  );
+
+  return sessionToken || null;
+}
+
+async function deleteCurrentBrowserSession(
+  ctx: AuthEndpointContext,
+  sessionToken: string | null,
+  replacementToken: string,
+) {
+  if (!sessionToken || sessionToken === replacementToken) {
+    return;
+  }
+
+  try {
+    const existingSession =
+      await ctx.context.internalAdapter.findSession(sessionToken);
+
+    if (!existingSession || existingSession.session.expiresAt <= new Date()) {
+      return;
+    }
+
+    await ctx.context.internalAdapter.deleteSession(sessionToken);
+  } catch (error) {
+    ctx.context.logger.error("Failed to replace current browser session", error);
+  }
+}
 
 async function createIdentifierAccount({
   username,
@@ -193,7 +227,14 @@ export const portfolioAuthFlow = () =>
             throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
           }
 
+          const currentSessionToken = await getCurrentSessionToken(ctx);
           const session = await ctx.context.internalAdapter.createSession(user.id);
+
+          await deleteCurrentBrowserSession(
+            ctx,
+            currentSessionToken,
+            session.token,
+          );
 
           await setSessionCookie(ctx, {
             session,
