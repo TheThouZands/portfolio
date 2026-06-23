@@ -17,18 +17,13 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { geometry } from "drizzle-orm/pg-core/columns/postgis_extension/geometry";
+import type { StructuralContentDocument } from "../cms/structural-content/types";
 
-/** Asset usage extracted from a writer document for validation, rendering, and preloading. */
-export type WriterAssetReference = {
+/** Asset usage extracted from structural content for validation, rendering, and preloading. */
+export type StructuralContentAssetReference = {
   assetId: number;
   blockId?: string;
   role: "cover" | "inline" | "gallery" | "attachment" | "logo" | "screenshot";
-};
-
-/** Editable source shape produced by the custom writer before it is compiled to HTML/CSS. */
-export type WriterDocument = {
-  type: "doc";
-  blocks: Record<string, unknown>[];
 };
 
 /** Captured request details from the fake WordPress installer. */
@@ -504,7 +499,7 @@ export const projectRevisions = pgTable(
     locale: varchar({ length: 16 }).notNull().default("en"),
     version: integer().notNull().default(1),
     is_current: boolean().notNull().default(false),
-    source_json: jsonb().$type<WriterDocument>().notNull(),
+    source_json: jsonb().$type<StructuralContentDocument>().notNull(),
     rendered_text: text().notNull(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
     compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
@@ -615,8 +610,8 @@ export const blogPostRevisions = pgTable(
     locale: varchar({ length: 16 }).notNull().default("en"),
     version: integer().notNull().default(1),
     is_current: boolean().notNull().default(false),
-    source_json: jsonb().$type<WriterDocument>().notNull(),
-    asset_manifest: jsonb().$type<WriterAssetReference[]>().notNull(),
+    source_json: jsonb().$type<StructuralContentDocument>().notNull(),
+    asset_manifest: jsonb().$type<StructuralContentAssetReference[]>().notNull(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
     compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
