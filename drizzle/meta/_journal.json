@@ -120,6 +120,13 @@
       "when": 1782250695994,
       "tag": "0016_pink_katie_power",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1782252026885,
+      "tag": "0017_odd_captain_flint",
+      "breakpoints": true
     }
   ]
 }

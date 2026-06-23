@@ -14,6 +14,7 @@ import {
   text,
   timestamp,
   uniqueIndex,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 import { geometry } from "drizzle-orm/pg-core/columns/postgis_extension/geometry";
@@ -82,7 +83,7 @@ export const blobAccess = pgEnum("blob_access", ["public", "private"]);
 export const user = pgTable(
   "user",
   {
-    id: text().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     name: text().notNull(),
     email: text().notNull(),
     emailVerified: boolean("email_verified").notNull().default(false),
@@ -99,14 +100,14 @@ export const user = pgTable(
 export const session = pgTable(
   "session",
   {
-    id: text().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
     token: text().notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     ipAddress: text("ip_address"),
     userAgent: text("user_agent"),
-    userId: text("user_id")
+    userId: uuid("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
   },
@@ -120,10 +121,10 @@ export const session = pgTable(
 export const account = pgTable(
   "account",
   {
-    id: text().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     accountId: text("account_id").notNull(),
     providerId: text("provider_id").notNull(),
-    userId: text("user_id")
+    userId: uuid("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     accessToken: text("access_token"),
@@ -149,7 +150,7 @@ export const account = pgTable(
 export const verification = pgTable(
   "verification",
   {
-    id: text().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     identifier: text().notNull(),
     value: text().notNull(),
     expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
@@ -165,7 +166,7 @@ export const verification = pgTable(
 export const authIdentities = pgTable(
   "auth_identities",
   {
-    userId: text("user_id")
+    userId: uuid("user_id")
       .primaryKey()
       .references(() => user.id, { onDelete: "cascade" }),
     username: varchar({ length: 80 }).notNull(),
