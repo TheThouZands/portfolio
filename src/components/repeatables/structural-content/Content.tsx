@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
-import Element from "@/components/repeatables/structural-content/elements/Element";
+import Element, {
+  type StructuralElementAttributes,
+} from "@/components/repeatables/structural-content/elements/Element";
 
 type ContentProps = {
   value: unknown;
@@ -13,6 +15,10 @@ function isRecord(value: unknown): value is StructuralRecord {
 
 function getType(value: StructuralRecord) {
   return typeof value.type === "string" ? value.type : "object";
+}
+
+function getAttrs(value: StructuralRecord): StructuralElementAttributes | undefined {
+  return isRecord(value.attrs) ? value.attrs : undefined;
 }
 
 function getRecordChildren(value: StructuralRecord, path: string): ReactNode {
@@ -46,7 +52,7 @@ function renderValue(value: unknown, path: string): ReactNode {
     }
 
     return (
-      <Element key={path} type={getType(value)}>
+      <Element attrs={getAttrs(value)} key={path} type={getType(value)}>
         {getRecordChildren(value, path)}
       </Element>
     );
