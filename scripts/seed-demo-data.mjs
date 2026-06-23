@@ -180,7 +180,72 @@ function createMentionCardSource(translation, mentionBlocks) {
   });
 }
 
+function createDeepNestingSource(translation) {
+  return createStructuralDocument({
+    attrs: {
+      data: {
+        "seed-shape": "deep-nesting",
+      },
+    },
+    content: [
+      createTextNode(translation.intro),
+      {
+        attrs: {
+          id: "deep-section",
+        },
+        content: [
+          createParagraph("deep-first-paragraph", translation.body),
+          {
+            attrs: {
+              id: "deep-sibling-group",
+            },
+            content: [
+              {
+                content: "Bare primitive string inside an element.",
+                type: "p",
+              },
+              {
+                attrs: {
+                  id: "deep-nested-element",
+                },
+                content: {
+                  attrs: {
+                    id: "deep-inner-element",
+                  },
+                  content: [
+                    createTextNode("Explicit text node at the edge."),
+                    {
+                      content: createTextNode("Nested sibling element content."),
+                      type: "span",
+                    },
+                  ],
+                  type: "div",
+                },
+                type: "div",
+              },
+            ],
+            type: "div",
+          },
+        ],
+        type: "section",
+      },
+      {
+        attrs: {
+          id: "deep-footer",
+        },
+        content: createParagraph("deep-footer-copy", translation.footer),
+        type: "footer",
+      },
+    ],
+    type: "div",
+  });
+}
+
 function createBlogSourceJson(translation, mentionBlocks, sourceShape) {
+  if (sourceShape === "deep-nesting") {
+    return createDeepNestingSource(translation);
+  }
+
   if (sourceShape === "nested-divs") {
     return createNestedDivSource(translation);
   }
@@ -1605,6 +1670,32 @@ async function seed() {
         },
       },
     },
+    {
+      comments: [],
+      coverAssetId: assetIds["jane10-g50-1.webp"],
+      featured: false,
+      publishedAt: "2026-06-20T12:00:00.000Z",
+      sourceShape: "deep-nesting",
+      status: "testing",
+      translations: {
+        en: {
+          body: "This stress post intentionally mixes nested siblings, explicit text nodes, primitive string content, and empty-ish element boundaries.",
+          excerpt: "A non-featured seeded post for stress testing structural content recursion.",
+          footer: "The simple renderer should still produce a readable fallback tree.",
+          intro: "Deep nesting should be boring for the structural content traverser.",
+          slug: "stress-testing-structural-content-nesting",
+          title: "Stress Testing Structural Content Nesting",
+        },
+        es: {
+          body: "Esta publicacion de prueba mezcla intencionalmente hermanos anidados, nodos de texto explicitos, contenido string primitivo y limites de elementos casi vacios.",
+          excerpt: "Una publicacion sembrada no destacada para probar recursividad de contenido estructural.",
+          footer: "El renderizador simple aun deberia producir un arbol fallback legible.",
+          intro: "El anidamiento profundo deberia ser aburrido para el recorrido de contenido estructural.",
+          slug: "probando-anidamiento-de-contenido-estructural",
+          title: "Probando anidamiento de contenido estructural",
+        },
+      },
+    },
   ];
 
   const blogPostIds = [];
@@ -1703,7 +1794,8 @@ async function seed() {
         WHERE blog_post_id IN (
           ${blogPostIds[0]},
           ${blogPostIds[1]},
-          ${blogPostIds[2]}
+          ${blogPostIds[2]},
+          ${blogPostIds[3]}
         )
       ) AS blog_post_translations,
       (
@@ -1712,7 +1804,8 @@ async function seed() {
         WHERE blog_post_id IN (
           ${blogPostIds[0]},
           ${blogPostIds[1]},
-          ${blogPostIds[2]}
+          ${blogPostIds[2]},
+          ${blogPostIds[3]}
         )
       ) AS blog_post_revisions,
       (
@@ -1724,7 +1817,8 @@ async function seed() {
           WHERE blog_post_id IN (
             ${blogPostIds[0]},
             ${blogPostIds[1]},
-            ${blogPostIds[2]}
+            ${blogPostIds[2]},
+            ${blogPostIds[3]}
           )
         )
       ) AS blog_post_assets,
@@ -1737,7 +1831,8 @@ async function seed() {
           WHERE blog_post_id IN (
             ${blogPostIds[0]},
             ${blogPostIds[1]},
-            ${blogPostIds[2]}
+            ${blogPostIds[2]},
+            ${blogPostIds[3]}
           )
         )
       ) AS blog_post_mentions,
@@ -1747,7 +1842,8 @@ async function seed() {
         WHERE blog_post_id IN (
           ${blogPostIds[0]},
           ${blogPostIds[1]},
-          ${blogPostIds[2]}
+          ${blogPostIds[2]},
+          ${blogPostIds[3]}
         )
       ) AS blog_comments,
       (
