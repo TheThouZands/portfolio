@@ -2,7 +2,7 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import SignUpForm from "@/app/[locale]/auth/signup/SignUpForm";
+import { RoutedSignUpForm } from "@/components/auth/RoutedAuthFlow";
 import { routing } from "@/i18n/routing";
 
 type SignUpPageProps = {
@@ -23,7 +23,7 @@ export default async function SignUpPage({ params }: SignUpPageProps) {
   return (
     <main>
       <h1>Create account</h1>
-      <SignUpForm />
+      <RoutedSignUpForm />
     </main>
   );
 }

@@ -2,7 +2,7 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import LoginForm from "@/app/[locale]/auth/login/LoginForm";
+import { RoutedLoginForm } from "@/components/auth/RoutedAuthFlow";
 import { routing } from "@/i18n/routing";
 
 type LoginPageProps = {
@@ -23,7 +23,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
   return (
     <main>
       <h1>Sign in</h1>
-      <LoginForm />
+      <RoutedLoginForm />
     </main>
   );
 }

@@ -3,13 +3,13 @@
 import {
   createContext,
   type ReactNode,
-  useContext,
   useCallback,
+  useContext,
   useMemo,
   useState,
 } from "react";
 
-import type { AuthActionState } from "@/app/[locale]/auth/actions";
+import type { AuthActionState } from "@/auth/actions";
 
 type AuthIdentifierType = AuthActionState["identifierType"];
 

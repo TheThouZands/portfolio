@@ -1,29 +1,29 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 
 import {
   type AuthActionState,
   resolveIdentifierAction,
-} from "@/app/[locale]/auth/actions";
-import { useAuthFlow } from "@/app/[locale]/auth/AuthFlowProvider";
-
-const initialState: AuthActionState = {
-  status: "idle",
-  message: "",
-};
+} from "@/auth/actions";
 
 type IdentifierFormProps = {
-  locale: string;
+  initialIdentifier?: string;
+  onResolved?: (state: AuthActionState) => void;
 };
 
-export default function IdentifierForm({ locale }: IdentifierFormProps) {
-  const router = useRouter();
-  const { setIdentifier } = useAuthFlow();
+export function IdentifierForm({
+  initialIdentifier = "",
+  onResolved,
+}: IdentifierFormProps) {
+  const handledStateRef = useRef<AuthActionState | null>(null);
   const [state, formAction, isPending] = useActionState(
     resolveIdentifierAction,
-    initialState,
+    {
+      status: "idle",
+      message: "",
+      identifier: initialIdentifier,
+    } satisfies AuthActionState,
   );
 
   useEffect(() => {
@@ -31,17 +31,13 @@ export default function IdentifierForm({ locale }: IdentifierFormProps) {
       return;
     }
 
-    setIdentifier(state.identifier, state.identifierType);
-    router.push(`/${locale}/auth/${state.nextPath}`);
-  }, [
-    locale,
-    router,
-    setIdentifier,
-    state.identifier,
-    state.identifierType,
-    state.nextPath,
-    state.status,
-  ]);
+    if (handledStateRef.current === state) {
+      return;
+    }
+
+    handledStateRef.current = state;
+    onResolved?.(state);
+  }, [onResolved, state]);
 
   return (
     <form action={formAction}>
@@ -49,7 +45,7 @@ export default function IdentifierForm({ locale }: IdentifierFormProps) {
       <input
         autoComplete="username"
         autoFocus
-        defaultValue={state.identifier}
+        defaultValue={state.identifier ?? initialIdentifier}
         id="identifier"
         name="identifier"
         placeholder="Email or username"

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { AuthFlowProvider } from "@/app/[locale]/auth/AuthFlowProvider";
+import { AuthFlowProvider } from "@/components/auth/AuthFlowProvider";
 
 type AuthLayoutProps = {
   children: ReactNode;

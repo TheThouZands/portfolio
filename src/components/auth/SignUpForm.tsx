@@ -1,14 +1,16 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 
-import {
-  type AuthActionState,
-  signUpAction,
-} from "@/app/[locale]/auth/actions";
-import { useAuthFlow } from "@/app/[locale]/auth/AuthFlowProvider";
+import { type AuthActionState, signUpAction } from "@/auth/actions";
 
 type IdentifierType = NonNullable<AuthActionState["identifierType"]>;
+
+type SignUpFormProps = {
+  initialIdentifier?: string;
+  initialIdentifierType?: AuthActionState["identifierType"];
+  onSuccess?: (state: AuthActionState) => void;
+};
 
 function getIdentifierType(identifier: string): IdentifierType {
   return identifier.includes("@") ? "email" : "username";
@@ -18,18 +20,35 @@ function getOtherIdentifierLabel(identifierType: IdentifierType): string {
   return identifierType === "email" ? "Username" : "Email";
 }
 
-export default function SignUpForm() {
-  const { identifier, identifierType: storedIdentifierType } = useAuthFlow();
-  const [identifierInput, setIdentifierInput] = useState(identifier);
+export function SignUpForm({
+  initialIdentifier = "",
+  initialIdentifierType,
+  onSuccess,
+}: SignUpFormProps) {
+  const handledStateRef = useRef<AuthActionState | null>(null);
+  const [identifierInput, setIdentifierInput] = useState(initialIdentifier);
   const identifierType = identifierInput
     ? getIdentifierType(identifierInput)
-    : storedIdentifierType ?? "username";
+    : initialIdentifierType ?? "username";
   const [state, formAction, isPending] = useActionState(signUpAction, {
     status: "idle",
     message: "",
-    identifier,
+    identifier: initialIdentifier,
     identifierType,
   } satisfies AuthActionState);
+
+  useEffect(() => {
+    if (state.status !== "success") {
+      return;
+    }
+
+    if (handledStateRef.current === state) {
+      return;
+    }
+
+    handledStateRef.current = state;
+    onSuccess?.(state);
+  }, [onSuccess, state]);
 
   return (
     <form action={formAction}>

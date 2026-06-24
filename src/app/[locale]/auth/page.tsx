@@ -2,7 +2,7 @@ import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import IdentifierForm from "@/app/[locale]/auth/IdentifierForm";
+import { RoutedIdentifierForm } from "@/components/auth/RoutedAuthFlow";
 import { routing } from "@/i18n/routing";
 
 type AuthPageProps = {
@@ -23,7 +23,7 @@ export default async function AuthPage({ params }: AuthPageProps) {
   return (
     <main>
       <h1>Continue</h1>
-      <IdentifierForm locale={locale} />
+      <RoutedIdentifierForm locale={locale} />
     </main>
   );
 }
