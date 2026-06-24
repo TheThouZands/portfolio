@@ -1,3 +1,5 @@
+import DateTime from "@/components/repeatables/singles/DateTime";
+
 export type CommentThreadItem = {
   authorName: string | null;
   body: string;
@@ -21,13 +23,6 @@ type CommentListProps = {
   fallbackAuthorName: string;
   locale: string;
 };
-
-function formatCommentDate(date: Date, locale: string) {
-  return new Intl.DateTimeFormat(locale, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date);
-}
 
 export function buildCommentTree(
   comments: CommentThreadItem[],
@@ -77,9 +72,14 @@ function CommentList({
           <article>
             <header>
               <p>{comment.authorName ?? fallbackAuthorName}</p>
-              <time dateTime={comment.createdAt.toISOString()}>
-                {formatCommentDate(comment.createdAt, locale)}
-              </time>
+              <DateTime
+                locale={locale}
+                options={{
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                }}
+                value={comment.createdAt.toISOString()}
+              />
             </header>
             <p>{comment.body}</p>
           </article>

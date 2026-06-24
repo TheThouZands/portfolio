@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DateTime from "@/components/repeatables/singles/DateTime";
 
 export type ProjectCardData = {
   completedOn: Date | string | null;
@@ -18,47 +19,13 @@ type CardProps = {
 };
 
 function getDateValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date;
-  }
-
-  return new Date(`${date}T00:00:00.000Z`);
-}
-
-function getDateTimeValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-
-  return date;
-}
-
-function formatDate(locale: string, date: Date | string) {
-  return new Intl.DateTimeFormat(locale, {
-    month: "short",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(getDateValue(date));
-}
-
-function getDateRange(project: ProjectCardData, locale: string) {
-  const startLabel = project.startedOn ? formatDate(locale, project.startedOn) : null;
-  const completedLabel = project.completedOn
-    ? formatDate(locale, project.completedOn)
-    : null;
-
-  return {
-    completedLabel,
-    startLabel,
-  };
+  return date instanceof Date ? date.toISOString().slice(0, 10) : date;
 }
 
 export default function Card({
   locale,
   project,
 }: CardProps) {
-  const { completedLabel, startLabel } = getDateRange(project, locale);
-
   return (
     <article>
       {project.coverUrl ? (
@@ -77,16 +44,30 @@ export default function Card({
         <h3>
           <Link href={`/${locale}/projects/${project.id}`}>{project.title}</Link>
         </h3>
-        {startLabel || completedLabel ? (
+        {project.startedOn || project.completedOn ? (
           <p>
-            {project.startedOn && startLabel ? (
-              <time dateTime={getDateTimeValue(project.startedOn)}>{startLabel}</time>
+            {project.startedOn ? (
+              <DateTime
+                locale={locale}
+                mode="date"
+                options={{
+                  month: "short",
+                  year: "numeric",
+                }}
+                value={getDateValue(project.startedOn)}
+              />
             ) : null}
-            {startLabel && completedLabel ? " - " : null}
-            {project.completedOn && completedLabel ? (
-              <time dateTime={getDateTimeValue(project.completedOn)}>
-                {completedLabel}
-              </time>
+            {project.startedOn && project.completedOn ? " - " : null}
+            {project.completedOn ? (
+              <DateTime
+                locale={locale}
+                mode="date"
+                options={{
+                  month: "short",
+                  year: "numeric",
+                }}
+                value={getDateValue(project.completedOn)}
+              />
             ) : null}
           </p>
         ) : null}

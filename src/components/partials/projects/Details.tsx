@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import SkillsList from "@/components/repeatables/collections/skills/List";
+import DateTime from "@/components/repeatables/singles/DateTime";
 import Content from "@/components/repeatables/structural-content/Content";
 import { getProjectById } from "@/db/queries/projects";
 
@@ -10,27 +11,7 @@ type DetailsProps = {
 };
 
 function getDateValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date;
-  }
-
-  return new Date(`${date}T00:00:00.000Z`);
-}
-
-function getDateTimeValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-
-  return date;
-}
-
-function formatDate(locale: string, date: Date | string) {
-  return new Intl.DateTimeFormat(locale, {
-    month: "long",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(getDateValue(date));
+  return date instanceof Date ? date.toISOString().slice(0, 10) : date;
 }
 
 export default async function Details({ locale, projectId }: DetailsProps) {
@@ -43,26 +24,35 @@ export default async function Details({ locale, projectId }: DetailsProps) {
     notFound();
   }
 
-  const startLabel = project.startedOn ? formatDate(locale, project.startedOn) : null;
-  const completedLabel = project.completedOn
-    ? formatDate(locale, project.completedOn)
-    : null;
-
   return (
     <article>
       <header>
         <h1>{project.title}</h1>
         {project.shortDescription ? <p>{project.shortDescription}</p> : null}
-        {startLabel || completedLabel ? (
+        {project.startedOn || project.completedOn ? (
           <p>
-            {project.startedOn && startLabel ? (
-              <time dateTime={getDateTimeValue(project.startedOn)}>{startLabel}</time>
+            {project.startedOn ? (
+              <DateTime
+                locale={locale}
+                mode="date"
+                options={{
+                  month: "long",
+                  year: "numeric",
+                }}
+                value={getDateValue(project.startedOn)}
+              />
             ) : null}
-            {startLabel && completedLabel ? " - " : null}
-            {project.completedOn && completedLabel ? (
-              <time dateTime={getDateTimeValue(project.completedOn)}>
-                {completedLabel}
-              </time>
+            {project.startedOn && project.completedOn ? " - " : null}
+            {project.completedOn ? (
+              <DateTime
+                locale={locale}
+                mode="date"
+                options={{
+                  month: "long",
+                  year: "numeric",
+                }}
+                value={getDateValue(project.completedOn)}
+              />
             ) : null}
           </p>
         ) : null}

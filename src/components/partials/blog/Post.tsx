@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Content from "@/components/repeatables/structural-content/Content";
+import DateTime from "@/components/repeatables/singles/DateTime";
 import { getBlogPostById } from "@/db/queries/blog";
 
 type PostProps = {
@@ -19,9 +20,11 @@ export default async function Post({ blogPostId, locale }: PostProps) {
       <header>
         <h1>{post.title}</h1>
         {post.publishedAt && (
-          <time dateTime={post.publishedAt.toISOString()}>
-            {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(post.publishedAt)}
-          </time>
+          <DateTime
+            locale={locale}
+            options={{ dateStyle: "long" }}
+            value={post.publishedAt.toISOString()}
+          />
         )}
         {post.excerpt ? <p>{post.excerpt}</p> : null}
       </header>

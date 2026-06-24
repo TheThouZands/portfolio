@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DateTime from "@/components/repeatables/singles/DateTime";
 
 export type CardData = {
   companyName: string;
@@ -22,27 +23,7 @@ type CardProps = {
 };
 
 function getDateValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date;
-  }
-
-  return new Date(`${date}T00:00:00.000Z`);
-}
-
-function getDateTimeValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-
-  return date;
-}
-
-function formatDate(locale: string, date: Date | string) {
-  return new Intl.DateTimeFormat(locale, {
-    month: "short",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(getDateValue(date));
+  return date instanceof Date ? date.toISOString().slice(0, 10) : date;
 }
 
 function formatEnumLabel(value: string) {
@@ -54,12 +35,7 @@ export default function Card({
   job,
   locale,
 }: CardProps) {
-  const startLabel = formatDate(locale, job.startDate);
-  const endLabel = job.isCurrent
-    ? currentLabel
-    : job.endDate
-      ? formatDate(locale, job.endDate)
-      : null;
+  const endLabel = job.isCurrent ? currentLabel : null;
 
   return (
     <article>
@@ -77,10 +53,26 @@ export default function Card({
           )}
         </p>
         <p>
-          <time dateTime={getDateTimeValue(job.startDate)}>{startLabel}</time>
-          {endLabel ? " - " : null}
+          <DateTime
+            locale={locale}
+            mode="date"
+            options={{
+              month: "short",
+              year: "numeric",
+            }}
+            value={getDateValue(job.startDate)}
+          />
+          {job.endDate || endLabel ? " - " : null}
           {job.endDate && !job.isCurrent ? (
-            <time dateTime={getDateTimeValue(job.endDate)}>{endLabel}</time>
+            <DateTime
+              locale={locale}
+              mode="date"
+              options={{
+                month: "short",
+                year: "numeric",
+              }}
+              value={getDateValue(job.endDate)}
+            />
           ) : (
             endLabel
           )}

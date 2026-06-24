@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import DateTime from "@/components/repeatables/singles/DateTime";
 import { type ExperienceDetail, getExperienceById } from "@/db/queries/experience";
 
 type DetailsProps = {
@@ -8,27 +9,7 @@ type DetailsProps = {
 };
 
 function getDateValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date;
-  }
-
-  return new Date(`${date}T00:00:00.000Z`);
-}
-
-function getDateTimeValue(date: Date | string) {
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-
-  return date;
-}
-
-function formatDate(locale: string, date: Date | string) {
-  return new Intl.DateTimeFormat(locale, {
-    month: "long",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(getDateValue(date));
+  return date instanceof Date ? date.toISOString().slice(0, 10) : date;
 }
 
 function formatEnumLabel(value: string) {
@@ -37,19 +18,10 @@ function formatEnumLabel(value: string) {
 
 function getDateRange(
   job: ExperienceDetail,
-  locale: string,
   currentLabel: string,
 ) {
-  const startLabel = formatDate(locale, job.startDate);
-  const endLabel = job.isCurrent
-    ? currentLabel
-    : job.endDate
-      ? formatDate(locale, job.endDate)
-      : null;
-
   return {
-    endLabel,
-    startLabel,
+    endLabel: job.isCurrent ? currentLabel : null,
   };
 }
 
@@ -63,9 +35,8 @@ export default async function Details({ jobId, locale }: DetailsProps) {
     notFound();
   }
 
-  const { endLabel, startLabel } = getDateRange(
+  const { endLabel } = getDateRange(
     job,
-    locale,
     experienceT("current"),
   );
 
@@ -81,14 +52,26 @@ export default async function Details({ jobId, locale }: DetailsProps) {
           )}
         </p>
         <p>
-          <time dateTime={getDateTimeValue(job.startDate)}>
-            {startLabel}
-          </time>
-          {endLabel ? " - " : null}
+          <DateTime
+            locale={locale}
+            mode="date"
+            options={{
+              month: "long",
+              year: "numeric",
+            }}
+            value={getDateValue(job.startDate)}
+          />
+          {job.endDate || endLabel ? " - " : null}
           {job.endDate && !job.isCurrent ? (
-            <time dateTime={getDateTimeValue(job.endDate)}>
-              {endLabel}
-            </time>
+            <DateTime
+              locale={locale}
+              mode="date"
+              options={{
+                month: "long",
+                year: "numeric",
+              }}
+              value={getDateValue(job.endDate)}
+            />
           ) : (
             endLabel
           )}
