@@ -12,6 +12,7 @@ import {
   normalizeAuthIdentifier,
   resolveAuthIdentifierForFlow,
 } from "@/auth/identity";
+import { AUTH_RATE_LIMIT } from "@/auth/rate-limit";
 import { db } from "@/db/client";
 import { authIdentities } from "@/db/schema";
 
@@ -269,6 +270,13 @@ async function createIdentifierAccount({
 export const portfolioAuthFlow = () =>
   ({
     id: "portfolio-auth-flow",
+    rateLimit: [
+      {
+        window: AUTH_RATE_LIMIT.identifier.window,
+        max: AUTH_RATE_LIMIT.identifier.max,
+        pathMatcher: (path) => path === "/portfolio-auth/resolve-identifier",
+      },
+    ],
     endpoints: {
       resolveIdentifier: createAuthEndpoint(
         "/portfolio-auth/resolve-identifier",

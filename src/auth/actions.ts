@@ -8,6 +8,7 @@ import {
   getAuthIdentifierKind,
   normalizeAuthIdentifier,
 } from "@/auth/identity";
+import { AUTH_RATE_LIMIT, enforceAuthRateLimit } from "@/auth/rate-limit";
 import { auth } from "@/auth/server";
 
 // UI-facing Server Actions. Forms submit here, but credential verification,
@@ -54,6 +55,12 @@ export async function resolveIdentifierAction(
   const identifier = readFormString(formData, "identifier").trim();
 
   try {
+    await enforceAuthRateLimit(
+      await headers(),
+      "resolve-identifier",
+      AUTH_RATE_LIMIT.identifier,
+    );
+
     const resolution = await auth.api.resolveIdentifier({
       body: {
         identifier,
@@ -87,6 +94,8 @@ export async function signInAction(
     : undefined;
 
   try {
+    await enforceAuthRateLimit(await headers(), "sign-in", AUTH_RATE_LIMIT.signIn);
+
     const result = await auth.api.signInIdentifier({
       body: {
         identifier,
@@ -122,6 +131,8 @@ export async function signUpAction(
     : undefined;
 
   try {
+    await enforceAuthRateLimit(await headers(), "sign-up", AUTH_RATE_LIMIT.signUp);
+
     const result = await auth.api.signUpIdentifier({
       body: {
         identifier,
@@ -159,8 +170,16 @@ export async function signOutAction(
   // deletes that exact session, and nextCookies clears the browser cookie in
   // the Server Action response.
   try {
+    const requestHeaders = await headers();
+
+    await enforceAuthRateLimit(
+      requestHeaders,
+      "sign-out",
+      AUTH_RATE_LIMIT.signOut,
+    );
+
     await auth.api.signOut({
-      headers: await headers(),
+      headers: requestHeaders,
     });
 
     return {
