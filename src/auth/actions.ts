@@ -7,7 +7,6 @@ import {
   type AuthIdentifierKind,
   getAuthIdentifierKind,
   normalizeAuthIdentifier,
-  resolveAuthIdentifierForFlow,
 } from "@/auth/identity";
 import { auth } from "@/auth/server";
 
@@ -55,13 +54,17 @@ export async function resolveIdentifierAction(
   const identifier = readFormString(formData, "identifier").trim();
 
   try {
-    const resolution = await resolveAuthIdentifierForFlow(identifier);
+    const resolution = await auth.api.resolveIdentifier({
+      body: {
+        identifier,
+      },
+    });
 
     return {
       status: "success",
       message: "",
       identifier,
-      identifierType: resolution.kind,
+      identifierType: resolution.identifierType,
       nextPath: resolution.nextStep === "sign-in" ? "login" : "signup",
     };
   } catch (error) {

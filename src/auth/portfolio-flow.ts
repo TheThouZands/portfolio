@@ -15,24 +15,106 @@ import {
 import { db } from "@/db/client";
 import { authIdentities } from "@/db/schema";
 
+const authUsernameSchema = z
+  .string()
+  .trim()
+  .min(1, "Username is required.")
+  .min(3, "Username must be at least 3 characters.")
+  .refine((username) => !username.includes("@"), {
+    message: "Username cannot contain @.",
+  });
+
+const authEmailSchema = z
+  .string()
+  .trim()
+  .min(1, "Email is required.")
+  .email("Enter a valid email address.");
+
+const authIdentifierSchema = z
+  .string()
+  .trim()
+  .min(1, "Email or username is required.")
+  .superRefine((identifier, ctx) => {
+    const parsedIdentifier =
+      getAuthIdentifierKind(identifier) === "email"
+        ? authEmailSchema.safeParse(identifier)
+        : authUsernameSchema.safeParse(identifier);
+
+    if (!parsedIdentifier.success) {
+      ctx.addIssue({
+        code: "custom",
+        message:
+          parsedIdentifier.error.issues[0]?.message ??
+          "Enter a valid email or username.",
+      });
+    }
+  });
+
+const authPasswordSchema = z
+  .string()
+  .min(8, "Password must be at least 8 characters.")
+  .refine((password) => /[A-Za-z]/.test(password), {
+    message: "Password must include at least one letter.",
+  })
+  .refine((password) => /\d/.test(password), {
+    message: "Password must include at least one number.",
+  });
+
+const signInPasswordSchema = z.string().min(1, "Password is required.");
+
 const resolveIdentifierBody = z.object({
-  identifier: z.string(),
+  identifier: authIdentifierSchema,
 });
 
 const signUpUsernameBody = z.object({
-  username: z.string(),
-  password: z.string(),
+  username: authUsernameSchema,
+  password: authPasswordSchema,
 });
 
-const signUpIdentifierBody = z.object({
-  identifier: z.string(),
-  otherIdentifier: z.string().optional(),
-  password: z.string(),
-});
+const signUpIdentifierBody = z
+  .object({
+    identifier: authIdentifierSchema,
+    otherIdentifier: z.string().trim().optional(),
+    password: authPasswordSchema,
+  })
+  .superRefine(({ identifier, otherIdentifier }, ctx) => {
+    const identifierKind = getAuthIdentifierKind(identifier);
+    const otherIdentifierValue = otherIdentifier ?? "";
+
+    if (identifierKind === "email") {
+      const parsedUsername = authUsernameSchema.safeParse(otherIdentifierValue);
+
+      if (!parsedUsername.success) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["otherIdentifier"],
+          message:
+            parsedUsername.error.issues[0]?.message ??
+            "Enter a valid username.",
+        });
+      }
+
+      return;
+    }
+
+    if (otherIdentifierValue) {
+      const parsedEmail = authEmailSchema.safeParse(otherIdentifierValue);
+
+      if (!parsedEmail.success) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["otherIdentifier"],
+          message:
+            parsedEmail.error.issues[0]?.message ??
+            "Enter a valid email address.",
+        });
+      }
+    }
+  });
 
 const signInIdentifierBody = z.object({
-  identifier: z.string(),
-  password: z.string(),
+  identifier: authIdentifierSchema,
+  password: signInPasswordSchema,
 });
 
 const USERNAME_TAKEN = {
@@ -66,6 +148,19 @@ type CreateIdentifierAccountInput = {
   password: string;
   ctx: AuthEndpointContext;
 };
+
+function parseAuthInput<T>(schema: z.ZodType<T>, input: unknown): T {
+  const parsed = schema.safeParse(input);
+
+  if (!parsed.success) {
+    throw APIError.from("BAD_REQUEST", {
+      code: "INVALID_AUTH_INPUT",
+      message: parsed.error.issues[0]?.message ?? "Invalid auth input.",
+    });
+  }
+
+  return parsed.data;
+}
 
 async function getCurrentSessionToken(ctx: AuthEndpointContext) {
   const sessionToken = await ctx.getSignedCookie(
@@ -105,15 +200,11 @@ async function createIdentifierAccount({
   password,
   ctx,
 }: CreateIdentifierAccountInput) {
-  const usernameNormalized = normalizeAuthIdentifier(username);
-  const emailNormalized = email ? normalizeAuthIdentifier(email) : null;
-
-  if (!username || usernameNormalized.includes("@") || !password) {
-    throw APIError.from("BAD_REQUEST", {
-      code: "INVALID_SIGN_UP",
-      message: "Username and password are required.",
-    });
-  }
+  const parsedUsername = parseAuthInput(authUsernameSchema, username);
+  const parsedEmail = email ? parseAuthInput(authEmailSchema, email) : null;
+  const parsedPassword = parseAuthInput(authPasswordSchema, password);
+  const usernameNormalized = normalizeAuthIdentifier(parsedUsername);
+  const emailNormalized = parsedEmail ? normalizeAuthIdentifier(parsedEmail) : null;
 
   if (await findAuthIdentityByIdentifier(usernameNormalized)) {
     throw APIError.from("CONFLICT", USERNAME_TAKEN);
@@ -129,8 +220,8 @@ async function createIdentifierAccount({
   try {
     const createdUser = await ctx.context.internalAdapter.createUser({
       id: userId,
-      name: username,
-      email: email ?? `${userId}@users.invalid`,
+      name: parsedUsername,
+      email: parsedEmail ?? `${userId}@users.invalid`,
       emailVerified: false,
     });
     createdUserId = createdUser.id;
@@ -139,14 +230,14 @@ async function createIdentifierAccount({
       userId: createdUser.id,
       providerId: "credential",
       accountId: createdUser.id,
-      password: await hashPassword(password),
+      password: await hashPassword(parsedPassword),
     });
 
     await db.insert(authIdentities).values({
       userId: createdUser.id,
-      username,
+      username: parsedUsername,
       usernameNormalized,
-      email,
+      email: parsedEmail,
       emailNormalized,
     });
 
@@ -159,7 +250,7 @@ async function createIdentifierAccount({
 
     return {
       userId: createdUser.id,
-      username,
+      username: parsedUsername,
     };
   } catch (error) {
     if (createdUserId) {
