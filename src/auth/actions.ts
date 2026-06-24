@@ -1,6 +1,8 @@
 "use server";
 
 import { APIError } from "better-auth/api";
+import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 
 import {
   type AuthIdentifierKind,
@@ -133,4 +135,19 @@ export async function signUpAction(
       identifierType,
     };
   }
+}
+
+export async function signOutAction(formData: FormData): Promise<void> {
+  const returnTo = readFormString(formData, "returnTo");
+
+  await auth.api.signOut({
+    headers: await headers(),
+  });
+
+  if (returnTo.startsWith("/")) {
+    revalidatePath(returnTo);
+    return;
+  }
+
+  revalidatePath("/", "layout");
 }

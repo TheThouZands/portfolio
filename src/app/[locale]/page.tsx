@@ -1,6 +1,9 @@
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { signOutAction } from "@/auth/actions";
+import { auth } from "@/auth/server";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
@@ -25,7 +28,16 @@ export default async function Home({ params }: HomeProps) {
 
   setRequestLocale(locale);
 
-  const t = await getTranslations("HomePage");
+  const requestHeaders = await headers();
+  const [t, currentSession] = await Promise.all([
+    getTranslations("HomePage"),
+    auth.api.getSession({
+      headers: requestHeaders,
+      query: {
+        disableCookieCache: true,
+      },
+    }),
+  ]);
 
   return (
     <main>
@@ -41,6 +53,14 @@ export default async function Home({ params }: HomeProps) {
       <JobsChart locale={locale} />
       <FeaturedProjects locale={locale} />
       <FeaturedPosts locale={locale} />
+      {currentSession ? (
+        <section>
+          <form action={signOutAction}>
+            <input name="returnTo" type="hidden" value={`/${locale}`} />
+            <button type="submit">Log out</button>
+          </form>
+        </section>
+      ) : null}
     </main>
   );
 }
