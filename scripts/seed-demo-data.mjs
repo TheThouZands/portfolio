@@ -4,10 +4,13 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config();
 
-const databaseUrl = process.env.PF_DATABASE_URL;
+const databaseUrl =
+  process.env.PF_DATABASE_URL_UNPOOLED ?? process.env.PF_DATABASE_URL;
 
 if (!databaseUrl) {
-  throw new Error("Missing PF_DATABASE_URL environment variable.");
+  throw new Error(
+    "Missing PF_DATABASE_URL_UNPOOLED or PF_DATABASE_URL environment variable.",
+  );
 }
 
 const sql = neon(databaseUrl);
@@ -777,6 +780,67 @@ function createBlogRevision(
   };
 }
 
+function normalizeSeedUsername(username) {
+  return typeof username === "string" && username.trim()
+    ? username.trim().toLowerCase()
+    : null;
+}
+
+function collectCommentAuthorUsernames(comments, usernames = new Set()) {
+  for (const comment of comments) {
+    const username = normalizeSeedUsername(comment.authorUsername);
+
+    if (username) {
+      usernames.add(username);
+    }
+
+    if (comment.replies?.length) {
+      collectCommentAuthorUsernames(comment.replies, usernames);
+    }
+  }
+
+  return usernames;
+}
+
+async function resolveCommentAuthorUserIds(posts) {
+  const requestedUsernames = new Set();
+
+  for (const post of posts) {
+    collectCommentAuthorUsernames(post.comments, requestedUsernames);
+  }
+
+  if (requestedUsernames.size === 0) {
+    return new Map();
+  }
+
+  const identities = await sql`
+    SELECT username_normalized, user_id
+    FROM auth_identities
+  `;
+  const userIdsByUsername = new Map();
+
+  for (const identity of identities) {
+    userIdsByUsername.set(identity.username_normalized, identity.user_id);
+  }
+
+  return new Map(
+    [...requestedUsernames].map((username) => [
+      username,
+      userIdsByUsername.get(username) ?? null,
+    ]),
+  );
+}
+
+function getCommentAuthorUserId(comment, authorUserIds) {
+  const username = normalizeSeedUsername(comment.authorUsername);
+
+  if (!username) {
+    return null;
+  }
+
+  return authorUserIds.get(username) ?? null;
+}
+
 async function upsertBlogPost(post) {
   const defaultTranslation = post.translations.en;
   const [existingBlogPost] = await sql`
@@ -941,6 +1005,7 @@ async function upsertBlogPost(post) {
 }
 
 async function insertCommentTree({
+  authorUserIds,
   blogPostId,
   comments,
   parentCommentId = null,
@@ -953,9 +1018,11 @@ async function insertCommentTree({
     const createdAt = new Date(
       startedAt.getTime() + sequence.value * 60 * 60 * 1000,
     ).toISOString();
+    const authorUserId = getCommentAuthorUserId(comment, authorUserIds);
     const [commentRow] = await sql`
       INSERT INTO comments (
         blog_post_id,
+        user_id,
         parent_comment_id,
         comment,
         created_at,
@@ -963,6 +1030,7 @@ async function insertCommentTree({
       )
       VALUES (
         ${blogPostId},
+        ${authorUserId},
         ${parentCommentId},
         ${comment.body},
         ${createdAt},
@@ -973,6 +1041,7 @@ async function insertCommentTree({
 
     if (comment.replies?.length) {
       await insertCommentTree({
+        authorUserIds,
         blogPostId,
         comments: comment.replies,
         parentCommentId: commentRow.id,
@@ -983,13 +1052,14 @@ async function insertCommentTree({
   }
 }
 
-async function seedBlogPostComments(blogPostId, post) {
+async function seedBlogPostComments(blogPostId, post, authorUserIds) {
   await sql`
     DELETE FROM comments
     WHERE blog_post_id = ${blogPostId}
   `;
 
   await insertCommentTree({
+    authorUserIds,
     blogPostId,
     comments: post.comments,
     sequence: { value: 0 },
@@ -1577,12 +1647,15 @@ async function seed() {
     {
       comments: [
         {
+          authorUsername: "asdas",
           body: "This makes the writer model feel testable before the editor exists.",
           replies: [
             {
+              authorUsername: "missing-commenter",
               body: "The structural JSON tree is the first thing I would inspect.",
               replies: [
                 {
+                  authorUsername: null,
                   body: "Same; a preview diff would make CMS changes feel much less mysterious.",
                 },
               ],
@@ -1590,6 +1663,7 @@ async function seed() {
           ],
         },
         {
+          authorUsername: "asdas",
           body: "I like that assets are part of the revision instead of being inferred later.",
           replies: [
             {
@@ -1626,9 +1700,11 @@ async function seed() {
     {
       comments: [
         {
+          authorUsername: "missing-commenter",
           body: "This is much easier to reason about than a static timeline.",
           replies: [
             {
+              authorUsername: "asdas",
               body: "The media roles and skill joins make the entry useful in more than one layout.",
               replies: [
                 {
@@ -1639,6 +1715,7 @@ async function seed() {
           ],
         },
         {
+          authorUsername: null,
           body: "The company context field feels like the right place for the human background.",
           replies: [
             {
@@ -1675,9 +1752,11 @@ async function seed() {
     {
       comments: [
         {
+          authorUsername: "asdas",
           body: "The mention rows make the portfolio graph feel intentional instead of decorative.",
           replies: [
             {
+              authorUsername: "missing-commenter",
               body: "I especially like that mentions belong to the revision that produced them.",
               replies: [
                 {
@@ -1688,6 +1767,7 @@ async function seed() {
           ],
         },
         {
+          authorUsername: null,
           body: "This is the kind of backend shape that can power related-content UI without hand curation.",
           replies: [
             {
@@ -1754,7 +1834,20 @@ async function seed() {
       },
     },
     {
-      comments: [],
+      comments: [
+        {
+          authorUsername: "asdas",
+          body: "This one is tied to the real seeded account so the renderer can show an authenticated author.",
+        },
+        {
+          authorUsername: "missing-commenter",
+          body: "This asks for a username that is not in auth_identities, so the seed should store a null user reference.",
+        },
+        {
+          authorUsername: null,
+          body: "This is explicitly anonymous seed data for the fallback author label.",
+        },
+      ],
       coverAssetId: assetIds["jane10-g50-1.webp"],
       featured: false,
       publishedAt: "2026-06-20T12:00:00.000Z",
@@ -1780,7 +1873,18 @@ async function seed() {
       },
     },
     {
-      comments: [],
+      comments: [
+        {
+          authorUsername: "asdas",
+          body: "Image-shaped content should still leave room for a normal comment thread.",
+          replies: [
+            {
+              authorUsername: null,
+              body: "This reply intentionally has no user_id even though account-backed comments are the product path.",
+            },
+          ],
+        },
+      ],
       coverAssetId: assetIds["jane10-g80-1.webp"],
       featured: false,
       inlineAssetId: assetIds["jane10-g90-1.webp"],
@@ -1812,12 +1916,13 @@ async function seed() {
   ];
 
   const blogPostIds = [];
+  const commentAuthorUserIds = await resolveCommentAuthorUserIds(blogPosts);
 
   for (const post of blogPosts) {
     const blogPostRecord = await upsertBlogPost(post);
 
     blogPostIds.push(blogPostRecord.id);
-    await seedBlogPostComments(blogPostRecord.id, post);
+    await seedBlogPostComments(blogPostRecord.id, post, commentAuthorUserIds);
   }
 
   const [childCounts] = await sql`

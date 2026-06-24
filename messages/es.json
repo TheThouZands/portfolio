@@ -65,6 +65,8 @@
   "Blog": {
     "title": "Blog",
     "allPosts": "Todas las publicaciones",
+    "commentsTitle": "Comentarios",
+    "commentAuthorFallback": "Alguien",
     "mentioningPostsTitle": "Visto en",
     "notFoundTitle": "Publicacion no encontrada",
     "notFoundDescription": "No encontramos esa publicacion."

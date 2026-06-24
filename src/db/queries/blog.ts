@@ -3,10 +3,13 @@ import "server-only";
 import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db/client";
 import {
+  authIdentities,
   blogPostMentions,
   blogPostRevisions,
   blogPosts,
   blogPostTranslations,
+  comments,
+  user as authUser,
 } from "@/db/schema";
 import { getVisibleCmsStatuses } from "@/db/queries/cms";
 
@@ -32,6 +35,10 @@ type GetBlogPostMetadataByIdOptions = {
   locale: string;
 };
 
+type GetBlogPostCommentsOptions = {
+  blogPostId: number;
+};
+
 type FindBlogPostIdsBySlugOptions = {
   limit?: number;
   slug: string;
@@ -49,6 +56,15 @@ type GetBlogPostTranslationSlugOptions = {
 export type BlogPostTranslationSlug = {
   locale: string;
   slug: string;
+};
+
+export type BlogPostComment = {
+  authorName: string | null;
+  body: string;
+  createdAt: Date;
+  id: number;
+  parentCommentId: number | null;
+  updatedAt: Date;
 };
 
 export function getVisibleBlogStatuses() {
@@ -195,6 +211,31 @@ export async function getBlogPostMetadataById({
     .limit(1);
 
   return post ?? null;
+}
+
+export async function getBlogPostComments({
+  blogPostId,
+}: GetBlogPostCommentsOptions): Promise<BlogPostComment[]> {
+  const rows = await db
+    .select({
+      authorDisplayName: authUser.name,
+      authorUsername: authIdentities.username,
+      body: comments.body,
+      createdAt: comments.created_at,
+      id: comments.id,
+      parentCommentId: comments.parent_comment_id,
+      updatedAt: comments.updated_at,
+    })
+    .from(comments)
+    .leftJoin(authUser, eq(authUser.id, comments.userId))
+    .leftJoin(authIdentities, eq(authIdentities.userId, comments.userId))
+    .where(eq(comments.blog_post_id, blogPostId))
+    .orderBy(asc(comments.created_at), asc(comments.id));
+
+  return rows.map(({ authorDisplayName, authorUsername, ...comment }) => ({
+    ...comment,
+    authorName: authorUsername ?? authorDisplayName,
+  }));
 }
 
 export async function findBlogPostIdsBySlug({
