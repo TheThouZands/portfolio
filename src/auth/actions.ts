@@ -1,7 +1,6 @@
 "use server";
 
 import { APIError } from "better-auth/api";
-import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 import {
@@ -24,6 +23,11 @@ export type AuthActionState = {
   nextPath?: "login" | "signup";
   userId?: string;
   username?: string;
+};
+
+export type SignOutActionState = {
+  status: "idle" | "success" | "error";
+  message: string;
 };
 
 function readFormString(formData: FormData, key: string): string {
@@ -141,22 +145,29 @@ export async function signUpAction(
   }
 }
 
-export async function signOutAction(formData: FormData): Promise<void> {
-  const returnTo = readFormString(formData, "returnTo");
+export async function signOutAction(
+  previousState: SignOutActionState,
+  formData: FormData,
+): Promise<SignOutActionState> {
+  void previousState;
+  void formData;
 
   // Better Auth reads this request's signed session cookie from headers,
   // deletes that exact session, and nextCookies clears the browser cookie in
   // the Server Action response.
-  await auth.api.signOut({
-    headers: await headers(),
-  });
+  try {
+    await auth.api.signOut({
+      headers: await headers(),
+    });
 
-  // Server-rendered pages need cache invalidation so auth-dependent UI, such as
-  // the homepage logout button, reflects the cleared cookie after submission.
-  if (returnTo.startsWith("/")) {
-    revalidatePath(returnTo);
-    return;
+    return {
+      status: "success",
+      message: "Signed out.",
+    };
+  } catch (error) {
+    return {
+      status: "error",
+      message: getAuthErrorMessage(error),
+    };
   }
-
-  revalidatePath("/", "layout");
 }

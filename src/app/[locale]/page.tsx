@@ -2,8 +2,8 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import { signOutAction } from "@/auth/actions";
 import { auth } from "@/auth/server";
+import { LogoutButton } from "@/components/auth/LogoutButton";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
@@ -57,10 +57,7 @@ export default async function Home({ params }: HomeProps) {
       <FeaturedPosts locale={locale} />
       {currentSession ? (
         <section>
-          <form action={signOutAction}>
-            <input name="returnTo" type="hidden" value={`/${locale}`} />
-            <button type="submit">Log out</button>
-          </form>
+          <LogoutButton />
         </section>
       ) : null}
     </main>
