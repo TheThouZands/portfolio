@@ -141,6 +141,13 @@
       "when": 1782277786018,
       "tag": "0019_useful_purifiers",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1782278877954,
+      "tag": "0020_chilly_punisher",
+      "breakpoints": true
     }
   ]
 }

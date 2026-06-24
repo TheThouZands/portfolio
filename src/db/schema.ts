@@ -677,7 +677,7 @@ export const comments = pgTable(
     blog_post_id: integer()
       .references(() => blogPosts.id, { onDelete: "cascade" })
       .notNull(),
-    userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }),
+    userId: uuid("user_id").references(() => user.id, { onDelete: "set null" }),
     parent_comment_id: bigint({ mode: "number" }).references(
       (): AnyPgColumn => comments.id,
       { onDelete: "cascade" },
