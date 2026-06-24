@@ -55,6 +55,9 @@ const SIGN_IN_FAILED = {
   message: "Could not sign in.",
 } as const;
 
+// Better Auth gives us the session/database primitives. This plugin keeps the
+// product-specific identifier shape outside app routes: username/email lookup,
+// Argon2id password verification, session creation, and cookie setting.
 type AuthEndpointContext = Parameters<typeof setSessionCookie>[0];
 
 type CreateIdentifierAccountInput = {
@@ -230,6 +233,9 @@ export const portfolioAuthFlow = () =>
           const currentSessionToken = await getCurrentSessionToken(ctx);
           const session = await ctx.context.internalAdapter.createSession(user.id);
 
+          // Re-login from the same browser should replace only the session
+          // referenced by this browser's previous cookie. Other devices keep
+          // their sessions, and invalid/expired cookie tokens are ignored.
           await deleteCurrentBrowserSession(
             ctx,
             currentSessionToken,

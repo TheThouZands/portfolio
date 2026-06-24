@@ -17,6 +17,9 @@ type AuthFlowProps = {
   onStepChange?: (step: AuthFlowStep, state: AuthActionState) => void;
 };
 
+// Embeddable flow for modals/drawers/in-place gates. It keeps the
+// identifier -> login/signup transition in local React state instead of
+// changing the URL, while the forms still submit Server Actions.
 export function AuthFlow({
   initialStep = "identifier",
   initialIdentifier = "",

@@ -12,6 +12,11 @@ const THIRTY_DAYS_IN_SECONDS = 60 * 60 * 24 * 30;
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const FIVE_MINUTES_IN_SECONDS = 60 * 5;
 
+// Auth stack overview:
+// - Better Auth owns the durable user/session/account tables in Postgres.
+// - portfolioAuthFlow adds this CMS' username/email identifier password flow.
+// - nextCookies must stay last so Better Auth Set-Cookie headers become Next
+//   cookie mutations during Server Actions, without needing a full page reload.
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",

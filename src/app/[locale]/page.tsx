@@ -29,6 +29,8 @@ export default async function Home({ params }: HomeProps) {
   setRequestLocale(locale);
 
   const requestHeaders = await headers();
+  // Read the database-backed session rather than trusting the short cookie
+  // cache, so revoked/logged-out sessions stop rendering auth-only UI quickly.
   const [t, currentSession] = await Promise.all([
     getTranslations("HomePage"),
     auth.api.getSession({

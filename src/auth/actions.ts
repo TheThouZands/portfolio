@@ -12,6 +12,10 @@ import {
 } from "@/auth/identity";
 import { auth } from "@/auth/server";
 
+// UI-facing Server Actions. Forms submit here, but credential verification,
+// session creation, and cookie writes are delegated to Better Auth endpoints.
+// Returned state is only for React UI; the session cookie/database remain the
+// source of truth for whether the browser is authenticated.
 export type AuthActionState = {
   status: "idle" | "success" | "error";
   message: string;
@@ -140,10 +144,15 @@ export async function signUpAction(
 export async function signOutAction(formData: FormData): Promise<void> {
   const returnTo = readFormString(formData, "returnTo");
 
+  // Better Auth reads this request's signed session cookie from headers,
+  // deletes that exact session, and nextCookies clears the browser cookie in
+  // the Server Action response.
   await auth.api.signOut({
     headers: await headers(),
   });
 
+  // Server-rendered pages need cache invalidation so auth-dependent UI, such as
+  // the homepage logout button, reflects the cleared cookie after submission.
   if (returnTo.startsWith("/")) {
     revalidatePath(returnTo);
     return;

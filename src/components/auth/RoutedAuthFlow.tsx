@@ -13,6 +13,9 @@ type RoutedIdentifierFormProps = {
   locale: string;
 };
 
+// Route adapter for the standalone /auth pages. It reuses the same forms as the
+// embeddable AuthFlow, but persists the identifier in layout context and moves
+// the browser to /auth/login or /auth/signup after the first step.
 export function RoutedIdentifierForm({ locale }: RoutedIdentifierFormProps) {
   const router = useRouter();
   const { setIdentifier } = useAuthFlow();
