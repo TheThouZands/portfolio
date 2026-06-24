@@ -677,6 +677,7 @@ export const comments = pgTable(
     blog_post_id: integer()
       .references(() => blogPosts.id, { onDelete: "cascade" })
       .notNull(),
+    userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }),
     parent_comment_id: bigint({ mode: "number" }).references(
       (): AnyPgColumn => comments.id,
       { onDelete: "cascade" },
@@ -690,6 +691,7 @@ export const comments = pgTable(
       table.blog_post_id,
       table.created_at,
     ),
+    index("comments_user_id_idx").on(table.userId),
     index("comments_parent_comment_created_at_idx").on(
       table.parent_comment_id,
       table.created_at,
