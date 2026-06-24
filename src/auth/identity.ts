@@ -2,10 +2,19 @@ import "server-only";
 
 import { eq } from "drizzle-orm";
 
+import {
+  getAuthIdentifierKind,
+  normalizeAuthIdentifier,
+  type AuthIdentifierKind,
+} from "@/auth/identifier";
 import { db } from "@/db/client";
 import { authIdentities } from "@/db/schema";
 
-export type AuthIdentifierKind = "email" | "username";
+export {
+  getAuthIdentifierKind,
+  normalizeAuthIdentifier,
+  type AuthIdentifierKind,
+} from "@/auth/identifier";
 
 export type AuthIdentifierNextStep = "email-otp" | "sign-in" | "sign-up";
 
@@ -18,14 +27,6 @@ export type AuthIdentifierFlowResolution = {
   exposesExistence: boolean;
   nextStep: AuthIdentifierNextStep;
 };
-
-export function normalizeAuthIdentifier(identifier: string): string {
-  return identifier.trim().toLowerCase();
-}
-
-export function getAuthIdentifierKind(identifier: string): AuthIdentifierKind {
-  return identifier.includes("@") ? "email" : "username";
-}
 
 export async function findAuthIdentityByIdentifier(
   identifier: string,

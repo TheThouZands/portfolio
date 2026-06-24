@@ -11,6 +11,8 @@
     "build": "next build",
     "build:vercel": "npm run db:migrate && next build",
     "start": "next start",
+    "test": "npm run test:unit",
+    "test:unit": "node --import tsx --test \"tests/**/*.test.ts\"",
     "lint": "eslint",
     "lint:scss": "stylelint \"src/**/*.{css,scss}\"",
     "db:branch:sync": "node scripts/sync-neon-branch.mjs",
@@ -48,6 +50,7 @@
     "stylelint": "^16.14.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-scss": "^6.12.1",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

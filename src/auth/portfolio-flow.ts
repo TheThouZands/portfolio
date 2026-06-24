@@ -3,7 +3,7 @@ import "server-only";
 import type { BetterAuthPlugin } from "better-auth";
 import { APIError, createAuthEndpoint } from "better-auth/api";
 import { setSessionCookie } from "better-auth/cookies";
-import { z } from "zod";
+import type { z } from "zod";
 
 import { hashPassword, verifyPassword } from "@/auth/password";
 import {
@@ -13,110 +13,17 @@ import {
   resolveAuthIdentifierForFlow,
 } from "@/auth/identity";
 import { AUTH_RATE_LIMIT } from "@/auth/rate-limit";
+import {
+  authEmailSchema,
+  authPasswordSchema,
+  authUsernameSchema,
+  resolveIdentifierBody,
+  signInIdentifierBody,
+  signUpIdentifierBody,
+  signUpUsernameBody,
+} from "@/auth/validation";
 import { db } from "@/db/client";
 import { authIdentities } from "@/db/schema";
-
-const authUsernameSchema = z
-  .string()
-  .trim()
-  .min(1, "Username is required.")
-  .min(3, "Username must be at least 3 characters.")
-  .refine((username) => !username.includes("@"), {
-    message: "Username cannot contain @.",
-  });
-
-const authEmailSchema = z
-  .string()
-  .trim()
-  .min(1, "Email is required.")
-  .email("Enter a valid email address.");
-
-const authIdentifierSchema = z
-  .string()
-  .trim()
-  .min(1, "Email or username is required.")
-  .superRefine((identifier, ctx) => {
-    const parsedIdentifier =
-      getAuthIdentifierKind(identifier) === "email"
-        ? authEmailSchema.safeParse(identifier)
-        : authUsernameSchema.safeParse(identifier);
-
-    if (!parsedIdentifier.success) {
-      ctx.addIssue({
-        code: "custom",
-        message:
-          parsedIdentifier.error.issues[0]?.message ??
-          "Enter a valid email or username.",
-      });
-    }
-  });
-
-const authPasswordSchema = z
-  .string()
-  .min(8, "Password must be at least 8 characters.")
-  .refine((password) => /[A-Za-z]/.test(password), {
-    message: "Password must include at least one letter.",
-  })
-  .refine((password) => /\d/.test(password), {
-    message: "Password must include at least one number.",
-  });
-
-const signInPasswordSchema = z.string().min(1, "Password is required.");
-
-const resolveIdentifierBody = z.object({
-  identifier: authIdentifierSchema,
-});
-
-const signUpUsernameBody = z.object({
-  username: authUsernameSchema,
-  password: authPasswordSchema,
-});
-
-const signUpIdentifierBody = z
-  .object({
-    identifier: authIdentifierSchema,
-    otherIdentifier: z.string().trim().optional(),
-    password: authPasswordSchema,
-  })
-  .superRefine(({ identifier, otherIdentifier }, ctx) => {
-    const identifierKind = getAuthIdentifierKind(identifier);
-    const otherIdentifierValue = otherIdentifier ?? "";
-
-    if (identifierKind === "email") {
-      const parsedUsername = authUsernameSchema.safeParse(otherIdentifierValue);
-
-      if (!parsedUsername.success) {
-        ctx.addIssue({
-          code: "custom",
-          path: ["otherIdentifier"],
-          message:
-            parsedUsername.error.issues[0]?.message ??
-            "Enter a valid username.",
-        });
-      }
-
-      return;
-    }
-
-    if (otherIdentifierValue) {
-      const parsedEmail = authEmailSchema.safeParse(otherIdentifierValue);
-
-      if (!parsedEmail.success) {
-        ctx.addIssue({
-          code: "custom",
-          path: ["otherIdentifier"],
-          message:
-            parsedEmail.error.issues[0]?.message ??
-            "Enter a valid email address.",
-        });
-      }
-    }
-  });
-
-const signInIdentifierBody = z.object({
-  identifier: authIdentifierSchema,
-  password: signInPasswordSchema,
-});
 
 const USERNAME_TAKEN = {
   code: "USERNAME_TAKEN",

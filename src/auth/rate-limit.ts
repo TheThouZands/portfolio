@@ -3,6 +3,7 @@ import "server-only";
 import { APIError } from "better-auth/api";
 import { sql } from "drizzle-orm";
 
+import { createAuthRateLimitKey } from "@/auth/rate-limit-keys";
 import { db } from "@/db/client";
 import { rateLimit } from "@/db/schema";
 
@@ -39,25 +40,6 @@ const RATE_LIMITED = {
   message: "Too many auth attempts. Please try again later.",
 } as const;
 
-function readForwardedHeader(headers: Headers, key: string): string | null {
-  const value = headers.get(key);
-
-  if (!value) {
-    return null;
-  }
-
-  return value.split(",")[0]?.trim() || null;
-}
-
-function getRateLimitIp(headers: Headers): string {
-  return (
-    readForwardedHeader(headers, "x-forwarded-for") ??
-    readForwardedHeader(headers, "x-real-ip") ??
-    readForwardedHeader(headers, "cf-connecting-ip") ??
-    "unknown"
-  );
-}
-
 export async function enforceAuthRateLimit(
   headers: Headers,
   scope: string,
@@ -65,7 +47,7 @@ export async function enforceAuthRateLimit(
 ) {
   const now = Date.now();
   const windowStart = now - rule.window * 1000;
-  const key = `auth:${scope}:${getRateLimitIp(headers)}`;
+  const key = createAuthRateLimitKey(headers, scope);
 
   const [bucket] = await db
     .insert(rateLimit)
