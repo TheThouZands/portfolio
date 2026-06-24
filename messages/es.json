@@ -67,6 +67,11 @@
     "allPosts": "Todas las publicaciones",
     "commentsTitle": "Comentarios",
     "commentAuthorFallback": "Alguien",
+    "commentBodyLabel": "Comentario",
+    "commentBodyPlaceholder": "Escribe un comentario",
+    "commentPostButton": "Publicar",
+    "commentPosterPrefix": "Publicando como",
+    "commentPostingButton": "Publicando...",
     "mentioningPostsTitle": "Visto en",
     "notFoundTitle": "Publicacion no encontrada",
     "notFoundDescription": "No encontramos esa publicacion."

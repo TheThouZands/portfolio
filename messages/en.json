@@ -67,6 +67,11 @@
     "allPosts": "All Posts",
     "commentsTitle": "Comments",
     "commentAuthorFallback": "Someone",
+    "commentBodyLabel": "Comment",
+    "commentBodyPlaceholder": "Write a comment",
+    "commentPostButton": "Post",
+    "commentPosterPrefix": "Posting as",
+    "commentPostingButton": "Posting...",
     "mentioningPostsTitle": "As Seen In",
     "notFoundTitle": "Blog post not found",
     "notFoundDescription": "We could not find that blog post."
