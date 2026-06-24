@@ -162,6 +162,16 @@ export const verification = pgTable(
   ],
 );
 
+/** Better Auth database-backed request rate limit buckets. */
+export const rateLimit = pgTable(
+  "rate_limit",
+  {
+    key: text().primaryKey(),
+    count: integer().notNull(),
+    lastRequest: bigint("last_request", { mode: "number" }).notNull(),
+  },
+);
+
 /** CMS-owned login identity, kept separate from Better Auth's session user shape. */
 export const authIdentities = pgTable(
   "auth_identities",
