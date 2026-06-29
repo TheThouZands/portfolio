@@ -16,12 +16,13 @@ should remain stable even after Jira assigns keys.
 | --- | --- | --- | --- | --- | --- | --- |
 | JIRA-IMPORT-001 | 2026-06-29 | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `86a2d97`, `b980ebb`, `e50da91` | Thouzands | Partial import: seven epics and the `PF-E01`/`PF-E02` story batches were created in Jira. Thirty-six stories remain pending. Jira defaulted created issues to `To Do` with `Medium` priority, so local priority values remain preserved in each issue description until priority mapping is applied. |
 | JIRA-STATUS-001 | 2026-06-29 | `KAN` | `analysis/jira/import-history.md`, `analysis/jira/backlog.csv` | `3bc7001` | Thouzands | Status reconciliation: created story issues with local status `Implemented` were transitioned to `Done`; created story issues with local status `Planned` remained `To Do`. |
+| JIRA-IMPORT-002 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `1a94d4e` | Thouzands | Imported the `PF-E03` Internationalized Content story batch as `KAN-20` through `KAN-22` under `KAN-3`; all three implemented stories were transitioned to `Done`. Thirty-three stories remain pending. |
 
 ## Status Mapping Decision
 
 | Local retrospective status | Jira status | Applies to | Notes |
 | --- | --- | --- | --- |
-| Implemented | Done | Created story issues `KAN-8` through `KAN-16` and `KAN-18`. | These stories represent completed public portfolio, backend, CMS, and CMS decision work extracted from existing code or accepted docs. |
+| Implemented | Done | Created story issues `KAN-8` through `KAN-16`, `KAN-18`, and `KAN-20` through `KAN-22`. | These stories represent completed public portfolio, backend, CMS, i18n, and CMS decision work extracted from existing code or accepted docs. |
 | Planned | To Do | Created story issues `KAN-17` and `KAN-19`, plus future planned story imports. | These are writer/content-producer implementation tasks or other future work, so they stay open. |
 | Implemented/in progress | Leave open until verified | Pending story batches that reference current worktree or partly complete behavior. | Import only after deciding whether the current slice should be `In Progress` or `Done`. |
 
@@ -56,6 +57,9 @@ already existed in Jira.
 | PF-206 | [KAN-17](https://thouzands.atlassian.net/browse/KAN-17) | Design owner draft preview publish flow | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Planned; local priority: High. |
 | PF-207 | [KAN-18](https://thouzands.atlassian.net/browse/KAN-18) | Define media lifecycle decisions | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
 | PF-208 | [KAN-19](https://thouzands.atlassian.net/browse/KAN-19) | Implement owner media upload lifecycle | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Planned; local priority: Medium. |
+| PF-301 | [KAN-20](https://thouzands.atlassian.net/browse/KAN-20) | Browse localized routes | JIRA-IMPORT-002 | Done | Parent: [KAN-3](https://thouzands.atlassian.net/browse/KAN-3). Local status: Implemented; local priority: High. |
+| PF-302 | [KAN-21](https://thouzands.atlassian.net/browse/KAN-21) | Redirect bare blog URLs canonically | JIRA-IMPORT-002 | Done | Parent: [KAN-3](https://thouzands.atlassian.net/browse/KAN-3). Local status: Implemented; local priority: Medium. |
+| PF-303 | [KAN-22](https://thouzands.atlassian.net/browse/KAN-22) | Resolve localized metadata | JIRA-IMPORT-002 | Done | Parent: [KAN-3](https://thouzands.atlassian.net/browse/KAN-3). Local status: Implemented; local priority: Medium. |
 | PF-401 | Pending | Sign up with portfolio identifier flow | JIRA-IMPORT-001 | Pending | Implemented story. |
 | PF-505 | Pending | Maintain retrospective analysis suite | JIRA-IMPORT-001 | Pending | Planning story. |
 | PF-701 | Pending | Define service entry points | JIRA-IMPORT-001 | Pending | Planned story. |
@@ -64,7 +68,6 @@ already existed in Jira.
 
 | Parent epic | Jira epic | Pending stories |
 | --- | --- | --- |
-| PF-E03 Internationalized Content | [KAN-3](https://thouzands.atlassian.net/browse/KAN-3) | 3 |
 | PF-E04 Authenticated Interaction | [KAN-4](https://thouzands.atlassian.net/browse/KAN-4) | 11 |
 | PF-E05 Quality Operations And Architecture | [KAN-5](https://thouzands.atlassian.net/browse/KAN-5) | 7 |
 | PF-E06 Forward Planning | [KAN-6](https://thouzands.atlassian.net/browse/KAN-6) | 10 |
