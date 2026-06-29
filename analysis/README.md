@@ -31,6 +31,8 @@ The suite is intended to stay useful in four places:
 | Product strategy | [product/content-strategy.md](product/content-strategy.md) | Confluence | Defines content pillars, templates, publishing workflow, and content gaps. |
 | Product strategy | [product/conversion-path.md](product/conversion-path.md) | Confluence/Jira | Defines service entry points, visitor journey, intake questions, and conversion requirements. |
 | Product policy | [product/interaction-policy.md](product/interaction-policy.md) | Confluence/Jira | Defines comment interaction goals, moderation principles, lifecycle, and future policy decisions. |
+| Product workflow | [product/cms-authoring-workflow.md](product/cms-authoring-workflow.md) | Confluence/Jira | Defines owner-first CMS authoring, draft, preview, publish, and data-model implications. |
+| Product workflow | [product/auth-account-roadmap.md](product/auth-account-roadmap.md) | Confluence/Jira | Defines account types, auth growth phases, owner controls, and deferred account scope. |
 | Planning | [planning/roadmap.md](planning/roadmap.md) | Confluence/Jira | Groups the work into practical stages and identifies next analysis slices. |
 | Planning | [planning/risk-register.md](planning/risk-register.md) | Confluence/Jira | Tracks product, technical, tooling, and process risks with mitigations and related stories. |
 | Planning | [planning/validation-strategy.md](planning/validation-strategy.md) | Confluence/Jira/GitHub | Defines validation layers, done checks, verification commands, and traceability expectations. |

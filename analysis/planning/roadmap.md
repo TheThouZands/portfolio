@@ -65,7 +65,8 @@ Candidate slices:
 - Visitor journey from homepage to project proof to contact/action. Current local output: `analysis/product/conversion-path.md`.
 - Content strategy for projects, experience, skills, and blog posts. Current local output: `analysis/product/content-strategy.md`.
 - Comment interaction policy, moderation scope, and abuse handling. Current local output: `analysis/product/interaction-policy.md`.
-- Auth/account roadmap: reader accounts, client accounts, or private collaboration.
+- CMS authoring workflow. Current local output: `analysis/product/cms-authoring-workflow.md`.
+- Auth/account roadmap: reader accounts, owner controls, client accounts, or private collaboration. Current local output: `analysis/product/auth-account-roadmap.md`.
 - Product and delivery risk register. Current local output: `analysis/planning/risk-register.md`.
 - Validation strategy. Current local output: `analysis/planning/validation-strategy.md`.
 

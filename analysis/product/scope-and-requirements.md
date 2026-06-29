@@ -36,6 +36,8 @@ content editing, and stronger moderation/observability.
 | FR-016 | The app shall expose development-only integration metadata where fixed URLs require route placement. | Implemented | `d98aff7` | `src/app`, route-level architecture notes |
 | FR-017 | Visitors shall be able to choose a scoped service entry point from the portfolio. | Planned | `analysis/product/conversion-path.md` | Future homepage/contact or intake surface |
 | FR-018 | The portfolio owner shall be able to moderate blog comments without breaking thread context. | Planned | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation state, owner workflow, comment rendering |
+| FR-019 | The portfolio owner shall be able to author, preview, and publish CMS content through a managed workflow. | Planned | `analysis/product/cms-authoring-workflow.md` | Future owner-only authoring routes, preview flow, validation, and audit metadata |
+| FR-020 | Owner-only account capabilities shall protect moderation and authoring tools. | Planned | `analysis/product/auth-account-roadmap.md` | Future authorization model for owner controls |
 
 ## Non-Functional Requirements
 
@@ -54,6 +56,8 @@ content editing, and stronger moderation/observability.
 | NFR-011 | Trust and safety: account-backed comments should have clear moderation and preservation rules. | Planned | `analysis/product/interaction-policy.md` | Policy baseline exists; implementation still needs stories and schema decisions. |
 | NFR-012 | Business clarity: conversion paths should keep service claims tied to implementation evidence. | Planned | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future contact/intake surfaces should route to service wedges and proof. |
 | NFR-013 | Planning quality: future work should remain traceable to personas, risks, requirements, and validation evidence. | In progress | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Planning artifacts exist; implementation changes still need per-slice traceability. |
+| NFR-014 | CMS authoring should preserve structural content safety, localization, and previewability. | Planned | `analysis/product/cms-authoring-workflow.md`, ADR 0003 | Authoring workflow should not weaken the structural content contract. |
+| NFR-015 | Auth scope should grow only when tied to reader, owner, or client product needs. | Planned | `analysis/product/auth-account-roadmap.md` | Avoid building generic account features without a portfolio use case. |
 
 ## Out Of Current Scope
 

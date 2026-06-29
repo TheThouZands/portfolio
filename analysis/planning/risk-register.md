@@ -35,6 +35,8 @@ interaction behavior changes.
 | RISK-010 | OpenAPI is created before a stable public API exists. | Architecture | Low | Medium | Keep OpenAPI deferred until a public contract decision is made. | `openapi.md`, ADR 0006 |
 | RISK-011 | Structural content contract changes without migration or renderer strategy. | Technical | Low | High | Treat schema version changes as ADR/migration-worthy and update renderer tests. | ADR 0003, PF-DIAG-006 |
 | RISK-012 | Contact/intake path collects too much or too little information. | Product | Medium | Medium | Start with minimal intake questions and validate whether leads map to service wedges. | `conversion-path.md`, `PF-702` |
+| RISK-013 | CMS authoring starts as isolated admin forms instead of a coherent workflow. | Product/technical | Medium | High | Use CMS authoring workflow before adding editor routes or migrations. | `cms-authoring-workflow.md`, `PF-205`, `PF-206` |
+| RISK-014 | Account scope grows beyond reader and owner needs without product justification. | Product/security | Medium | Medium | Use auth/account roadmap and defer client/private accounts until a real use case exists. | `auth-account-roadmap.md`, `PF-409`, `PF-410`, `PF-411` |
 
 ## Review Cadence
 
@@ -55,4 +57,3 @@ Review this register:
 | A mitigation requires a technical decision | Add or update an ADR. |
 | A risk affects user trust or privacy | Update product policy before implementation. |
 | A risk affects schema or migrations | Update schema notes and migration plan. |
-

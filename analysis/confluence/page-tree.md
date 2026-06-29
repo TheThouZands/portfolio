@@ -33,6 +33,8 @@ Portfolio Analysis Home
     1.5 Content Strategy
     1.6 Conversion Path Brief
     1.7 Interaction Policy
+    1.8 CMS Authoring Workflow
+    1.9 Auth And Account Roadmap
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
@@ -74,6 +76,8 @@ Portfolio Analysis Home
 | Content Strategy | `analysis/product/content-strategy.md` | Local to Confluence |
 | Conversion Path Brief | `analysis/product/conversion-path.md` | Local to Confluence and Jira |
 | Interaction Policy | `analysis/product/interaction-policy.md` | Local to Confluence and Jira |
+| CMS Authoring Workflow | `analysis/product/cms-authoring-workflow.md` | Local to Confluence and Jira |
+| Auth And Account Roadmap | `analysis/product/auth-account-roadmap.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Risk Register | `analysis/planning/risk-register.md` | Local to Confluence and Jira |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | Local to Confluence and Jira |
