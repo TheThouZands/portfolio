@@ -26,7 +26,7 @@ technical artifacts near the code.
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
 | Tool setup operations | Local runbooks ready | `planning/tool-setup-plan.md`, `planning/external-setup-execution-runbook.md`, import/log files | Execute setup in external tools. |
-| Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, operations docs | Apply cadence during future slices. |
+| Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, `operations/artifact-maintenance-matrix.md`, operations docs | Apply cadence during future slices. |
 
 ## Objective Requirement Check
 

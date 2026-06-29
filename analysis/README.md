@@ -44,6 +44,7 @@ The suite is intended to stay useful in four places:
 | Planning | [planning/requirements-traceability-matrix.md](planning/requirements-traceability-matrix.md) | Confluence/Jira/GitHub | Maps requirements to personas, Jira stories, evidence, verification signals, and gaps. |
 | Planning | [planning/readiness-audit.md](planning/readiness-audit.md) | Confluence/GitHub | Audits the local suite against the original objective and names external setup gaps. |
 | Operations | [operations/release-and-review-cadence.md](operations/release-and-review-cadence.md) | Confluence/Jira | Defines per-slice, monthly, tool-sync, and launch review cadence. |
+| Operations | [operations/artifact-maintenance-matrix.md](operations/artifact-maintenance-matrix.md) | Confluence/GitHub/Jira | Defines artifact ownership, update triggers, validation checks, and external sync rules. |
 | Operations | [operations/decision-log.md](operations/decision-log.md) | Confluence/GitHub | Tracks lightweight product, planning, and tooling decisions that do not need ADRs. |
 | Operations | [operations/open-questions.md](operations/open-questions.md) | Confluence/Jira | Keeps unresolved product, tooling, and architecture questions visible. |
 | Jira backlog | [jira/user-stories.md](jira/user-stories.md) | Jira/Confluence | Human-readable epics and user stories with acceptance criteria and evidence commits. |

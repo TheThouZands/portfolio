@@ -50,6 +50,7 @@ A change is validated when:
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
 | External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
 | External setup runbook update | Runbook links to current manifests, logs, preflight checks, batch gates, and completion criteria. |
+| Artifact maintenance update | Matrix reflects source-of-truth, update triggers, validation, and external sync rules. |
 | Requirement traceability update | Matrix maps requirement, persona, story, evidence, verification signal, and remaining gaps. |
 | Pull request or implementation slice | Change traceability template completed or equivalent details included in PR/story notes. |
 
@@ -120,6 +121,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/planning/risk-register.md`
 - `analysis/planning/readiness-audit.md`
 - `analysis/operations/release-and-review-cadence.md`
+- `analysis/operations/artifact-maintenance-matrix.md`
 - `analysis/operations/decision-log.md`
 - `analysis/operations/open-questions.md`
 - `analysis/confluence/publishing-runbook.md`

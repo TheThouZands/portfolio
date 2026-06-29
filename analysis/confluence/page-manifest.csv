@@ -46,6 +46,7 @@ Page Title,Parent Page,Local Source,Target Area,Source Of Truth,Publish Priority
 "ADR Index","Technical Reference","analysis/technical/adr/README.md","Technical","GitHub source","1","Pending","","ADR index and decision conventions."
 "Operations","Portfolio Analysis Home","","Operations","Confluence container","2","Pending","","Container page for maintenance, publishing, and ongoing review."
 "Documentation Maintenance","Operations","analysis/github/documentation-rules.md","Operations","GitHub source","2","Pending","","Source-of-truth, naming, and review rules."
+"Artifact Maintenance Matrix","Operations","analysis/operations/artifact-maintenance-matrix.md","Operations","Local Git source","1","Pending","","Artifact ownership, update triggers, validation checks, and external sync rules."
 "Confluence Publishing Runbook","Operations","analysis/confluence/publishing-runbook.md","Operations","Local Git source","1","Pending","","Publishing metadata, steps, and update triggers."
 "Page Manifest","Operations","analysis/confluence/page-manifest.csv","Operations","Local Git source","1","Pending","","CSV checklist for page creation, priority, and URLs."
 "FigJam Creation Log","Operations","analysis/design/figjam-creation-log.md","Operations","Local Git source","2","Pending","","FigJam file and section URL tracking."

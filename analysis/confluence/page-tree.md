@@ -73,10 +73,11 @@ Portfolio Analysis Home
     5.7 ADR Index
   6. Operations
     6.1 Documentation Maintenance
-    6.2 Confluence Publishing Runbook
-    6.3 FigJam Creation Log
-    6.4 Decision Log
-    6.5 Open Questions
+    6.2 Artifact Maintenance Matrix
+    6.3 Confluence Publishing Runbook
+    6.4 FigJam Creation Log
+    6.5 Decision Log
+    6.6 Open Questions
 ```
 
 ## Local Source Mapping
@@ -119,6 +120,7 @@ Portfolio Analysis Home
 | OpenAPI Planning Notes | `analysis/technical/openapi.md` | GitHub to Confluence reference |
 | ADR Index | `analysis/technical/adr/README.md` | GitHub to Confluence reference |
 | Documentation Maintenance | `analysis/github/documentation-rules.md` | GitHub to Confluence reference |
+| Artifact Maintenance Matrix | `analysis/operations/artifact-maintenance-matrix.md` | Local to Confluence, GitHub, and Jira |
 | Confluence Publishing Runbook | `analysis/confluence/publishing-runbook.md` | Local to Confluence and GitHub |
 | Release And Review Cadence | `analysis/operations/release-and-review-cadence.md` | Local to Confluence and Jira |
 | Decision Log | `analysis/operations/decision-log.md` | Local to Confluence and GitHub |

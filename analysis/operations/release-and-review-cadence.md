@@ -33,6 +33,8 @@ Use this for each small commit or implementation step:
 For implementation slices, use `analysis/github/change-traceability-template.md` or include equivalent details in the
 PR/story notes.
 
+Use `analysis/operations/artifact-maintenance-matrix.md` to decide which neighboring artifacts must be updated.
+
 ## Monthly Product Review
 
 Review:
@@ -63,6 +65,7 @@ Use before a feature becomes public-facing or materially changes user trust.
 | --- | --- |
 | `analysis/planning/roadmap.md` | Direction or stage changes. |
 | `analysis/planning/risk-register.md` | Risk likelihood, impact, mitigation, or ownership changes. |
+| `analysis/operations/artifact-maintenance-matrix.md` | Artifact ownership, source-of-truth, trigger, or validation rule changes. |
 | `analysis/operations/decision-log.md` | Product or delivery decision does not need a full ADR but should be remembered. |
 | `analysis/operations/open-questions.md` | A decision is not ready but must remain visible. |
 | `analysis/jira/user-stories.md` and `backlog.csv` | Story, priority, acceptance, or evidence changes. |
