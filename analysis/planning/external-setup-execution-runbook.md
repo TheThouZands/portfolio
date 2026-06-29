@@ -77,9 +77,9 @@ Also confirm:
 
 ### EXT-003 Jira Stories
 
-- `analysis/jira/backlog.csv` imports or is manually recreated.
+- `analysis/jira/backlog.csv` imports or is manually recreated in batches.
 - Local story ids remain visible after Jira creates issue keys.
-- Parent epic links are set.
+- Parent epic links are set; the first `PF-E01` batch verified `parent = KAN-1`.
 - Status mapping is intentionally chosen, especially for implemented retrospective stories.
 - Story key mapping is recorded in `analysis/jira/import-history.md`.
 
@@ -106,10 +106,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source |
 | External tools touched | Confluence, Jira read/write checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; story import and FigJam pending |
+| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-11` created under `KAN-1`; remaining story import and FigJam pending |
 
 Record the final values in the relevant logs after execution.
 

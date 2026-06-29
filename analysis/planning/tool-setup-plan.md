@@ -59,7 +59,7 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 | Batch | Scope | Exit check |
 | --- | --- | --- |
 | Batch 1 | Confluence root, product analysis pages, roadmap. | Pages exist and link back to Git source files. |
-| Batch 2 | Jira project `KAN`, epics, CSV import, key mapping. | Epic keys are mapped; local story ids still need Jira issue keys. |
+| Batch 2 | Jira project `KAN`, epics, CSV import, key mapping. | Epic keys and the first `PF-E01` story keys are mapped; remaining local story ids still need Jira issue keys. |
 | Batch 3 | FigJam file and first four diagram sections. | Section manifest rows have FigJam URLs and link to local diagram sources. |
 | Batch 4 | Technical reference pages or links. | ADR/schema/API pages point back to GitHub. |
 

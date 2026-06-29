@@ -131,7 +131,7 @@ A story is done when:
 | --- | --- | --- |
 | Confirm connected Jira project `KAN` settings | Task | High |
 | Confirm created epic keys before story import | Task | High |
-| Import starter story CSV | Task | High |
+| Import remaining story batches | Task | High |
 | Add components and labels | Task | Medium |
 | Create import history page | Task | Medium |
 | Decide whether implemented retrospective stories should import as Done or Backlog | Task | Medium |

@@ -14,7 +14,7 @@ should remain stable even after Jira assigns keys.
 
 | Run id | Date | Jira project | Source files | Source commit | Imported by | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| JIRA-IMPORT-001 | 2026-06-29 | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `86a2d97` | Thouzands | Partial import: seven epics created in Jira from `epics.csv`; story import remains pending. Jira defaulted created epics to `To Do` with `Medium` priority, so local priority/status values are preserved in each epic description until workflow mapping is decided. |
+| JIRA-IMPORT-001 | 2026-06-29 | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `86a2d97`, `b980ebb` | Thouzands | Partial import: seven epics and the four `PF-E01` stories were created in Jira. Forty-four stories remain pending. Jira defaulted created issues to `To Do` with `Medium` priority, so local priority/status values are preserved in each issue description until workflow mapping is decided. |
 
 ## Epic Mapping
 
@@ -32,11 +32,25 @@ should remain stable even after Jira assigns keys.
 
 | Local story id | Jira key | Summary | Import run | Status after import | Notes |
 | --- | --- | --- | --- | --- | --- |
-| PF-101 | Pending | Homepage communicates portfolio identity | JIRA-IMPORT-001 | Pending | Implemented story. |
+| PF-101 | [KAN-8](https://thouzands.atlassian.net/browse/KAN-8) | Homepage communicates portfolio identity | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-102 | [KAN-9](https://thouzands.atlassian.net/browse/KAN-9) | Browse professional experience | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-103 | [KAN-10](https://thouzands.atlassian.net/browse/KAN-10) | Browse skills and related work | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-104 | [KAN-11](https://thouzands.atlassian.net/browse/KAN-11) | Browse project evidence | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
 | PF-201 | Pending | Store content as structured records | JIRA-IMPORT-001 | Pending | Implemented story. |
 | PF-401 | Pending | Sign up with portfolio identifier flow | JIRA-IMPORT-001 | Pending | Implemented story. |
 | PF-505 | Pending | Maintain retrospective analysis suite | JIRA-IMPORT-001 | Pending | Planning story. |
 | PF-701 | Pending | Define service entry points | JIRA-IMPORT-001 | Pending | Planned story. |
+
+## Pending Story Batches
+
+| Parent epic | Jira epic | Pending stories |
+| --- | --- | --- |
+| PF-E02 CMS Content Foundation | [KAN-2](https://thouzands.atlassian.net/browse/KAN-2) | 8 |
+| PF-E03 Internationalized Content | [KAN-3](https://thouzands.atlassian.net/browse/KAN-3) | 3 |
+| PF-E04 Authenticated Interaction | [KAN-4](https://thouzands.atlassian.net/browse/KAN-4) | 11 |
+| PF-E05 Quality Operations And Architecture | [KAN-5](https://thouzands.atlassian.net/browse/KAN-5) | 7 |
+| PF-E06 Forward Planning | [KAN-6](https://thouzands.atlassian.net/browse/KAN-6) | 10 |
+| PF-E07 Service Conversion | [KAN-7](https://thouzands.atlassian.net/browse/KAN-7) | 5 |
 
 ## Import Checklist
 
