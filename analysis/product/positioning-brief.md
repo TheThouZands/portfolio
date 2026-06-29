@@ -28,7 +28,7 @@ survive beyond the first launch.
 | 2 | CMS and structured content architecture | "My content is outgrowing static pages or loose admin fields." | Content entities, translations, structural content, revisions, media, mentions. |
 | 3 | Authenticated interaction workflows | "Users need accounts, sessions, and safe interaction without overbuilding." | Better Auth integration, custom identifier flow, validation, rate limiting, blog comments. |
 | 4 | Database and deployment workflows | "Schema changes and preview data need to stop being risky." | Drizzle migrations, Neon branch sync, Vercel build migration flow. |
-| 5 | Product analysis and technical planning | "The idea exists, but it is not yet shaped into requirements and delivery slices." | This analysis suite, Jira stories, ADRs, traceability, diagram inventory. |
+| 5 | Product analysis and technical planning | "The product direction is coherent, but requirements, proof, and delivery slices need to be explicit." | This analysis suite, Jira stories, ADRs, traceability, diagram inventory. |
 
 The detailed offer model lives in `analysis/product/service-offer-catalog.md`.
 

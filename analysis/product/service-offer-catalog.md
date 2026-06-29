@@ -39,7 +39,7 @@ visitor can choose a service wedge and the owner can convert that request into a
 
 | Field | Guidance |
 | --- | --- |
-| Buyer signal | The buyer can describe a product or workflow but cannot tell what to build first. |
+| Buyer signal | The buyer has a coherent product, workflow, or portfolio goal and needs the first delivery slice made explicit. |
 | Included | Problem framing, stakeholder scan, requirement shortlist, risk register, and first delivery backlog. |
 | Not included | Full rebuild, deep code rewrite, or long-term roadmap ownership without a follow-up agreement. |
 | Success check | The buyer can point to the next slice, why it matters, and what evidence will prove it. |
@@ -93,7 +93,7 @@ visitor can choose a service wedge and the owner can convert that request into a
 
 | Intake answer points to | Route to offer | Follow-up question |
 | --- | --- | --- |
-| Unclear idea, unclear roadmap, or messy priority list | `OFF-001` | What would make the first slice obviously valuable? |
+| Coherent goal with unclear first slice, proof path, or priority order | `OFF-001` | What would make the first slice obviously valuable? |
 | Content complexity, localization, revisions, or publishing state | `OFF-002` | Which content type changes most often or breaks the current workflow? |
 | Accounts, sessions, comments, forms, submissions, or moderation | `OFF-003` | What user action needs protection, validation, or abuse handling? |
 | Migrations, preview databases, deployment fragility, or environment drift | `OFF-004` | What database or deployment action currently feels risky? |

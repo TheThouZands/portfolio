@@ -25,19 +25,20 @@ The portfolio is still centered on the owner, but the product only works if visi
 
 ## Personas
 
-### PERS-001 - Founder With A Half-Shaped Product Idea
+### PERS-001 - Portfolio Owner Needing A Proof-Driven Showcase
 
 Needs:
 
-- Translate a rough web idea into buildable slices.
-- Understand whether the first version should be a tool, CMS, workflow, or content surface.
-- Avoid spending money on a fragile one-off site.
+- Present coherent skills and services through a working product, not only a static page.
+- Show how current capabilities and future features map to requirements, proof, and delivery slices.
+- Avoid a portfolio that cannot demonstrate fullstack judgment.
 
 Portfolio response:
 
-- Positioning brief names durable fullstack systems.
+- Problem statement names the portfolio as a skill and service showcase.
+- Positioning brief frames the service promise around durable fullstack systems.
 - Conversion path offers a discovery/build slice.
-- Analysis suite proves planning can stay connected to implementation.
+- Analysis suite keeps current product behavior and future features connected to implementation.
 
 Content that should convince them:
 
@@ -141,9 +142,9 @@ Content that should convince them:
 
 | Implication | Why it matters |
 | --- | --- |
-| Homepage copy should not only say "fullstack"; it should point to durable systems and tools. | PERS-001 needs a service promise, not a role label. |
+| Homepage copy should not only say "fullstack"; it should point to durable systems and tools. | PERS-001 needs a proof-driven service promise, not a role label. |
 | Projects should show problem, approach, result, and technical evidence. | PERS-001, PERS-002, and PERS-004 need different proof from the same content. |
-| Technical docs should stay close to code. | PERS-002 and PERS-006 need trustworthy implementation evidence. |
+| Technical docs should stay close to code. | PERS-002 and PERS-004 need trustworthy implementation evidence. |
 | Content model diagrams should be understandable without reading schema code. | PERS-003 needs product-level clarity. |
 | Comments need moderation and deletion rules before wider use. | PERS-005 needs trust and safety. |
 
@@ -154,4 +155,3 @@ Content that should convince them:
 | Which persona should the homepage optimize for first? | PERS-001, with proof paths for PERS-002 and PERS-004. |
 | Should technical readers be encouraged to comment or only read? | Encourage comments cautiously after moderation basics exist. |
 | Should content-heavy operators get a dedicated service page? | Not yet; connect CMS proof through projects and posts first. |
-

@@ -15,12 +15,13 @@ and how implementation evidence should support the service story.
 
 ## Core Problem
 
-Independent technical services are hard to evaluate from a static portfolio. A visitor can see claims, but cannot easily
-judge whether the person can design durable fullstack systems, handle content complexity, operate a database-backed app,
-think about security, or ship maintainable user-facing workflows.
+The immediate business problem is the lack of a portfolio surface that can showcase fullstack skill through real product
+behavior. A visitor can see claims in a static portfolio, but cannot easily judge whether the person can design durable
+systems, handle content complexity, operate a database-backed app, think about security, or ship maintainable
+user-facing workflows.
 
 The portfolio therefore needs to do more than display biographical content. It needs to act as live evidence of the
-services offered.
+services offered, and the analysis suite needs to describe both the current product and future features as planned work.
 
 ## Product Thesis
 

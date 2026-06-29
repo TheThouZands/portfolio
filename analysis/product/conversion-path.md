@@ -39,7 +39,7 @@ and intake routing rules that this conversion path should use.
 
 | Offer | Best for | Starting output |
 | --- | --- | --- |
-| Product system audit | A visitor with an existing app or idea that feels unclear. | Analysis memo, risk map, and delivery slice backlog. |
+| Product system audit | A visitor with a coherent app, workflow, or portfolio goal that needs a first slice. | Analysis memo, risk map, and delivery slice backlog. |
 | CMS/content model design slice | A visitor with content that is outgrowing static pages. | Content model, migration plan, and rendering approach. |
 | Auth/interaction workflow slice | A visitor who needs accounts, comments, submissions, or protected workflows. | Flow diagram, data model, validation/rate-limit plan. |
 | Database/deployment workflow setup | A visitor with risky schema/deployment practices. | Migration workflow, preview database strategy, and operational checklist. |
