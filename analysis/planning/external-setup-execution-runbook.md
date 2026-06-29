@@ -80,7 +80,7 @@ Also confirm:
 
 - `analysis/jira/backlog.csv` imports or is manually recreated in batches.
 - Local story ids remain visible after Jira creates issue keys.
-- Parent epic links are set; the `PF-E01` through `PF-E04` batches verified `parent = KAN-1` through `parent = KAN-4`.
+- Parent epic links are set; the `PF-E01` through `PF-E05` batches verified `parent = KAN-1` through `parent = KAN-5`.
 - Status mapping is intentionally chosen and applied: created implemented stories are `Done`, current-worktree stories
   `KAN-24` and `KAN-26` are `In Progress`, and planned created stories remain `To Do`.
 - Story key mapping is recorded in `analysis/jira/import-history.md`.
@@ -108,10 +108,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source |
 | External tools touched | Confluence, Jira read/write checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-33` created under `KAN-1` through `KAN-4`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 10 was synced; Figma connector and Mermaid-to-FigJam generation path verified; twenty-two story imports and FigJam diagram generation pending |
+| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-40` created under `KAN-1` through `KAN-5`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 10 was synced; Figma connector and Mermaid-to-FigJam generation path verified; fifteen story imports and FigJam diagram generation pending |
 
 Record the final values in the relevant logs after execution.
 
