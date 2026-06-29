@@ -71,6 +71,7 @@ Candidate slices:
 
 - Stakeholder and persona analysis. Current local output: `analysis/product/stakeholders-and-personas.md`.
 - Positioning brief for services sold through the portfolio. Current local output: `analysis/product/positioning-brief.md`.
+- Service offer catalog for buyer fit, outputs, proof, and intake routing. Current local output: `analysis/product/service-offer-catalog.md`.
 - Visitor journey from homepage to project proof to contact/action. Current local output: `analysis/product/conversion-path.md`.
 - Content strategy for projects, experience, skills, and blog posts. Current local output: `analysis/product/content-strategy.md`.
 - Comment interaction policy, moderation scope, and abuse handling. Current local output: `analysis/product/interaction-policy.md`.

@@ -16,7 +16,7 @@ technical artifacts near the code.
 | Area | Current readiness | Evidence | Remaining work |
 | --- | --- | --- | --- |
 | Retrospective analysis directory | Strong local baseline | `analysis/README.md` and 40+ linked artifacts | Keep updated as implementation changes. |
-| Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
+| Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
 | Jira-compatible user stories | Strong local baseline | `jira/user-stories.md`, `jira/backlog.csv` | Import into Jira and fill `jira/import-history.md`. |

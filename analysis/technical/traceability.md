@@ -37,7 +37,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
 | Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`. |
 | Auth and session flows | `FR-010`, `FR-011`, `FR-012` | `src/auth`, `src/components/auth`, `src/app/api/auth/[...all]`, `src/app/api/auth-state` | `tests/auth`; future integration tests. |
-| Service conversion path | `FR-017`, `NFR-012` | Future contact/intake route or component, homepage CTA, service wedge links | Planned; brief in `analysis/product/conversion-path.md`. |
+| Service conversion path | `FR-017`, `FR-021`, `NFR-012` | Future contact/intake route or component, homepage CTA, service offer links | Planned; briefs in `analysis/product/conversion-path.md` and `analysis/product/service-offer-catalog.md`. |
 | CMS authoring workflow | `FR-019`, `NFR-014` | Future owner-only CMS authoring routes, preview flow, validation, audit fields | Planned; workflow in `analysis/product/cms-authoring-workflow.md`. |
 | Owner account controls | `FR-020`, `NFR-015` | Future owner authorization model for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |

@@ -30,6 +30,8 @@ survive beyond the first launch.
 | 4 | Database and deployment workflows | "Schema changes and preview data need to stop being risky." | Drizzle migrations, Neon branch sync, Vercel build migration flow. |
 | 5 | Product analysis and technical planning | "The idea exists, but it is not yet shaped into requirements and delivery slices." | This analysis suite, Jira stories, ADRs, traceability, diagram inventory. |
 
+The detailed offer model lives in `analysis/product/service-offer-catalog.md`.
+
 ## Target Audiences
 
 | Audience | What they care about | What the portfolio should show first |

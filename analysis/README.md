@@ -29,6 +29,7 @@ The suite is intended to stay useful in four places:
 | Product analysis | [product/stakeholders-and-personas.md](product/stakeholders-and-personas.md) | Confluence/Jira | Defines stakeholders, personas, persona-to-requirement mapping, and product implications. |
 | Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |
 | Product strategy | [product/positioning-brief.md](product/positioning-brief.md) | Confluence | Defines the service position, audience, proof strategy, and first conversion hypothesis. |
+| Product strategy | [product/service-offer-catalog.md](product/service-offer-catalog.md) | Confluence/Jira | Defines service offers, buyer fit, outputs, proof surfaces, intake routing, and pricing stance. |
 | Product strategy | [product/content-strategy.md](product/content-strategy.md) | Confluence | Defines content pillars, templates, publishing workflow, and content gaps. |
 | Product strategy | [product/conversion-path.md](product/conversion-path.md) | Confluence/Jira | Defines service entry points, visitor journey, intake questions, and conversion requirements. |
 | Product policy | [product/interaction-policy.md](product/interaction-policy.md) | Confluence/Jira | Defines comment interaction goals, moderation principles, lifecycle, and future policy decisions. |

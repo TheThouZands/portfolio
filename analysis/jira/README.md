@@ -42,6 +42,7 @@ is known.
 | `db` | Schema, migrations, seed data, and database operations |
 | `security` | Validation, rate limiting, headers, and abuse controls |
 | `docs` | Analysis, ADRs, architecture, and planning artifacts |
+| `requirements` | Requirement mapping, traceability, and acceptance coverage |
 | `ops` | Deployment, Neon, CI, and workflow operations |
 
 ## Status Meanings

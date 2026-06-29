@@ -136,7 +136,7 @@ The CMS can link blog revisions to content entities. Use that intentionally:
 
 | Gap | Why it matters | Candidate next artifact |
 | --- | --- | --- |
-| No explicit service offer page yet | Visitors may understand capability but not how to start working together. | `product/conversion-path.md` baseline drafted |
+| No public service offer surface yet | Visitors may understand capability but not how to start working together. | `product/service-offer-catalog.md` and `product/conversion-path.md` baselines drafted |
 | Demo project/content may not fully represent real service work | Synthetic data proves structure but not business credibility. | Real project case-study backlog |
 | Blog comments lack moderation policy | Interaction evidence needs trust rules. | `product/interaction-policy.md` baseline drafted |
 | No diagram outputs yet | Visual explanation still depends on text docs. | First FigJam diagrams |

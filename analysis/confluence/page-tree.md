@@ -30,11 +30,12 @@ Portfolio Analysis Home
     1.2 Stakeholders And Personas
     1.3 Scope And Requirements
     1.4 Positioning Brief
-    1.5 Content Strategy
-    1.6 Conversion Path Brief
-    1.7 Interaction Policy
-    1.8 CMS Authoring Workflow
-    1.9 Auth And Account Roadmap
+    1.5 Service Offer Catalog
+    1.6 Content Strategy
+    1.7 Conversion Path Brief
+    1.8 Interaction Policy
+    1.9 CMS Authoring Workflow
+    1.10 Auth And Account Roadmap
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
@@ -78,6 +79,7 @@ Portfolio Analysis Home
 | Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | Local to Confluence and Jira |
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | Local to Confluence |
 | Positioning Brief | `analysis/product/positioning-brief.md` | Local to Confluence |
+| Service Offer Catalog | `analysis/product/service-offer-catalog.md` | Local to Confluence and Jira |
 | Content Strategy | `analysis/product/content-strategy.md` | Local to Confluence |
 | Conversion Path Brief | `analysis/product/conversion-path.md` | Local to Confluence and Jira |
 | Interaction Policy | `analysis/product/interaction-policy.md` | Local to Confluence and Jira |

@@ -38,6 +38,7 @@ content editing, and stronger moderation/observability.
 | FR-018 | The portfolio owner shall be able to moderate blog comments without breaking thread context. | Planned | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation state, owner workflow, comment rendering |
 | FR-019 | The portfolio owner shall be able to author, preview, and publish CMS content through a managed workflow. | Planned | `analysis/product/cms-authoring-workflow.md` | Future owner-only authoring routes, preview flow, validation, and audit metadata |
 | FR-020 | Owner-only account capabilities shall protect moderation and authoring tools. | Planned | `analysis/product/auth-account-roadmap.md` | Future authorization model for owner controls |
+| FR-021 | The portfolio shall describe service offers with audience fit, scope boundaries, outputs, and proof surfaces. | Planned | `analysis/product/service-offer-catalog.md` | Future service entry section, intake path, and offer-to-proof tagging |
 
 ## Non-Functional Requirements
 

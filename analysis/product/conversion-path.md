@@ -22,6 +22,9 @@ Convert a qualified visitor into a scoped conversation about one of the portfoli
 
 The intended first conversion is a discovery/build slice, not a vague "contact me sometime" action.
 
+The service offer catalog in `analysis/product/service-offer-catalog.md` defines the offer labels, buyer fit, outputs,
+and intake routing rules that this conversion path should use.
+
 ## Primary Journey
 
 | Step | Visitor question | Product answer |
@@ -81,6 +84,7 @@ form.
 | Requirement | Status |
 | --- | --- |
 | `FR-017` visitors can choose a scoped service entry point | Planned. |
+| `FR-021` visitors can understand service offers, fit, outputs, and scope boundaries | Planned. |
 | `NFR-012` conversion paths should keep claims tied to evidence | Planned. |
 
 ## Jira Impact
@@ -91,6 +95,7 @@ form.
 | `PF-702` | Add contact/intake route or component. |
 | `PF-703` | Link projects and posts to service wedges. |
 | `PF-704` | Create visitor journey diagram in FigJam. |
+| `PF-705` | Maintain the service offer catalog as the source for offer labels, outputs, and scope boundaries. |
 
 ## Measurement
 
@@ -109,4 +114,3 @@ Because the product is still personal and early, measurement can stay lightweigh
 | Should each service wedge have its own page? | Not yet; begin with one conversion path and link proof content. |
 | Should comments contribute to conversion? | Only indirectly as proof of interaction capability. |
 | Should pricing be public? | Defer until offer shapes are clearer. |
-

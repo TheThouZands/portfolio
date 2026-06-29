@@ -43,6 +43,10 @@ Every Confluence page copied from this repository should include this metadata b
 | Problem Statement | `analysis/product/problem-statement.md` | Pending | Pending | Pending | Product baseline. |
 | Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | Pending | Pending | Pending | Audience model. |
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | Pending | Pending | Pending | Requirement ids must stay stable. |
+| Positioning Brief | `analysis/product/positioning-brief.md` | Pending | Pending | Pending | Service position and proof strategy. |
+| Service Offer Catalog | `analysis/product/service-offer-catalog.md` | Pending | Pending | Pending | Offer fit, outputs, proof, and pricing stance. |
+| Content Strategy | `analysis/product/content-strategy.md` | Pending | Pending | Pending | Content pillars and publication workflow. |
+| Conversion Path Brief | `analysis/product/conversion-path.md` | Pending | Pending | Pending | Visitor journey and intake path. |
 | Roadmap | `analysis/planning/roadmap.md` | Pending | Pending | Pending | Stage map. |
 | Risk Register | `analysis/planning/risk-register.md` | Pending | Pending | Pending | Review before implementation slices. |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | Pending | Pending | Pending | Done/verification expectations. |
@@ -64,4 +68,3 @@ Every Confluence page copied from this repository should include this metadata b
 | FigJam diagram created | Add the FigJam section URL to relevant pages. |
 | ADR accepted | Summarize in Confluence and link to GitHub ADR. |
 | Schema meaning changes | Update schema summary page and link to migration/ADR evidence. |
-

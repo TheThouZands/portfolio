@@ -60,6 +60,7 @@ the two aligned as the portfolio keeps changing.
 | `FR-018` Owner can moderate blog comments without breaking thread context. | Planned | owner, `PERS-005` | `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation schema/action/rendering tests. |
 | `FR-019` Owner can author, preview, and publish CMS content through a managed workflow. | Planned | owner, `PERS-003` | `PF-205`, `PF-206`, `PF-207` | `analysis/product/cms-authoring-workflow.md` | Future authoring route, preview, validation, and audit checks. |
 | `FR-020` Owner-only account capabilities protect moderation and authoring tools. | Planned | owner, `PERS-003` | `PF-409`, `PF-411` | `analysis/product/auth-account-roadmap.md` | Future authorization tests and protected-route review. |
+| `FR-021` Service offers describe audience fit, scope boundaries, outputs, and proof surfaces. | Planned | `PERS-001`, `PERS-002`, `PERS-004` | `PF-701`, `PF-702`, `PF-703`, `PF-705` | `analysis/product/service-offer-catalog.md` | Future service section review, intake routing check, offer-to-proof content audit. |
 
 ## Non-Functional Requirements
 
