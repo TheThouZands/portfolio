@@ -31,7 +31,7 @@ It supports ADR 0006 by separating three things:
 | ID | Route | Methods | Source | Current purpose | Contract status | OpenAPI action |
 | --- | --- | --- | --- | --- | --- | --- |
 | API-001 | `/api/auth/[...all]` | `GET`, `POST` | `src/app/api/auth/[...all]/route.ts` | Better Auth route handler generated with `toNextJsHandler(auth)`. | Framework/provider owned | Do not document as portfolio OpenAPI unless auth integration becomes an explicit public contract. |
-| API-002 | `/api/auth-state` | `GET` | `src/app/api/auth-state/route.ts` | Returns a small authenticated/unauthenticated session snapshot for local UI refresh. | Internal app contract | Keep narrative inventory; consider schema only if other clients consume it. |
+| API-002 | `/api/auth-state` | `GET` | `src/app/api/auth-state/route.ts` | Returns a small authenticated/unauthenticated session snapshot for local UI refresh. | Current-worktree internal app contract | Keep narrative inventory; do not treat as a stable public contract until the auth-state slice is committed and reused beyond local UI refresh. |
 | API-003 | `/blog/{slug}` | `GET` | `src/app/blog/[slug]/route.ts` | Redirects bare blog slugs to canonical localized post routes. | Public app behavior | Document as route behavior; OpenAPI is likely unnecessary unless redirect behavior becomes integration-facing. |
 
 ## Server Actions
@@ -50,7 +50,7 @@ It supports ADR 0006 by separating three things:
 | --- | --- | --- | --- |
 | Public portfolio content API | CMS queries, localized routes, project/skill/experience/blog models | Should the portfolio expose content as data, or only render pages? | External consumer or automation needs stable content JSON. |
 | Comment creation/moderation API | `createBlogCommentAction`, comments table, interaction policy, ADR 0005 | Should comments remain form-backed server actions or become stable route handlers? | Moderation UI, mobile/client integration, or contract tests require HTTP route semantics. |
-| Auth state API | `/api/auth-state`, `AuthSessionSnapshot`, active auth-state worktree files | Is this endpoint a durable app contract or just a UI refresh helper? | Multiple clients or tests depend on the snapshot shape. |
+| Auth state API | `/api/auth-state`, `AuthSessionSnapshot`, current auth-state worktree files | Is this endpoint a durable app contract or just a UI refresh helper? | The auth-state slice is committed and multiple clients or tests depend on the snapshot shape. |
 | Health/readiness endpoint | Deployment workflow, Neon migration workflow, Vercel build process | What should readiness verify without exposing sensitive internals? | Deployment monitoring needs an HTTP status contract. |
 
 ## OpenAPI Readiness Checklist
