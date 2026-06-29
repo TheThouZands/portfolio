@@ -20,12 +20,12 @@ technical artifacts near the code.
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
 | Jira-compatible user stories | Jira story import complete with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-55`; implemented created stories are `Done` and current-worktree stories are `In Progress` | Keep story statuses current as planned work is implemented. |
-| Confluence-compatible docs | External setup started | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages | Publish priority 1 content pages and keep source commits/URLs current. |
+| Confluence-compatible docs | External setup in progress | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages, first product content pages | Publish remaining priority 1 content pages and keep source commits/URLs current. |
 | FigJam/Figma diagrams | Local source ready and MCP generation path verified | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; Figma MCP exposes Mermaid `generate_diagram` | Generate FigJam diagrams from Mermaid and record URLs. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
-| Tool setup operations | Local runbooks ready | `planning/tool-setup-plan.md`, `planning/external-setup-execution-runbook.md`, import/log files | Execute setup in external tools. |
+| Tool setup operations | External setup in progress | `planning/tool-setup-plan.md`, `planning/external-setup-execution-runbook.md`, import/log files | Continue Confluence and FigJam setup in small batches. |
 | Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, `technical/verification-catalog.md`, `operations/artifact-maintenance-matrix.md`, operations docs | Apply cadence during future slices. |
 
 ## Objective Requirement Check
@@ -37,8 +37,8 @@ technical artifacts near the code.
 | Slowly get more specific with functionality and planning artifacts. | Satisfied baseline | Scope/requirements, Jira stories, roadmap, risk register, validation strategy, workflow docs. |
 | Make artifacts refer to already existing commits/features. | Satisfied baseline | Requirements, matrix, stories, traceability, ADRs, schema notes reference commits/code areas. |
 | Connect requirements to personas, stories, evidence, and verification. | Locally satisfied baseline | `analysis/planning/requirements-traceability-matrix.md`, `analysis/technical/verification-catalog.md` |
-| Product/business docs compatible with Confluence. | Locally ready | Page tree, publishing runbook, product docs, planning docs, operations docs. |
-| User stories compatible with Jira. | Locally ready | Markdown backlog and importable CSV parse successfully. |
+| Product/business docs compatible with Confluence. | Partially published | Page tree, publishing runbook, product docs, planning docs, operations docs; first product content pages are published in Confluence. |
+| User stories compatible with Jira. | Jira imported | Markdown backlog and importable CSV parse successfully; Jira epics `KAN-1` to `KAN-7` and stories `KAN-8` to `KAN-55` exist with status mapping. |
 | ADRs kept in GitHub. | Satisfied baseline | `analysis/technical/adr` |
 | Current schema and migrations documented in Git. | Satisfied baseline | `analysis/technical/schema-and-migrations.md` |
 | Potential OpenAPI considered. | Satisfied by decision | OpenAPI planning note and ADR 0006 intentionally defer spec until public contract exists. |
@@ -50,7 +50,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 
 | Item | Why it remains |
 | --- | --- |
-| Only starter Confluence pages exist. | The Portfolio space, analysis root, and six container pages exist; priority 1 content pages still need publication. |
+| Confluence publication is partial. | The Portfolio space, analysis root, six container pages, and first product content pages exist; remaining priority 1 content pages still need publication. |
 | Actual FigJam generated diagrams do not exist yet. | Figma access and Mermaid generation path are verified, but no diagrams have been generated or URL-mapped yet. |
 | Contact/intake UI is not implemented. | Planned in `PF-701` to `PF-704`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
@@ -61,8 +61,8 @@ These are not local analysis gaps; they are execution or external setup gaps.
 
 | Slice | Purpose |
 | --- | --- |
-| External Confluence setup | Create space/page tree and fill publishing metadata. |
-| External Jira setup | Continue story import batches, record key mappings, and apply the chosen status mapping after each batch. |
+| Continue Confluence publication | Publish the remaining priority 1 content pages and fill publishing metadata after each small batch. |
+| Jira upkeep and cross-linking | Keep story statuses current and add useful Confluence/GitHub links as pages are published. |
 | External FigJam setup | Generate first Mermaid-backed diagrams, record URLs, and keep Git Mermaid as source of truth. |
 | External setup execution run | Follow `analysis/planning/external-setup-execution-runbook.md` and commit filled URLs/keys after each batch. |
 | Owner authorization implementation prep | Define and test the shared server-only guard before moderation or authoring routes. |

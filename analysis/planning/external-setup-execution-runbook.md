@@ -49,7 +49,7 @@ Also confirm:
 
 | Batch | Tool | Action | Done when | Local files to update after |
 | --- | --- | --- | --- | --- |
-| EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root and starter container pages exist with source metadata; priority 1 content pages can follow in smaller batches. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
+| EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root, starter container pages, and first product content pages exist with source metadata; remaining priority 1 content pages can follow in smaller batches. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
 | EXT-002 | Jira | Use the connected Portfolio project, confirm components/labels/workflow, and create epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
 | EXT-004 | FigJam | Generate the first diagrams from Mermaid using the Figma MCP and record the generated URLs. | First four diagram rows have FigJam URLs or a recorded unsupported-tool reason. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
@@ -63,7 +63,8 @@ Also confirm:
 - Existing space homepage `Portfolio Home` exists.
 - Analysis root page `Portfolio Analysis Home` exists under `Portfolio Home`.
 - Starter container pages exist under `Portfolio Analysis Home`.
-- Priority 1 content pages from `analysis/confluence/page-manifest.csv` remain the next Confluence batch.
+- First product content pages exist: `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements`.
+- Remaining priority 1 content pages from `analysis/confluence/page-manifest.csv` remain the next Confluence batches.
 - Each copied page includes source file and source commit metadata.
 - Page URLs are recorded in `page-manifest.csv`.
 
@@ -108,10 +109,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source; `da7214d` for the `PF-E05` story mapping and Confluence Jira Backlog sync source; `38f82ed` for the `PF-E06` story import source; `3bac758` for the `PF-E06` story mapping and Confluence Jira Backlog sync source; `aaf0128` for the `PF-E07` story import source; `fd213fb` for the `PF-E07` story mapping and completed Confluence Jira Backlog sync source |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source; `da7214d` for the `PF-E05` story mapping and Confluence Jira Backlog sync source; `38f82ed` for the `PF-E06` story import source; `3bac758` for the `PF-E06` story mapping and Confluence Jira Backlog sync source; `aaf0128` for the `PF-E07` story import source; `fd213fb` for the `PF-E07` story mapping and completed Confluence Jira Backlog sync source; `4ced0fc` for the first product content Confluence batch |
 | External tools touched | Confluence, Jira read/write checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 13 was synced; Figma connector and Mermaid-to-FigJam generation path verified; Jira story import is complete and FigJam diagram generation is pending |
+| Result | EXT-001 starter pages created; first product content pages `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements` created from source commit `4ced0fc`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 13 was synced; Figma connector and Mermaid-to-FigJam generation path verified; Jira story import is complete and FigJam diagram generation is pending |
 
 Record the final values in the relevant logs after execution.
 

@@ -49,9 +49,9 @@ below is the first publishing batch, not the full page inventory.
 | Diagrams | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/163842/Diagrams | 2026-06-29 | Starter container page; FigJam pending. |
 | Technical Reference | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/557058/Technical+Reference | 2026-06-29 | Starter container page. |
 | Operations | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/622594/Operations | 2026-06-29 | Starter container page. |
-| Problem Statement | `analysis/product/problem-statement.md` | Pending | Pending | Pending | Product baseline. |
-| Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | Pending | Pending | Pending | Audience model. |
-| Scope And Requirements | `analysis/product/scope-and-requirements.md` | Pending | Pending | Pending | Requirement ids must stay stable. |
+| Problem Statement | `analysis/product/problem-statement.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1376257/Problem+Statement | 2026-06-29 | Product baseline. |
+| Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179650/Stakeholders+And+Personas | 2026-06-29 | Audience model. |
+| Scope And Requirements | `analysis/product/scope-and-requirements.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1343502/Scope+And+Requirements | 2026-06-29 | Requirement ids must stay stable. |
 | Positioning Brief | `analysis/product/positioning-brief.md` | Pending | Pending | Pending | Service position and proof strategy. |
 | Service Offer Catalog | `analysis/product/service-offer-catalog.md` | Pending | Pending | Pending | Offer fit, outputs, proof, and pricing stance. |
 | Content Strategy | `analysis/product/content-strategy.md` | Pending | Pending | Pending | Content pillars and publication workflow. |
