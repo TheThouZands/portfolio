@@ -58,8 +58,11 @@ below is the first publishing batch, not the full page inventory.
 | Conversion Path Brief | `analysis/product/conversion-path.md` | `b1138ea` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441793/Conversion+Path+Brief | 2026-06-29 | Visitor journey and intake path; coherent entry-offer wording synced. |
 | Roadmap | `analysis/planning/roadmap.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/884745/Roadmap | 2026-06-29 | Stage map; product-baseline framing synced. |
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1507329/Tool+Setup+Plan | 2026-06-29 | External tool sequence and source-of-truth rules. |
+| External Setup Execution Runbook | `analysis/planning/external-setup-execution-runbook.md` | `28ce467` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1277980/External+Setup+Execution+Runbook | 2026-06-29 | External setup batches, preflight checks, logs, and exit criteria. |
 | Risk Register | `analysis/planning/risk-register.md` | Pending | Pending | Pending | Review before implementation slices. |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179670/Validation+Strategy | 2026-06-29 | Done/verification expectations; source-first validation wording synced. |
+| Readiness Audit | `analysis/planning/readiness-audit.md` | `28ce467` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1671177/Readiness+Audit | 2026-06-29 | Goal readiness audit and external setup gaps. |
+| Requirements Traceability Matrix | `analysis/planning/requirements-traceability-matrix.md` | `28ce467` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/786449/Requirements+Traceability+Matrix | 2026-06-29 | FR/NFR to persona, story, evidence, and verification map. |
 
 ## Formatting Notes
 
