@@ -1,0 +1,159 @@
+# Diagram Inventory
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Target home: Figma/FigJam and Confluence
+
+## Purpose
+
+This inventory defines the diagrams worth creating before connected Figma/FigJam work begins. It keeps each diagram tied
+to a product or technical question, so visual work supports analysis instead of becoming decorative documentation.
+
+## Naming Convention
+
+Use this format for FigJam files or sections:
+
+```text
+PF-DIAG-<number> - <short title>
+```
+
+Example:
+
+```text
+PF-DIAG-001 - Visitor Discovery Journey
+```
+
+## Diagram List
+
+| ID | Title | Type | Primary audience | Source docs | Status |
+| --- | --- | --- | --- | --- | --- |
+| PF-DIAG-001 | Visitor Discovery Journey | Journey map | Product, Confluence | `problem-statement.md`, `scope-and-requirements.md` | Planned |
+| PF-DIAG-002 | Portfolio Content Model | Entity relationship map | Technical, product | `schema-and-migrations.md`, `src/db/schema.ts` | Planned |
+| PF-DIAG-003 | Auth Identifier And Session Flow | Flowchart | Technical, security | `src/auth/auth.md`, auth stories | Planned |
+| PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `src/blog/actions.ts` | Planned |
+| PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Planned |
+| PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests | Planned |
+| PF-DIAG-007 | Documentation Toolchain | System/process map | Owner, collaborators | `analysis/README.md`, this suite | Planned |
+
+## Diagram Specs
+
+### PF-DIAG-001 - Visitor Discovery Journey
+
+Goal: show how a potential client or reviewer moves from first impression to proof of capability.
+
+Include:
+
+- Entry point: localized homepage.
+- Decision points: hero, experience, skills, projects, blog.
+- Proof moments: project details, related skills/jobs, technical writing.
+- Conversion gap: contact or next action is not yet fully analyzed.
+
+Update trigger: homepage positioning, project storytelling, or conversion path changes.
+
+### PF-DIAG-002 - Portfolio Content Model
+
+Goal: explain how CMS records relate without requiring readers to inspect `schema.ts`.
+
+Include:
+
+- Content entities as the shared identity layer.
+- Companies, experience, skills, projects, blog posts, media assets.
+- Translation tables and revision tables.
+- Mentions and skill joins.
+- Comments as blog interaction data.
+
+Update trigger: new table, relationship, content lifecycle state, or major migration.
+
+### PF-DIAG-003 - Auth Identifier And Session Flow
+
+Goal: explain the portfolio-specific auth flow and where Better Auth owns behavior.
+
+Include:
+
+- Identifier entry.
+- Username path and email path.
+- Sign-up and sign-in decisions.
+- Validation and rate-limit checks.
+- Better Auth session creation.
+- Local UI session refresh.
+
+Update trigger: auth route/action changes, session state changes, or identity model changes.
+
+### PF-DIAG-004 - Blog Comment Flow
+
+Goal: show how authenticated commenting works from UI to database and back.
+
+Include:
+
+- Blog post page.
+- Session-aware comment composer.
+- Comment server action.
+- Blog post and optional user association.
+- Parent/child comments.
+- Account deletion preserving comments through fallback author display.
+
+Update trigger: moderation, editing, deletion, reporting, or notification behavior.
+
+### PF-DIAG-005 - Deployment And Neon Branch Workflow
+
+Goal: make database branch behavior understandable before local, preview, or production migrations.
+
+Include:
+
+- Current git branch.
+- Neon branch sync script.
+- `.env.local` update.
+- Drizzle migration.
+- Vercel build migration step.
+- Warning about stale process environment values.
+
+Update trigger: build script, Neon workflow, Vercel deployment model, or env handling changes.
+
+### PF-DIAG-006 - Structural Content Rendering Contract
+
+Goal: explain how stored content becomes rendered React output without trusting raw HTML.
+
+Include:
+
+- Structural content document.
+- Allowlisted element types.
+- Allowlisted attributes and token styles.
+- Asset manifest.
+- Renderer.
+- Fallback behavior and tests.
+
+Update trigger: structural schema version, renderer behavior, supported attributes, or security filtering changes.
+
+### PF-DIAG-007 - Documentation Toolchain
+
+Goal: show how local docs feed Confluence, Jira, FigJam, and GitHub.
+
+Include:
+
+- `analysis/` as local source.
+- Confluence product/business pages.
+- Jira stories and CSV imports.
+- FigJam diagrams.
+- GitHub ADRs, schema notes, OpenAPI contracts.
+- Traceability links back to commits and code paths.
+
+Update trigger: tool setup changes, source-of-truth changes, or import/sync workflow changes.
+
+## FigJam Creation Rules
+
+- Create one FigJam file for the analysis suite, with one section per diagram.
+- Put the diagram id and source docs in each section title or note.
+- Keep product journey diagrams visually separate from technical architecture diagrams.
+- Link Confluence pages back to the diagram sections after creation.
+- Do not treat the diagram as authoritative unless its source docs are updated too.
+
+## Suggested First FigJam Sections
+
+| Section | Why first |
+| --- | --- |
+| PF-DIAG-007 Documentation Toolchain | Helps set up the working system for all future docs. |
+| PF-DIAG-001 Visitor Discovery Journey | Clarifies product value and missing conversion path. |
+| PF-DIAG-002 Portfolio Content Model | Gives technical reviewers a fast schema overview. |
+| PF-DIAG-003 Auth Identifier And Session Flow | Captures the most security-sensitive user flow. |
+

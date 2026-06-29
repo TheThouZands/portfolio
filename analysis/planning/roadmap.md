@@ -16,11 +16,11 @@ Goal: explain the product that already exists.
 
 | Slice | Output | Status |
 | --- | --- | --- |
-| S0.1 | Analysis index and artifact map | Started |
-| S0.2 | Problem statement, goals, stakeholders, and constraints | Started |
-| S0.3 | Functional and non-functional requirements | Started |
-| S0.4 | Jira-compatible user story backlog | Started |
-| S0.5 | Technical traceability, schema inventory, ADR seed, OpenAPI plan | Started |
+| S0.1 | Analysis index and artifact map | Baseline drafted |
+| S0.2 | Problem statement, goals, stakeholders, and constraints | Baseline drafted |
+| S0.3 | Functional and non-functional requirements | Baseline drafted |
+| S0.4 | Jira-compatible user story backlog | Baseline drafted |
+| S0.5 | Technical traceability, schema inventory, ADR seed, OpenAPI plan | Baseline drafted |
 
 Exit check:
 
@@ -39,6 +39,13 @@ Goal: connect the artifact model to external planning tools without losing local
 | S1.2 | Jira project setup map: epics, issue types, labels, components | Jira |
 | S1.3 | Figma/FigJam diagram inventory and naming convention | Figma/FigJam |
 | S1.4 | GitHub documentation placement rules | GitHub |
+
+Current local outputs:
+
+- `analysis/confluence/page-tree.md`
+- `analysis/jira/project-setup.md`
+- `analysis/design/diagram-inventory.md`
+- `analysis/github/documentation-rules.md`
 
 Exit check:
 
@@ -102,4 +109,3 @@ Exit check:
 - Jira issues are small enough to implement and review independently.
 - Each new implementation PR links to the relevant requirement/story/ADR.
 - Analysis docs change when product decisions change.
-

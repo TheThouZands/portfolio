@@ -11,6 +11,7 @@ The local backlog has two forms:
 
 - [user-stories.md](user-stories.md): readable working backlog with epics, stories, acceptance criteria, and evidence.
 - [backlog.csv](backlog.csv): starter Jira CSV import with one row per issue.
+- [project-setup.md](project-setup.md): proposed Jira project settings, issue types, components, workflow, and import order.
 
 Use the Markdown file as the source for refinement. Use the CSV when the Jira project exists and the issue field mapping
 is known.
@@ -51,4 +52,3 @@ is known.
 | Implemented/in progress | Existing commits exist, but related local uncommitted work is present. |
 | Planned | Not implemented, but supported by current product direction. |
 | Needs decision | A product or architecture choice is required before implementation. |
-
