@@ -23,7 +23,7 @@ instead of disappearing into the background.
 
 | ID | Question | Status | Default until answered | Related docs |
 | --- | --- | --- | --- | --- |
-| OQ-001 | Should implemented stories import into Jira as Done or Backlog? | Open | Decide during first Jira import. | `analysis/jira/import-history.md` |
+| OQ-001 | Should implemented stories import into Jira as Done or Backlog? | Answered | Implemented stories import as `Done`; current-worktree stories stay `In Progress`; planned implementation stories stay `To Do`. | `analysis/jira/import-history.md` |
 | OQ-002 | Should comments support reader edit, delete, or report actions? | Deferred | No reader edit, delete, or report controls in the first moderation slice; owner soft-state moderation first. | `analysis/product/interaction-policy.md`, ADR 0009 |
 | OQ-003 | Should CMS authoring start as an authenticated admin route or local tooling? | Answered | ADR 0011 chooses owner-protected admin routes after the ADR 0010 guard exists; local tooling remains a seed/support path. | `analysis/product/cms-authoring-workflow.md`, ADR 0011 |
 | OQ-004 | Should client/private accounts exist in the portfolio? | Deferred | No client accounts until a real collaboration use case exists. | `analysis/product/auth-account-roadmap.md` |

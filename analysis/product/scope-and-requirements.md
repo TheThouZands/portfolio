@@ -34,11 +34,11 @@ content editing, and stronger moderation/observability.
 | FR-014 | The system shall preserve comment discussion context after user deletion. | Implemented | `cc9073d` | `comments.userId` foreign key with `set null`, comment rendering fallback |
 | FR-015 | The project shall support branch-isolated Neon database workflows. | Implemented | `5a50321`, `888fbdf` | `scripts/sync-neon-branch.mjs`, `README.md`, `.env.local` workflow |
 | FR-016 | The app shall expose development-only integration metadata where fixed URLs require route placement. | Implemented | `d98aff7` | `src/app`, route-level architecture notes |
-| FR-017 | Visitors shall be able to choose a scoped service entry point from the portfolio. | Planned | `analysis/product/conversion-path.md` | Future homepage/contact or intake surface |
+| FR-017 | The portfolio shall define scoped service entry points for visitors with different service needs. | Documented | `analysis/product/conversion-path.md` | Future homepage/contact or intake surface implements the focused choice path |
 | FR-018 | The portfolio owner shall be able to moderate blog comments without breaking thread context. | Planned | `analysis/product/interaction-policy.md`, ADR 0005, ADR 0009, ADR 0010 | Future moderation state, owner workflow, comment rendering |
 | FR-019 | The portfolio owner shall be able to author, preview, and publish CMS content through a managed workflow. | Planned | `analysis/product/cms-authoring-workflow.md`, `analysis/product/media-asset-lifecycle.md`, ADR 0011, ADR 0012 | Future owner-only authoring routes, authenticated preview flow, validation, media upload, and audit metadata |
 | FR-020 | Owner-only account capabilities shall protect moderation and authoring tools. | Planned | `analysis/product/auth-account-roadmap.md`, ADR 0010, ADR 0011 | Future shared owner guard, protected routes, and action checks |
-| FR-021 | The portfolio shall describe service offers with audience fit, scope boundaries, outputs, and proof surfaces. | Planned | `analysis/product/service-offer-catalog.md` | Future service entry section, intake path, and offer-to-proof tagging |
+| FR-021 | The portfolio shall describe service offers with audience fit, scope boundaries, outputs, and proof surfaces. | Documented | `analysis/product/service-offer-catalog.md` | Future service entry section, intake path, and offer-to-proof tagging |
 
 ## Non-Functional Requirements
 
@@ -50,13 +50,13 @@ content editing, and stronger moderation/observability.
 | NFR-004 | Security: auth attempts must be rate limited by scope and resolved client IP. | Implemented | `7333bb1`, `bbdf312`, `213d7a7` | Includes rate limit key tests. |
 | NFR-005 | Security: responses should include baseline headers. | Implemented | `ca983df` | Baseline response header work exists in branch history. |
 | NFR-006 | Internationalization: public content should support localized metadata and slugs. | Implemented | `bc4f459`, `73952bb`, `7fd2f33` | Locale routes and translated slugs. |
-| NFR-007 | Portability: local docs should be copyable into Confluence/Jira without losing stable ids. | In progress | This suite | Use Markdown tables and Jira CSV. |
+| NFR-007 | Portability: local docs should be copyable into Confluence/Jira without losing stable ids. | Implemented baseline | This suite, Confluence page manifest, Jira import history, FigJam section manifest | Use Markdown tables, Jira CSV, and external publication records. |
 | NFR-008 | Testability: important auth, content rendering, and comment behavior should have unit coverage. | Implemented baseline | `213d7a7`, `2870f75`, `analysis/technical/verification-catalog.md` | Tests exist under `tests`; command and coverage mapping lives in the verification catalog. |
 | NFR-009 | Operational safety: production and preview builds should run committed migrations predictably. | Implemented | `README.md`, `build:vercel` | Vercel build runs `npm run db:migrate && next build`. |
 | NFR-010 | Accessibility and SEO: heroes should align with route-level heading semantics. | Documented | `c4ea874` | Hero docs note SEO H1 assumptions. |
 | NFR-011 | Trust and safety: account-backed comments should have clear moderation and preservation rules. | Planned | `analysis/product/interaction-policy.md`, ADR 0005, ADR 0009 | Policy and moderation model exist; implementation still needs migration, owner workflow, and tests. |
-| NFR-012 | Business clarity: conversion paths should keep service claims tied to implementation evidence. | Planned | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future contact/intake surfaces should route to service wedges and proof. |
-| NFR-013 | Planning quality: future work should remain traceable to personas, risks, requirements, and validation evidence. | In progress | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Planning artifacts exist; implementation changes still need per-slice traceability. |
+| NFR-012 | Business clarity: conversion paths should keep service claims tied to implementation evidence. | Documented | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future contact/intake surfaces should route to service wedges and proof. |
+| NFR-013 | Planning quality: future work should remain traceable to personas, risks, requirements, and validation evidence. | Implemented baseline | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Planning artifacts exist; implementation changes still need per-slice traceability. |
 | NFR-014 | CMS authoring should preserve structural content safety, localization, and previewability. | Planned | `analysis/product/cms-authoring-workflow.md`, `analysis/product/media-asset-lifecycle.md`, ADR 0003, ADR 0011, ADR 0012 | Authoring workflow should not weaken the structural content or media accessibility contracts. |
 | NFR-015 | Auth scope should grow only when tied to reader, owner, or client product needs. | Planned | `analysis/product/auth-account-roadmap.md`, ADR 0010 | Avoid building generic account features or role tables without a portfolio use case. |
 | NFR-016 | API boundaries should distinguish internal app routes/actions from public contracts before creating OpenAPI. | Documented | `analysis/technical/openapi.md`, `analysis/technical/api-surface-inventory.md`, ADR 0006 | Do not promote internal framework or server-action behavior into public API promises by accident. |
@@ -68,8 +68,8 @@ content editing, and stronger moderation/observability.
 | OOS-001 | Full CMS editor UI | The schema and rendering model exist, but authoring workflows need separate product analysis. |
 | OOS-002 | Moderation dashboard implementation | Comments and policy exist, but admin flows and schema changes need separate implementation planning. |
 | OOS-003 | Public API promise | Current APIs are route handlers and server actions; OpenAPI scope needs a decision. |
-| OOS-004 | Complete Confluence/Jira automation | Local files come first so the artifact model can stabilize before tool setup. |
-| OOS-005 | Figma/FigJam diagrams | Diagram inventory should be defined before creating connected design artifacts. |
+| OOS-004 | Fully automated Confluence/Jira synchronization | Current external setup is recorded, but automatic two-way sync is intentionally not part of the first baseline. |
+| OOS-005 | High-fidelity Figma product design | FigJam diagram coverage exists; product UI design remains separate from the analysis baseline. |
 
 ## Requirement Hygiene
 

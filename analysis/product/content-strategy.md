@@ -136,11 +136,11 @@ The CMS can link blog revisions to content entities. Use that intentionally:
 
 | Gap | Why it matters | Candidate next artifact |
 | --- | --- | --- |
-| No public service offer surface yet | Visitors may understand capability but not how to start working together. | `product/service-offer-catalog.md` and `product/conversion-path.md` baselines drafted |
+| No public service offer surface yet | Visitors may understand capability but not how to start working together. | Use `product/service-offer-catalog.md` and `product/conversion-path.md`; implement focused intake in `PF-702` |
 | Demo project/content may not fully represent real service work | Synthetic data proves structure but not business credibility. | Real project case-study backlog |
-| Blog comments lack moderation policy | Interaction evidence needs trust rules. | `product/interaction-policy.md` baseline drafted |
-| No diagram outputs yet | Visual explanation still depends on text docs. | First FigJam diagrams |
-| No public contact/conversion requirement | Business outcome is not fully represented in current implementation. | `FR-017`, `PF-701` to `PF-704` |
+| Blog comments lack moderation surface | Interaction evidence needs owner controls to enforce the trust rules. | Future `PF-407` and `PF-408` implementation |
+| Diagram outputs need durable section links | Visual explanations exist, but Confluence links still use board-level URLs until durable section anchors are available. | FigJam upkeep through `PF-603` |
+| No public contact/intake route | Business outcome is documented but not fully represented in current implementation. | `FR-017`, `PF-702` |
 
 ## Content Quality Checklist
 

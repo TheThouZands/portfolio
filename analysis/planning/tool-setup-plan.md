@@ -54,14 +54,14 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 - Do not make Confluence the source of truth for ADRs, schema notes, or API contracts.
 - Do not make Jira the only place where the reasoning behind a story exists.
 
-## First Setup Batch
+## Current Setup Baseline
 
-| Batch | Scope | Exit check |
+| Batch | Scope | Current result |
 | --- | --- | --- |
-| Batch 1 | Confluence root, product analysis pages, roadmap. | Pages exist and link back to Git source files. |
-| Batch 2 | Jira project `KAN`, epics, CSV import, key mapping. | Epic keys and all current local story ids are mapped to Jira issue keys. |
-| Batch 3 | Generated FigJam diagrams for the current Mermaid source inventory. | Manifest rows have FigJam URLs and link to local diagram sources. |
-| Batch 4 | Technical reference pages or links. | ADR/schema/API pages point back to GitHub. |
+| Batch 1 | Confluence root, product, planning, Jira, design, technical, and operations pages. | All 55 current rows in `analysis/confluence/page-manifest.csv` are published with Confluence URLs. |
+| Batch 2 | Jira project `KAN`, epics, story import, key mapping, and status mapping. | Seven epics and 48 stories exist as `KAN-1` through `KAN-55`; 40 implemented stories are `Done`, `KAN-24` and `KAN-26` are `In Progress`, and planned implementation stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52` remain `To Do`. |
+| Batch 3 | Generated FigJam diagrams for the current Mermaid source inventory. | All seven current diagram rows are generated in the FigJam board and recorded in the section manifest and creation log. |
+| Batch 4 | Technical reference pages or links. | ADR, schema, migration, API surface, verification, and traceability pages are published while Git remains authoritative. |
 
 The detailed execution gates for these batches live in `analysis/planning/external-setup-execution-runbook.md`.
 
@@ -70,5 +70,5 @@ The detailed execution gates for these batches live in `analysis/planning/extern
 | Question | Default until answered |
 | --- | --- |
 | Should Confluence pages be manually copied or imported with automation? | Manual first, automation only after format stabilizes. |
-| Should Jira implemented stories import as Done? | Import as Done only if historical work should appear in reports; otherwise import to Backlog with evidence. |
+| Should Jira implemented stories import as Done? | Answered for the current setup: implemented stories import as `Done`, current-worktree stories as `In Progress`, and the six planned implementation stories remain `To Do`. |
 | How should FigJam diagrams be created? | Use Figma MCP `generate_diagram` from Mermaid. Do not make FigJam canvas edits the maintenance path. |

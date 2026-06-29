@@ -7,10 +7,10 @@ Target home: Confluence/Jira/FigJam/GitHub
 
 ## Purpose
 
-This runbook turns the local setup plan and manifests into an execution checklist for the first real Confluence, Jira,
-and FigJam setup pass.
+This runbook turns the local setup plan and manifests into an execution checklist and evidence record for Confluence,
+Jira, FigJam, and GitHub setup.
 
-Use it when external tool access is available. Until then, it is the local handoff point that explains which files to
+Use it when external tool access is available or when a new external-sync batch is needed. It explains which files to
 trust, what order to follow, what evidence to capture, and which local logs must be updated after setup.
 
 ## Required Local Sources
@@ -49,11 +49,11 @@ Also confirm:
 
 | Batch | Tool | Action | Done when | Local files to update after |
 | --- | --- | --- | --- | --- |
-| EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root, starter container pages, priority 1 product content pages, priority 1 planning pages, priority 1 Jira pages, priority 1 design pages, priority 1 technical pages, and priority 1 operations pages exist with source metadata; priority 1 Confluence publication is complete. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
+| EXT-001 | Confluence | Create or use the Portfolio space, root page, and current page tree from `page-manifest.csv`. | All current Confluence manifest rows are published with source metadata and URLs. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
 | EXT-002 | Jira | Use the connected Portfolio project, confirm components/labels/workflow, and create epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
 | EXT-004 | FigJam | Generate diagrams from Mermaid using the Figma MCP and record the generated URLs. | All seven current diagram rows have FigJam URLs or a recorded unsupported-tool reason. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
-| EXT-005 | Confluence | Link Jira issues, FigJam sections, and GitHub sources back into copied pages. | Priority 1 pages expose source commit, Jira links, FigJam links, and GitHub references. | `analysis/confluence/page-manifest.csv`, relevant source docs |
+| EXT-005 | Confluence | Link Jira issues, FigJam sections, and GitHub sources back into copied pages. | Published pages expose source commit, Jira links, FigJam links, and GitHub references where useful. | `analysis/confluence/page-manifest.csv`, relevant source docs |
 
 ## Batch Exit Checks
 
@@ -65,14 +65,13 @@ Also confirm:
 - Starter container pages exist under `Portfolio Analysis Home`.
 - First product content pages exist: `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements`.
 - Product business-path pages exist: `Positioning Brief`, `Service Offer Catalog`, and `Conversion Path Brief`.
-- Priority 1 planning pages exist: `Roadmap`, `Tool Setup Plan`, `External Setup Execution Runbook`, `Validation Strategy`, `Readiness Audit`, and `Requirements Traceability Matrix`.
-- Priority 1 Jira pages exist: `Backlog Notes`, `User Stories`, `Jira Project Setup`, and `Import History`.
-- Priority 1 design overview pages exist: `Diagram Inventory`, `FigJam Section Manifest`, and `Diagram Sources`.
-- Generated priority 1 diagram pages exist: `Visitor Discovery Journey`, `CMS Content Model`, and `Auth And Session Flow`.
-- Generated priority 1 diagram pages also exist for `Blog Comment Flow` and `Deployment And Neon Branch Workflow`.
-- Priority 1 technical pages exist: `Traceability`, `Schema And Migrations`, `Schema Table Catalog`, `Migration Catalog`, `API Surface Inventory`, `Verification Catalog`, and `ADR Index`.
-- Priority 1 operations pages exist: `Artifact Maintenance Matrix`, `Confluence Publishing Runbook`, and `Page Manifest`.
-- No priority 1 Confluence rows remain pending in `analysis/confluence/page-manifest.csv`; lower-priority rows remain future batches.
+- Planning pages exist: `Roadmap`, `Tool Setup Plan`, `External Setup Execution Runbook`, `Validation Strategy`, `Readiness Audit`, `Requirements Traceability Matrix`, and supporting planning records.
+- Jira pages exist: `Backlog Notes`, `User Stories`, `Jira Project Setup`, and `Import History`.
+- Design overview pages exist: `Diagram Inventory`, `FigJam Section Manifest`, and `Diagram Sources`.
+- Generated diagram pages exist for the current seven-diagram inventory.
+- Technical pages exist: `Traceability`, `Schema And Migrations`, `Schema Table Catalog`, `Migration Catalog`, `API Surface Inventory`, `Verification Catalog`, and `ADR Index`.
+- Operations pages exist: `Artifact Maintenance Matrix`, `Confluence Publishing Runbook`, `Page Manifest`, and supporting operations records.
+- No Confluence rows remain pending in `analysis/confluence/page-manifest.csv`.
 - Each copied page includes source file and source commit metadata.
 - Page URLs are recorded in `page-manifest.csv`.
 
@@ -105,7 +104,7 @@ Also confirm:
 
 ### EXT-005 Cross-Linking
 
-- Confluence priority 1 pages link to related Jira issues and FigJam sections where available.
+- Confluence pages link to related Jira issues and FigJam sections where available.
 - Jira descriptions link back to Confluence or GitHub sources where useful.
 - FigJam sections link or note the Git source files.
 - Any external edit that changes meaning is brought back to Git in a follow-up commit.
@@ -118,10 +117,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source; `da7214d` for the `PF-E05` story mapping and Confluence Jira Backlog sync source; `38f82ed` for the `PF-E06` story import source; `3bac758` for the `PF-E06` story mapping and Confluence Jira Backlog sync source; `aaf0128` for the `PF-E07` story import source; `fd213fb` for the `PF-E07` story mapping and completed Confluence Jira Backlog sync source; `4ced0fc` for the first product content Confluence batch; `2ca08e0` for the first FigJam diagram source batch; `6baedcd` for the product business-path Confluence batch; `983ab1c` for the first planning Confluence batch; `28ce467` for the remaining priority 1 planning Confluence batch; `a1ecc22` for the priority 1 Jira Confluence child-page batch; `6b61551` for the priority 1 design overview Confluence batch; `c130050` for the generated priority 1 diagram Confluence batch; `d335479` for the source-ready priority 1 diagram Confluence batch; `736f56f` for the priority 1 schema technical Confluence batch; `d7ba04b` for the remaining priority 1 technical Confluence batch; `bf2900b` for the priority 1 operations Confluence batch; `b5249e3` for the remaining FigJam diagram generation batch |
+| Source commit | Setup history spans the recorded Confluence, Jira, and FigJam batches: starter pages `86015e1`; Jira import and status records from `86a2d97` through `fd213fb`; product, planning, Jira, design, diagram, technical, and operations Confluence publication batches from `4ced0fc` through `bf2900b`; remaining FigJam generation batch `b5249e3`; diagram/page state sync `695e4d8`; remaining analysis-page publication `39b5f6a`. |
 | External tools touched | Confluence, Jira read/write checks, Figma/FigJam diagram generation |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; first product content pages `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements` created from source commit `4ced0fc`; product business-path pages `Positioning Brief`, `Service Offer Catalog`, and `Conversion Path Brief` created from source commit `6baedcd`; first planning pages `Roadmap`, `Tool Setup Plan`, and `Validation Strategy` created from source commit `983ab1c`; remaining priority 1 planning pages `External Setup Execution Runbook`, `Readiness Audit`, and `Requirements Traceability Matrix` created from source commit `28ce467`; priority 1 Jira child pages `Backlog Notes`, `User Stories`, `Jira Project Setup`, and `Import History` created from source commit `a1ecc22`; priority 1 design overview pages `Diagram Inventory`, `FigJam Section Manifest`, and `Diagram Sources` created from source commit `6b61551`; generated priority 1 diagram pages `Visitor Discovery Journey`, `CMS Content Model`, and `Auth And Session Flow` created from source commit `c130050`; source-ready priority 1 diagram pages `Blog Comment Flow` and `Deployment And Neon Branch Workflow` created from source commit `d335479`; priority 1 schema technical pages `Schema And Migrations`, `Schema Table Catalog`, and `Migration Catalog` created from source commit `736f56f`; remaining priority 1 technical pages `Traceability`, `API Surface Inventory`, `Verification Catalog`, and `ADR Index` created from source commit `d7ba04b`; priority 1 operations pages `Artifact Maintenance Matrix`, `Confluence Publishing Runbook`, and `Page Manifest` created from source commit `bf2900b`; priority 1 Confluence publication is complete; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 14 was synced; first FigJam diagram batch `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, and `PF-DIAG-003` was generated; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` was generated into the same board; Jira story import is complete and current FigJam diagram generation is complete |
+| Result | EXT-001 starter pages created; product, planning, Jira, design, diagram, technical, and operations pages published in Confluence; all 55 current Confluence manifest rows have external URLs; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` generated from source commit `b5249e3`; diagram and page publication state synced from source commit `695e4d8`; remaining analysis pages published and recorded from source commit `39b5f6a`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; 40 implemented stories are `Done`; current-worktree stories `KAN-24` and `KAN-26` are `In Progress`; planned implementation stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52` remain `To Do`; Jira Backlog Confluence page version 14 was synced; current Confluence manifest publication, Jira story import, and FigJam diagram generation are complete |
 
 Record the final values in the relevant logs after execution.
 
@@ -137,9 +136,9 @@ Record the final values in the relevant logs after execution.
 
 ## Completion Criteria
 
-The first external setup pass is complete when:
+The current external setup baseline is complete when:
 
-- Priority 1 Confluence pages exist and have source metadata.
+- Current Confluence manifest pages exist and have source metadata.
 - Jira epics and stories exist with local id mappings.
 - FigJam file and current diagram inventory exist with URLs recorded.
 - Git still contains the source manifests and updated external ids/URLs.
