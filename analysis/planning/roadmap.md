@@ -81,9 +81,9 @@ Candidate diagrams:
 - Visitor discovery journey. Current local source: `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md`.
 - CMS content entity relationship diagram. Current local source: `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md`.
 - Auth identifier and session flow. Current local source: `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md`.
-- Blog comment submission and rendering flow.
-- Deployment and Neon branch workflow.
-- Structural content rendering contract.
+- Blog comment submission and rendering flow. Current local source: `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md`.
+- Deployment and Neon branch workflow. Current local source: `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md`.
+- Structural content rendering contract. Current local source: `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md`.
 - Documentation toolchain. Current local source: `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md`.
 
 Exit check:

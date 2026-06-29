@@ -164,4 +164,7 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 | PF-DIAG-001 | [diagrams/pf-diag-001-visitor-discovery-journey.md](diagrams/pf-diag-001-visitor-discovery-journey.md) |
 | PF-DIAG-002 | [diagrams/pf-diag-002-portfolio-content-model.md](diagrams/pf-diag-002-portfolio-content-model.md) |
 | PF-DIAG-003 | [diagrams/pf-diag-003-auth-identifier-session-flow.md](diagrams/pf-diag-003-auth-identifier-session-flow.md) |
+| PF-DIAG-004 | [diagrams/pf-diag-004-blog-comment-flow.md](diagrams/pf-diag-004-blog-comment-flow.md) |
+| PF-DIAG-005 | [diagrams/pf-diag-005-deployment-neon-branch-workflow.md](diagrams/pf-diag-005-deployment-neon-branch-workflow.md) |
+| PF-DIAG-006 | [diagrams/pf-diag-006-structural-content-rendering-contract.md](diagrams/pf-diag-006-structural-content-rendering-contract.md) |
 | PF-DIAG-007 | [diagrams/pf-diag-007-documentation-toolchain.md](diagrams/pf-diag-007-documentation-toolchain.md) |
