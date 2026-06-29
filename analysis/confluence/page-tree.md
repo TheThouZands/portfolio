@@ -11,6 +11,8 @@ This document defines the first Confluence structure for the portfolio analysis 
 stays as the source while tool setup is local-only. Once Confluence is connected, these pages can be copied or imported
 without losing stable ids, owners, or references back to GitHub.
 
+The operational page creation checklist lives in `analysis/confluence/page-manifest.csv`.
+
 ## Space Proposal
 
 | Setting | Proposed value | Notes |
@@ -51,11 +53,14 @@ Portfolio Analysis Home
     3.4 Import History
   4. Diagrams
     4.1 Diagram Inventory
-    4.2 Visitor Discovery Journey
-    4.3 CMS Content Model
-    4.4 Auth And Session Flow
-    4.5 Blog Comment Flow
-    4.6 Deployment And Neon Branch Workflow
+    4.2 Diagram Sources
+    4.3 Visitor Discovery Journey
+    4.4 CMS Content Model
+    4.5 Auth And Session Flow
+    4.6 Blog Comment Flow
+    4.7 Deployment And Neon Branch Workflow
+    4.8 Structural Content Rendering Contract
+    4.9 Documentation Toolchain
   5. Technical Reference
     5.1 Traceability
     5.2 Schema And Migrations
@@ -97,6 +102,8 @@ Portfolio Analysis Home
 | Import History | `analysis/jira/import-history.md` | Local to Confluence and Jira |
 | Diagram Inventory | `analysis/design/diagram-inventory.md` | Local to Confluence and FigJam |
 | Diagram Sources | `analysis/design/diagrams/README.md` | Local to Confluence and FigJam |
+| Structural Content Rendering Contract | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Local to Confluence and FigJam |
+| Documentation Toolchain | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Local to Confluence and FigJam |
 | FigJam Creation Log | `analysis/design/figjam-creation-log.md` | Local to Confluence and FigJam |
 | Traceability | `analysis/technical/traceability.md` | Local to Confluence and GitHub |
 | Schema And Migrations | `analysis/technical/schema-and-migrations.md` | GitHub to Confluence reference |

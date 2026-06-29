@@ -24,6 +24,9 @@ Every Confluence page copied from this repository should include this metadata b
 | Last local update | Date from the source file |
 | External links | Related Jira issues, FigJam sections, GitHub files, or ADRs |
 
+Use `analysis/confluence/page-manifest.csv` as the page creation checklist and URL tracking sheet. The mapping table
+below is the first publishing batch, not the full page inventory.
+
 ## Publishing Steps
 
 1. Confirm the local source file is committed.
@@ -32,7 +35,7 @@ Every Confluence page copied from this repository should include this metadata b
 4. Add the metadata block.
 5. Copy the Markdown content and adjust formatting only where Confluence requires it.
 6. Add links to related Jira issues, FigJam sections, and GitHub technical references.
-7. Record the publication in the page mapping table below.
+7. Record the publication in `analysis/confluence/page-manifest.csv` and the batch mapping table below when relevant.
 8. If Confluence edits change meaning, update the local source file in a follow-up commit.
 
 ## Page Mapping

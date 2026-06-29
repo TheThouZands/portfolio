@@ -25,6 +25,7 @@ The suite is intended to stay useful in four places:
 | --- | --- | --- | --- |
 | Tool setup | [confluence/page-tree.md](confluence/page-tree.md) | Confluence | Defines the first Confluence space, page hierarchy, publishing rules, and templates. |
 | Tool setup | [confluence/publishing-runbook.md](confluence/publishing-runbook.md) | Confluence/GitHub | Defines page metadata, publishing steps, mapping table, and update triggers. |
+| Tool setup | [confluence/page-manifest.csv](confluence/page-manifest.csv) | Confluence | CSV checklist for page creation order, source files, priorities, statuses, and URLs. |
 | Product analysis | [product/problem-statement.md](product/problem-statement.md) | Confluence | Defines the reconstructed problem, opportunity, stakeholders, goals, and constraints. |
 | Product analysis | [product/stakeholders-and-personas.md](product/stakeholders-and-personas.md) | Confluence/Jira | Defines stakeholders, personas, persona-to-requirement mapping, and product implications. |
 | Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |

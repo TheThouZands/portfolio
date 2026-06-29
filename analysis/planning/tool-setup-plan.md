@@ -15,7 +15,7 @@ large migration.
 
 | Step | Tool | Output | Local source |
 | --- | --- | --- | --- |
-| 1 | Confluence | Create space and page tree. | `analysis/confluence/page-tree.md` |
+| 1 | Confluence | Create space, page tree, and page creation manifest. | `analysis/confluence/page-tree.md`, `analysis/confluence/page-manifest.csv` |
 | 2 | Confluence | Publish high-level product pages. | `analysis/product` |
 | 3 | Jira | Create project, epics, labels, components, workflow. | `analysis/jira/project-setup.md` |
 | 4 | Jira | Import or manually create epics and stories from CSV. | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` |
