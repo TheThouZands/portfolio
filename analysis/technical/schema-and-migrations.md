@@ -62,5 +62,5 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 | CMS authoring fields are not represented yet. | ADR 0011 defines the first owner-only source-aware authoring boundary; add author/editor, audit, preview, or validation fields only through a planned implementation migration. |
 | Owner authorization is intentionally not schema-backed yet. | ADR 0010 uses an explicit owner allowlist before adding role or permission tables. |
 | Public API shape is undecided. | Route handlers and server actions exist, but OpenAPI should wait for an explicit API product boundary. |
-| Media storage lifecycle needs an operations policy. | Media metadata exists, but upload/delete/reconciliation flows need a later decision. |
+| Media upload tooling is not represented yet. | ADR 0012 defines the lifecycle; implementation may need upload state, owner id, retirement, checksum, or cleanup audit fields. |
 | Migration naming is generated and not semantic. | This is acceptable for Drizzle, but summary docs should keep human-readable grouping. |

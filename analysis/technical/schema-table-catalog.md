@@ -47,7 +47,7 @@ query code.
 | `auth_identities` | Auth | Portfolio-owned username/email identity resolution. | Separates portfolio identity from Better Auth provider records; see ADR 0004. Owner authorization stays config-backed first; see ADR 0010. |
 | `wp_honeypot_logs` | Operations/security | Records fake WordPress installer probes. | Defensive telemetry for suspicious automated requests. |
 | `content_entities` | CMS identity | Shared identity layer for portfolio objects. | Enables cross-content references and mentions across content types. |
-| `media_assets` | Media | Reusable media metadata and storage references. | Translated alt text and use-specific join tables attach media to content. |
+| `media_assets` | Media | Reusable media metadata and storage references. | Translated alt text and use-specific join tables attach media to content; lifecycle rules live in ADR 0012. |
 | `media_asset_translations` | Media | Localized media text. | Belongs to `media_assets`; supports localized alt/metadata. |
 | `companies` | Experience | Organization records for professional history. | Referenced by `experience` and localized by `company_translations`. |
 | `company_translations` | Experience | Localized company copy. | Belongs to `companies`. |
@@ -80,6 +80,7 @@ query code.
 | Localized content | `*_translations`, localized slugs | Public portfolio surfaces can support English and Spanish without hard-coded page data. |
 | Structured rich content | `project_revisions`, `blog_post_revisions` | Rich bodies stay stored as structural JSON rather than unsafe rendered HTML. |
 | Evidence graph | `content_entities`, mentions, skill joins | Projects, posts, experience, and skills can support each other as proof. |
+| Managed media lifecycle | `media_assets`, media translations, media joins | Media should be uploaded, attached, replaced, retired, and cleaned up through owner-reviewed rules. |
 | Account-backed interaction | Better Auth tables, `auth_identities`, `comments` | Readers can authenticate and comment while preserving discussion context. |
 | Operational safety | `rate_limit`, `wp_honeypot_logs`, migrations | Abuse controls and operational records are part of the product, not afterthoughts. |
 

@@ -52,4 +52,4 @@ Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
 | Moderation migration plan | ADR 0009 defines the future soft-state model, but schema is intentionally not implemented yet. |
 | CMS authoring migration plan | ADR 0011 defines the first authoring boundary; author/editor, audit, preview, or validation metadata should wait for implementation planning. |
 | Owner authorization migration plan | ADR 0010 keeps owner authorization config-backed first; add schema only if collaborator, client, or multi-owner needs appear. |
-| Media lifecycle migration plan | Upload, cleanup, and asset reconciliation need a product decision first. |
+| Media lifecycle migration plan | ADR 0012 defines upload, cleanup, and reconciliation rules; add schema only when owner media tooling is implemented. |

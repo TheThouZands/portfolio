@@ -10,6 +10,7 @@ Page Title,Parent Page,Local Source,Target Area,Source Of Truth,Publish Priority
 "Conversion Path Brief","Product Analysis","analysis/product/conversion-path.md","Product","Local Git source","1","Pending","","Visitor journey, CTA, and intake path."
 "Interaction Policy","Product Analysis","analysis/product/interaction-policy.md","Product","Local Git source","2","Pending","","Comment behavior, moderation policy, and trust rules."
 "CMS Authoring Workflow","Product Analysis","analysis/product/cms-authoring-workflow.md","Product","Local Git source","2","Pending","","Owner-first authoring, preview, publish, and audit workflow."
+"Media Asset Lifecycle","Product Analysis","analysis/product/media-asset-lifecycle.md","Product","Local Git source","2","Pending","","Owner-first media upload, attachment, accessibility, replacement, and cleanup rules."
 "Auth And Account Roadmap","Product Analysis","analysis/product/auth-account-roadmap.md","Product","Local Git source","2","Pending","","Reader, owner, client, and protected workflow account strategy."
 "Planning","Portfolio Analysis Home","","Planning","Confluence container","1","Pending","","Container page for roadmap, validation, and setup planning."
 "Roadmap","Planning","analysis/planning/roadmap.md","Planning","Local Git source","1","Pending","","Stage map and forward delivery framing."

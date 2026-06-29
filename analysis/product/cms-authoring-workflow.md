@@ -11,7 +11,10 @@ The current portfolio has a CMS-like database and renderer, but it does not yet 
 document defines the authoring workflow before implementation so future CMS work can be planned deliberately instead of
 adding isolated admin forms.
 
-Decision record: [ADR 0011](../technical/adr/0011-use-owner-only-source-aware-cms-authoring.md).
+Decision records:
+
+- [ADR 0011](../technical/adr/0011-use-owner-only-source-aware-cms-authoring.md)
+- [ADR 0012](../technical/adr/0012-use-managed-media-asset-lifecycle-for-cms-authoring.md)
 
 ## Current State
 
@@ -54,7 +57,7 @@ Decision record: [ADR 0011](../technical/adr/0011-use-owner-only-source-aware-cm
 | Projects | High | Projects are core service proof and need rich case-study structure. |
 | Skills | Medium | Skills should stay concise and connected to projects/experience. |
 | Experience | Medium | Experience is less frequently edited but business-critical. |
-| Media assets | Medium | Media needs upload/reconciliation decisions before a full editor. |
+| Media assets | Medium | Media lifecycle is defined in `product/media-asset-lifecycle.md`; upload tooling remains future work. |
 | Companies | Low | Usually supporting data for experience entries. |
 
 ## Workflow Boundaries
@@ -66,7 +69,7 @@ Decision record: [ADR 0011](../technical/adr/0011-use-owner-only-source-aware-cm
 | Multi-user editorial workflow | Deferred. |
 | Public user-generated content authoring | Not part of CMS authoring; comments remain separate. |
 | Rich-text editor | Source-aware constrained forms or structured block controls first; structural source contract remains authoritative. |
-| Media upload | Deferred to a separate storage lifecycle, alt text, cleanup, and reconciliation decision. |
+| Media upload | Managed lifecycle defined in ADR 0012; upload, replacement, and cleanup tooling remain future implementation work. |
 
 ## Data Model Implications
 
@@ -75,7 +78,7 @@ Future CMS authoring may need:
 - Author/editor user id fields.
 - Draft revision metadata.
 - Owner-authenticated private preview routes first; public preview tokens only if sharing becomes a real need.
-- Media upload state and cleanup workflow.
+- Media upload state and cleanup workflow if interactive media tooling needs schema support.
 - Validation error persistence or preview diagnostics.
 - Slug collision handling per locale.
 
@@ -87,8 +90,8 @@ Do not add these fields one by one without a migration plan.
 | --- | --- |
 | `FR-003` CMS portfolio content is stored in PostgreSQL | Implemented. |
 | `FR-008` rich bodies use structural content | Implemented. |
-| `FR-019` owner can author and preview CMS content through a managed workflow | Planned implementation; authorization model accepted in ADR 0010 and authoring boundary accepted in ADR 0011. |
-| `NFR-014` authoring workflow preserves structured content safety and localization | Planned implementation; structural source boundary accepted in ADR 0011. |
+| `FR-019` owner can author and preview CMS content through a managed workflow | Planned implementation; authorization model accepted in ADR 0010; authoring boundary accepted in ADR 0011; media lifecycle accepted in ADR 0012. |
+| `NFR-014` authoring workflow preserves structural content safety and localization | Planned implementation; structural source boundary accepted in ADR 0011 and media publish gates accepted in ADR 0012. |
 
 ## Jira Impact
 
@@ -96,7 +99,7 @@ Do not add these fields one by one without a migration plan.
 | --- | --- |
 | `PF-205` | CMS authoring workflow and first implementation boundary are defined. |
 | `PF-206` | Owner-only draft, preview, and publish flow is bounded; implementation remains future work. |
-| `PF-207` | Media asset lifecycle remains a separate decision before upload tooling. |
+| `PF-207` | Media asset lifecycle is defined before upload tooling. |
 
 ## Open Questions
 

@@ -61,6 +61,7 @@ Windows PowerShell note: if `npm` resolves to a blocked `npm.ps1`, run the same 
 | Internationalized routes and metadata | Manual locale route checks plus typecheck. | Add route/metadata regression tests if locale behavior changes frequently. |
 | CMS schema and migrations | `npm run db:check`, migration catalog review, schema table catalog review. | Add query or fixture tests when authoring flows depend on specific data relationships. |
 | Structural content rendering | `tests/structural-content/rendering.test.ts`. | Add authoring/preview tests aligned to ADR 0011 before owner CMS editing ships. |
+| CMS media lifecycle | ADR 0012, media asset lifecycle review, schema catalog review. | Add owner upload, metadata validation, reference checking, and cleanup dry-run tests before media tooling ships. |
 | Auth validation and rate-limit keys | `tests/auth/validation.test.ts`, `tests/auth/rate-limit-keys.test.ts`. | Add action/session integration tests before owner-only tools or expanded account scope. |
 | Blog comments | `tests/blog/comments.test.ts`. | Add action, persistence, moderation, and auth-gate tests before broader public use. |
 | Database branch operations | Manual env review, `npm run db:branch:sync`, `npm run db:branch:migrate` when relevant. | Keep branch-target checks explicit in PR notes before migration or deployment changes. |

@@ -32,7 +32,7 @@ PF-DIAG-001 - Visitor Discovery Journey
 | ID | Title | Type | Primary audience | Source docs | Status |
 | --- | --- | --- | --- | --- | --- |
 | PF-DIAG-001 | Visitor Discovery Journey | Journey map | Product, Confluence | `problem-statement.md`, `scope-and-requirements.md`, `conversion-path.md` | Planned |
-| PF-DIAG-002 | Portfolio Content Model | Entity relationship map | Technical, product | `schema-and-migrations.md`, `src/db/schema.ts` | Planned |
+| PF-DIAG-002 | Portfolio Content Model | Entity relationship map | Technical, product | `schema-and-migrations.md`, `src/db/schema.ts`, ADR 0012 | Planned |
 | PF-DIAG-003 | Auth Identifier And Session Flow | Flowchart | Technical, security | `src/auth/auth.md`, auth stories, ADR 0010 | Planned |
 | PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `interaction-policy.md`, ADR 0009, `src/blog/actions.ts` | Planned |
 | PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Planned |

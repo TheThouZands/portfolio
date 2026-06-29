@@ -37,10 +37,11 @@ Each ADR should include:
 | [0009](0009-use-soft-state-comment-moderation.md) | Use soft-state comment moderation | Accepted |
 | [0010](0010-use-explicit-owner-allowlist-for-protected-tools.md) | Use explicit owner allowlist for protected tools | Accepted |
 | [0011](0011-use-owner-only-source-aware-cms-authoring.md) | Use owner-only source-aware CMS authoring | Accepted |
+| [0012](0012-use-managed-media-asset-lifecycle-for-cms-authoring.md) | Use managed media asset lifecycle for CMS authoring | Accepted |
 
 ## Candidate ADRs
 
 | Candidate | Reason |
 | --- | --- |
-| Define media lifecycle for CMS authoring | Needed before upload, cleanup, and asset reconciliation tooling. |
 | Define intake/contact data handling | Needed before a public service intake route stores lead data. |
+| Define public preview sharing | Needed if draft content must be reviewed outside the owner account. |

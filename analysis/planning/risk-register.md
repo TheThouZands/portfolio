@@ -37,6 +37,7 @@ interaction behavior changes.
 | RISK-012 | Contact/intake path collects too much or too little information. | Product | Medium | Medium | Start with minimal intake questions and validate whether leads map to service wedges. | `conversion-path.md`, `PF-702` |
 | RISK-013 | CMS authoring starts as isolated admin forms instead of a coherent workflow. | Product/technical | Medium | High | Use the CMS authoring workflow and ADR 0011 before adding editor routes or migrations. | `cms-authoring-workflow.md`, ADR 0011, `PF-205`, `PF-206` |
 | RISK-014 | Account scope grows beyond reader and owner needs without product justification. | Product/security | Medium | Medium | Use ADR 0010's owner allowlist and defer client/private accounts until a real use case exists. | `auth-account-roadmap.md`, ADR 0010, `PF-410`, `PF-411` |
+| RISK-015 | Media upload tooling creates orphaned blobs, missing alt text, or broken public references. | Content/operations | Medium | Medium | Use ADR 0012 and owner-reviewed dry-run cleanup before destructive media actions. | `media-asset-lifecycle.md`, ADR 0012, `PF-207`, `PF-208` |
 
 ## Review Cadence
 

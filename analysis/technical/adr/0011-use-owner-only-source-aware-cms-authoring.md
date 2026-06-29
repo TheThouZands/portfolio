@@ -63,7 +63,7 @@ Tradeoffs:
 - `src/components/repeatables/structural-content`
 - `src/db/schema.ts`
 - `tests/structural-content/rendering.test.ts`
-- Stories: `PF-205`, `PF-206`, `PF-207`, `PF-411`
+- Stories: `PF-205`, `PF-206`, `PF-207`, `PF-208`, `PF-411`
 
 ## Follow-Ups
 
@@ -72,4 +72,4 @@ Tradeoffs:
 - Add tests for unauthenticated, authenticated non-owner, and owner authoring paths.
 - Add validation/preview tests for structural content source, localized fields, slug collisions, and publish transitions.
 - Update schema and migration catalogs if author/editor, audit, preview, or validation metadata becomes real schema.
-- Write a separate media lifecycle decision before upload, cleanup, or reconciliation tooling ships.
+- Use ADR 0012 before upload, cleanup, or reconciliation tooling ships.

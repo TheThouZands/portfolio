@@ -37,7 +37,8 @@ Portfolio Analysis Home
     1.7 Conversion Path Brief
     1.8 Interaction Policy
     1.9 CMS Authoring Workflow
-    1.10 Auth And Account Roadmap
+    1.10 Media Asset Lifecycle
+    1.11 Auth And Account Roadmap
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
@@ -95,6 +96,7 @@ Portfolio Analysis Home
 | Conversion Path Brief | `analysis/product/conversion-path.md` | Local to Confluence and Jira |
 | Interaction Policy | `analysis/product/interaction-policy.md` | Local to Confluence and Jira |
 | CMS Authoring Workflow | `analysis/product/cms-authoring-workflow.md` | Local to Confluence and Jira |
+| Media Asset Lifecycle | `analysis/product/media-asset-lifecycle.md` | Local to Confluence and Jira |
 | Auth And Account Roadmap | `analysis/product/auth-account-roadmap.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | Local to Confluence, Jira, and FigJam |
