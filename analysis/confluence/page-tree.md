@@ -64,6 +64,8 @@ Portfolio Analysis Home
 | Portfolio Analysis Home | `analysis/README.md` | Local to Confluence |
 | Problem Statement | `analysis/product/problem-statement.md` | Local to Confluence |
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | Local to Confluence |
+| Positioning Brief | `analysis/product/positioning-brief.md` | Local to Confluence |
+| Content Strategy | `analysis/product/content-strategy.md` | Local to Confluence |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Backlog Notes | `analysis/jira/README.md` | Local to Confluence |
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |
@@ -160,4 +162,3 @@ Open follow-ups
 | Should Confluence or GitHub be the canonical home for requirements? | Local GitHub files first, Confluence copy for readability. |
 | Should diagrams be maintained in FigJam only or mirrored in Mermaid? | FigJam for collaborative diagrams, Mermaid only for lightweight GitHub references. |
 | Should Jira become the only backlog after import? | No. Keep local planning docs for narrative context and Jira for execution. |
-

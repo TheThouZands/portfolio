@@ -84,8 +84,7 @@ Build a portfolio that behaves like a compact production product:
 
 | Question | Why it matters | Suggested next artifact |
 | --- | --- | --- |
-| Which services should the portfolio optimize for selling first? | Affects homepage hierarchy and project storytelling. | Positioning brief |
+| Which services should the portfolio optimize for selling first? | Affects homepage hierarchy and project storytelling. | `product/positioning-brief.md` baseline drafted |
 | Should comments remain generally available or become invitation/client scoped? | Affects auth, moderation, and abuse controls. | Interaction policy |
 | What diagrams belong in FigJam versus GitHub Mermaid? | Affects how architecture and flow diagrams are maintained. | Diagram inventory |
 | What public APIs, if any, should be formalized beyond current route handlers? | Affects OpenAPI scope and API stability promises. | API contract decision |
-

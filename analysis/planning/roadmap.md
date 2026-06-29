@@ -60,9 +60,9 @@ Goal: decide where the portfolio should go next, not merely describe where it is
 
 Candidate slices:
 
-- Positioning brief for services sold through the portfolio.
+- Positioning brief for services sold through the portfolio. Current local output: `analysis/product/positioning-brief.md`.
 - Visitor journey map from homepage to project proof to contact/action.
-- Content strategy for projects, experience, skills, and blog posts.
+- Content strategy for projects, experience, skills, and blog posts. Current local output: `analysis/product/content-strategy.md`.
 - Comment interaction policy, moderation scope, and abuse handling.
 - Auth/account roadmap: reader accounts, client accounts, or private collaboration.
 
