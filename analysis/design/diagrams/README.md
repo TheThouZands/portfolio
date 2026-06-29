@@ -7,13 +7,13 @@ Target home: Figma/FigJam, Confluence, GitHub
 
 ## Purpose
 
-These files are local source sketches for diagrams that should later be recreated or refined in FigJam. They keep the
-diagram intent reviewable in Git before connected design tooling is set up.
+These files are local Mermaid source sketches for diagrams that are generated or ready to generate in FigJam. They keep
+the diagram intent reviewable in Git while FigJam holds the collaborative visual copy.
 
 The source of truth is still split by artifact type:
 
 - Product and technical meaning: local analysis docs.
-- Collaborative visual board: future FigJam sections.
+- Collaborative visual board: generated FigJam diagrams.
 - FigJam setup checklist: `analysis/design/figjam-section-manifest.csv`.
 - Lightweight source sketch: these Mermaid files.
 
@@ -33,12 +33,13 @@ The source of truth is still split by artifact type:
 
 - Keep diagram ids stable.
 - Keep Mermaid source small enough to review in Git.
-- Use FigJam for polished collaborative layout and annotations.
+- Use the Figma MCP generation path for collaborative FigJam copies and annotations.
 - Link the FigJam section back to the source doc after creation.
 - Update the source doc when a diagram meaning changes materially.
 - Prefer separate diagrams over one overloaded master diagram.
+- Avoid manual FigJam-only maintenance; regenerate from Mermaid when the meaning changes.
 
 ## Remaining Work
 
-These source sketches are not final FigJam diagrams. Each still needs visual refinement, layout, and links back to the
-created FigJam sections once external tooling is connected.
+Not every source sketch has a generated FigJam diagram yet. Generated diagrams still need Confluence cross-links, and
+priority 2 diagrams remain pending until the next FigJam generation batch.

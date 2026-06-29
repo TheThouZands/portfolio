@@ -7,11 +7,12 @@ Target home: Figma/FigJam and Confluence
 
 ## Purpose
 
-This inventory defines the diagrams worth generating before connected Figma/FigJam work begins. It keeps each diagram tied
-to a product or technical question, so visual work supports analysis instead of becoming decorative documentation.
+This inventory defines the diagrams worth generating and maintaining through the Figma/FigJam connector. It keeps each
+diagram tied to a product or technical question, so visual work supports analysis instead of becoming decorative
+documentation.
 
-Use `analysis/design/figjam-section-manifest.csv` as the section creation checklist when creating or updating the FigJam
-file.
+Use `analysis/design/figjam-section-manifest.csv` as the section creation checklist when creating or updating generated
+FigJam diagrams. Record generated URLs in both the manifest and `analysis/design/figjam-creation-log.md`.
 
 ## Naming Convention
 
@@ -154,8 +155,9 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 - Do not treat the diagram as authoritative unless its source docs are updated too.
 - Record created file and section URLs in [figjam-creation-log.md](figjam-creation-log.md).
 - Keep section status and URLs aligned with [figjam-section-manifest.csv](figjam-section-manifest.csv).
+- Avoid manual FigJam-only maintenance; update Mermaid/source docs first when meaning changes, then regenerate.
 
-## Suggested First FigJam Sections
+## First FigJam Sections
 
 | Section | Why first |
 | --- | --- |
