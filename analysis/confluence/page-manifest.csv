@@ -14,6 +14,7 @@ Page Title,Parent Page,Local Source,Target Area,Source Of Truth,Publish Priority
 "Planning","Portfolio Analysis Home","","Planning","Confluence container","1","Pending","","Container page for roadmap, validation, and setup planning."
 "Roadmap","Planning","analysis/planning/roadmap.md","Planning","Local Git source","1","Pending","","Stage map and forward delivery framing."
 "Tool Setup Plan","Planning","analysis/planning/tool-setup-plan.md","Planning","Local Git source","1","Pending","","Confluence, Jira, FigJam, and GitHub setup sequence."
+"External Setup Execution Runbook","Planning","analysis/planning/external-setup-execution-runbook.md","Planning","Local Git source","1","Pending","","First external setup batches, preflight checks, logs, and exit criteria."
 "Risk Register","Planning","analysis/planning/risk-register.md","Planning","Local Git source","2","Pending","","Product, technical, process, and tooling risks."
 "Validation Strategy","Planning","analysis/planning/validation-strategy.md","Planning","Local Git source","1","Pending","","Done checks, verification commands, and validation expectations."
 "Readiness Audit","Planning","analysis/planning/readiness-audit.md","Planning","Local Git source","1","Pending","","Goal readiness audit and external setup gaps."

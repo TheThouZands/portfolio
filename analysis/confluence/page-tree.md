@@ -41,11 +41,12 @@ Portfolio Analysis Home
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
-    2.3 Risk Register
-    2.4 Validation Strategy
-    2.5 Readiness Audit
-    2.6 Requirements Traceability Matrix
-    2.7 Release And Review Cadence
+    2.3 External Setup Execution Runbook
+    2.4 Risk Register
+    2.5 Validation Strategy
+    2.6 Readiness Audit
+    2.7 Requirements Traceability Matrix
+    2.8 Release And Review Cadence
   3. Jira Backlog
     3.1 Backlog Notes
     3.2 User Stories
@@ -94,6 +95,7 @@ Portfolio Analysis Home
 | Auth And Account Roadmap | `analysis/product/auth-account-roadmap.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | Local to Confluence, Jira, and FigJam |
+| External Setup Execution Runbook | `analysis/planning/external-setup-execution-runbook.md` | Local to Confluence, Jira, FigJam, and GitHub |
 | Risk Register | `analysis/planning/risk-register.md` | Local to Confluence and Jira |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | Local to Confluence and Jira |
 | Requirements Traceability Matrix | `analysis/planning/requirements-traceability-matrix.md` | Local to Confluence, Jira, and GitHub |

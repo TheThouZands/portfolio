@@ -11,6 +11,8 @@ This plan coordinates how the local analysis suite should move into Confluence, 
 source for technical artifacts. It exists so external tool setup can happen in small, reversible steps instead of as one
 large migration.
 
+Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
+
 ## Setup Sequence
 
 | Step | Tool | Output | Local source |
@@ -60,6 +62,8 @@ large migration.
 | Batch 2 | Jira project, epics, CSV import, key mapping. | Local story ids map to Jira issue keys. |
 | Batch 3 | FigJam file and first four diagram sections. | Section manifest rows have FigJam URLs and link to local diagram sources. |
 | Batch 4 | Technical reference pages or links. | ADR/schema/API pages point back to GitHub. |
+
+The detailed execution gates for these batches live in `analysis/planning/external-setup-execution-runbook.md`.
 
 ## Open Questions
 

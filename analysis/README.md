@@ -38,6 +38,7 @@ The suite is intended to stay useful in four places:
 | Product workflow | [product/auth-account-roadmap.md](product/auth-account-roadmap.md) | Confluence/Jira | Defines account types, auth growth phases, owner controls, and deferred account scope. |
 | Planning | [planning/roadmap.md](planning/roadmap.md) | Confluence/Jira | Groups the work into practical stages and identifies next analysis slices. |
 | Planning | [planning/tool-setup-plan.md](planning/tool-setup-plan.md) | Confluence/Jira/FigJam | Coordinates the external tool setup sequence and source-of-truth rules. |
+| Planning | [planning/external-setup-execution-runbook.md](planning/external-setup-execution-runbook.md) | Confluence/Jira/FigJam/GitHub | Defines the first external setup execution batches, preflight checks, logs, and exit criteria. |
 | Planning | [planning/risk-register.md](planning/risk-register.md) | Confluence/Jira | Tracks product, technical, tooling, and process risks with mitigations and related stories. |
 | Planning | [planning/validation-strategy.md](planning/validation-strategy.md) | Confluence/Jira/GitHub | Defines validation layers, done checks, verification commands, and traceability expectations. |
 | Planning | [planning/requirements-traceability-matrix.md](planning/requirements-traceability-matrix.md) | Confluence/Jira/GitHub | Maps requirements to personas, Jira stories, evidence, verification signals, and gaps. |

@@ -49,6 +49,7 @@ A change is validated when:
 | Diagram change | Diagram inventory and FigJam section manifest updated; source docs and update triggers named. |
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
 | External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
+| External setup runbook update | Runbook links to current manifests, logs, preflight checks, batch gates, and completion criteria. |
 | Requirement traceability update | Matrix maps requirement, persona, story, evidence, verification signal, and remaining gaps. |
 | Pull request or implementation slice | Change traceability template completed or equivalent details included in PR/story notes. |
 
@@ -114,6 +115,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
 - `analysis/design/figjam-section-manifest.csv`
+- `analysis/planning/external-setup-execution-runbook.md`
 - `analysis/planning/risk-register.md`
 - `analysis/planning/readiness-audit.md`
 - `analysis/operations/release-and-review-cadence.md`
