@@ -24,6 +24,7 @@ The suite is intended to stay useful in four places:
 | Area | File | Intended destination | Purpose |
 | --- | --- | --- | --- |
 | Tool setup | [confluence/page-tree.md](confluence/page-tree.md) | Confluence | Defines the first Confluence space, page hierarchy, publishing rules, and templates. |
+| Tool setup | [confluence/publishing-runbook.md](confluence/publishing-runbook.md) | Confluence/GitHub | Defines page metadata, publishing steps, mapping table, and update triggers. |
 | Product analysis | [product/problem-statement.md](product/problem-statement.md) | Confluence | Defines the reconstructed problem, opportunity, stakeholders, goals, and constraints. |
 | Product analysis | [product/stakeholders-and-personas.md](product/stakeholders-and-personas.md) | Confluence/Jira | Defines stakeholders, personas, persona-to-requirement mapping, and product implications. |
 | Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |
@@ -34,12 +35,15 @@ The suite is intended to stay useful in four places:
 | Product workflow | [product/cms-authoring-workflow.md](product/cms-authoring-workflow.md) | Confluence/Jira | Defines owner-first CMS authoring, draft, preview, publish, and data-model implications. |
 | Product workflow | [product/auth-account-roadmap.md](product/auth-account-roadmap.md) | Confluence/Jira | Defines account types, auth growth phases, owner controls, and deferred account scope. |
 | Planning | [planning/roadmap.md](planning/roadmap.md) | Confluence/Jira | Groups the work into practical stages and identifies next analysis slices. |
+| Planning | [planning/tool-setup-plan.md](planning/tool-setup-plan.md) | Confluence/Jira/FigJam | Coordinates the external tool setup sequence and source-of-truth rules. |
 | Planning | [planning/risk-register.md](planning/risk-register.md) | Confluence/Jira | Tracks product, technical, tooling, and process risks with mitigations and related stories. |
 | Planning | [planning/validation-strategy.md](planning/validation-strategy.md) | Confluence/Jira/GitHub | Defines validation layers, done checks, verification commands, and traceability expectations. |
 | Jira backlog | [jira/user-stories.md](jira/user-stories.md) | Jira/Confluence | Human-readable epics and user stories with acceptance criteria and evidence commits. |
 | Jira backlog | [jira/backlog.csv](jira/backlog.csv) | Jira CSV import | Starter import file for Jira issues once the Jira project is configured. |
 | Jira setup | [jira/project-setup.md](jira/project-setup.md) | Jira/Confluence | Defines project key, issue types, components, workflow, import order, and done/ready rules. |
+| Jira setup | [jira/import-history.md](jira/import-history.md) | Jira/Confluence/GitHub | Records import runs and local story id to Jira key mappings. |
 | Design setup | [design/diagram-inventory.md](design/diagram-inventory.md) | Figma/FigJam/Confluence | Lists planned diagrams, source docs, update triggers, and FigJam creation rules. |
+| Design setup | [design/figjam-creation-log.md](design/figjam-creation-log.md) | Figma/FigJam/Confluence | Tracks FigJam file and section URLs against local diagram ids. |
 | Design sources | [design/diagrams/README.md](design/diagrams/README.md) | Figma/FigJam/GitHub | Keeps first Mermaid diagram sketches reviewable before FigJam setup. |
 | GitHub setup | [github/documentation-rules.md](github/documentation-rules.md) | GitHub/Confluence | Defines source-of-truth rules, naming conventions, commit sizing, and doc review checks. |
 | Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |

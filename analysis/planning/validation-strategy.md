@@ -46,6 +46,7 @@ A change is validated when:
 | Auth/comment change | Unit or integration coverage for validation/session/comment behavior; policy reviewed. |
 | Diagram change | Diagram inventory updated; source docs and update triggers named. |
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
+| External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
 
 ## Current Verification Commands
 
@@ -104,6 +105,9 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
 - `analysis/planning/risk-register.md`
+- `analysis/confluence/publishing-runbook.md`
+- `analysis/jira/import-history.md`
+- `analysis/design/figjam-creation-log.md`
 
 ## Residual Risk
 
@@ -115,4 +119,3 @@ If a story ships with known gaps, record them explicitly:
 | Reason accepted | Why is it okay for this slice? |
 | Follow-up story | Where will it be handled? |
 | Review trigger | When should the decision be revisited? |
-

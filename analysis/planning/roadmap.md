@@ -43,9 +43,13 @@ Goal: connect the artifact model to external planning tools without losing local
 Current local outputs:
 
 - `analysis/confluence/page-tree.md`
+- `analysis/confluence/publishing-runbook.md`
 - `analysis/jira/project-setup.md`
+- `analysis/jira/import-history.md`
 - `analysis/design/diagram-inventory.md`
+- `analysis/design/figjam-creation-log.md`
 - `analysis/github/documentation-rules.md`
+- `analysis/planning/tool-setup-plan.md`
 
 Exit check:
 
@@ -53,6 +57,7 @@ Exit check:
 - Jira epics and labels match backlog ids.
 - FigJam diagrams have owners and source references.
 - GitHub remains the source for ADRs, schema notes, and API contracts.
+- External tool ids, URLs, and import mappings have local history files.
 
 ## Stage 2 - Product Clarification
 

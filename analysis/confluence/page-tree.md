@@ -25,7 +25,7 @@ without losing stable ids, owners, or references back to GitHub.
 
 ```text
 Portfolio Analysis Home
-    1. Product Analysis
+  1. Product Analysis
     1.1 Problem Statement
     1.2 Stakeholders And Personas
     1.3 Scope And Requirements
@@ -60,8 +60,10 @@ Portfolio Analysis Home
     5.4 ADR Index
   6. Operations
     6.1 Documentation Maintenance
-    6.2 Decision Log
-    6.3 Open Questions
+    6.2 Confluence Publishing Runbook
+    6.3 FigJam Creation Log
+    6.4 Decision Log
+    6.5 Open Questions
 ```
 
 ## Local Source Mapping
@@ -79,18 +81,22 @@ Portfolio Analysis Home
 | CMS Authoring Workflow | `analysis/product/cms-authoring-workflow.md` | Local to Confluence and Jira |
 | Auth And Account Roadmap | `analysis/product/auth-account-roadmap.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
+| Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | Local to Confluence, Jira, and FigJam |
 | Risk Register | `analysis/planning/risk-register.md` | Local to Confluence and Jira |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | Local to Confluence and Jira |
 | Backlog Notes | `analysis/jira/README.md` | Local to Confluence |
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |
 | Jira Project Setup | `analysis/jira/project-setup.md` | Local to Confluence and Jira admin |
+| Import History | `analysis/jira/import-history.md` | Local to Confluence and Jira |
 | Diagram Inventory | `analysis/design/diagram-inventory.md` | Local to Confluence and FigJam |
 | Diagram Sources | `analysis/design/diagrams/README.md` | Local to Confluence and FigJam |
+| FigJam Creation Log | `analysis/design/figjam-creation-log.md` | Local to Confluence and FigJam |
 | Traceability | `analysis/technical/traceability.md` | Local to Confluence and GitHub |
 | Schema And Migrations | `analysis/technical/schema-and-migrations.md` | GitHub to Confluence reference |
 | OpenAPI Planning Notes | `analysis/technical/openapi.md` | GitHub to Confluence reference |
 | ADR Index | `analysis/technical/adr/README.md` | GitHub to Confluence reference |
 | Documentation Maintenance | `analysis/github/documentation-rules.md` | GitHub to Confluence reference |
+| Confluence Publishing Runbook | `analysis/confluence/publishing-runbook.md` | Local to Confluence and GitHub |
 
 ## Page Templates
 

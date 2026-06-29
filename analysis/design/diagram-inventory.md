@@ -147,6 +147,7 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 - Keep product journey diagrams visually separate from technical architecture diagrams.
 - Link Confluence pages back to the diagram sections after creation.
 - Do not treat the diagram as authoritative unless its source docs are updated too.
+- Record created file and section URLs in [figjam-creation-log.md](figjam-creation-log.md).
 
 ## Suggested First FigJam Sections
 

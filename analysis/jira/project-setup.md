@@ -93,6 +93,8 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 6. For implemented stories, add evidence commits to the description or linked development panel.
 7. Record import date and Jira issue key mapping in an import history page.
 
+The local import history source is `analysis/jira/import-history.md`.
+
 ## Import Caution
 
 If Jira cannot map "Epic Name" during CSV import, import stories without parent links, then bulk edit their parents
@@ -129,4 +131,3 @@ A story is done when:
 | Add components and labels | Task | Medium |
 | Create import history page | Task | Medium |
 | Decide whether implemented retrospective stories should import as Done or Backlog | Spike | Medium |
-
