@@ -41,5 +41,6 @@ The source of truth is still split by artifact type:
 
 ## Remaining Work
 
-Not every source sketch has a generated FigJam diagram yet. Generated diagrams still need Confluence cross-links, and
-priority 2 diagrams remain pending until the next FigJam generation batch.
+Every current source sketch has a generated FigJam diagram in the shared board. Remaining work is to keep Confluence
+links current as lower-priority pages are published and to replace board-level links with section-specific anchors if
+the Figma connector exposes durable section URLs later.

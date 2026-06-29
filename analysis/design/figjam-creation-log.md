@@ -1,6 +1,6 @@
 # FigJam Creation Log
 
-Status: First batch generated
+Status: Current diagram inventory generated
 Owner: Thouzands  
 Last updated: 2026-06-29  
 Target home: Figma/FigJam and Confluence
@@ -31,9 +31,9 @@ FigJam file or section URL exists.
 | PF-DIAG-001 | Visitor Discovery Journey | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md` | Generated |
 | PF-DIAG-002 | Portfolio Content Model | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | Generated |
 | PF-DIAG-003 | Auth Identifier And Session Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | Generated |
-| PF-DIAG-004 | Blog Comment Flow | Pending | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | Source ready |
-| PF-DIAG-005 | Deployment And Neon Branch Workflow | Pending | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Source ready |
-| PF-DIAG-006 | Structural Content Rendering Contract | Pending | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Source ready |
+| PF-DIAG-004 | Blog Comment Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | Generated |
+| PF-DIAG-005 | Deployment And Neon Branch Workflow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Generated |
+| PF-DIAG-006 | Structural Content Rendering Contract | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Generated |
 | PF-DIAG-007 | Documentation Toolchain | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Generated |
 
 ## Generation History
@@ -41,6 +41,7 @@ FigJam file or section URL exists.
 | Date | Source commit | Diagrams | FigJam URL | Notes |
 | --- | --- | --- | --- | --- |
 | 2026-06-29 | `2ca08e0` | `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, `PF-DIAG-003` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram`; Git Mermaid remains source of truth. |
+| 2026-06-29 | `b5249e3` | `PF-DIAG-004`, `PF-DIAG-005`, `PF-DIAG-006` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram` into the existing FigJam board; Git Mermaid remains source of truth. |
 
 ## Generation Steps
 

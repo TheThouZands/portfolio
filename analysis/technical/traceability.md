@@ -59,8 +59,8 @@ Detailed command selection, CI coverage, and coverage gaps live in `analysis/tec
 
 | Gap | Why it matters | Candidate story |
 | --- | --- | --- |
-| External publication is still partial | Jira import is complete and priority 1 Confluence product, planning, Jira, design, and schema technical pages are published; remaining technical, operations, and cross-linking work still needs small-batch setup. | `PF-601`, `PF-602`, `PF-608`, `PF-610` |
-| FigJam generation is partial | The first FigJam board and first generated diagrams exist; remaining priority 2 diagrams and Confluence backlinks still need setup. | `PF-603` |
+| External publication still has lower-priority follow-up | Jira import is complete and priority 1 Confluence publication is complete; lower-priority Confluence pages and richer cross-linking still need small-batch setup when useful. | `PF-601`, `PF-602`, `PF-608`, `PF-610` |
+| FigJam cross-linking is partial | The FigJam board and all current generated diagrams exist; Confluence backlinks and section-specific anchors still need cleanup when durable links are available. | `PF-603` |
 | ADR baseline exists, but future intake and public preview sharing decisions remain uncovered | Route composition is covered by ADR 0007, comment moderation by ADR 0009, owner authorization by ADR 0010, first CMS authoring by ADR 0011, and media lifecycle by ADR 0012. | `PF-604`, `PF-702` |
 | No formal public OpenAPI contract | Current route handlers and server actions are inventoried, but ADR 0006 intentionally defers a spec until public API intent is decided. | `PF-506` or future API decision story |
 | Comment moderation decision exists, but implementation is not built | ADR 0009 defines the soft-state model; schema, owner actions, and rendering tests remain future work. | `PF-407`, `PF-408` |

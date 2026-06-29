@@ -35,9 +35,9 @@ PF-DIAG-001 - Visitor Discovery Journey
 | PF-DIAG-001 | Visitor Discovery Journey | Journey map | Product, Confluence | `problem-statement.md`, `scope-and-requirements.md`, `conversion-path.md` | Generated |
 | PF-DIAG-002 | Portfolio Content Model | Entity relationship map | Technical, product | `schema-and-migrations.md`, `src/db/schema.ts`, ADR 0012 | Generated |
 | PF-DIAG-003 | Auth Identifier And Session Flow | Flowchart | Technical, security | `src/auth/auth.md`, auth stories, ADR 0010 | Generated |
-| PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `interaction-policy.md`, ADR 0009, `src/blog/actions.ts` | Planned |
-| PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Planned |
-| PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests, ADR 0003, ADR 0011 | Planned |
+| PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `interaction-policy.md`, ADR 0009, `src/blog/actions.ts` | Generated |
+| PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Generated |
+| PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests, ADR 0003, ADR 0011 | Generated |
 | PF-DIAG-007 | Documentation Toolchain | System/process map | Owner, collaborators | `analysis/README.md`, this suite | Generated |
 
 ## Diagram Specs
@@ -157,14 +157,17 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 - Keep section status and URLs aligned with [figjam-section-manifest.csv](figjam-section-manifest.csv).
 - Avoid manual FigJam-only maintenance; update Mermaid/source docs first when meaning changes, then regenerate.
 
-## First FigJam Sections
+## Generated FigJam Sections
 
-| Section | Why first |
+| Section | Why generated |
 | --- | --- |
 | PF-DIAG-007 Documentation Toolchain | Helps set up the working system for all future docs. |
 | PF-DIAG-001 Visitor Discovery Journey | Clarifies product value and missing conversion path. |
 | PF-DIAG-002 Portfolio Content Model | Gives technical reviewers a fast schema overview. |
 | PF-DIAG-003 Auth Identifier And Session Flow | Captures the most security-sensitive user flow. |
+| PF-DIAG-004 Blog Comment Flow | Shows current comment behavior and future moderation boundary. |
+| PF-DIAG-005 Deployment And Neon Branch Workflow | Makes database branch and migration operations reviewable. |
+| PF-DIAG-006 Structural Content Rendering Contract | Explains safe rendering without raw HTML trust. |
 
 ## Local Source Sketches
 
