@@ -8,8 +8,7 @@ Target home: Confluence
 ## Purpose
 
 This document defines the first Confluence structure for the portfolio analysis suite. The local `analysis/` directory
-stays as the source while tool setup is local-only. Once Confluence is connected, these pages can be copied or imported
-without losing stable ids, owners, or references back to GitHub.
+stays as the source while the connected Confluence space provides the readable product and business page tree.
 
 The operational page creation checklist lives in `analysis/confluence/page-manifest.csv`.
 
@@ -17,69 +16,72 @@ The operational page creation checklist lives in `analysis/confluence/page-manif
 
 | Setting | Proposed value | Notes |
 | --- | --- | --- |
-| Space name | Portfolio Product And Delivery | Keeps business, product, and delivery analysis together. |
-| Space key | `PPD` | Short and stable enough for links. |
-| Root page | Portfolio Analysis Home | Mirrors `analysis/README.md`. |
+| Space name | Portfolio | Existing connected Confluence space for the portfolio analysis suite. |
+| Space key | `Portfolio` | Actual connected space key in `thouzands.atlassian.net`. |
+| Space id | `425988` | Returned by the Atlassian/Rovo connector. |
+| Existing space home | Portfolio Home | Default Confluence space homepage. |
+| Analysis root page | Portfolio Analysis Home | Created under Portfolio Home; mirrors `analysis/README.md`. |
 | Owner | Thouzands | Single owner until collaborators exist. |
 | Source repository | GitHub portfolio repository | Git remains source for ADRs, schema notes, and API contracts. |
 
 ## Page Tree
 
 ```text
-Portfolio Analysis Home
-  1. Product Analysis
-    1.1 Problem Statement
-    1.2 Stakeholders And Personas
-    1.3 Scope And Requirements
-    1.4 Positioning Brief
-    1.5 Service Offer Catalog
-    1.6 Content Strategy
-    1.7 Conversion Path Brief
-    1.8 Interaction Policy
-    1.9 CMS Authoring Workflow
-    1.10 Media Asset Lifecycle
-    1.11 Auth And Account Roadmap
-  2. Planning
-    2.1 Roadmap
-    2.2 Tool Setup Plan
-    2.3 External Setup Execution Runbook
-    2.4 Risk Register
-    2.5 Validation Strategy
-    2.6 Readiness Audit
-    2.7 Requirements Traceability Matrix
-    2.8 Release And Review Cadence
-  3. Jira Backlog
-    3.1 Backlog Notes
-    3.2 User Stories
-    3.3 Jira Project Setup
-    3.4 Import History
-  4. Diagrams
-    4.1 Diagram Inventory
-    4.2 FigJam Section Manifest
-    4.3 Diagram Sources
-    4.4 Visitor Discovery Journey
-    4.5 CMS Content Model
-    4.6 Auth And Session Flow
-    4.7 Blog Comment Flow
-    4.8 Deployment And Neon Branch Workflow
-    4.9 Structural Content Rendering Contract
-    4.10 Documentation Toolchain
-  5. Technical Reference
-    5.1 Traceability
-    5.2 Schema And Migrations
-    5.3 Schema Table Catalog
-    5.4 Migration Catalog
-    5.5 API Surface Inventory
-    5.6 OpenAPI Planning Notes
-    5.7 Verification Catalog
-    5.8 ADR Index
-  6. Operations
-    6.1 Documentation Maintenance
-    6.2 Artifact Maintenance Matrix
-    6.3 Confluence Publishing Runbook
-    6.4 FigJam Creation Log
-    6.5 Decision Log
-    6.6 Open Questions
+Portfolio Home
+  Portfolio Analysis Home
+    1. Product Analysis
+      1.1 Problem Statement
+      1.2 Stakeholders And Personas
+      1.3 Scope And Requirements
+      1.4 Positioning Brief
+      1.5 Service Offer Catalog
+      1.6 Content Strategy
+      1.7 Conversion Path Brief
+      1.8 Interaction Policy
+      1.9 CMS Authoring Workflow
+      1.10 Media Asset Lifecycle
+      1.11 Auth And Account Roadmap
+    2. Planning
+      2.1 Roadmap
+      2.2 Tool Setup Plan
+      2.3 External Setup Execution Runbook
+      2.4 Risk Register
+      2.5 Validation Strategy
+      2.6 Readiness Audit
+      2.7 Requirements Traceability Matrix
+      2.8 Release And Review Cadence
+    3. Jira Backlog
+      3.1 Backlog Notes
+      3.2 User Stories
+      3.3 Jira Project Setup
+      3.4 Import History
+    4. Diagrams
+      4.1 Diagram Inventory
+      4.2 FigJam Section Manifest
+      4.3 Diagram Sources
+      4.4 Visitor Discovery Journey
+      4.5 CMS Content Model
+      4.6 Auth And Session Flow
+      4.7 Blog Comment Flow
+      4.8 Deployment And Neon Branch Workflow
+      4.9 Structural Content Rendering Contract
+      4.10 Documentation Toolchain
+    5. Technical Reference
+      5.1 Traceability
+      5.2 Schema And Migrations
+      5.3 Schema Table Catalog
+      5.4 Migration Catalog
+      5.5 API Surface Inventory
+      5.6 OpenAPI Planning Notes
+      5.7 Verification Catalog
+      5.8 ADR Index
+    6. Operations
+      6.1 Documentation Maintenance
+      6.2 Artifact Maintenance Matrix
+      6.3 Confluence Publishing Runbook
+      6.4 FigJam Creation Log
+      6.5 Decision Log
+      6.6 Open Questions
 ```
 
 ## Local Source Mapping

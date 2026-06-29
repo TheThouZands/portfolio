@@ -39,7 +39,7 @@ Also confirm:
 
 - The setup source commit is known.
 - External tool access exists for Confluence, Jira, and FigJam.
-- The target Confluence space key is `PPD`.
+- The target Confluence space key is `Portfolio` and the space id is `425988`.
 - The target Jira project key is `PF`.
 - The FigJam file name is `Portfolio Analysis Diagrams`.
 - Local manifests are committed before copying or importing them.
@@ -48,7 +48,7 @@ Also confirm:
 
 | Batch | Tool | Action | Done when | Local files to update after |
 | --- | --- | --- | --- | --- |
-| EXT-001 | Confluence | Create space, root page, and first page tree from `page-manifest.csv`. | Root and priority 1 pages exist with source metadata. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
+| EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root and starter container pages exist with source metadata; priority 1 content pages can follow in smaller batches. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
 | EXT-002 | Jira | Create project, components, labels, workflow, and epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
 | EXT-004 | FigJam | Create the FigJam file and first diagram sections from `figjam-section-manifest.csv`. | First four sections have FigJam URLs and source notes. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
@@ -58,9 +58,11 @@ Also confirm:
 
 ### EXT-001 Confluence
 
-- Space `PPD` exists.
-- Root page matches `Portfolio Analysis Home`.
-- Priority 1 pages from `analysis/confluence/page-manifest.csv` exist.
+- Space `Portfolio` exists.
+- Existing space homepage `Portfolio Home` exists.
+- Analysis root page `Portfolio Analysis Home` exists under `Portfolio Home`.
+- Starter container pages exist under `Portfolio Analysis Home`.
+- Priority 1 content pages from `analysis/confluence/page-manifest.csv` remain the next Confluence batch.
 - Each copied page includes source file and source commit metadata.
 - Page URLs are recorded in `page-manifest.csv`.
 
@@ -103,10 +105,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | Pending until run |
-| External tools touched | Confluence, Jira, FigJam |
+| Source commit | `86015e1` for EXT-001 starter pages |
+| External tools touched | Confluence |
 | Operator | Thouzands |
-| Result | Pending |
+| Result | EXT-001 starter pages created; Jira blocked by app installation; FigJam pending |
 
 Record the final values in the relevant logs after execution.
 

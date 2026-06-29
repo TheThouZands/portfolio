@@ -14,7 +14,7 @@ should remain stable even after Jira assigns keys.
 
 | Run id | Date | Jira project | Source files | Source commit | Imported by | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| JIRA-IMPORT-001 | Pending | `PF` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | Pending | Thouzands | Pending |
+| JIRA-IMPORT-001 | Pending | `PF` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | Pending | Thouzands | Blocked; Rovo Jira project access returns 403 because the app is not installed on the Jira instance. |
 
 ## Epic Mapping
 
