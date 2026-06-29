@@ -47,6 +47,7 @@ A change is validated when:
 | Diagram change | Diagram inventory updated; source docs and update triggers named. |
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
 | External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
+| Requirement traceability update | Matrix maps requirement, persona, story, evidence, verification signal, and remaining gaps. |
 | Pull request or implementation slice | Change traceability template completed or equivalent details included in PR/story notes. |
 
 ## Current Verification Commands
@@ -98,6 +99,7 @@ Stronger:
 Before marking a story done, confirm whether the change should update:
 
 - `analysis/product/scope-and-requirements.md`
+- `analysis/planning/requirements-traceability-matrix.md`
 - `analysis/jira/user-stories.md`
 - `analysis/jira/backlog.csv`
 - `analysis/technical/traceability.md`

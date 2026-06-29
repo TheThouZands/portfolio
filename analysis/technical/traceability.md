@@ -42,7 +42,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Owner account controls | `FR-020`, `NFR-015` | Future owner authorization model for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
 | Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates; ADR 0007 records route/component boundaries. |
-| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Docs validate with CSV/import checks; future implementation slices should cite persona, risk, and validation evidence. |
+| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md`, `analysis/planning/requirements-traceability-matrix.md` | Docs validate with CSV/import checks; future implementation slices should cite persona, requirement, story, risk, and validation evidence. |
 
 ## Tests Inventory
 
@@ -63,5 +63,5 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
 | Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
-| Risk and validation artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607` |
+| Risk, validation, and requirement traceability artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607`, `PF-610` |
 | CMS authoring and owner auth are planned, but not implemented | The data model supports CMS behavior, but safe authoring needs protected workflow decisions. | `PF-205`, `PF-206`, `PF-207`, `PF-409`, `PF-411` |

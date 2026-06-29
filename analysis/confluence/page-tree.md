@@ -41,7 +41,8 @@ Portfolio Analysis Home
     2.3 Risk Register
     2.4 Validation Strategy
     2.5 Readiness Audit
-    2.6 Release And Review Cadence
+    2.6 Requirements Traceability Matrix
+    2.7 Release And Review Cadence
   3. Jira Backlog
     3.1 Backlog Notes
     3.2 User Stories
@@ -86,6 +87,7 @@ Portfolio Analysis Home
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | Local to Confluence, Jira, and FigJam |
 | Risk Register | `analysis/planning/risk-register.md` | Local to Confluence and Jira |
 | Validation Strategy | `analysis/planning/validation-strategy.md` | Local to Confluence and Jira |
+| Requirements Traceability Matrix | `analysis/planning/requirements-traceability-matrix.md` | Local to Confluence, Jira, and GitHub |
 | Readiness Audit | `analysis/planning/readiness-audit.md` | Local to Confluence and GitHub |
 | Backlog Notes | `analysis/jira/README.md` | Local to Confluence |
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |

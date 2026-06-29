@@ -38,6 +38,7 @@ The suite is intended to stay useful in four places:
 | Planning | [planning/tool-setup-plan.md](planning/tool-setup-plan.md) | Confluence/Jira/FigJam | Coordinates the external tool setup sequence and source-of-truth rules. |
 | Planning | [planning/risk-register.md](planning/risk-register.md) | Confluence/Jira | Tracks product, technical, tooling, and process risks with mitigations and related stories. |
 | Planning | [planning/validation-strategy.md](planning/validation-strategy.md) | Confluence/Jira/GitHub | Defines validation layers, done checks, verification commands, and traceability expectations. |
+| Planning | [planning/requirements-traceability-matrix.md](planning/requirements-traceability-matrix.md) | Confluence/Jira/GitHub | Maps requirements to personas, Jira stories, evidence, verification signals, and gaps. |
 | Planning | [planning/readiness-audit.md](planning/readiness-audit.md) | Confluence/GitHub | Audits the local suite against the original objective and names external setup gaps. |
 | Operations | [operations/release-and-review-cadence.md](operations/release-and-review-cadence.md) | Confluence/Jira | Defines per-slice, monthly, tool-sync, and launch review cadence. |
 | Operations | [operations/decision-log.md](operations/decision-log.md) | Confluence/GitHub | Tracks lightweight product, planning, and tooling decisions that do not need ADRs. |
