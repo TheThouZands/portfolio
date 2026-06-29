@@ -1,0 +1,62 @@
+# User Stories
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Target home: Jira/Confluence
+
+## Epic PF-E01 - Public Portfolio Discovery
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-101 | As a potential client, I want the homepage to immediately communicate who owns the portfolio and what kind of work they do, so I can decide whether to keep exploring. | High | Implemented | Homepage renders a strong hero; supporting sections expose professional proof; route composition stays clear. | `693b93f`, `5a4bcd2`, `fd7329f`, `a8397c1` |
+| PF-102 | As a visitor, I want to browse professional experience, so I can understand the owner's background and credibility. | High | Implemented | Experience list and detail routes render CMS-backed jobs; empty or missing states are handled through route/partial boundaries. | `7e4d781`, `fd7329f`, `ce8e785` |
+| PF-103 | As a visitor, I want to browse skills and see related work, so I can connect capabilities to evidence. | High | Implemented | Skills are CMS-backed; skill detail pages exist; related jobs are shown where available. | `a8397c1`, `453a504`, `0555e11`, `b87e6ab` |
+| PF-104 | As a technical reviewer, I want project pages to explain concrete work, so I can evaluate delivery depth. | High | Implemented | Project list and detail routes render from CMS data; project revisions carry structured narrative content. | `94504e1`, `403c727`, `51f33ee` |
+
+## Epic PF-E02 - CMS Content Foundation
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-201 | As the portfolio owner, I want content stored as structured records, so updates do not require hard-coding every page. | High | Implemented | Database schema includes companies, experience, skills, projects, blog posts, translations, media, revisions, and content entities. | `734bc11`, `a4e903c`, `bc4f459`, `c973703` |
+| PF-202 | As the portfolio owner, I want content lifecycle statuses, so drafts and testing records can exist without becoming public by accident. | Medium | Implemented | CMS status enum includes published, hidden, draft, and testing; query layers define visible statuses. | `912ad4f`, `src/db/queries/cms.ts` |
+| PF-203 | As a content author, I want rich article/project bodies represented as safe structural content, so the site can render complex writing without unsafe raw HTML. | High | Implemented | Structural content schema exists; renderer supports known elements and fallbacks; tests cover filtering and fallback behavior. | `1646dd0`, `41794d8`, `5fbd111`, `5640a29`, `213d7a7` |
+| PF-204 | As the portfolio owner, I want demo seed data, so local and design testing can use repeatable content. | Medium | Implemented | Seed script exists; structural content stress posts and localized demo content are present. | `819f946`, `162d1be`, `b0decdb`, `21235c7`, `7ac7b23`, `c76456a` |
+
+## Epic PF-E03 - Internationalized Content
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-301 | As a visitor, I want localized routes, so I can browse the portfolio in the intended language context. | High | Implemented | Locale route tree exists; invalid locales route to not found; locale request setup is centralized. | `4f41de7`, `7fd2f33` |
+| PF-302 | As a visitor following an old or bare blog URL, I want to land on the canonical localized post route. | Medium | Implemented | Bare blog resolver redirects to the localized route; translated slugs are indexed. | `27c9bc0`, `73952bb`, `154ad9d` |
+| PF-303 | As a search or social crawler, I want metadata to resolve from localized CMS records, so previews match the page language. | Medium | Implemented | CMS modules expose metadata resolution for blog, experience, projects, and skills. | `src/cms/blog.ts`, `src/cms/experience.ts`, `src/cms/projects.ts`, `src/cms/skills.ts` |
+
+## Epic PF-E04 - Authenticated Interaction
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-401 | As a reader, I want to sign up with a portfolio-specific identifier flow, so I can interact without the site exposing unnecessary account details. | High | Implemented | Identifier resolution distinguishes username and email paths; signup route and server action exist. | `e9077c4`, `42d0cb8`, `1c96224` |
+| PF-402 | As a returning reader, I want to sign in and sign out reliably, so my visible session state matches server state. | High | Implemented/in progress | Better Auth route handler exists; sign-in action creates session; logout refreshes local state; current worktree includes auth-state updates. | `6a7ccc8`, `f767a0f`, `ba94255`, current worktree |
+| PF-403 | As the portfolio owner, I want credential validation and rate limiting, so auth flows are harder to abuse. | High | Implemented | Zod validation covers usernames, emails, identifiers, passwords, and sign-up shapes; rate limit table and enforcement exist. | `c0fa0fc`, `7333bb1`, `bbdf312`, `213d7a7` |
+| PF-404 | As an authenticated reader, I want to comment on blog posts, so I can engage with technical writing. | High | Implemented/in progress | Comments table links to posts and optional users; comments render on posts; composer/action exist; active local files refine session-aware rendering. | `4083894`, `1033065`, `3d145da`, `94566f8`, current worktree |
+| PF-405 | As a reader, I want discussion history preserved even if an account is removed, so conversation context does not disappear unexpectedly. | Medium | Implemented | Comment user foreign key uses account deletion behavior that preserves comments; rendering has fallback author handling. | `cc9073d`, `tests/blog/comments.test.ts` |
+
+## Epic PF-E05 - Quality, Operations, And Architecture
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-501 | As the developer, I want schema changes generated as committed migrations, so database evolution is reviewable. | High | Implemented | README documents migration workflow; Drizzle files and snapshots exist; build flow runs migrations before Vercel builds. | `734bc11`, `README.md`, `drizzle` |
+| PF-502 | As the developer, I want branch-isolated Neon database workflows, so local and preview work do not collide with production data. | Medium | Implemented | Neon sync script creates/reuses branch-scoped URLs; docs warn about stale env values. | `5a50321`, `888fbdf`, `README.md` |
+| PF-503 | As a maintainer, I want clear architecture boundaries, so future changes can be placed correctly. | High | Implemented | Architecture index and local notes define routes, partials, repeatables, CMS, and DB layering. | `0becf78`, `7482d77`, `ARCHITECTURE.md` |
+| PF-504 | As a maintainer, I want automated checks for important behavior, so regressions are caught before deployment. | High | Implemented | Unit tests cover auth validation, auth rate-limit keys, structural content rendering, and blog comments; CI workflow exists. | `213d7a7`, `2870f75` |
+| PF-505 | As the portfolio owner, I want retrospective product analysis, so future work can be planned instead of improvised. | High | Planned | Analysis directory exists; requirements, stories, traceability, ADR, schema inventory, and API notes are in place. | This suite |
+
+## Epic PF-E06 - Forward Planning
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-601 | As the portfolio owner, I want a Confluence page tree plan, so product and business docs can move out of local files cleanly. | Medium | Planned | Page hierarchy maps to local `analysis/`; ownership and update rules are defined. | Planned |
+| PF-602 | As the portfolio owner, I want a Jira setup plan, so stories can be imported with stable labels, epics, and acceptance criteria. | Medium | Planned | Jira project fields, issue types, labels, and CSV mapping are documented. | `analysis/jira` |
+| PF-603 | As the portfolio owner, I want a diagram inventory for Figma/FigJam, so visual artifacts are created with purpose. | Medium | Planned | Required diagrams are listed with owners, source docs, and update triggers. | `analysis/planning/roadmap.md` |
+| PF-604 | As a technical reviewer, I want ADR coverage for major decisions, so I can understand why the system evolved this way. | Medium | Planned | ADR index exists; future ADR candidates are listed. | `analysis/technical/adr` |
+

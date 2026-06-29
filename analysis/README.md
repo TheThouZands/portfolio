@@ -1,0 +1,68 @@
+# Portfolio Analysis Suite
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Source basis: Existing codebase, local architecture notes, database schema, migrations, tests, and git commit history.
+
+## Purpose
+
+This directory reconstructs the product and business analysis that would normally happen before implementation. The
+project was built iteratively in one main feature branch, so these docs are a retrospective baseline: they explain the
+problem, goals, requirements, user stories, architecture decisions, and technical inventory that the current product has
+already started to satisfy.
+
+The suite is intended to stay useful in four places:
+
+- Confluence: product, business, planning, and decision pages.
+- Jira: epics, stories, acceptance criteria, priorities, and traceability.
+- Figma/FigJam: diagrams and product flows referenced from local docs before tooling is connected.
+- GitHub: ADRs, schema and migration notes, API contracts, and implementation traceability.
+
+## Artifact Map
+
+| Area | File | Intended destination | Purpose |
+| --- | --- | --- | --- |
+| Product analysis | [product/problem-statement.md](product/problem-statement.md) | Confluence | Defines the reconstructed problem, opportunity, stakeholders, goals, and constraints. |
+| Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |
+| Planning | [planning/roadmap.md](planning/roadmap.md) | Confluence/Jira | Groups the work into practical stages and identifies next analysis slices. |
+| Jira backlog | [jira/user-stories.md](jira/user-stories.md) | Jira/Confluence | Human-readable epics and user stories with acceptance criteria and evidence commits. |
+| Jira backlog | [jira/backlog.csv](jira/backlog.csv) | Jira CSV import | Starter import file for Jira issues once the Jira project is configured. |
+| Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |
+| Technical | [technical/schema-and-migrations.md](technical/schema-and-migrations.md) | GitHub | Current schema inventory and migration history summary. |
+| Technical decisions | [technical/adr/README.md](technical/adr/README.md) | GitHub | ADR index and conventions. |
+| Technical decisions | [technical/adr/0001-record-retrospective-analysis-suite.md](technical/adr/0001-record-retrospective-analysis-suite.md) | GitHub | First ADR for keeping retrospective analysis in the repository. |
+| API contracts | [technical/openapi.md](technical/openapi.md) | GitHub | Current API surface and OpenAPI planning notes. |
+
+## Traceability Model
+
+Each artifact should prefer concrete evidence:
+
+- Requirement id: stable id such as `FR-001` or `NFR-003`.
+- User story id: stable id such as `PF-101`.
+- Evidence commits: short hashes from the existing branch history.
+- Code areas: paths or route groups that currently satisfy the behavior.
+- Verification: existing tests, manual checks, or planned tests.
+- Tool target: Confluence, Jira, Figma/FigJam, or GitHub.
+
+## Current Product Summary
+
+The portfolio is a fullstack service showcase rather than a static brochure. It presents personal experience, skills,
+projects, and blog content through a CMS-backed Next.js application with PostgreSQL/Neon, Drizzle migrations,
+internationalized routing, auth flows, blog comments, and operational workflows for preview database branches.
+
+The current product already demonstrates:
+
+- Content modeling for experience, skills, projects, blog posts, media, mentions, and revisions.
+- Public routes for localized portfolio browsing.
+- Server-rendered CMS data access and route metadata resolution.
+- Account/session foundations using Better Auth, custom portfolio identity flow, and Argon2 password handling.
+- Blog comments associated with accounts while preserving reader discussion after account deletion.
+- Migration-first database workflow backed by Drizzle and Neon branch synchronization.
+- Baseline security and quality controls through headers, validation, rate limiting, and tests.
+
+## Working Rule
+
+Keep future changes small and reviewable. Prefer one focused documentation slice at a time, then check whether it still
+matches the implemented product before expanding the suite.
+

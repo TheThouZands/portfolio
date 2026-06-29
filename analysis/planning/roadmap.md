@@ -1,0 +1,105 @@
+# Roadmap
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Target home: Confluence/Jira
+
+## Planning Principle
+
+The product should move from retrospective reconstruction to forward planning in small, checkable increments. Each slice
+should produce artifacts that are useful locally first, then portable into Confluence, Jira, Figma/FigJam, or GitHub.
+
+## Stage 0 - Retrospective Baseline
+
+Goal: explain the product that already exists.
+
+| Slice | Output | Status |
+| --- | --- | --- |
+| S0.1 | Analysis index and artifact map | Started |
+| S0.2 | Problem statement, goals, stakeholders, and constraints | Started |
+| S0.3 | Functional and non-functional requirements | Started |
+| S0.4 | Jira-compatible user story backlog | Started |
+| S0.5 | Technical traceability, schema inventory, ADR seed, OpenAPI plan | Started |
+
+Exit check:
+
+- Major implemented capabilities have requirement ids.
+- Major implemented capabilities have at least one user story.
+- Evidence commits and code areas are recorded.
+- Next unknowns are visible instead of hidden.
+
+## Stage 1 - Tool Setup
+
+Goal: connect the artifact model to external planning tools without losing local source control.
+
+| Slice | Output | Suggested target |
+| --- | --- | --- |
+| S1.1 | Confluence space/page tree plan | Confluence |
+| S1.2 | Jira project setup map: epics, issue types, labels, components | Jira |
+| S1.3 | Figma/FigJam diagram inventory and naming convention | Figma/FigJam |
+| S1.4 | GitHub documentation placement rules | GitHub |
+
+Exit check:
+
+- Confluence page hierarchy mirrors `analysis/`.
+- Jira epics and labels match backlog ids.
+- FigJam diagrams have owners and source references.
+- GitHub remains the source for ADRs, schema notes, and API contracts.
+
+## Stage 2 - Product Clarification
+
+Goal: decide where the portfolio should go next, not merely describe where it is.
+
+Candidate slices:
+
+- Positioning brief for services sold through the portfolio.
+- Visitor journey map from homepage to project proof to contact/action.
+- Content strategy for projects, experience, skills, and blog posts.
+- Comment interaction policy, moderation scope, and abuse handling.
+- Auth/account roadmap: reader accounts, client accounts, or private collaboration.
+
+Exit check:
+
+- Future work can be prioritized by business value.
+- Each major feature has a reason to exist in the service portfolio.
+- Risks have owners or explicit deferrals.
+
+## Stage 3 - Design And Flow Diagrams
+
+Goal: create diagrams that explain flows and architecture at the right level.
+
+Candidate diagrams:
+
+- Visitor discovery journey.
+- CMS content entity relationship diagram.
+- Auth identifier and session flow.
+- Blog comment submission and rendering flow.
+- Deployment and Neon branch workflow.
+- Structural content rendering contract.
+
+Exit check:
+
+- Diagrams are referenced from the relevant Markdown docs.
+- Each diagram has a maintainer and update trigger.
+- Diagrams separate product flow from technical architecture.
+
+## Stage 4 - Forward Delivery
+
+Goal: use the reconstructed analysis to plan new work.
+
+Candidate epics:
+
+- Portfolio positioning and conversion paths.
+- CMS authoring workflow.
+- Comment moderation and account trust.
+- Public API contract, if a public API is justified.
+- Observability and operational review.
+- Accessibility and SEO hardening.
+
+Exit check:
+
+- Jira issues are small enough to implement and review independently.
+- Each new implementation PR links to the relevant requirement/story/ADR.
+- Analysis docs change when product decisions change.
+

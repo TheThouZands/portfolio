@@ -1,0 +1,59 @@
+# Technical Traceability
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Target home: GitHub/Confluence
+
+## Purpose
+
+This document connects product capabilities to the implemented codebase, database schema, tests, and historical commits.
+It is intentionally practical: it should help a reviewer move from "why does this exist?" to "where is it implemented?"
+
+## Commit Clusters
+
+| Cluster | Representative commits | Product meaning |
+| --- | --- | --- |
+| Foundation and UI shell | `34df7a2`, `693b93f`, `5a4bcd2`, `0dcfab6` | Started portfolio app, created main hero/sections, and clarified component naming. |
+| Architecture documentation | `2b8b48c`, `0becf78`, `8a37c2b`, `7482d77` | Added local docs and route/component/db layering guidance. |
+| Internationalization | `4f41de7`, `bc4f459`, `7fd2f33`, `154ad9d` | Moved app into locale-aware routing and content translations. |
+| CMS and content model | `734bc11`, `a4e903c`, `819f946`, `c973703`, `94504e1` | Established Drizzle, CMS entities, seed data, content mentions, and project model. |
+| Portfolio surfaces | `7e4d781`, `a8397c1`, `0555e11`, `403c727` | Rendered experience, skills, skill details, related work, and project pages. |
+| Structural content | `1646dd0`, `41794d8`, `5fbd111`, `5640a29`, `c76456a` | Defined and stress-tested a safe structural content contract. |
+| Auth foundation | `7b91dd3`, `85d63d3`, `30739e4`, `e9077c4`, `42d0cb8`, `1c96224` | Added Better Auth, portfolio identity, custom identifier flow, and signup/signin routes. |
+| Auth hardening | `c0fa0fc`, `7333bb1`, `bbdf312`, `ca983df` | Added validation, auth rate limiting, and baseline security headers. |
+| Blog comments | `4083894`, `8af92b5`, `1033065`, `cc9073d`, `3d145da`, `94566f8` | Attached comments to blog posts, associated comments with accounts, preserved orphaned comments, and rendered/composed comments. |
+| Operations and quality | `5a50321`, `888fbdf`, `fe788f7`, `213d7a7`, `2870f75` | Added Neon branch sync, cleanup job, unit tests, and CI workflow. |
+
+## Capability To Code Map
+
+| Capability | Requirements | Code areas | Verification |
+| --- | --- | --- | --- |
+| Homepage and public portfolio browsing | `FR-001`, `FR-004`, `FR-005`, `FR-006` | `src/app/[locale]`, `src/components/heroes`, `src/components/partials`, `src/components/repeatables` | Manual route checks; future visual/a11y checks. |
+| Internationalized routes and content | `FR-002`, `NFR-006` | `src/i18n`, `messages`, `src/app/[locale]`, translation tables | Existing route behavior; future metadata tests. |
+| CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle` | `npm run db:check`, migrations, query tests as added. |
+| Structural content rendering | `FR-008`, `NFR-003` | `src/cms/structural-content`, `src/components/repeatables/structural-content` | `tests/structural-content/rendering.test.ts` |
+| Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
+| Auth and session flows | `FR-010`, `FR-011`, `FR-012` | `src/auth`, `src/components/auth`, `src/app/api/auth/[...all]`, `src/app/api/auth-state` | `tests/auth`; future integration tests. |
+| Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
+| Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates. |
+
+## Tests Inventory
+
+| Test file | Behavior covered |
+| --- | --- |
+| `tests/auth/validation.test.ts` | Username, email, identifier, password, sign-in, and sign-up validation shapes. |
+| `tests/auth/rate-limit-keys.test.ts` | Client IP resolution and scoped rate-limit key generation. |
+| `tests/structural-content/rendering.test.ts` | Nested structural content rendering, unknown element fallback, unsafe attribute filtering, and null content placeholder. |
+| `tests/blog/comments.test.ts` | Nested comment tree behavior, orphaned replies, author fallback names, and rendered nested bodies. |
+
+## Current Gaps
+
+| Gap | Why it matters | Candidate story |
+| --- | --- | --- |
+| No complete Confluence/Jira integration yet | Local docs are portable but not connected to external tools. | `PF-601`, `PF-602` |
+| No diagram inventory yet | Figma/FigJam work needs a clear scope. | `PF-603` |
+| Limited ADR coverage | Technical decisions are visible in commits but not fully explained. | `PF-604` |
+| No formal public OpenAPI contract | Current route handlers exist, but public API intent is undecided. | Future API decision story |
+| Comment moderation is not defined | Account-backed comments introduce trust and abuse questions. | Future moderation epic |
+
