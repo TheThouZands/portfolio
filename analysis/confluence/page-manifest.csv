@@ -39,6 +39,7 @@ Page Title,Parent Page,Local Source,Target Area,Source Of Truth,Publish Priority
 "Technical Reference","Portfolio Analysis Home","","Technical","Confluence container","2","Pending","","Container page for GitHub-owned technical references."
 "Traceability","Technical Reference","analysis/technical/traceability.md","Technical","Local Git source","1","Pending","","Capability to code, test, schema, and commit map."
 "Schema And Migrations","Technical Reference","analysis/technical/schema-and-migrations.md","Technical","GitHub source","1","Pending","","Schema inventory and migration history summary."
+"Schema Table Catalog","Technical Reference","analysis/technical/schema-table-catalog.md","Technical","GitHub source","1","Pending","","Table and enum catalog for current database schema."
 "Migration Catalog","Technical Reference","analysis/technical/migration-catalog.md","Technical","GitHub source","1","Pending","","Per-migration product intent and evidence."
 "API Surface Inventory","Technical Reference","analysis/technical/api-surface-inventory.md","Technical","GitHub source","1","Pending","","Route handler and server action contract status inventory."
 "OpenAPI Planning Notes","Technical Reference","analysis/technical/openapi.md","Technical","GitHub source","2","Pending","","Current API surface and deferred public contract decision."

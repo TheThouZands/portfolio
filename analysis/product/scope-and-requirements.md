@@ -45,7 +45,7 @@ content editing, and stronger moderation/observability.
 | ID | Requirement | Status | Evidence commits | Notes |
 | --- | --- | --- | --- | --- |
 | NFR-001 | Maintainability: routes should compose sections rather than own all feature behavior. | Implemented pattern | `0becf78`, `8a37c2b`, `29f3709`, `619d869` | Captured in `ARCHITECTURE.md` and component docs. |
-| NFR-002 | Data integrity: schema changes must be code-first and migration-backed. | Implemented | `734bc11`, migration history | `src/db/schema.ts` is source of truth. |
+| NFR-002 | Data integrity: schema changes must be code-first and migration-backed. | Implemented | `734bc11`, migration history, `analysis/technical/schema-table-catalog.md` | `src/db/schema.ts` is source of truth. |
 | NFR-003 | Security: authentication inputs must be validated before account actions. | Implemented | `c0fa0fc`, `213d7a7` | Zod validation and tests. |
 | NFR-004 | Security: auth attempts must be rate limited by scope and resolved client IP. | Implemented | `7333bb1`, `bbdf312`, `213d7a7` | Includes rate limit key tests. |
 | NFR-005 | Security: responses should include baseline headers. | Implemented | `ca983df` | Baseline response header work exists in branch history. |

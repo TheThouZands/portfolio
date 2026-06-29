@@ -67,7 +67,7 @@ the two aligned as the portfolio keeps changing.
 | Requirement | Status | Primary personas | Jira stories | Evidence | Verification signal |
 | --- | --- | --- | --- | --- | --- |
 | `NFR-001` Maintainable route and component boundaries. | Implemented pattern | `PERS-002` | `PF-503`, `PF-604` | `0becf78`, `8a37c2b`, `29f3709`, `619d869`, ADR 0007 | Architecture review, route composition review, ADR updates. |
-| `NFR-002` Data integrity through code-first schema and migrations. | Implemented | `PERS-002`, `PERS-003` | `PF-201`, `PF-501` | `734bc11`, migration history, ADR 0002 | `npm run db:check`, migration catalog review. |
+| `NFR-002` Data integrity through code-first schema and migrations. | Implemented | `PERS-002`, `PERS-003` | `PF-201`, `PF-501`, `PF-507` | `734bc11`, migration history, ADR 0002, `analysis/technical/schema-table-catalog.md` | `npm run db:check`, schema table catalog review, migration catalog review. |
 | `NFR-003` Auth inputs validated before account actions. | Implemented | `PERS-005` | `PF-403` | `c0fa0fc`, `213d7a7` | Auth validation tests. |
 | `NFR-004` Auth attempts rate limited by scope and resolved client IP. | Implemented | `PERS-005`, owner | `PF-403` | `7333bb1`, `bbdf312`, `213d7a7` | Rate-limit key tests, abuse-case review. |
 | `NFR-005` Baseline response headers. | Implemented with indirect story coverage | `PERS-002`, owner | `PF-504` | `ca983df` | Header review in route/build checks, future security checklist. |

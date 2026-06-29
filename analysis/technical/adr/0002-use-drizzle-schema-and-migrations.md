@@ -48,6 +48,7 @@ Tradeoffs:
 - `README.md`
 - `src/db/db.md`
 - `analysis/technical/schema-and-migrations.md`
+- `analysis/technical/schema-table-catalog.md`
 - Commits: `734bc11`, `5a50321`, `888fbdf`
 
 ## Follow-Ups
@@ -55,4 +56,3 @@ Tradeoffs:
 - Add ADRs if the project adopts a CMS admin/editor workflow that changes schema ownership.
 - Keep migration timeline summaries updated when schema domains change materially.
 - Consider tests around query behavior for critical content relationships.
-

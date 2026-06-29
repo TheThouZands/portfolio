@@ -60,6 +60,7 @@ Target home: Jira/Confluence
 | PF-504 | As a maintainer, I want automated checks for important behavior, so regressions are caught before deployment. | High | Implemented | Unit tests cover auth validation, auth rate-limit keys, structural content rendering, and blog comments; CI workflow exists. | `213d7a7`, `2870f75` |
 | PF-505 | As the portfolio owner, I want retrospective product analysis, so future work can be planned instead of improvised. | High | Planned | Analysis directory exists; requirements, stories, traceability, ADR, schema inventory, and API notes are in place. | This suite |
 | PF-506 | As a technical maintainer, I want an API surface inventory, so internal routes and server actions are not mistaken for public OpenAPI contracts. | Medium | Planned | Inventory lists route handlers, server actions, contract status, OpenAPI triggers, and update rules. | `analysis/technical/api-surface-inventory.md`, ADR 0006 |
+| PF-507 | As a technical reviewer, I want a table-level schema catalog, so I can understand database purpose and relationships before reading `schema.ts`. | Medium | Planned | Catalog lists current enums, tables, product purposes, relationship themes, source-of-truth rules, and update rules. | `analysis/technical/schema-table-catalog.md`, ADR 0002 |
 
 ## Epic PF-E06 - Forward Planning
 

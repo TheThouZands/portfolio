@@ -59,6 +59,7 @@ The suite is intended to stay useful in four places:
 | GitHub setup | [github/change-traceability-template.md](github/change-traceability-template.md) | GitHub/Jira/Confluence | Provides a reusable PR/change template for requirements, stories, risks, ADRs, and verification. |
 | Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |
 | Technical | [technical/schema-and-migrations.md](technical/schema-and-migrations.md) | GitHub | Current schema inventory and migration history summary. |
+| Technical | [technical/schema-table-catalog.md](technical/schema-table-catalog.md) | GitHub/Confluence | Table and enum catalog explaining current schema purpose and relationships. |
 | Technical | [technical/migration-catalog.md](technical/migration-catalog.md) | GitHub/Confluence | Maps each committed Drizzle migration to product intent and evidence. |
 | Technical | [technical/api-surface-inventory.md](technical/api-surface-inventory.md) | GitHub/Confluence | Inventories current route handlers, server actions, contract status, and OpenAPI triggers. |
 | Technical decisions | [technical/adr/README.md](technical/adr/README.md) | GitHub | ADR index and conventions. |

@@ -32,7 +32,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | --- | --- | --- | --- |
 | Homepage and public portfolio browsing | `FR-001`, `FR-004`, `FR-005`, `FR-006` | `src/app/[locale]`, `src/components/heroes`, `src/components/partials`, `src/components/repeatables` | Manual route checks; future visual/a11y checks. |
 | Internationalized routes and content | `FR-002`, `NFR-006` | `src/i18n`, `messages`, `src/app/[locale]`, translation tables | Existing route behavior; future metadata tests. |
-| CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle` | `npm run db:check`, migrations, query tests as added. |
+| CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle`, `analysis/technical/schema-table-catalog.md` | `npm run db:check`, schema catalog review, migrations, query tests as added. |
 | Structural content rendering | `FR-008`, `NFR-003` | `src/cms/structural-content`, `src/components/repeatables/structural-content` | `tests/structural-content/rendering.test.ts` |
 | Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
 | Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`. |
