@@ -18,7 +18,7 @@ large migration.
 | 1 | Confluence | Create space and page tree. | `analysis/confluence/page-tree.md` |
 | 2 | Confluence | Publish high-level product pages. | `analysis/product` |
 | 3 | Jira | Create project, epics, labels, components, workflow. | `analysis/jira/project-setup.md` |
-| 4 | Jira | Import or manually create stories from CSV. | `analysis/jira/backlog.csv` |
+| 4 | Jira | Import or manually create epics and stories from CSV. | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` |
 | 5 | Jira | Record local story id to Jira key mappings. | `analysis/jira/import-history.md` |
 | 6 | FigJam | Create diagram file and sections. | `analysis/design/diagram-inventory.md` |
 | 7 | FigJam | Recreate/refine local Mermaid sketches. | `analysis/design/diagrams` |
@@ -29,7 +29,7 @@ large migration.
 | Artifact | During local setup | After external setup |
 | --- | --- | --- |
 | Product/business narrative | `analysis/product` | Confluence readable copy, Git local source retained. |
-| Jira execution state | `analysis/jira/backlog.csv` and `user-stories.md` | Jira becomes execution state; local docs preserve context. |
+| Jira execution state | `analysis/jira/user-stories.md`, `analysis/jira/epics.csv`, and `analysis/jira/backlog.csv` | Jira becomes execution state; local docs preserve context. |
 | Diagrams | `analysis/design/diagrams` | FigJam becomes collaborative visual home; local source sketches remain references. |
 | ADRs/schema/OpenAPI | GitHub | GitHub remains source of truth. |
 | Import mappings/logs | Local docs | Local docs record external ids and links. |
@@ -68,4 +68,3 @@ large migration.
 | Should Confluence pages be manually copied or imported with automation? | Manual first, automation only after format stabilizes. |
 | Should Jira implemented stories import as Done? | Import as Done only if historical work should appear in reports; otherwise import to Backlog with evidence. |
 | Should FigJam sections embed Mermaid exports or be redrawn manually? | Redraw manually from source sketches for readability. |
-

@@ -7,14 +7,15 @@ Target home: Jira/Confluence
 
 ## Import Strategy
 
-The local backlog has two forms:
+The local Jira package has four files:
 
 - [user-stories.md](user-stories.md): readable working backlog with epics, stories, acceptance criteria, and evidence.
+- [epics.csv](epics.csv): starter Jira CSV import with one row per epic.
 - [backlog.csv](backlog.csv): starter Jira CSV import with one row per issue.
 - [project-setup.md](project-setup.md): proposed Jira project settings, issue types, components, workflow, and import order.
 
-Use the Markdown file as the source for refinement. Use the CSV when the Jira project exists and the issue field mapping
-is known.
+Use the Markdown file as the source for refinement. Use the CSV files when the Jira project exists and the issue field
+mapping is known.
 
 ## Suggested Jira Fields
 

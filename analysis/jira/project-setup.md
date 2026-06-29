@@ -56,6 +56,7 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 | `db` | Schema, migrations, data integrity, seed data. |
 | `security` | Validation, rate limits, headers, and abuse controls. |
 | `docs` | Analysis suite, architecture notes, ADRs, and planning artifacts. |
+| `requirements` | Requirement mapping, traceability, and acceptance coverage. |
 | `ops` | Deployment, Neon, CI, cleanup jobs, and environment workflows. |
 
 ## Workflow
@@ -73,12 +74,12 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 
 | CSV column | Jira field | Notes |
 | --- | --- | --- |
-| Issue Type | Issue Type | `Story` for all current backlog rows. |
-| Summary | Summary | Includes local story id in the summary until Jira issue keys exist. |
+| Issue Type | Issue Type | `Epic` for `epics.csv`; `Story` for `backlog.csv`. |
+| Summary | Summary | Includes the local epic or story id until Jira issue keys exist. |
 | Description | Description | Preserve the user story sentence. |
 | Priority | Priority | High, Medium, Low. |
 | Labels | Labels | Comma-separated labels. |
-| Epic Name | Epic Link or Parent | May require importing epics first depending on Jira configuration. |
+| Epic Name | Epic Name, Epic Link, or Parent | For epics, this is the display name; for stories, this maps to the parent epic. |
 | Acceptance Criteria | Description or custom field | If no custom field exists, append under a heading in Description. |
 | Evidence Commits | Description or custom field | Keep commit hashes for traceability. |
 | Status | Status | Map implemented stories to Done only after confirming Jira allows historical Done imports. |
@@ -86,7 +87,7 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 ## Import Order
 
 1. Create the Jira project with key `PF`.
-2. Create epics from the epic headings in `analysis/jira/user-stories.md`.
+2. Import or manually create epics from `analysis/jira/epics.csv`.
 3. Import `analysis/jira/backlog.csv`.
 4. Map each story to its epic.
 5. Confirm labels, components, and priorities.

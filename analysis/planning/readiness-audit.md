@@ -19,7 +19,7 @@ technical artifacts near the code.
 | Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
-| Jira-compatible user stories | Strong local baseline | `jira/user-stories.md`, `jira/backlog.csv` | Import into Jira and fill `jira/import-history.md`. |
+| Jira-compatible user stories | Strong local baseline | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv` | Import into Jira and fill `jira/import-history.md`. |
 | Confluence-compatible docs | Strong local baseline | `confluence/page-tree.md`, `confluence/publishing-runbook.md` | Create Confluence space/pages and record source commits/URLs. |
 | FigJam/Figma diagrams | Local source ready | `design/diagram-inventory.md`, `design/diagrams`, `figjam-creation-log.md` | Create FigJam file/sections and record URLs. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0007` | Add ADRs for moderation schema, CMS authoring implementation, or owner auth when decided. |

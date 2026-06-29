@@ -39,7 +39,7 @@ A change is validated when:
 | Work type | Minimum validation |
 | --- | --- |
 | Product analysis doc | Link from index or roadmap; check stable ids and target home. |
-| Jira backlog update | CSV parses; story has priority, status, acceptance criteria, and evidence/source. |
+| Jira backlog update | Epic and story CSV files parse; story has priority, status, acceptance criteria, and evidence/source. |
 | ADR | Decision has context, consequences, evidence, and follow-ups. |
 | Schema change | Drizzle migration generated and reviewed; schema docs updated if product meaning changes. |
 | Route/page change | Manual route check; metadata/locale behavior checked when relevant. |
@@ -59,6 +59,7 @@ rg --files analysis
 rg --pcre2 "[^\x00-\x7F]" analysis
 rg "TO[D]O|TB[D]|FIX[M]E" analysis
 Import-Csv analysis\jira\backlog.csv | Measure-Object
+Import-Csv analysis\jira\epics.csv | Measure-Object
 ```
 
 Useful checks for application changes, chosen by risk:

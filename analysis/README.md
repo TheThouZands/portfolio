@@ -45,6 +45,7 @@ The suite is intended to stay useful in four places:
 | Operations | [operations/decision-log.md](operations/decision-log.md) | Confluence/GitHub | Tracks lightweight product, planning, and tooling decisions that do not need ADRs. |
 | Operations | [operations/open-questions.md](operations/open-questions.md) | Confluence/Jira | Keeps unresolved product, tooling, and architecture questions visible. |
 | Jira backlog | [jira/user-stories.md](jira/user-stories.md) | Jira/Confluence | Human-readable epics and user stories with acceptance criteria and evidence commits. |
+| Jira backlog | [jira/epics.csv](jira/epics.csv) | Jira CSV import | Starter import file for Jira epics before importing stories. |
 | Jira backlog | [jira/backlog.csv](jira/backlog.csv) | Jira CSV import | Starter import file for Jira issues once the Jira project is configured. |
 | Jira setup | [jira/project-setup.md](jira/project-setup.md) | Jira/Confluence | Defines project key, issue types, components, workflow, import order, and done/ready rules. |
 | Jira setup | [jira/import-history.md](jira/import-history.md) | Jira/Confluence/GitHub | Records import runs and local story id to Jira key mappings. |

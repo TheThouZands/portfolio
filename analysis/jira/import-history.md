@@ -12,9 +12,9 @@ should remain stable even after Jira assigns keys.
 
 ## Import Runs
 
-| Run id | Date | Jira project | Source file | Source commit | Imported by | Result |
+| Run id | Date | Jira project | Source files | Source commit | Imported by | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| JIRA-IMPORT-001 | Pending | `PF` | `analysis/jira/backlog.csv` | Pending | Thouzands | Pending |
+| JIRA-IMPORT-001 | Pending | `PF` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | Pending | Thouzands | Pending |
 
 ## Epic Mapping
 
@@ -43,8 +43,9 @@ should remain stable even after Jira assigns keys.
 Before import:
 
 - Confirm `analysis/jira/backlog.csv` parses locally.
+- Confirm `analysis/jira/epics.csv` parses locally.
 - Confirm project key is `PF` or update this file before import.
-- Create epics first if Jira CSV import cannot create parent links.
+- Import or manually create epics first so story parent links can be mapped.
 - Decide whether implemented retrospective stories import as Done or Backlog.
 
 After import:
@@ -61,4 +62,3 @@ After import:
 - Add Jira keys beside local ids after import.
 - Keep import run ids stable.
 - If a story is split in Jira, record the split in Notes instead of deleting the local story id.
-
