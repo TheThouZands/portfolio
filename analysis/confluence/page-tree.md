@@ -75,6 +75,7 @@ Portfolio Analysis Home
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |
 | Jira Project Setup | `analysis/jira/project-setup.md` | Local to Confluence and Jira admin |
 | Diagram Inventory | `analysis/design/diagram-inventory.md` | Local to Confluence and FigJam |
+| Diagram Sources | `analysis/design/diagrams/README.md` | Local to Confluence and FigJam |
 | Traceability | `analysis/technical/traceability.md` | Local to Confluence and GitHub |
 | Schema And Migrations | `analysis/technical/schema-and-migrations.md` | GitHub to Confluence reference |
 | OpenAPI Planning Notes | `analysis/technical/openapi.md` | GitHub to Confluence reference |

@@ -78,12 +78,13 @@ Goal: create diagrams that explain flows and architecture at the right level.
 
 Candidate diagrams:
 
-- Visitor discovery journey.
-- CMS content entity relationship diagram.
-- Auth identifier and session flow.
+- Visitor discovery journey. Current local source: `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md`.
+- CMS content entity relationship diagram. Current local source: `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md`.
+- Auth identifier and session flow. Current local source: `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md`.
 - Blog comment submission and rendering flow.
 - Deployment and Neon branch workflow.
 - Structural content rendering contract.
+- Documentation toolchain. Current local source: `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md`.
 
 Exit check:
 

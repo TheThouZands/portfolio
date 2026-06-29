@@ -35,6 +35,7 @@ The suite is intended to stay useful in four places:
 | Jira backlog | [jira/backlog.csv](jira/backlog.csv) | Jira CSV import | Starter import file for Jira issues once the Jira project is configured. |
 | Jira setup | [jira/project-setup.md](jira/project-setup.md) | Jira/Confluence | Defines project key, issue types, components, workflow, import order, and done/ready rules. |
 | Design setup | [design/diagram-inventory.md](design/diagram-inventory.md) | Figma/FigJam/Confluence | Lists planned diagrams, source docs, update triggers, and FigJam creation rules. |
+| Design sources | [design/diagrams/README.md](design/diagrams/README.md) | Figma/FigJam/GitHub | Keeps first Mermaid diagram sketches reviewable before FigJam setup. |
 | GitHub setup | [github/documentation-rules.md](github/documentation-rules.md) | GitHub/Confluence | Defines source-of-truth rules, naming conventions, commit sizing, and doc review checks. |
 | Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |
 | Technical | [technical/schema-and-migrations.md](technical/schema-and-migrations.md) | GitHub | Current schema inventory and migration history summary. |
