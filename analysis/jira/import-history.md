@@ -14,7 +14,19 @@ should remain stable even after Jira assigns keys.
 
 | Run id | Date | Jira project | Source files | Source commit | Imported by | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| JIRA-IMPORT-001 | 2026-06-29 | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `86a2d97`, `b980ebb`, `e50da91` | Thouzands | Partial import: seven epics and the `PF-E01`/`PF-E02` story batches were created in Jira. Thirty-six stories remain pending. Jira defaulted created issues to `To Do` with `Medium` priority, so local priority/status values are preserved in each issue description until workflow mapping is decided. |
+| JIRA-IMPORT-001 | 2026-06-29 | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `86a2d97`, `b980ebb`, `e50da91` | Thouzands | Partial import: seven epics and the `PF-E01`/`PF-E02` story batches were created in Jira. Thirty-six stories remain pending. Jira defaulted created issues to `To Do` with `Medium` priority, so local priority values remain preserved in each issue description until priority mapping is applied. |
+| JIRA-STATUS-001 | 2026-06-29 | `KAN` | `analysis/jira/import-history.md`, `analysis/jira/backlog.csv` | `3bc7001` | Thouzands | Status reconciliation: created story issues with local status `Implemented` were transitioned to `Done`; created story issues with local status `Planned` remained `To Do`. |
+
+## Status Mapping Decision
+
+| Local retrospective status | Jira status | Applies to | Notes |
+| --- | --- | --- | --- |
+| Implemented | Done | Created story issues `KAN-8` through `KAN-16` and `KAN-18`. | These stories represent completed public portfolio, backend, CMS, and CMS decision work extracted from existing code or accepted docs. |
+| Planned | To Do | Created story issues `KAN-17` and `KAN-19`, plus future planned story imports. | These are writer/content-producer implementation tasks or other future work, so they stay open. |
+| Implemented/in progress | Leave open until verified | Pending story batches that reference current worktree or partly complete behavior. | Import only after deciding whether the current slice should be `In Progress` or `Done`. |
+
+Epic statuses stay open until child story batches are imported and reconciled. The status pass only changed story issues that
+already existed in Jira.
 
 ## Epic Mapping
 
@@ -32,17 +44,17 @@ should remain stable even after Jira assigns keys.
 
 | Local story id | Jira key | Summary | Import run | Status after import | Notes |
 | --- | --- | --- | --- | --- | --- |
-| PF-101 | [KAN-8](https://thouzands.atlassian.net/browse/KAN-8) | Homepage communicates portfolio identity | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
-| PF-102 | [KAN-9](https://thouzands.atlassian.net/browse/KAN-9) | Browse professional experience | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
-| PF-103 | [KAN-10](https://thouzands.atlassian.net/browse/KAN-10) | Browse skills and related work | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
-| PF-104 | [KAN-11](https://thouzands.atlassian.net/browse/KAN-11) | Browse project evidence | JIRA-IMPORT-001 | To Do | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
-| PF-201 | [KAN-12](https://thouzands.atlassian.net/browse/KAN-12) | Store content as structured records | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
-| PF-202 | [KAN-13](https://thouzands.atlassian.net/browse/KAN-13) | Support CMS content lifecycle statuses | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
-| PF-203 | [KAN-14](https://thouzands.atlassian.net/browse/KAN-14) | Render safe structural content | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
-| PF-204 | [KAN-15](https://thouzands.atlassian.net/browse/KAN-15) | Seed repeatable demo content | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
-| PF-205 | [KAN-16](https://thouzands.atlassian.net/browse/KAN-16) | Define CMS authoring workflow | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
+| PF-101 | [KAN-8](https://thouzands.atlassian.net/browse/KAN-8) | Homepage communicates portfolio identity | JIRA-IMPORT-001 | Done | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-102 | [KAN-9](https://thouzands.atlassian.net/browse/KAN-9) | Browse professional experience | JIRA-IMPORT-001 | Done | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-103 | [KAN-10](https://thouzands.atlassian.net/browse/KAN-10) | Browse skills and related work | JIRA-IMPORT-001 | Done | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-104 | [KAN-11](https://thouzands.atlassian.net/browse/KAN-11) | Browse project evidence | JIRA-IMPORT-001 | Done | Parent: [KAN-1](https://thouzands.atlassian.net/browse/KAN-1). Local status: Implemented; local priority: High. |
+| PF-201 | [KAN-12](https://thouzands.atlassian.net/browse/KAN-12) | Store content as structured records | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
+| PF-202 | [KAN-13](https://thouzands.atlassian.net/browse/KAN-13) | Support CMS content lifecycle statuses | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
+| PF-203 | [KAN-14](https://thouzands.atlassian.net/browse/KAN-14) | Render safe structural content | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
+| PF-204 | [KAN-15](https://thouzands.atlassian.net/browse/KAN-15) | Seed repeatable demo content | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
+| PF-205 | [KAN-16](https://thouzands.atlassian.net/browse/KAN-16) | Define CMS authoring workflow | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: High. |
 | PF-206 | [KAN-17](https://thouzands.atlassian.net/browse/KAN-17) | Design owner draft preview publish flow | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Planned; local priority: High. |
-| PF-207 | [KAN-18](https://thouzands.atlassian.net/browse/KAN-18) | Define media lifecycle decisions | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
+| PF-207 | [KAN-18](https://thouzands.atlassian.net/browse/KAN-18) | Define media lifecycle decisions | JIRA-IMPORT-001 | Done | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Implemented; local priority: Medium. |
 | PF-208 | [KAN-19](https://thouzands.atlassian.net/browse/KAN-19) | Implement owner media upload lifecycle | JIRA-IMPORT-001 | To Do | Parent: [KAN-2](https://thouzands.atlassian.net/browse/KAN-2). Local status: Planned; local priority: Medium. |
 | PF-401 | Pending | Sign up with portfolio identifier flow | JIRA-IMPORT-001 | Pending | Implemented story. |
 | PF-505 | Pending | Maintain retrospective analysis suite | JIRA-IMPORT-001 | Pending | Planning story. |
@@ -66,7 +78,7 @@ Before story import:
 - Confirm `analysis/jira/epics.csv` parses locally.
 - Confirm project key is `KAN` and local ids remain `PF-*` after import.
 - Epics are created; use the Jira keys in the epic mapping table for story parent links.
-- Decide whether implemented retrospective stories import as Done or Backlog.
+- Apply the status mapping decision: implemented created stories transition to `Done`; planned work remains `To Do`.
 
 After story import:
 
@@ -80,4 +92,5 @@ After story import:
 - Never replace local ids with Jira keys in source docs.
 - Add Jira keys beside local ids after import.
 - Keep import run ids stable.
+- Keep the Jira status aligned with the local retrospective status after each import batch.
 - If a story is split in Jira, record the split in Notes instead of deleting the local story id.

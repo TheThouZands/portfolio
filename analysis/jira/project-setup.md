@@ -66,12 +66,10 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 
 | Status | Meaning |
 | --- | --- |
-| Backlog | Captured but not ready for implementation. |
-| Ready | Refined enough to start without extra product decisions. |
+| To Do | Captured, planned, or not yet reconciled from the local backlog. |
 | In Progress | Actively being implemented or documented. |
 | In Review | Awaiting code/doc review or self-review checkpoint. |
 | Done | Implemented, verified, and traceability updated. |
-| Deferred | Useful but intentionally postponed. |
 
 ## Field Mapping For CSV Import
 
@@ -85,16 +83,16 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 | Epic Name | Epic Name, Epic Link, or Parent | For epics, this is the display name; for stories, this maps to the parent epic. |
 | Acceptance Criteria | Description or custom field | If no custom field exists, append under a heading in Description. |
 | Evidence Commits | Description or custom field | Keep commit hashes for traceability. |
-| Status | Status | Map implemented stories to Done only after confirming Jira allows historical Done imports. |
+| Status | Status | Implemented created stories transition to `Done`; planned work remains `To Do`; partially complete/current-worktree stories stay open until verified. |
 
 ## Import Order
 
 1. Use the connected Jira project `KAN` named Portfolio.
 2. Import or manually create epics from `analysis/jira/epics.csv`.
-3. Import `analysis/jira/backlog.csv`.
+3. Import `analysis/jira/backlog.csv` in small batches.
 4. Map each story to its epic.
 5. Confirm labels, components, and priorities.
-6. For implemented stories, add evidence commits to the description or linked development panel.
+6. For implemented stories, add evidence commits to the description or linked development panel and transition the story to `Done`.
 7. Record import date and Jira issue key mapping in an import history page.
 
 The local import history source is `analysis/jira/import-history.md`.
@@ -134,4 +132,4 @@ A story is done when:
 | Import remaining story batches | Task | High |
 | Add components and labels | Task | Medium |
 | Create import history page | Task | Medium |
-| Decide whether implemented retrospective stories should import as Done or Backlog | Task | Medium |
+| Reconcile statuses after each story import batch | Task | Medium |
