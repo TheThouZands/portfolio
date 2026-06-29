@@ -38,6 +38,4 @@ Use an ADR when:
 | --- | --- |
 | Whether implemented retrospective stories should import into Jira as Done | Depends on how historical work should appear in Jira reporting. |
 | Whether comments should allow edit/delete/report controls first | Needs product and moderation design before implementation. |
-| Whether CMS authoring starts as admin UI or local tooling | Depends on owner auth readiness and editor scope. |
 | Whether public OpenAPI should exist | Deferred by ADR 0006 until stable external API intent exists. |
-

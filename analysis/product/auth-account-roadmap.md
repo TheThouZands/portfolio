@@ -43,7 +43,7 @@ Auth does not yet exist to support:
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
 | A2 Owner controls | Owner can moderate comments and access protected owner tools. | Owner-only authorization model exists in ADR 0010; implementation still pending. |
-| A3 CMS authoring auth | Owner can draft, preview, and publish CMS content. | Authoring workflow has protected routes and audit fields if needed. |
+| A3 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
 | A4 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
 
 ## Authorization Model
@@ -66,7 +66,7 @@ and authoring tools should call one server-only authorization helper rather than
 | Account enumeration | Username/email flow separates behavior and avoids exposing email account existence. |
 | Session accuracy | Session state refresh and Better Auth session storage. |
 | Comment trust | Authenticated comments plus planned moderation. |
-| Owner tools | Use the ADR 0010 explicit owner allowlist and server-only guard before protected tools ship. |
+| Owner tools | Use the ADR 0010 explicit owner allowlist and server-only guard before protected tools ship; use ADR 0011 for the first CMS authoring boundary. |
 
 ## Requirements Impact
 

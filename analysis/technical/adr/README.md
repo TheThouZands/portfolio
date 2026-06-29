@@ -36,9 +36,11 @@ Each ADR should include:
 | [0008](0008-use-git-owned-manifests-for-external-tool-setup.md) | Use Git-owned manifests for external tool setup | Accepted |
 | [0009](0009-use-soft-state-comment-moderation.md) | Use soft-state comment moderation | Accepted |
 | [0010](0010-use-explicit-owner-allowlist-for-protected-tools.md) | Use explicit owner allowlist for protected tools | Accepted |
+| [0011](0011-use-owner-only-source-aware-cms-authoring.md) | Use owner-only source-aware CMS authoring | Accepted |
 
 ## Candidate ADRs
 
 | Candidate | Reason |
 | --- | --- |
-| Define CMS authoring workflow ownership | Needed before adding an editor/admin surface. |
+| Define media lifecycle for CMS authoring | Needed before upload, cleanup, and asset reconciliation tooling. |
+| Define intake/contact data handling | Needed before a public service intake route stores lead data. |

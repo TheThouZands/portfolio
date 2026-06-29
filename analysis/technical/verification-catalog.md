@@ -51,7 +51,7 @@ Windows PowerShell note: if `npm` resolves to a blocked `npm.ps1`, run the same 
 | `tests/auth/validation.test.ts` | `FR-011`, `NFR-003` | `PF-403` | Username/email/identifier trimming, password strength, sign-in validation, sign-up counterpart rules. | Does not exercise full server actions, Better Auth session persistence, or browser form behavior. |
 | `tests/auth/rate-limit-keys.test.ts` | `FR-011`, `NFR-004` | `PF-403` | Forwarded IP precedence, trusted proxy fallbacks, and scoped auth rate-limit key format. | Does not exercise rate-limit storage, expiry, or action-level enforcement. |
 | `tests/blog/comments.test.ts` | `FR-013`, `FR-014` | `PF-404`, `PF-405` | Reply tree nesting, orphaned replies, fallback author names, and nested comment markup. | Does not exercise comment server actions, authentication gates, moderation, or persistence. |
-| `tests/structural-content/rendering.test.ts` | `FR-008`, `NFR-014` | `PF-203`, `PF-205` | Nested structural content rendering, known elements, unknown fallback elements, unsafe attribute filtering, and null placeholders. | Does not exercise CMS authoring, preview workflows, localization, or database-backed content fixtures. |
+| `tests/structural-content/rendering.test.ts` | `FR-008`, `NFR-014` | `PF-203` | Nested structural content rendering, known elements, unknown fallback elements, unsafe attribute filtering, and null placeholders. | Does not exercise CMS authoring, preview workflows, localization, or database-backed content fixtures. |
 
 ## Capability Coverage
 
@@ -60,7 +60,7 @@ Windows PowerShell note: if `npm` resolves to a blocked `npm.ps1`, run the same 
 | Public portfolio pages | Manual route review, lint/typecheck, future build when route composition changes. | Add route, visual, accessibility, or metadata checks when service conversion pages become core. |
 | Internationalized routes and metadata | Manual locale route checks plus typecheck. | Add route/metadata regression tests if locale behavior changes frequently. |
 | CMS schema and migrations | `npm run db:check`, migration catalog review, schema table catalog review. | Add query or fixture tests when authoring flows depend on specific data relationships. |
-| Structural content rendering | `tests/structural-content/rendering.test.ts`. | Add authoring/preview tests before owner CMS editing ships. |
+| Structural content rendering | `tests/structural-content/rendering.test.ts`. | Add authoring/preview tests aligned to ADR 0011 before owner CMS editing ships. |
 | Auth validation and rate-limit keys | `tests/auth/validation.test.ts`, `tests/auth/rate-limit-keys.test.ts`. | Add action/session integration tests before owner-only tools or expanded account scope. |
 | Blog comments | `tests/blog/comments.test.ts`. | Add action, persistence, moderation, and auth-gate tests before broader public use. |
 | Database branch operations | Manual env review, `npm run db:branch:sync`, `npm run db:branch:migrate` when relevant. | Keep branch-target checks explicit in PR notes before migration or deployment changes. |

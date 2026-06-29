@@ -11,6 +11,8 @@ The current portfolio has a CMS-like database and renderer, but it does not yet 
 document defines the authoring workflow before implementation so future CMS work can be planned deliberately instead of
 adding isolated admin forms.
 
+Decision record: [ADR 0011](../technical/adr/0011-use-owner-only-source-aware-cms-authoring.md).
+
 ## Current State
 
 | Area | Current support |
@@ -63,8 +65,8 @@ adding isolated admin forms.
 | Approval | Self-review through preview and validation. |
 | Multi-user editorial workflow | Deferred. |
 | Public user-generated content authoring | Not part of CMS authoring; comments remain separate. |
-| Rich-text editor | Needs a separate build decision; structural source contract must remain authoritative. |
-| Media upload | Should be designed with storage lifecycle and alt text requirements. |
+| Rich-text editor | Source-aware constrained forms or structured block controls first; structural source contract remains authoritative. |
+| Media upload | Deferred to a separate storage lifecycle, alt text, cleanup, and reconciliation decision. |
 
 ## Data Model Implications
 
@@ -72,7 +74,7 @@ Future CMS authoring may need:
 
 - Author/editor user id fields.
 - Draft revision metadata.
-- Preview tokens or private preview routes.
+- Owner-authenticated private preview routes first; public preview tokens only if sharing becomes a real need.
 - Media upload state and cleanup workflow.
 - Validation error persistence or preview diagnostics.
 - Slug collision handling per locale.
@@ -85,22 +87,22 @@ Do not add these fields one by one without a migration plan.
 | --- | --- |
 | `FR-003` CMS portfolio content is stored in PostgreSQL | Implemented. |
 | `FR-008` rich bodies use structural content | Implemented. |
-| `FR-019` owner can author and preview CMS content through a managed workflow | Planned; authorization model accepted in ADR 0010. |
-| `NFR-014` authoring workflow preserves structured content safety and localization | Planned. |
+| `FR-019` owner can author and preview CMS content through a managed workflow | Planned implementation; authorization model accepted in ADR 0010 and authoring boundary accepted in ADR 0011. |
+| `NFR-014` authoring workflow preserves structured content safety and localization | Planned implementation; structural source boundary accepted in ADR 0011. |
 
 ## Jira Impact
 
 | Story | Need |
 | --- | --- |
-| `PF-205` | Define CMS authoring workflow before editor implementation. |
-| `PF-206` | Design owner-only draft, preview, and publish flow. |
-| `PF-207` | Define media asset lifecycle for authoring. |
+| `PF-205` | CMS authoring workflow and first implementation boundary are defined. |
+| `PF-206` | Owner-only draft, preview, and publish flow is bounded; implementation remains future work. |
+| `PF-207` | Media asset lifecycle remains a separate decision before upload tooling. |
 
 ## Open Questions
 
 | Question | Default until answered |
 | --- | --- |
-| Should authoring start as an admin route or local tooling? | Admin route only after the ADR 0010 owner guard exists. |
-| Should the editor be visual, form-based, or source-oriented? | Source-aware constrained editor until richer needs are proven. |
+| Should authoring start as an admin route or local tooling? | ADR 0011 chooses owner-protected admin routes after the ADR 0010 owner guard exists. |
+| Should the editor be visual, form-based, or source-oriented? | ADR 0011 chooses source-aware constrained editing until richer needs are proven. |
 | Should CMS records track author/editor ids? | Yes, if an admin surface is built. |
-| Should preview be public behind unguessable token or authenticated only? | Authenticated only for first version. |
+| Should preview be public behind unguessable token or authenticated only? | Authenticated owner-only preview for the first version. |

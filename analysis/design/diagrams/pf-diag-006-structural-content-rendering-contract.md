@@ -12,6 +12,7 @@ Show how stored structural content becomes rendered output without storing or tr
 Source docs:
 
 - `analysis/technical/adr/0003-use-structural-content-json.md`
+- `analysis/technical/adr/0011-use-owner-only-source-aware-cms-authoring.md`
 - `src/cms/structural-content/types.ts`
 - `src/components/repeatables/structural-content`
 - `tests/structural-content/rendering.test.ts`
@@ -20,7 +21,7 @@ Source docs:
 
 ```mermaid
 flowchart TD
-  A["CMS authoring or seed data"] --> B["StructuralContentDocument"]
+  A["Owner source-aware authoring or seed data"] --> B["StructuralContentDocument"]
   B --> C["version"]
   B --> D["content tree"]
   D --> E["text nodes"]
@@ -55,4 +56,3 @@ flowchart TD
 
 Update when structural schema version, supported elements, attribute filtering, asset handling, or renderer fallback
 behavior changes.
-
