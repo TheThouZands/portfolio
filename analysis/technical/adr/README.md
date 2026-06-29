@@ -33,6 +33,7 @@ Each ADR should include:
 | [0005](0005-preserve-comments-after-user-deletion.md) | Preserve blog comments after user deletion | Accepted |
 | [0006](0006-defer-openapi-until-public-contract.md) | Defer OpenAPI until a stable public contract exists | Accepted |
 | [0007](0007-compose-routes-from-partials-and-repeatables.md) | Compose routes from partials and repeatables | Accepted |
+| [0008](0008-use-git-owned-manifests-for-external-tool-setup.md) | Use Git-owned manifests for external tool setup | Accepted |
 
 ## Candidate ADRs
 

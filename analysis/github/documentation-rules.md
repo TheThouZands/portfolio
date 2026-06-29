@@ -20,6 +20,7 @@ is to keep technical truth close to code while letting planning tools do the job
 | Product/problem docs | Local Markdown first, then Confluence | Early drafting benefits from Git review; Confluence improves reading and navigation. |
 | Jira stories | Jira after import, local Markdown for context | Jira owns execution state; local docs preserve retrospective reasoning. |
 | Diagrams | FigJam after creation, local inventory for governance | FigJam owns collaborative visuals; local docs define purpose and update triggers. |
+| External tool manifests | GitHub | Setup manifests need reviewable history until external ids and URLs exist. |
 | Architecture notes | GitHub | Developers need architecture boundaries during code review. |
 
 ## Directory Roles
@@ -30,8 +31,8 @@ is to keep technical truth close to code while letting planning tools do the job
 | `analysis/product/` | Business/product problem, scope, requirements, positioning, and strategy. |
 | `analysis/planning/` | Roadmaps, staged plans, and delivery cadence. |
 | `analysis/jira/` | Jira import sources, setup rules, and backlog notes. |
-| `analysis/confluence/` | Confluence page tree and publishing rules. |
-| `analysis/design/` | FigJam/Figma diagram inventory and diagram specs. |
+| `analysis/confluence/` | Confluence page tree, page manifest, and publishing rules. |
+| `analysis/design/` | FigJam/Figma diagram inventory, section manifest, logs, and diagram specs. |
 | `analysis/technical/` | Traceability, schema notes, API planning, and ADRs. |
 | `analysis/github/change-traceability-template.md` | Reusable change/PR traceability template. |
 | `ARCHITECTURE.md` | Repo-level architecture entrypoint for developers. |
@@ -79,6 +80,9 @@ rg --files analysis
 rg --pcre2 "[^\x00-\x7F]" analysis
 rg "TO[D]O|TB[D]|FIX[M]E" analysis
 Import-Csv analysis\jira\backlog.csv | Measure-Object
+Import-Csv analysis\jira\epics.csv | Measure-Object
+Import-Csv analysis\confluence\page-manifest.csv | Measure-Object
+Import-Csv analysis\design\figjam-section-manifest.csv | Measure-Object
 ```
 
 ## Traceability Expectations

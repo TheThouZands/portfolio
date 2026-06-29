@@ -42,7 +42,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Owner account controls | `FR-020`, `NFR-015` | Future owner authorization model for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
 | Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates; ADR 0007 records route/component boundaries. |
-| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md`, `analysis/planning/requirements-traceability-matrix.md` | Docs validate with CSV/import checks; future implementation slices should cite persona, requirement, story, risk, and validation evidence. |
+| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md`, `analysis/planning/requirements-traceability-matrix.md`, external tool manifests | Docs validate with CSV/import checks; future implementation slices should cite persona, requirement, story, risk, and validation evidence. ADR 0008 records manifest ownership. |
 
 ## Tests Inventory
 
