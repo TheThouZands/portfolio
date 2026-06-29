@@ -50,6 +50,9 @@ Current local outputs:
 - `analysis/design/figjam-creation-log.md`
 - `analysis/github/documentation-rules.md`
 - `analysis/planning/tool-setup-plan.md`
+- `analysis/operations/release-and-review-cadence.md`
+- `analysis/operations/decision-log.md`
+- `analysis/operations/open-questions.md`
 
 Exit check:
 
@@ -58,6 +61,7 @@ Exit check:
 - FigJam diagrams have owners and source references.
 - GitHub remains the source for ADRs, schema notes, and API contracts.
 - External tool ids, URLs, and import mappings have local history files.
+- Review cadence, decision log, and open questions register exist.
 
 ## Stage 2 - Product Clarification
 

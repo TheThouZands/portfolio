@@ -105,6 +105,9 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
 - `analysis/planning/risk-register.md`
+- `analysis/operations/release-and-review-cadence.md`
+- `analysis/operations/decision-log.md`
+- `analysis/operations/open-questions.md`
 - `analysis/confluence/publishing-runbook.md`
 - `analysis/jira/import-history.md`
 - `analysis/design/figjam-creation-log.md`

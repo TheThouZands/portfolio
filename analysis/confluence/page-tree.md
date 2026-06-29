@@ -97,6 +97,9 @@ Portfolio Analysis Home
 | ADR Index | `analysis/technical/adr/README.md` | GitHub to Confluence reference |
 | Documentation Maintenance | `analysis/github/documentation-rules.md` | GitHub to Confluence reference |
 | Confluence Publishing Runbook | `analysis/confluence/publishing-runbook.md` | Local to Confluence and GitHub |
+| Release And Review Cadence | `analysis/operations/release-and-review-cadence.md` | Local to Confluence and Jira |
+| Decision Log | `analysis/operations/decision-log.md` | Local to Confluence and GitHub |
+| Open Questions | `analysis/operations/open-questions.md` | Local to Confluence and Jira |
 
 ## Page Templates
 
