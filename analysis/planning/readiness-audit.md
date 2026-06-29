@@ -20,7 +20,7 @@ technical artifacts near the code.
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
 | Jira-compatible user stories | Jira story import complete with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-55`; implemented created stories are `Done` and current-worktree stories are `In Progress` | Keep story statuses current as planned work is implemented. |
-| Confluence-compatible docs | External setup in progress | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages, product baseline pages, product business-path pages | Publish remaining priority 1 planning, Jira, design, technical, and operations pages and keep source commits/URLs current. |
+| Confluence-compatible docs | External setup in progress | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages, product baseline pages, product business-path pages, first planning pages | Publish remaining priority 1 planning, Jira, design, technical, and operations pages and keep source commits/URLs current. |
 | FigJam/Figma diagrams | First batch generated | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; first FigJam board exists at `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW` | Generate remaining priority 2 diagrams and link relevant Confluence pages. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
@@ -50,7 +50,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 
 | Item | Why it remains |
 | --- | --- |
-| Confluence publication is partial. | The Portfolio space, analysis root, six container pages, product baseline pages, and product business-path pages exist; remaining priority 1 planning, Jira, design, technical, and operations pages still need publication. |
+| Confluence publication is partial. | The Portfolio space, analysis root, six container pages, product baseline pages, product business-path pages, and first planning pages exist; remaining priority 1 planning, Jira, design, technical, and operations pages still need publication. |
 | FigJam publication is partial. | First priority diagrams `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, and `PF-DIAG-003` exist; priority 2 diagrams and Confluence links remain pending. |
 | Contact/intake UI is not implemented. | Planned in `PF-701` to `PF-704`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |

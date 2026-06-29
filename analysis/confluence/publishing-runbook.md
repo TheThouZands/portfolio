@@ -56,9 +56,10 @@ below is the first publishing batch, not the full page inventory.
 | Service Offer Catalog | `analysis/product/service-offer-catalog.md` | `6baedcd` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1212428/Service+Offer+Catalog | 2026-06-29 | Offer fit, outputs, proof, and pricing stance. |
 | Content Strategy | `analysis/product/content-strategy.md` | Pending | Pending | Pending | Content pillars and publication workflow. |
 | Conversion Path Brief | `analysis/product/conversion-path.md` | `6baedcd` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441793/Conversion+Path+Brief | 2026-06-29 | Visitor journey and intake path. |
-| Roadmap | `analysis/planning/roadmap.md` | Pending | Pending | Pending | Stage map. |
+| Roadmap | `analysis/planning/roadmap.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/884745/Roadmap | 2026-06-29 | Stage map. |
+| Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1507329/Tool+Setup+Plan | 2026-06-29 | External tool sequence and source-of-truth rules. |
 | Risk Register | `analysis/planning/risk-register.md` | Pending | Pending | Pending | Review before implementation slices. |
-| Validation Strategy | `analysis/planning/validation-strategy.md` | Pending | Pending | Pending | Done/verification expectations. |
+| Validation Strategy | `analysis/planning/validation-strategy.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179670/Validation+Strategy | 2026-06-29 | Done/verification expectations. |
 
 ## Formatting Notes
 
