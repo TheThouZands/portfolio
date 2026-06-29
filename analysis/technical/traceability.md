@@ -46,6 +46,8 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 
 ## Tests Inventory
 
+Detailed command selection, CI coverage, and coverage gaps live in `analysis/technical/verification-catalog.md`.
+
 | Test file | Behavior covered |
 | --- | --- |
 | `tests/auth/validation.test.ts` | Username, email, identifier, password, sign-in, and sign-up validation shapes. |
@@ -63,5 +65,5 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | No formal public OpenAPI contract | Current route handlers and server actions are inventoried, but ADR 0006 intentionally defers a spec until public API intent is decided. | `PF-506` or future API decision story |
 | Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
-| Risk, validation, and requirement traceability artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607`, `PF-610` |
+| Risk, validation, requirement traceability, and verification catalog artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607`, `PF-610` |
 | CMS authoring and owner auth are planned, but not implemented | The data model supports CMS behavior, but safe authoring needs protected workflow decisions. | `PF-205`, `PF-206`, `PF-207`, `PF-409`, `PF-411` |

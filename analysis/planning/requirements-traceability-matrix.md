@@ -73,7 +73,7 @@ the two aligned as the portfolio keeps changing.
 | `NFR-005` Baseline response headers. | Implemented with indirect story coverage | `PERS-002`, owner | `PF-504` | `ca983df` | Header review in route/build checks, future security checklist. |
 | `NFR-006` Localized metadata and slugs. | Implemented | `PERS-001`, `PERS-003`, `PERS-004` | `PF-301`, `PF-302`, `PF-303` | `bc4f459`, `73952bb`, `7fd2f33` | Locale route and metadata checks. |
 | `NFR-007` Portable docs for Confluence/Jira/FigJam. | In progress | owner, `PERS-002` | `PF-601`, `PF-602`, `PF-603`, `PF-608` | Local analysis suite | Markdown review, CSV parse, future external import records. |
-| `NFR-008` Unit coverage for important auth, content, and comment behavior. | Implemented baseline | `PERS-002` | `PF-504` | `213d7a7`, `2870f75` | `npm run test`, focused test files by capability. |
+| `NFR-008` Unit coverage for important auth, content, and comment behavior. | Implemented baseline | `PERS-002` | `PF-504` | `213d7a7`, `2870f75`, `analysis/technical/verification-catalog.md` | `npm run test`, focused test files by capability. |
 | `NFR-009` Production and preview builds run committed migrations predictably. | Implemented | `PERS-002`, owner | `PF-501`, `PF-502` | `README.md`, `build:vercel` | Build script review, Neon workflow review. |
 | `NFR-010` Hero semantics support accessibility and SEO. | Documented | `PERS-001`, `PERS-004` | `PF-101` | `c4ea874` | Heading semantics review, future visual/accessibility checks. |
 | `NFR-011` Account-backed comments have moderation and preservation rules. | Planned | owner, `PERS-005` | `PF-405`, `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation tests, policy review before schema work. |

@@ -51,7 +51,7 @@ content editing, and stronger moderation/observability.
 | NFR-005 | Security: responses should include baseline headers. | Implemented | `ca983df` | Baseline response header work exists in branch history. |
 | NFR-006 | Internationalization: public content should support localized metadata and slugs. | Implemented | `bc4f459`, `73952bb`, `7fd2f33` | Locale routes and translated slugs. |
 | NFR-007 | Portability: local docs should be copyable into Confluence/Jira without losing stable ids. | In progress | This suite | Use Markdown tables and Jira CSV. |
-| NFR-008 | Testability: important auth, content rendering, and comment behavior should have unit coverage. | Implemented baseline | `213d7a7`, `2870f75` | Tests exist under `tests`. |
+| NFR-008 | Testability: important auth, content rendering, and comment behavior should have unit coverage. | Implemented baseline | `213d7a7`, `2870f75`, `analysis/technical/verification-catalog.md` | Tests exist under `tests`; command and coverage mapping lives in the verification catalog. |
 | NFR-009 | Operational safety: production and preview builds should run committed migrations predictably. | Implemented | `README.md`, `build:vercel` | Vercel build runs `npm run db:migrate && next build`. |
 | NFR-010 | Accessibility and SEO: heroes should align with route-level heading semantics. | Documented | `c4ea874` | Hero docs note SEO H1 assumptions. |
 | NFR-011 | Trust and safety: account-backed comments should have clear moderation and preservation rules. | Planned | `analysis/product/interaction-policy.md` | Policy baseline exists; implementation still needs stories and schema decisions. |

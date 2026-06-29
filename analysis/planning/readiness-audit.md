@@ -26,7 +26,7 @@ technical artifacts near the code.
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
 | Tool setup operations | Local runbooks ready | `planning/tool-setup-plan.md`, `planning/external-setup-execution-runbook.md`, import/log files | Execute setup in external tools. |
-| Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, `operations/artifact-maintenance-matrix.md`, operations docs | Apply cadence during future slices. |
+| Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, `technical/verification-catalog.md`, `operations/artifact-maintenance-matrix.md`, operations docs | Apply cadence during future slices. |
 
 ## Objective Requirement Check
 
@@ -36,7 +36,7 @@ technical artifacts near the code.
 | Include the problem itself. | Satisfied | `analysis/product/problem-statement.md` |
 | Slowly get more specific with functionality and planning artifacts. | Satisfied baseline | Scope/requirements, Jira stories, roadmap, risk register, validation strategy, workflow docs. |
 | Make artifacts refer to already existing commits/features. | Satisfied baseline | Requirements, matrix, stories, traceability, ADRs, schema notes reference commits/code areas. |
-| Connect requirements to personas, stories, evidence, and verification. | Locally satisfied baseline | `analysis/planning/requirements-traceability-matrix.md` |
+| Connect requirements to personas, stories, evidence, and verification. | Locally satisfied baseline | `analysis/planning/requirements-traceability-matrix.md`, `analysis/technical/verification-catalog.md` |
 | Product/business docs compatible with Confluence. | Locally ready | Page tree, publishing runbook, product docs, planning docs, operations docs. |
 | User stories compatible with Jira. | Locally ready | Markdown backlog and importable CSV parse successfully. |
 | ADRs kept in GitHub. | Satisfied baseline | `analysis/technical/adr` |

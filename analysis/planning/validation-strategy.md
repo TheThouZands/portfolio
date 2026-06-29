@@ -52,6 +52,7 @@ A change is validated when:
 | External setup runbook update | Runbook links to current manifests, logs, preflight checks, batch gates, and completion criteria. |
 | Artifact maintenance update | Matrix reflects source-of-truth, update triggers, validation, and external sync rules. |
 | Requirement traceability update | Matrix maps requirement, persona, story, evidence, verification signal, and remaining gaps. |
+| Verification catalog update | Command catalog, CI behavior, focused tests, gaps, and evidence recording rules match the current repo. |
 | Pull request or implementation slice | Change traceability template completed or equivalent details included in PR/story notes. |
 
 ## Current Verification Commands
@@ -79,6 +80,9 @@ npm run db:check
 
 Run only the relevant checks for the slice. A documentation-only change does not need app tests unless it claims to
 verify implementation behavior.
+
+Detailed CI, command, focused test, and coverage-gap mapping lives in
+`analysis/technical/verification-catalog.md`.
 
 ## Acceptance Criteria Quality
 
@@ -110,6 +114,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/jira/user-stories.md`
 - `analysis/jira/backlog.csv`
 - `analysis/technical/traceability.md`
+- `analysis/technical/verification-catalog.md`
 - `analysis/technical/adr/`
 - `analysis/technical/schema-and-migrations.md`
 - `analysis/technical/schema-table-catalog.md`

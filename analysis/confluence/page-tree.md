@@ -70,7 +70,8 @@ Portfolio Analysis Home
     5.4 Migration Catalog
     5.5 API Surface Inventory
     5.6 OpenAPI Planning Notes
-    5.7 ADR Index
+    5.7 Verification Catalog
+    5.8 ADR Index
   6. Operations
     6.1 Documentation Maintenance
     6.2 Artifact Maintenance Matrix
@@ -118,6 +119,7 @@ Portfolio Analysis Home
 | Migration Catalog | `analysis/technical/migration-catalog.md` | GitHub to Confluence reference |
 | API Surface Inventory | `analysis/technical/api-surface-inventory.md` | GitHub to Confluence reference |
 | OpenAPI Planning Notes | `analysis/technical/openapi.md` | GitHub to Confluence reference |
+| Verification Catalog | `analysis/technical/verification-catalog.md` | GitHub to Confluence and Jira reference |
 | ADR Index | `analysis/technical/adr/README.md` | GitHub to Confluence reference |
 | Documentation Maintenance | `analysis/github/documentation-rules.md` | GitHub to Confluence reference |
 | Artifact Maintenance Matrix | `analysis/operations/artifact-maintenance-matrix.md` | Local to Confluence, GitHub, and Jira |
