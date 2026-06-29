@@ -27,15 +27,16 @@ Each ADR should include:
 | ID | Title | Status |
 | --- | --- | --- |
 | [0001](0001-record-retrospective-analysis-suite.md) | Record retrospective analysis suite in the repository | Accepted |
+| [0002](0002-use-drizzle-schema-and-migrations.md) | Use Drizzle schema and migrations as database source of truth | Accepted |
+| [0003](0003-use-structural-content-json.md) | Use structural content JSON instead of stored rendered HTML | Accepted |
+| [0004](0004-separate-portfolio-identity-from-auth-provider-records.md) | Separate portfolio identity from auth provider records | Accepted |
+| [0005](0005-preserve-comments-after-user-deletion.md) | Preserve blog comments after user deletion | Accepted |
+| [0006](0006-defer-openapi-until-public-contract.md) | Defer OpenAPI until a stable public contract exists | Accepted |
 
 ## Candidate ADRs
 
 | Candidate | Reason |
 | --- | --- |
 | Use Next.js App Router with route files as composition boundaries | Existing architecture docs already describe this separation. |
-| Use Drizzle schema and migrations as the database source of truth | Important operational and review decision. |
-| Use structural content JSON instead of rendered HTML storage | Central to CMS safety and rendering flexibility. |
-| Use Better Auth plus portfolio-owned identity records | Explains separation between Better Auth user/session records and CMS-owned identifiers. |
-| Preserve comments after user deletion | Product and data integrity decision around discussion history. |
-| Keep OpenAPI deferred until a stable public API exists | Prevents false contract promises. |
-
+| Define comment moderation model | Needed before comments become a more public interaction surface. |
+| Define CMS authoring workflow ownership | Needed before adding an editor/admin surface. |

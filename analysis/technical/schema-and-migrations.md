@@ -11,6 +11,8 @@ Target home: GitHub/Confluence
 should update the Drizzle schema first, generate a migration with `npm run db:generate`, review the SQL, then apply
 committed migrations with `npm run db:migrate`.
 
+Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
+
 ## Current Schema Domains
 
 | Domain | Tables/enums | Product purpose |
@@ -57,4 +59,3 @@ committed migrations with `npm run db:migrate`.
 | Public API shape is undecided. | Route handlers and server actions exist, but OpenAPI should wait for an explicit API product boundary. |
 | Media storage lifecycle needs an operations policy. | Media metadata exists, but upload/delete/reconciliation flows need a later decision. |
 | Migration naming is generated and not semantic. | This is acceptable for Drizzle, but summary docs should keep human-readable grouping. |
-

@@ -11,6 +11,8 @@ The portfolio does not yet expose a formal public API contract. The current serv
 handlers, Better Auth endpoints, and server actions. An OpenAPI document should be introduced only when the product
 commits to stable HTTP behavior for consumers outside the app.
 
+Decision record: [ADR 0006](adr/0006-defer-openapi-until-public-contract.md).
+
 ## Existing HTTP Surface
 
 | Route | Method | Current purpose | Contract status |
@@ -63,4 +65,3 @@ tests/
 
 Keep this as a planning note for now. Add `openapi/portfolio.v1.yaml` only after the product decides which routes are
 stable public contracts.
-

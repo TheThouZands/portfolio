@@ -52,8 +52,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Gap | Why it matters | Candidate story |
 | --- | --- | --- |
 | No complete Confluence/Jira integration yet | Local docs are portable but not connected to external tools. | `PF-601`, `PF-602` |
-| No diagram inventory yet | Figma/FigJam work needs a clear scope. | `PF-603` |
-| Limited ADR coverage | Technical decisions are visible in commits but not fully explained. | `PF-604` |
-| No formal public OpenAPI contract | Current route handlers exist, but public API intent is undecided. | Future API decision story |
+| Diagram inventory exists, but no FigJam diagrams have been created yet | Visual artifacts still need external tool setup. | `PF-603` |
+| ADR baseline exists, but route composition and future moderation/editor decisions remain uncovered | Some technical decisions are still only documented in local notes. | `PF-604` |
+| No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
 | Comment moderation is not defined | Account-backed comments introduce trust and abuse questions. | Future moderation epic |
-
