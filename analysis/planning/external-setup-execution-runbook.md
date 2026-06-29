@@ -106,7 +106,7 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check |
 | External tools touched | Confluence, Jira read checks |
 | Operator | Thouzands |
 | Result | EXT-001 starter pages created; Jira project `KAN` is visible; FigJam pending |
