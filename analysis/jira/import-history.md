@@ -20,6 +20,7 @@ should remain stable even after Jira assigns keys.
 | JIRA-IMPORT-003 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `4024a94` | Thouzands | Imported the `PF-E04` Authenticated Interaction story batch as `KAN-23` through `KAN-33` under `KAN-4`; implemented stories were transitioned to `Done`, current-worktree stories to `In Progress`, and planned stories remained `To Do`. Twenty-two stories remain pending. |
 | JIRA-IMPORT-004 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `0ce05cd` | Thouzands | Imported the `PF-E05` Quality Operations And Architecture story batch as `KAN-34` through `KAN-40` under `KAN-5`; implemented stories were transitioned to `Done`, and planned stories remained `To Do`. Fifteen stories remain pending. |
 | JIRA-IMPORT-005 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `38f82ed` | Thouzands | Imported the `PF-E06` Forward Planning story batch as `KAN-41` through `KAN-50` under `KAN-6`; all ten planned stories remained `To Do`. Five stories remain pending. |
+| JIRA-IMPORT-006 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `aaf0128` | Thouzands | Imported the `PF-E07` Service Conversion story batch as `KAN-51` through `KAN-55` under `KAN-7`; all five planned stories remained `To Do`. Jira story import is complete for the current backlog. |
 
 ## Status Mapping Decision
 
@@ -27,7 +28,7 @@ should remain stable even after Jira assigns keys.
 | --- | --- | --- | --- |
 | Implemented | Done | Created story issues `KAN-8` through `KAN-16`, `KAN-18`, `KAN-20` through `KAN-23`, `KAN-25`, `KAN-27`, `KAN-28`, `KAN-31`, and `KAN-34` through `KAN-37`. | These stories represent completed public portfolio, backend, CMS, i18n, auth, blog, quality, operations, architecture, and decision work extracted from existing code or accepted docs. |
 | Implemented/in progress | In Progress | Created story issues `KAN-24` and `KAN-26`. | These stories include committed behavior plus current worktree follow-up changes, so they stay active until the current work is verified and committed. |
-| Planned | To Do | Created story issues `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-32`, `KAN-33`, `KAN-38` through `KAN-40`, and `KAN-41` through `KAN-50`, plus future planned story imports. | These are writer/content-producer implementation tasks, moderation follow-ups, account-scope follow-ups, analysis maintenance follow-ups, forward-planning work, or other future work, so they stay open. |
+| Planned | To Do | Created story issues `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-32`, `KAN-33`, `KAN-38` through `KAN-40`, `KAN-41` through `KAN-50`, and `KAN-51` through `KAN-55`. | These are writer/content-producer implementation tasks, moderation follow-ups, account-scope follow-ups, analysis maintenance follow-ups, forward-planning work, service-conversion work, or other future work, so they stay open. |
 
 Epic statuses stay open until child story batches are imported and reconciled. The status pass only changed story issues that
 already existed in Jira.
@@ -91,13 +92,16 @@ already existed in Jira.
 | PF-608 | [KAN-48](https://thouzands.atlassian.net/browse/KAN-48) | Track external tool setup history | JIRA-IMPORT-005 | To Do | Parent: [KAN-6](https://thouzands.atlassian.net/browse/KAN-6). Local status: Planned; local priority: Medium. |
 | PF-609 | [KAN-49](https://thouzands.atlassian.net/browse/KAN-49) | Maintain review cadence and decision registers | JIRA-IMPORT-005 | To Do | Parent: [KAN-6](https://thouzands.atlassian.net/browse/KAN-6). Local status: Planned; local priority: Medium. |
 | PF-610 | [KAN-50](https://thouzands.atlassian.net/browse/KAN-50) | Maintain requirements traceability matrix | JIRA-IMPORT-005 | To Do | Parent: [KAN-6](https://thouzands.atlassian.net/browse/KAN-6). Local status: Planned; local priority: Medium. |
-| PF-701 | Pending | Define service entry points | JIRA-IMPORT-001 | Pending | Planned story. |
+| PF-701 | [KAN-51](https://thouzands.atlassian.net/browse/KAN-51) | Define service entry points | JIRA-IMPORT-006 | To Do | Parent: [KAN-7](https://thouzands.atlassian.net/browse/KAN-7). Local status: Planned; local priority: High. |
+| PF-702 | [KAN-52](https://thouzands.atlassian.net/browse/KAN-52) | Add focused intake path | JIRA-IMPORT-006 | To Do | Parent: [KAN-7](https://thouzands.atlassian.net/browse/KAN-7). Local status: Planned; local priority: High. |
+| PF-703 | [KAN-53](https://thouzands.atlassian.net/browse/KAN-53) | Link proof to service wedges | JIRA-IMPORT-006 | To Do | Parent: [KAN-7](https://thouzands.atlassian.net/browse/KAN-7). Local status: Planned; local priority: Medium. |
+| PF-704 | [KAN-54](https://thouzands.atlassian.net/browse/KAN-54) | Create visitor journey diagram | JIRA-IMPORT-006 | To Do | Parent: [KAN-7](https://thouzands.atlassian.net/browse/KAN-7). Local status: Planned; local priority: Medium. |
+| PF-705 | [KAN-55](https://thouzands.atlassian.net/browse/KAN-55) | Define service offer catalog | JIRA-IMPORT-006 | To Do | Parent: [KAN-7](https://thouzands.atlassian.net/browse/KAN-7). Local status: Planned; local priority: High. |
 
 ## Pending Story Batches
 
-| Parent epic | Jira epic | Pending stories |
-| --- | --- | --- |
-| PF-E07 Service Conversion | [KAN-7](https://thouzands.atlassian.net/browse/KAN-7) | 5 |
+No pending story batches remain. Every row in `analysis/jira/backlog.csv` now has a Jira issue key recorded in the
+story mapping table.
 
 ## Import Checklist
 
