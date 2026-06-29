@@ -42,8 +42,8 @@ flowchart TD
 
   N --> O["Architecture, migrations, tests, ADRs"]
   O --> P{"Does the visitor have a service need?"}
-  P -->|Yes| Q["Choose service wedge"]
-  P -->|Not yet| R["Keep browsing proof content"]
+  P -->|"Yes"| Q["Choose service wedge"]
+  P -->|"Not yet"| R["Keep browsing proof content"]
   Q --> S["Start discovery/build slice"]
   R --> E
 ```
@@ -57,4 +57,3 @@ flowchart TD
 ## Update Trigger
 
 Update when homepage order, service wedges, proof surfaces, or contact/intake behavior changes.
-

@@ -26,12 +26,12 @@ flowchart TD
   C --> D["Apply auth rate limit"]
   D --> E{"Identifier kind"}
 
-  E -->|Username| F["Normalize username"]
+  E -->|"Username"| F["Normalize username"]
   F --> G{"Portfolio identity exists?"}
-  G -->|Yes| H["Route to sign in"]
-  G -->|No| I["Route to sign up"]
+  G -->|"Yes"| H["Route to sign in"]
+  G -->|"No"| I["Route to sign up"]
 
-  E -->|Email| J["Normalize email"]
+  E -->|"Email"| J["Normalize email"]
   J --> K["Route without exposing account existence"]
   K --> L["Future email verification or OTP decision"]
 
@@ -45,8 +45,8 @@ flowchart TD
   Q --> R["Authenticated reader UI"]
   R --> S["Can comment on blog posts"]
   R --> T{"Matches owner allowlist?"}
-  T -->|No| U["Reader-only permissions"]
-  T -->|Yes| V["Owner tool guard passes"]
+  T -->|"No"| U["Reader-only permissions"]
+  T -->|"Yes"| V["Owner tool guard passes"]
   V --> W["Future moderation/CMS tools"]
 ```
 
