@@ -59,6 +59,7 @@ content editing, and stronger moderation/observability.
 | NFR-013 | Planning quality: future work should remain traceable to personas, risks, requirements, and validation evidence. | In progress | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Planning artifacts exist; implementation changes still need per-slice traceability. |
 | NFR-014 | CMS authoring should preserve structural content safety, localization, and previewability. | Planned | `analysis/product/cms-authoring-workflow.md`, ADR 0003 | Authoring workflow should not weaken the structural content contract. |
 | NFR-015 | Auth scope should grow only when tied to reader, owner, or client product needs. | Planned | `analysis/product/auth-account-roadmap.md` | Avoid building generic account features without a portfolio use case. |
+| NFR-016 | API boundaries should distinguish internal app routes/actions from public contracts before creating OpenAPI. | Documented | `analysis/technical/openapi.md`, `analysis/technical/api-surface-inventory.md`, ADR 0006 | Do not promote internal framework or server-action behavior into public API promises by accident. |
 
 ## Out Of Current Scope
 

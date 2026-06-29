@@ -13,6 +13,8 @@ commits to stable HTTP behavior for consumers outside the app.
 
 Decision record: [ADR 0006](adr/0006-defer-openapi-until-public-contract.md).
 
+Current route/action inventory: [api-surface-inventory.md](api-surface-inventory.md).
+
 ## Existing HTTP Surface
 
 | Route | Method | Current purpose | Contract status |
@@ -30,6 +32,8 @@ Relevant areas:
 
 - `src/auth/actions.ts`
 - `src/blog/actions.ts`
+
+The current server actions and route handlers are classified in `analysis/technical/api-surface-inventory.md`.
 
 ## OpenAPI Decision Criteria
 

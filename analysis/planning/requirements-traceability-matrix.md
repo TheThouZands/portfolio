@@ -81,6 +81,7 @@ the two aligned as the portfolio keeps changing.
 | `NFR-013` Future work stays traceable to personas, risks, requirements, and validation. | In progress | owner, `PERS-002` | `PF-605`, `PF-606`, `PF-607`, `PF-608`, `PF-609`, `PF-610` | Planning suite, this matrix | Traceability checklist, PR/change template, review cadence. |
 | `NFR-014` CMS authoring preserves structural safety, localization, and previewability. | Planned | owner, `PERS-003` | `PF-203`, `PF-205`, `PF-206`, `PF-207` | `analysis/product/cms-authoring-workflow.md`, ADR 0003 | Future authoring validation tests, preview workflow review. |
 | `NFR-015` Auth scope grows only with reader, owner, or client product needs. | Planned | owner, `PERS-005` | `PF-409`, `PF-410`, `PF-411` | `analysis/product/auth-account-roadmap.md` | Future account-scope decision review, authorization tests. |
+| `NFR-016` API boundaries distinguish internal app behavior from public contracts before OpenAPI. | Documented | `PERS-002` | `PF-506` | `analysis/technical/openapi.md`, `analysis/technical/api-surface-inventory.md`, ADR 0006 | API inventory review before adding public route contracts or OpenAPI files. |
 
 ## Coverage Notes
 

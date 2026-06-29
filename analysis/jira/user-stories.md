@@ -59,6 +59,7 @@ Target home: Jira/Confluence
 | PF-503 | As a maintainer, I want clear architecture boundaries, so future changes can be placed correctly. | High | Implemented | Architecture index and local notes define routes, partials, repeatables, CMS, and DB layering. | `0becf78`, `7482d77`, `ARCHITECTURE.md` |
 | PF-504 | As a maintainer, I want automated checks for important behavior, so regressions are caught before deployment. | High | Implemented | Unit tests cover auth validation, auth rate-limit keys, structural content rendering, and blog comments; CI workflow exists. | `213d7a7`, `2870f75` |
 | PF-505 | As the portfolio owner, I want retrospective product analysis, so future work can be planned instead of improvised. | High | Planned | Analysis directory exists; requirements, stories, traceability, ADR, schema inventory, and API notes are in place. | This suite |
+| PF-506 | As a technical maintainer, I want an API surface inventory, so internal routes and server actions are not mistaken for public OpenAPI contracts. | Medium | Planned | Inventory lists route handlers, server actions, contract status, OpenAPI triggers, and update rules. | `analysis/technical/api-surface-inventory.md`, ADR 0006 |
 
 ## Epic PF-E06 - Forward Planning
 

@@ -24,7 +24,7 @@ technical artifacts near the code.
 | FigJam/Figma diagrams | Local source ready | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md` | Create FigJam file/sections and record URLs. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0008` | Add ADRs for moderation schema, CMS authoring implementation, or owner auth when decided. |
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
-| OpenAPI | Intentionally deferred | `technical/openapi.md`, ADR 0006 | Create spec only when stable external API contract exists. |
+| OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
 | Tool setup operations | Local runbooks ready | `planning/tool-setup-plan.md`, import/log files | Execute setup in external tools. |
 | Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, operations docs | Apply cadence during future slices. |
 

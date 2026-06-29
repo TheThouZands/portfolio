@@ -43,6 +43,7 @@ A change is validated when:
 | Jira backlog update | Epic and story CSV files parse; story has priority, status, acceptance criteria, and evidence/source. |
 | ADR | Decision has context, consequences, evidence, and follow-ups. |
 | Schema change | Drizzle migration generated and reviewed; schema docs updated if product meaning changes. |
+| API surface change | API surface inventory updated; OpenAPI planning note or ADR reviewed if the route becomes public. |
 | Route/page change | Manual route check; metadata/locale behavior checked when relevant. |
 | Auth/comment change | Unit or integration coverage for validation/session/comment behavior; policy reviewed. |
 | Diagram change | Diagram inventory and FigJam section manifest updated; source docs and update triggers named. |
@@ -109,6 +110,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/traceability.md`
 - `analysis/technical/adr/`
 - `analysis/technical/schema-and-migrations.md`
+- `analysis/technical/api-surface-inventory.md`
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
 - `analysis/design/figjam-section-manifest.csv`

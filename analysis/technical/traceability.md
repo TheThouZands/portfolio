@@ -60,7 +60,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | No complete Confluence/Jira integration yet | Local docs are portable but not connected to external tools. | `PF-601`, `PF-602` |
 | Diagram inventory exists, but no FigJam diagrams have been created yet | Visual artifacts still need external tool setup. | `PF-603` |
 | ADR baseline exists, but future moderation/editor implementation decisions remain uncovered | Route composition is covered by ADR 0007; future protected workflows still need decisions when implemented. | `PF-604` |
-| No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
+| No formal public OpenAPI contract | Current route handlers and server actions are inventoried, but ADR 0006 intentionally defers a spec until public API intent is decided. | `PF-506` or future API decision story |
 | Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
 | Risk, validation, and requirement traceability artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607`, `PF-610` |
