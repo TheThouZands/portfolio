@@ -83,7 +83,7 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 | Epic Name | Epic Name, Epic Link, or Parent | For epics, this is the display name; for stories, this maps to the parent epic. |
 | Acceptance Criteria | Description or custom field | If no custom field exists, append under a heading in Description. |
 | Evidence Commits | Description or custom field | Keep commit hashes for traceability. |
-| Status | Status | Implemented created stories transition to `Done`; planned work remains `To Do`; partially complete/current-worktree stories stay open until verified. |
+| Status | Status | Implemented created stories transition to `Done`; current-worktree stories transition to `In Progress`; planned work remains `To Do`. |
 
 ## Import Order
 

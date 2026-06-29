@@ -19,7 +19,7 @@ technical artifacts near the code.
 | Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
-| Jira-compatible user stories | Jira story import started with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-22`; implemented created stories are `Done` | Continue importing remaining story batches and fill story mappings in `jira/import-history.md`. |
+| Jira-compatible user stories | Jira story import started with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-33`; implemented created stories are `Done` and current-worktree stories are `In Progress` | Continue importing remaining story batches and fill story mappings in `jira/import-history.md`. |
 | Confluence-compatible docs | External setup started | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages | Publish priority 1 content pages and keep source commits/URLs current. |
 | FigJam/Figma diagrams | Local source ready and MCP generation path verified | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; Figma MCP exposes Mermaid `generate_diagram` | Generate FigJam diagrams from Mermaid and record URLs. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
@@ -51,7 +51,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 | Item | Why it remains |
 | --- | --- |
 | Only starter Confluence pages exist. | The Portfolio space, analysis root, and six container pages exist; priority 1 content pages still need publication. |
-| Jira story import is not done yet. | Project `KAN` is accessible, epics `KAN-1` through `KAN-7` exist, and the `PF-E01`/`PF-E02`/`PF-E03` stories are mapped as `KAN-8` through `KAN-22`; implemented created stories are `Done`, planned created stories remain `To Do`, and thirty-three stories remain pending. |
+| Jira story import is not done yet. | Project `KAN` is accessible, epics `KAN-1` through `KAN-7` exist, and the `PF-E01` through `PF-E04` stories are mapped as `KAN-8` through `KAN-33`; implemented created stories are `Done`, current-worktree stories are `In Progress`, planned created stories remain `To Do`, and twenty-two stories remain pending. |
 | Actual FigJam generated diagrams do not exist yet. | Figma access and Mermaid generation path are verified, but no diagrams have been generated or URL-mapped yet. |
 | Contact/intake UI is not implemented. | Planned in `PF-701` to `PF-704`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
