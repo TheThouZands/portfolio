@@ -26,7 +26,7 @@ visitor can choose a service wedge and the owner can convert that request into a
 
 | Offer id | Offer | Best-fit buyer situation | First output | Proof surfaces |
 | --- | --- | --- | --- | --- |
-| `OFF-001` | Product system audit | Existing product, app idea, or portfolio feels unclear or risky. | Analysis memo, risk map, requirement/story shortlist, and first delivery slice. | Analysis suite, risk register, traceability matrix. |
+| `OFF-001` | Product system audit | A coherent product, workflow, or portfolio goal needs a clear first delivery slice. | Analysis memo, risk map, requirement/story shortlist, and first delivery slice. | Analysis suite, risk register, traceability matrix. |
 | `OFF-002` | CMS and content model design slice | Content is outgrowing static pages, loose fields, or copy-only updates. | Content model, structural content plan, migration path, and rendering notes. | CMS schema, structural content renderer, content strategy, ADR 0003. |
 | `OFF-003` | Auth and interaction workflow slice | Users need accounts, comments, submissions, or protected workflows. | Flow diagram, data model changes, validation/rate-limit plan, and test checklist. | Better Auth integration, custom identifier flow, comments, ADR 0004 and ADR 0005. |
 | `OFF-004` | Database and deployment workflow setup | Schema changes, preview data, or deployment steps are fragile. | Migration workflow, preview database strategy, branch sync checklist, and operational notes. | Drizzle migrations, Neon branch sync, migration catalog, ADR 0002. |
