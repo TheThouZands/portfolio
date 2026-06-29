@@ -49,8 +49,7 @@ Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
 
 | Follow-up | Reason |
 | --- | --- |
-| Moderation migration plan | Comment moderation policy exists, but schema is intentionally not implemented yet. |
+| Moderation migration plan | ADR 0009 defines the future soft-state model, but schema is intentionally not implemented yet. |
 | CMS authoring migration plan | Authoring workflow may need draft/audit/preview metadata. |
 | Owner authorization migration plan | Owner controls may need simple or explicit authorization data. |
 | Media lifecycle migration plan | Upload, cleanup, and asset reconciliation need a product decision first. |
-

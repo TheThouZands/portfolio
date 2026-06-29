@@ -25,7 +25,7 @@ interaction behavior changes.
 | --- | --- | --- | --- | --- | --- | --- |
 | RISK-001 | The portfolio still reads as a feature collection instead of a service offer. | Product | Medium | High | Use positioning, conversion path, and service-linked proof content. | `positioning-brief.md`, `conversion-path.md`, `PF-701` |
 | RISK-002 | Demo content proves the CMS shape but not enough real business credibility. | Content | Medium | High | Add real case-study backlog and replace or supplement synthetic examples. | `content-strategy.md`, future case-study stories |
-| RISK-003 | Comments become public interaction without moderation tools. | Trust/safety | Medium | High | Implement owner hide/remove workflow before inviting broader use. | `interaction-policy.md`, `PF-406`, `PF-407` |
+| RISK-003 | Comments become public interaction without moderation tools. | Trust/safety | Medium | High | Implement the ADR 0009 owner hide/remove soft-state workflow before inviting broader use. | `interaction-policy.md`, ADR 0009, `PF-407` |
 | RISK-004 | Auth scope grows into account product complexity too early. | Product/technical | Medium | Medium | Keep auth tied to reader comments until client/private account use is analyzed. | `interaction-policy.md`, future auth roadmap |
 | RISK-005 | Analysis docs drift from implementation after app changes. | Process | Medium | High | Require traceability updates when requirements, schema, routes, or ADR-level decisions change. | `documentation-rules.md`, `traceability.md` |
 | RISK-006 | Jira import loses local ids or context. | Tooling | Low | Medium | Keep local ids stable and record import mappings/history. | `jira/project-setup.md`, `jira/backlog.csv` |

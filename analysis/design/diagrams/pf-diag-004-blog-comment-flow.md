@@ -14,6 +14,7 @@ Source docs:
 
 - `analysis/product/interaction-policy.md`
 - `analysis/technical/adr/0005-preserve-comments-after-user-deletion.md`
+- `analysis/technical/adr/0009-use-soft-state-comment-moderation.md`
 - `analysis/jira/user-stories.md`
 - `src/blog/actions.ts`
 - `tests/blog/comments.test.ts`
@@ -44,21 +45,22 @@ flowchart TD
   O --> P["Render author or fallback label"]
   P --> Q["Thread remains readable"]
 
-  Q --> R["Future moderation states"]
+  Q --> R["Future soft-state moderation"]
   R --> S["Visible"]
   R --> T["Hidden"]
-  R --> U["Removed or redacted"]
-  R --> V["Reported"]
+  R --> U["Removed placeholder"]
+  Q --> V["Deferred reader controls"]
+  V --> W["Edit/delete/report later"]
 ```
 
 ## FigJam Notes
 
 - Show current behavior and future moderation in separate visual zones.
 - Mark account deletion as a preservation path, not a deletion path.
-- Link future states to `PF-406`, `PF-407`, and `PF-408`.
+- Link future soft states to ADR 0009, `PF-406`, and `PF-407`.
+- Keep reader edit, delete, and report controls visually separate as deferred `PF-408` scope.
 
 ## Update Trigger
 
 Update when comment action behavior, moderation schema, rendering states, edit/delete rules, or reporting behavior
 changes.
-

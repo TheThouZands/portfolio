@@ -67,7 +67,7 @@ query code.
 | `project_skills` | Projects/skills | Join table between projects and skills. | Connects case-study proof to reusable capabilities. |
 | `project_revisions` | Projects/content | Versioned structured project narrative content. | Stores structural content source, not rendered HTML; see ADR 0003. |
 | `blog_posts` | Blog | Blog article identity and lifecycle records. | Connects translations, revisions, comments, mentions, and assets. |
-| `comments` | Blog/auth | Authenticated reader comments on blog posts. | Supports nesting and preserves comments after user deletion; see ADR 0005. |
+| `comments` | Blog/auth | Authenticated reader comments on blog posts. | Supports nesting and preserves comments after user deletion; future soft-state moderation is defined in ADR 0009. |
 | `blog_post_translations` | Blog/i18n | Localized blog metadata and slugs. | Supports canonical localized routes and bare slug redirects. |
 | `blog_post_revisions` | Blog/content | Versioned structured blog body content. | Stores structural source, not rendered HTML; see ADR 0003. |
 | `blog_post_mentions` | Blog/CMS graph | Connects blog revisions to mentioned portfolio entities. | Powers related content and evidence linking. |

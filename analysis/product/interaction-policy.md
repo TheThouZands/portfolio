@@ -45,9 +45,9 @@ and safe without turning the portfolio into a general social platform.
 | Submitted | Comment is saved to the blog post. | Implemented/in progress. |
 | Visible | Comment renders in the thread. | Implemented. |
 | Orphaned account | Comment remains after user deletion. | Implemented by nullable user reference and fallback author rendering. |
-| Hidden | Comment exists but is not public. | Planned. |
-| Removed | Comment is deleted or redacted. | Needs decision. |
-| Reported | Comment is flagged for review. | Planned. |
+| Hidden | Comment exists but is not public. | Planned by ADR 0009. |
+| Removed | Comment is redacted or replaced with a placeholder while preserving thread context. | Planned by ADR 0009. |
+| Reported | Comment is flagged for review. | Deferred beyond the first moderation slice. |
 
 ## Moderation Principles
 
@@ -97,20 +97,21 @@ Open decision: whether users should be able to delete or edit individual comment
 | Report and review | Readers can report comments for owner review. | More community-friendly, more workflow. |
 | Trust tiers | New accounts have stricter limits or review. | Useful later if traffic grows. |
 
-Recommended first step: owner-only hide/remove plus clear hidden/removed rendering behavior.
+Recommended first step: owner-only hide/remove plus clear hidden/removed rendering behavior. ADR 0009 records this as a
+soft-state moderation decision.
 
 ## Data Model Implications
 
-Future moderation likely needs fields or tables for:
+ADR 0009 chooses a small soft-state model before heavier moderation workflows:
 
-- Visibility state: visible, hidden, removed, pending.
+- Visibility state: visible, hidden, removed.
 - Moderator note or reason.
 - Moderated timestamp.
 - Moderated by user id.
-- Optional report records.
-- Optional edited timestamp and edit history.
+- Optional report records only after reader reporting is justified.
+- Optional edited timestamp and edit history only after reader edit controls are justified.
 
-These should be analyzed before adding migrations so the schema does not grow one isolated flag at a time.
+The first migration should avoid reader report records, reader edit history, trust tiers, and pre-moderation queues.
 
 ## Requirements Impact
 
@@ -118,8 +119,8 @@ These should be analyzed before adding migrations so the schema does not grow on
 | --- | --- |
 | `FR-013` authenticated readers can comment | Implemented/in progress. |
 | `FR-014` discussion survives account deletion | Implemented. |
-| `FR-018` owner can moderate comments | Planned. |
-| `NFR-011` comments should preserve trust and safety | Planned. |
+| `FR-018` owner can moderate comments | Planned; moderation state decision accepted in ADR 0009. |
+| `NFR-011` comments should preserve trust and safety | Planned; preservation and moderation decisions now have ADR coverage. |
 
 ## Jira Impact
 
@@ -134,8 +135,7 @@ These should be analyzed before adding migrations so the schema does not grow on
 | Question | Default until answered |
 | --- | --- |
 | Can anonymous users ever post? | No. Keep posting authenticated. |
-| Can users edit comments? | Not until edit history and abuse implications are clear. |
-| Can users delete comments? | Needs separate decision because thread context may be affected. |
+| Can users edit comments? | Deferred by ADR 0009 until edit history and abuse implications are clear. |
+| Can users delete comments? | Deferred by ADR 0009 because thread context may be affected. |
 | Should comments be pre-moderated? | No for now; use owner moderation first. |
 | Should preserved comments show "deleted account" or a generic fallback? | Generic fallback until privacy copy is written. |
-

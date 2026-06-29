@@ -58,7 +58,7 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 
 | Risk/follow-up | Notes |
 | --- | --- |
-| Comment moderation model is not yet represented. | Current comments support authorship and nesting, but moderation state/reporting needs a product decision. |
+| Comment moderation model is not yet represented. | ADR 0009 defines the future soft-state direction; the Drizzle schema and migrations have not implemented it yet. |
 | CMS authoring workflow is implicit. | Seed scripts and direct data workflows exist; future editor/admin requirements need separate analysis. |
 | Public API shape is undecided. | Route handlers and server actions exist, but OpenAPI should wait for an explicit API product boundary. |
 | Media storage lifecycle needs an operations policy. | Media metadata exists, but upload/delete/reconciliation flows need a later decision. |

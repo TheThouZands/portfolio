@@ -24,7 +24,7 @@ instead of disappearing into the background.
 | ID | Question | Status | Default until answered | Related docs |
 | --- | --- | --- | --- | --- |
 | OQ-001 | Should implemented retrospective stories import into Jira as Done or Backlog? | Open | Decide during first Jira import. | `analysis/jira/import-history.md` |
-| OQ-002 | Should comments support reader edit, delete, or report actions? | Open | Owner moderation first. | `analysis/product/interaction-policy.md` |
+| OQ-002 | Should comments support reader edit, delete, or report actions? | Deferred | No reader edit, delete, or report controls in the first moderation slice; owner soft-state moderation first. | `analysis/product/interaction-policy.md`, ADR 0009 |
 | OQ-003 | Should CMS authoring start as an authenticated admin route or local tooling? | Open | Admin route only after owner auth stabilizes. | `analysis/product/cms-authoring-workflow.md` |
 | OQ-004 | Should client/private accounts exist in the portfolio? | Deferred | No client accounts until a real collaboration use case exists. | `analysis/product/auth-account-roadmap.md` |
 | OQ-005 | Should a public OpenAPI spec be created? | Deferred | No spec until a stable public contract exists. | ADR 0006, `analysis/technical/openapi.md` |

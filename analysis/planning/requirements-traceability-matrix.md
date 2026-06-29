@@ -57,7 +57,7 @@ the two aligned as the portfolio keeps changing.
 | `FR-015` Branch-isolated Neon database workflows. | Implemented | `PERS-002`, owner | `PF-502` | `5a50321`, `888fbdf` | Manual Neon branch sync, env review, migration build review. |
 | `FR-016` Development-only integration metadata for fixed route placement. | Implemented with indirect story coverage | `PERS-002` | `PF-503` | `d98aff7` | Route placement review, architecture boundary review. |
 | `FR-017` Visitors can choose a scoped service entry point. | Planned | `PERS-001` | `PF-701`, `PF-702`, `PF-703`, `PF-704` | `analysis/product/conversion-path.md` | Future CTA/intake route review, conversion path validation. |
-| `FR-018` Owner can moderate blog comments without breaking thread context. | Planned | owner, `PERS-005` | `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation schema/action/rendering tests. |
+| `FR-018` Owner can moderate blog comments without breaking thread context. | Planned | owner, `PERS-005` | `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005, ADR 0009 | Future moderation schema/action/rendering tests. |
 | `FR-019` Owner can author, preview, and publish CMS content through a managed workflow. | Planned | owner, `PERS-003` | `PF-205`, `PF-206`, `PF-207` | `analysis/product/cms-authoring-workflow.md` | Future authoring route, preview, validation, and audit checks. |
 | `FR-020` Owner-only account capabilities protect moderation and authoring tools. | Planned | owner, `PERS-003` | `PF-409`, `PF-411` | `analysis/product/auth-account-roadmap.md` | Future authorization tests and protected-route review. |
 | `FR-021` Service offers describe audience fit, scope boundaries, outputs, and proof surfaces. | Planned | `PERS-001`, `PERS-002`, `PERS-004` | `PF-701`, `PF-702`, `PF-703`, `PF-705` | `analysis/product/service-offer-catalog.md` | Future service section review, intake routing check, offer-to-proof content audit. |
@@ -76,7 +76,7 @@ the two aligned as the portfolio keeps changing.
 | `NFR-008` Unit coverage for important auth, content, and comment behavior. | Implemented baseline | `PERS-002` | `PF-504` | `213d7a7`, `2870f75`, `analysis/technical/verification-catalog.md` | `npm run test`, focused test files by capability. |
 | `NFR-009` Production and preview builds run committed migrations predictably. | Implemented | `PERS-002`, owner | `PF-501`, `PF-502` | `README.md`, `build:vercel` | Build script review, Neon workflow review. |
 | `NFR-010` Hero semantics support accessibility and SEO. | Documented | `PERS-001`, `PERS-004` | `PF-101` | `c4ea874` | Heading semantics review, future visual/accessibility checks. |
-| `NFR-011` Account-backed comments have moderation and preservation rules. | Planned | owner, `PERS-005` | `PF-405`, `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation tests, policy review before schema work. |
+| `NFR-011` Account-backed comments have moderation and preservation rules. | Planned | owner, `PERS-005` | `PF-405`, `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005, ADR 0009 | Future moderation tests, policy review before schema work. |
 | `NFR-012` Conversion claims stay tied to implementation evidence. | Planned | `PERS-001`, `PERS-002`, `PERS-004` | `PF-701`, `PF-702`, `PF-703`, `PF-704` | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future service CTA review, proof-to-service mapping. |
 | `NFR-013` Future work stays traceable to personas, risks, requirements, and validation. | In progress | owner, `PERS-002` | `PF-605`, `PF-606`, `PF-607`, `PF-608`, `PF-609`, `PF-610` | Planning suite, this matrix | Traceability checklist, PR/change template, review cadence. |
 | `NFR-014` CMS authoring preserves structural safety, localization, and previewability. | Planned | owner, `PERS-003` | `PF-203`, `PF-205`, `PF-206`, `PF-207` | `analysis/product/cms-authoring-workflow.md`, ADR 0003 | Future authoring validation tests, preview workflow review. |
@@ -91,7 +91,7 @@ the two aligned as the portfolio keeps changing.
 | Blog publishing as a standalone product story | Partial story coverage. | Add a dedicated story if blog publishing becomes a major roadmap area beyond comments and metadata. |
 | Security headers and development-only metadata | Indirect story coverage. | Keep under architecture/quality unless they need independent product acceptance criteria. |
 | External tool portability | Locally ready, externally incomplete. | Finish `PF-601`, `PF-602`, `PF-603`, and `PF-608` once Confluence, Jira, and FigJam are connected. |
-| Planned owner workflows | Story-backed but not implemented. | Decide moderation schema, CMS authoring boundaries, and owner authorization before migration or route work. |
+| Planned owner workflows | Story-backed but not implemented. | Moderation schema direction is accepted in ADR 0009; decide CMS authoring boundaries and owner authorization before migration or route work. |
 
 ## Update Rules
 

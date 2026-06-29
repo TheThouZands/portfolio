@@ -34,10 +34,11 @@ Each ADR should include:
 | [0006](0006-defer-openapi-until-public-contract.md) | Defer OpenAPI until a stable public contract exists | Accepted |
 | [0007](0007-compose-routes-from-partials-and-repeatables.md) | Compose routes from partials and repeatables | Accepted |
 | [0008](0008-use-git-owned-manifests-for-external-tool-setup.md) | Use Git-owned manifests for external tool setup | Accepted |
+| [0009](0009-use-soft-state-comment-moderation.md) | Use soft-state comment moderation | Accepted |
 
 ## Candidate ADRs
 
 | Candidate | Reason |
 | --- | --- |
-| Define comment moderation model | Needed before comments become a more public interaction surface. |
 | Define CMS authoring workflow ownership | Needed before adding an editor/admin surface. |
+| Define owner authorization model | Needed before moderation or authoring routes become protected tools. |
