@@ -17,7 +17,7 @@ FigJam file or section URL exists.
 
 | Field | Value |
 | --- | --- |
-| File title | PF-DIAG-007 - Documentation Toolchain |
+| File title | Portfolio Analysis Diagrams |
 | File contents | Seven generated diagrams, `PF-DIAG-001` through `PF-DIAG-007` |
 | File URL | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW |
 | Project folder | Portfolio |
@@ -31,13 +31,13 @@ FigJam file or section URL exists.
 
 | Diagram id | FigJam section name | FigJam URL | Local source | Status |
 | --- | --- | --- | --- | --- |
-| PF-DIAG-001 | Visitor Discovery Journey | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md` | Generated |
-| PF-DIAG-002 | Portfolio Content Model | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | Generated |
-| PF-DIAG-003 | Auth Identifier And Session Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | Generated |
-| PF-DIAG-004 | Blog Comment Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | Generated |
-| PF-DIAG-005 | Deployment And Neon Branch Workflow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Generated |
-| PF-DIAG-006 | Structural Content Rendering Contract | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Generated |
-| PF-DIAG-007 | Documentation Toolchain | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Generated |
+| PF-DIAG-001 | PF-DIAG-001 - Visitor Discovery Journey | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-745 | `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md` | Generated |
+| PF-DIAG-002 | PF-DIAG-002 - Portfolio Content Model | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-746 | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | Generated |
+| PF-DIAG-003 | PF-DIAG-003 - Auth Identifier And Session Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-747 | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | Generated |
+| PF-DIAG-004 | PF-DIAG-004 - Blog Comment Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-748 | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | Generated |
+| PF-DIAG-005 | PF-DIAG-005 - Deployment And Neon Branch Workflow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-749 | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Generated |
+| PF-DIAG-006 | PF-DIAG-006 - Structural Content Rendering Contract | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-750 | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Generated |
+| PF-DIAG-007 | PF-DIAG-007 - Documentation Toolchain | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-744 | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Generated |
 
 ## Generation History
 
@@ -47,6 +47,7 @@ FigJam file or section URL exists.
 | 2026-06-29 | `b5249e3` | `PF-DIAG-004`, `PF-DIAG-005`, `PF-DIAG-006` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram` into the existing FigJam board; Git Mermaid remains source of truth. |
 | 2026-06-29 | `a9cdad4` | `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Refreshed the documentation-toolchain wording in place: the old implementation-first label became `Delivery evidence`, and the backward connector into `analysis/` was removed. |
 | 2026-06-29 | N/A | `PF-DIAG-001` through `PF-DIAG-007` | https://www.figma.com/files/team/1285044710574723356/project/619873187 | Moved the single FigJam file containing all seven generated diagrams from Drafts into the `Portfolio` project folder. |
+| 2026-06-29 | N/A | `PF-DIAG-001` through `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams | Renamed the FigJam file to `Portfolio Analysis Diagrams` and added visible section groupings. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
 
 ## Generation Steps
 
@@ -56,6 +57,7 @@ FigJam file or section URL exists.
 4. Copy the generated FigJam URL into this log and `figjam-section-manifest.csv`.
 5. Link the FigJam diagram from Confluence pages that use it.
 6. If the generation tool cannot support a diagram type, keep the Mermaid source in Git and mark the FigJam URL as `Pending`.
+7. Use FigJam sections for visible grouping and navigation labels, but keep generated shapes and connectors at page level unless connector routing has been verified after nesting.
 
 ## Update Rules
 
