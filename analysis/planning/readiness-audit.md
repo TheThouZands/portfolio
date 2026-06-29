@@ -19,7 +19,7 @@ technical artifacts near the code.
 | Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
-| Jira-compatible user stories | Strong local baseline | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv` | Import into Jira and fill `jira/import-history.md`. |
+| Jira-compatible user stories | Jira project connected | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira project `KAN` | Import epics/stories into Jira and fill `jira/import-history.md`. |
 | Confluence-compatible docs | External setup started | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages | Publish priority 1 content pages and keep source commits/URLs current. |
 | FigJam/Figma diagrams | Local source ready | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md` | Create FigJam file/sections and record URLs. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
@@ -51,7 +51,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 | Item | Why it remains |
 | --- | --- |
 | Only starter Confluence pages exist. | The Portfolio space, analysis root, and six container pages exist; priority 1 content pages still need publication. |
-| Actual Jira project/import is not done yet. | Needs Jira workspace access and import decisions. |
+| Jira import is not done yet. | Project `KAN` is accessible, but a read-only JQL check returned no project issues yet; epics/stories have not been imported or mapped. |
 | Actual FigJam file/sections do not exist yet. | Needs Figma/FigJam setup and visual refinement. |
 | Contact/intake UI is not implemented. | Planned in `PF-701` to `PF-704`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |

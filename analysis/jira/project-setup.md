@@ -10,13 +10,15 @@ Target home: Jira/Confluence
 This document defines a Jira setup that can receive the local backlog without losing the retrospective analysis context.
 It is designed for a small portfolio product with one owner today and possible collaborators later.
 
-## Project Proposal
+## Connected Project
 
 | Setting | Proposed value | Notes |
 | --- | --- | --- |
-| Project name | Portfolio Product Delivery | Matches the Confluence space. |
-| Project key | `PF` | Aligns with local story ids such as `PF-101`. |
-| Template | Kanban or Scrum | Kanban is simpler for ongoing portfolio work; Scrum works if planned sprint delivery becomes useful. |
+| Project name | Portfolio | Visible through Atlassian/Rovo. |
+| Project key | `KAN` | Actual Jira key for the connected project. Local story ids keep the `PF-*` prefix for analysis traceability. |
+| Project id | `10000` | Returned by the Jira project API. |
+| Project type | Software | Team-managed project. |
+| Template | Kanban | Current connected project key suggests a Kanban-style setup. |
 | Lead | Thouzands | Single owner until collaborators exist. |
 | Category | Personal product / portfolio | Keeps it separate from client delivery projects. |
 
@@ -27,8 +29,9 @@ It is designed for a small portfolio product with one owner today and possible c
 | Epic | Major capability or workstream, such as authenticated interaction or CMS authoring. | Epic sections in `analysis/jira/user-stories.md`. |
 | Story | User-visible or owner-visible behavior with acceptance criteria. | `analysis/jira/backlog.csv`. |
 | Task | Tool setup, documentation conversion, migration inventory, and operational chores. | Planning docs and ADR follow-ups. |
-| Spike | Time-boxed research where the desired implementation is not clear yet. | Open questions and decision points. |
+| Feature | Broad capability grouping if Jira needs a non-epic delivery item. | Larger follow-up areas that do not fit a single story. |
 | Bug | Regressions found after implementation. | GitHub issues, tests, or manual checks. |
+| Subtask | Small pieces of work under a parent issue. | Optional for implementation breakdowns. |
 
 ## Components
 
@@ -86,7 +89,7 @@ Keep the labels from `analysis/jira/README.md` as the starter set:
 
 ## Import Order
 
-1. Create the Jira project with key `PF`.
+1. Use the connected Jira project `KAN` named Portfolio.
 2. Import or manually create epics from `analysis/jira/epics.csv`.
 3. Import `analysis/jira/backlog.csv`.
 4. Map each story to its epic.
@@ -126,9 +129,9 @@ A story is done when:
 
 | Task | Target issue type | Priority |
 | --- | --- | --- |
-| Create Jira project `PF` | Task | High |
+| Confirm connected Jira project `KAN` settings | Task | High |
 | Create epics from local backlog | Task | High |
 | Import starter story CSV | Task | High |
 | Add components and labels | Task | Medium |
 | Create import history page | Task | Medium |
-| Decide whether implemented retrospective stories should import as Done or Backlog | Spike | Medium |
+| Decide whether implemented retrospective stories should import as Done or Backlog | Task | Medium |

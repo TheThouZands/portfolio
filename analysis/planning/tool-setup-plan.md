@@ -19,7 +19,7 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 | --- | --- | --- | --- |
 | 1 | Confluence | Create space, page tree, and page creation manifest. | `analysis/confluence/page-tree.md`, `analysis/confluence/page-manifest.csv` |
 | 2 | Confluence | Publish high-level product pages. | `analysis/product` |
-| 3 | Jira | Create project, epics, labels, components, workflow. | `analysis/jira/project-setup.md` |
+| 3 | Jira | Use connected project, confirm issue types, labels, components, workflow, and create epics. | `analysis/jira/project-setup.md` |
 | 4 | Jira | Import or manually create epics and stories from CSV. | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` |
 | 5 | Jira | Record local story id to Jira key mappings. | `analysis/jira/import-history.md` |
 | 6 | FigJam | Create diagram file and sections. | `analysis/design/diagram-inventory.md`, `analysis/design/figjam-section-manifest.csv` |
@@ -59,7 +59,7 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 | Batch | Scope | Exit check |
 | --- | --- | --- |
 | Batch 1 | Confluence root, product analysis pages, roadmap. | Pages exist and link back to Git source files. |
-| Batch 2 | Jira project, epics, CSV import, key mapping. | Local story ids map to Jira issue keys. |
+| Batch 2 | Jira project `KAN`, epics, CSV import, key mapping. | Local story ids map to Jira issue keys. |
 | Batch 3 | FigJam file and first four diagram sections. | Section manifest rows have FigJam URLs and link to local diagram sources. |
 | Batch 4 | Technical reference pages or links. | ADR/schema/API pages point back to GitHub. |
 

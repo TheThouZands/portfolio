@@ -14,7 +14,7 @@ should remain stable even after Jira assigns keys.
 
 | Run id | Date | Jira project | Source files | Source commit | Imported by | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| JIRA-IMPORT-001 | Pending | `PF` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | Pending | Thouzands | Blocked; Rovo Jira project access returns 403 because the app is not installed on the Jira instance. |
+| JIRA-IMPORT-001 | Pending | `KAN` | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | Pending | Thouzands | Ready for import planning; Rovo can see project `KAN` named Portfolio with Epic, Story, Task, Feature, Bug, and Subtask issue types. A read-only JQL check returned no project issues yet. |
 
 ## Epic Mapping
 
@@ -44,7 +44,7 @@ Before import:
 
 - Confirm `analysis/jira/backlog.csv` parses locally.
 - Confirm `analysis/jira/epics.csv` parses locally.
-- Confirm project key is `PF` or update this file before import.
+- Confirm project key is `KAN` and local ids remain `PF-*` after import.
 - Import or manually create epics first so story parent links can be mapped.
 - Decide whether implemented retrospective stories import as Done or Backlog.
 

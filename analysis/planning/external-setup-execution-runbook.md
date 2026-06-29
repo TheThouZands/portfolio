@@ -40,7 +40,7 @@ Also confirm:
 - The setup source commit is known.
 - External tool access exists for Confluence, Jira, and FigJam.
 - The target Confluence space key is `Portfolio` and the space id is `425988`.
-- The target Jira project key is `PF`.
+- The target Jira project key is `KAN`; local story and epic ids retain the `PF-*`/`PF-E*` analysis prefixes.
 - The FigJam file name is `Portfolio Analysis Diagrams`.
 - Local manifests are committed before copying or importing them.
 
@@ -49,7 +49,7 @@ Also confirm:
 | Batch | Tool | Action | Done when | Local files to update after |
 | --- | --- | --- | --- | --- |
 | EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root and starter container pages exist with source metadata; priority 1 content pages can follow in smaller batches. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
-| EXT-002 | Jira | Create project, components, labels, workflow, and epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
+| EXT-002 | Jira | Use the connected Portfolio project, confirm components/labels/workflow, and create epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
 | EXT-004 | FigJam | Create the FigJam file and first diagram sections from `figjam-section-manifest.csv`. | First four sections have FigJam URLs and source notes. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
 | EXT-005 | Confluence | Link Jira issues, FigJam sections, and GitHub sources back into copied pages. | Priority 1 pages expose source commit, Jira links, FigJam links, and GitHub references. | `analysis/confluence/page-manifest.csv`, relevant source docs |
@@ -68,7 +68,8 @@ Also confirm:
 
 ### EXT-002 Jira Epics
 
-- Project `PF` exists.
+- Project `KAN` exists and is named Portfolio.
+- Project issue types include Epic, Story, Task, Feature, Bug, and Subtask.
 - Components and labels match `analysis/jira/project-setup.md`.
 - Seven epics from `analysis/jira/epics.csv` exist.
 - Local epic ids remain in summaries or descriptions.
@@ -106,9 +107,9 @@ Before each external setup session, capture:
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
 | Source commit | `86015e1` for EXT-001 starter pages |
-| External tools touched | Confluence |
+| External tools touched | Confluence, Jira read checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira blocked by app installation; FigJam pending |
+| Result | EXT-001 starter pages created; Jira project `KAN` is visible; FigJam pending |
 
 Record the final values in the relevant logs after execution.
 
