@@ -63,6 +63,10 @@ below is the first publishing batch, not the full page inventory.
 | Validation Strategy | `analysis/planning/validation-strategy.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179670/Validation+Strategy | 2026-06-29 | Done/verification expectations; source-first validation wording synced. |
 | Readiness Audit | `analysis/planning/readiness-audit.md` | `28ce467` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1671177/Readiness+Audit | 2026-06-29 | Goal readiness audit and external setup gaps. |
 | Requirements Traceability Matrix | `analysis/planning/requirements-traceability-matrix.md` | `28ce467` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/786449/Requirements+Traceability+Matrix | 2026-06-29 | FR/NFR to persona, story, evidence, and verification map. |
+| Backlog Notes | `analysis/jira/README.md` | `a1ecc22` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1278003/Backlog+Notes | 2026-06-29 | Backlog package overview, local CSV sources, and label taxonomy. |
+| User Stories | `analysis/jira/user-stories.md` | `a1ecc22` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1802241/User+Stories | 2026-06-29 | Epic and story narrative with acceptance criteria, evidence, and Jira mapping. |
+| Jira Project Setup | `analysis/jira/project-setup.md` | `a1ecc22` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1540098/Jira+Project+Setup | 2026-06-29 | Project key, issue types, workflow, labels, components, and import order. |
+| Import History | `analysis/jira/import-history.md` | `a1ecc22` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1835009/Import+History | 2026-06-29 | Local id to Jira key mapping, import run log, and status mapping decision. |
 
 ## Formatting Notes
 
