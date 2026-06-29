@@ -21,6 +21,7 @@ should remain stable even after Jira assigns keys.
 | JIRA-IMPORT-004 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `0ce05cd` | Thouzands | Imported the `PF-E05` Quality Operations And Architecture story batch as `KAN-34` through `KAN-40` under `KAN-5`; implemented stories were transitioned to `Done`, and planned stories remained `To Do`. Fifteen stories remain pending. |
 | JIRA-IMPORT-005 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `38f82ed` | Thouzands | Imported the `PF-E06` Forward Planning story batch as `KAN-41` through `KAN-50` under `KAN-6`; all ten planned stories remained `To Do`. Five stories remain pending. |
 | JIRA-IMPORT-006 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `aaf0128` | Thouzands | Imported the `PF-E07` Service Conversion story batch as `KAN-51` through `KAN-55` under `KAN-7`; all five planned stories remained `To Do`. Jira story import is complete for the current backlog. |
+| JIRA-DESC-001 | 2026-06-29 | `KAN` | Jira issue descriptions | `7b49856` | Thouzands | Description maintenance: cleaned legacy source wording in `KAN-1` through `KAN-33`, replacing the older priority/status provenance labels with `Local priority` and `Local analysis status`. Jira statuses, summaries, parents, labels, and evidence references were not changed. |
 
 ## Status Mapping Decision
 
