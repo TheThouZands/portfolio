@@ -89,10 +89,11 @@ Also confirm:
 ### EXT-004 FigJam
 
 - Figma connector access is verified; authenticated account has one available Pro team plan.
-- First four priority Mermaid diagrams are generated through the MCP, or unsupported diagram types are explicitly left pending.
+- First four priority Mermaid diagrams are generated through the MCP in `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW`.
+- Remaining priority 2 diagram sources stay pending for a later batch.
 - Each generated diagram name includes the diagram id and title.
-- Section URLs are recorded in both the section manifest and creation log.
-- Confluence links can target the section URLs.
+- Generated FigJam board URL is recorded in both the section manifest and creation log.
+- Confluence links can target the board URL until section-specific anchors are available.
 
 ### EXT-005 Cross-Linking
 
@@ -109,10 +110,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source; `da7214d` for the `PF-E05` story mapping and Confluence Jira Backlog sync source; `38f82ed` for the `PF-E06` story import source; `3bac758` for the `PF-E06` story mapping and Confluence Jira Backlog sync source; `aaf0128` for the `PF-E07` story import source; `fd213fb` for the `PF-E07` story mapping and completed Confluence Jira Backlog sync source; `4ced0fc` for the first product content Confluence batch |
-| External tools touched | Confluence, Jira read/write checks |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source; `4024a94` for the `PF-E04` story import source; `80a2d1d` for the `PF-E04` story mapping and Confluence Jira Backlog sync source; `0ce05cd` for the `PF-E05` story import source; `da7214d` for the `PF-E05` story mapping and Confluence Jira Backlog sync source; `38f82ed` for the `PF-E06` story import source; `3bac758` for the `PF-E06` story mapping and Confluence Jira Backlog sync source; `aaf0128` for the `PF-E07` story import source; `fd213fb` for the `PF-E07` story mapping and completed Confluence Jira Backlog sync source; `4ced0fc` for the first product content Confluence batch; `2ca08e0` for the first FigJam diagram source batch |
+| External tools touched | Confluence, Jira read/write checks, Figma/FigJam diagram generation |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; first product content pages `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements` created from source commit `4ced0fc`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 13 was synced; Figma connector and Mermaid-to-FigJam generation path verified; Jira story import is complete and FigJam diagram generation is pending |
+| Result | EXT-001 starter pages created; first product content pages `Problem Statement`, `Stakeholders And Personas`, and `Scope And Requirements` created from source commit `4ced0fc`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-55` created under `KAN-1` through `KAN-7`; implemented created stories are `Done`; current-worktree stories are `In Progress`; planned created stories remain `To Do`; Jira Backlog Confluence page version 13 was synced; first FigJam diagram batch `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, and `PF-DIAG-003` was generated; Jira story import is complete and FigJam remaining diagram generation is pending |
 
 Record the final values in the relevant logs after execution.
 

@@ -1,6 +1,6 @@
 # FigJam Creation Log
 
-Status: Draft  
+Status: First batch generated
 Owner: Thouzands  
 Last updated: 2026-06-29  
 Target home: Figma/FigJam and Confluence
@@ -18,7 +18,7 @@ FigJam file or section URL exists.
 | Field | Value |
 | --- | --- |
 | File name | Portfolio Analysis Diagrams |
-| File URL | Pending |
+| File URL | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW |
 | Owner | Thouzands |
 | Source inventory | `analysis/design/diagram-inventory.md` |
 | Section manifest | `analysis/design/figjam-section-manifest.csv` |
@@ -28,13 +28,19 @@ FigJam file or section URL exists.
 
 | Diagram id | FigJam section name | FigJam URL | Local source | Status |
 | --- | --- | --- | --- | --- |
-| PF-DIAG-001 | Visitor Discovery Journey | Pending | `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md` | Source ready |
-| PF-DIAG-002 | Portfolio Content Model | Pending | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | Source ready |
-| PF-DIAG-003 | Auth Identifier And Session Flow | Pending | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | Source ready |
+| PF-DIAG-001 | Visitor Discovery Journey | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md` | Generated |
+| PF-DIAG-002 | Portfolio Content Model | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | Generated |
+| PF-DIAG-003 | Auth Identifier And Session Flow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | Generated |
 | PF-DIAG-004 | Blog Comment Flow | Pending | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | Source ready |
 | PF-DIAG-005 | Deployment And Neon Branch Workflow | Pending | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Source ready |
 | PF-DIAG-006 | Structural Content Rendering Contract | Pending | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Source ready |
-| PF-DIAG-007 | Documentation Toolchain | Pending | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Source ready |
+| PF-DIAG-007 | Documentation Toolchain | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Generated |
+
+## Generation History
+
+| Date | Source commit | Diagrams | FigJam URL | Notes |
+| --- | --- | --- | --- | --- |
+| 2026-06-29 | `2ca08e0` | `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, `PF-DIAG-003` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram`; Git Mermaid remains source of truth. |
 
 ## Generation Steps
 

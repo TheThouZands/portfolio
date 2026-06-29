@@ -21,7 +21,7 @@ technical artifacts near the code.
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
 | Jira-compatible user stories | Jira story import complete with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-55`; implemented created stories are `Done` and current-worktree stories are `In Progress` | Keep story statuses current as planned work is implemented. |
 | Confluence-compatible docs | External setup in progress | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`, Portfolio space starter pages, first product content pages | Publish remaining priority 1 content pages and keep source commits/URLs current. |
-| FigJam/Figma diagrams | Local source ready and MCP generation path verified | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; Figma MCP exposes Mermaid `generate_diagram` | Generate FigJam diagrams from Mermaid and record URLs. |
+| FigJam/Figma diagrams | First batch generated | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; first FigJam board exists at `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW` | Generate remaining priority 2 diagrams and link relevant Confluence pages. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
@@ -51,7 +51,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 | Item | Why it remains |
 | --- | --- |
 | Confluence publication is partial. | The Portfolio space, analysis root, six container pages, and first product content pages exist; remaining priority 1 content pages still need publication. |
-| Actual FigJam generated diagrams do not exist yet. | Figma access and Mermaid generation path are verified, but no diagrams have been generated or URL-mapped yet. |
+| FigJam publication is partial. | First priority diagrams `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, and `PF-DIAG-003` exist; priority 2 diagrams and Confluence links remain pending. |
 | Contact/intake UI is not implemented. | Planned in `PF-701` to `PF-704`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
 | CMS authoring UI is not implemented. | ADR 0011 defines the first owner-only source-aware boundary and ADR 0012 defines media lifecycle; implementation remains planned in `PF-206`, `PF-208`, and `PF-411`. |
@@ -63,7 +63,7 @@ These are not local analysis gaps; they are execution or external setup gaps.
 | --- | --- |
 | Continue Confluence publication | Publish the remaining priority 1 content pages and fill publishing metadata after each small batch. |
 | Jira upkeep and cross-linking | Keep story statuses current and add useful Confluence/GitHub links as pages are published. |
-| External FigJam setup | Generate first Mermaid-backed diagrams, record URLs, and keep Git Mermaid as source of truth. |
+| Continue FigJam setup | Generate remaining Mermaid-backed diagrams, record URLs, and keep Git Mermaid as source of truth. |
 | External setup execution run | Follow `analysis/planning/external-setup-execution-runbook.md` and commit filled URLs/keys after each batch. |
 | Owner authorization implementation prep | Define and test the shared server-only guard before moderation or authoring routes. |
 | Conversion implementation | Add service CTA and minimal intake path. |
