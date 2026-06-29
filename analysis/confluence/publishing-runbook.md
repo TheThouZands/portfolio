@@ -45,7 +45,7 @@ below is the first publishing batch, not the full page inventory.
 | Portfolio Analysis Home | `analysis/README.md` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/655361/Portfolio+Analysis+Home | 2026-06-29 | Root analysis page under existing Portfolio Home. |
 | Product Analysis | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/98317/Product+Analysis | 2026-06-29 | Starter container page. |
 | Planning | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/688129/Planning | 2026-06-29 | Starter container page. |
-| Jira Backlog | `analysis/jira/import-history.md` | `14b9eb9` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-06-29 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-19` are mapped, with implemented created stories marked `Done`. |
+| Jira Backlog | `analysis/jira/import-history.md` | `cc8586f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-06-29 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-22` are mapped, with implemented created stories marked `Done`. |
 | Diagrams | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/163842/Diagrams | 2026-06-29 | Starter container page; FigJam pending. |
 | Technical Reference | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/557058/Technical+Reference | 2026-06-29 | Starter container page. |
 | Operations | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/622594/Operations | 2026-06-29 | Starter container page. |
@@ -66,7 +66,7 @@ below is the first publishing batch, not the full page inventory.
 - Keep status labels visible.
 - Prefer Confluence tables for mapping pages, requirements, risks, and stories.
 - Link ADRs and schema docs to GitHub source rather than duplicating them as editable Confluence authority.
-- Keep Mermaid source in Git and FigJam; Confluence can embed or link the finished visual.
+- Keep Mermaid source in Git and use generated FigJam diagrams as the visual copy; Confluence can embed or link the finished visual.
 
 ## Update Triggers
 

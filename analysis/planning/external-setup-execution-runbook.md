@@ -19,7 +19,7 @@ trust, what order to follow, what evidence to capture, and which local logs must
 | --- | --- | --- | --- |
 | Confluence | `analysis/confluence/page-tree.md`, `analysis/confluence/page-manifest.csv` | `analysis/confluence/publishing-runbook.md` | `Import-Csv analysis\confluence\page-manifest.csv` |
 | Jira | `analysis/jira/project-setup.md`, `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` | `analysis/jira/import-history.md` | `Import-Csv analysis\jira\epics.csv`, `Import-Csv analysis\jira\backlog.csv` |
-| FigJam | `analysis/design/diagram-inventory.md`, `analysis/design/figjam-section-manifest.csv` | `analysis/design/figjam-creation-log.md` | `Import-Csv analysis\design\figjam-section-manifest.csv` |
+| FigJam | `analysis/design/diagram-inventory.md`, `analysis/design/figjam-section-manifest.csv`, `analysis/design/diagrams` | `analysis/design/figjam-creation-log.md` | `Import-Csv analysis\design\figjam-section-manifest.csv` |
 | GitHub | `analysis/github/documentation-rules.md`, `analysis/technical/adr/0008-use-git-owned-manifests-for-external-tool-setup.md` | Commit history | `git status --short`, focused docs commits |
 
 ## Preflight
@@ -41,7 +41,8 @@ Also confirm:
 - External tool access exists for Confluence, Jira, and FigJam.
 - The target Confluence space key is `Portfolio` and the space id is `425988`.
 - The target Jira project key is `KAN`; local story and epic ids retain the `PF-*`/`PF-E*` analysis prefixes.
-- The FigJam file name is `Portfolio Analysis Diagrams`.
+- Figma access is authenticated and the Figma MCP `generate_diagram` tool is available for Mermaid to FigJam generation.
+- The FigJam file name is `Portfolio Analysis Diagrams` if an existing board is used.
 - Local manifests are committed before copying or importing them.
 
 ## Execution Batches
@@ -51,7 +52,7 @@ Also confirm:
 | EXT-001 | Confluence | Create or use the Portfolio space, root page, and first page tree from `page-manifest.csv`. | Root and starter container pages exist with source metadata; priority 1 content pages can follow in smaller batches. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
 | EXT-002 | Jira | Use the connected Portfolio project, confirm components/labels/workflow, and create epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
-| EXT-004 | FigJam | Create the FigJam file and first diagram sections from `figjam-section-manifest.csv`. | First four sections have FigJam URLs and source notes. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
+| EXT-004 | FigJam | Generate the first diagrams from Mermaid using the Figma MCP and record the generated URLs. | First four diagram rows have FigJam URLs or a recorded unsupported-tool reason. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
 | EXT-005 | Confluence | Link Jira issues, FigJam sections, and GitHub sources back into copied pages. | Priority 1 pages expose source commit, Jira links, FigJam links, and GitHub references. | `analysis/confluence/page-manifest.csv`, relevant source docs |
 
 ## Batch Exit Checks
@@ -88,9 +89,9 @@ Also confirm:
 
 ### EXT-004 FigJam
 
-- FigJam file exists with the planned name.
-- First four priority sections exist.
-- Each section includes diagram id, local source file, and source docs.
+- Figma connector access is verified; authenticated account has one available Pro team plan.
+- First four priority Mermaid diagrams are generated through the MCP, or unsupported diagram types are explicitly left pending.
+- Each generated diagram name includes the diagram id and title.
 - Section URLs are recorded in both the section manifest and creation log.
 - Confluence links can target the section URLs.
 
@@ -109,10 +110,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source; `eab5f40` for the local epic key mapping; `b980ebb` for the first story batch source; `4b664c6` for the local first story mapping; `e50da91` for the second story batch source; `ca99f14` for the local second story mapping; `3bc7001` for the Jira status reconciliation source; `14b9eb9` for the local status mapping record and Confluence Jira Backlog sync source; `1a94d4e` for the `PF-E03` story import source; `cc8586f` for the `PF-E03` story mapping and Confluence Jira Backlog sync source |
 | External tools touched | Confluence, Jira read/write checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-22` created under `KAN-1` through `KAN-3`; implemented created stories are `Done`; planned created stories remain `To Do`; Jira Backlog Confluence page version 8 was synced; thirty-three story imports and FigJam pending |
+| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-22` created under `KAN-1` through `KAN-3`; implemented created stories are `Done`; planned created stories remain `To Do`; Jira Backlog Confluence page version 9 was synced; Figma connector and Mermaid-to-FigJam generation path verified; thirty-three story imports and FigJam diagram generation pending |
 
 Record the final values in the relevant logs after execution.
 

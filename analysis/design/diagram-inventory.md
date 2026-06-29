@@ -7,7 +7,7 @@ Target home: Figma/FigJam and Confluence
 
 ## Purpose
 
-This inventory defines the diagrams worth creating before connected Figma/FigJam work begins. It keeps each diagram tied
+This inventory defines the diagrams worth generating before connected Figma/FigJam work begins. It keeps each diagram tied
 to a product or technical question, so visual work supports analysis instead of becoming decorative documentation.
 
 Use `analysis/design/figjam-section-manifest.csv` as the section creation checklist when creating or updating the FigJam
@@ -143,10 +143,12 @@ Include:
 
 Update trigger: tool setup changes, source-of-truth changes, or import/sync workflow changes.
 
-## FigJam Creation Rules
+## FigJam Generation Rules
 
-- Create one FigJam file for the analysis suite, with one section per diagram.
-- Put the diagram id and source docs in each section title or note.
+- Keep the Mermaid files in `analysis/design/diagrams` as the source of truth.
+- Use the Figma MCP `generate_diagram` path to create or refresh FigJam visuals from Mermaid.
+- If the generated path cannot represent a diagram type, leave the FigJam URL pending and keep the Mermaid source in Git.
+- Put the diagram id and source docs in the generated diagram name or nearby note when the tool allows it.
 - Keep product journey diagrams visually separate from technical architecture diagrams.
 - Link Confluence pages back to the diagram sections after creation.
 - Do not treat the diagram as authoritative unless its source docs are updated too.

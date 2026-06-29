@@ -7,8 +7,8 @@ Target home: Figma/FigJam and Confluence
 
 ## Purpose
 
-This log records FigJam files and sections created from the local diagram inventory. It keeps visual work connected to
-the source docs and local Mermaid sketches.
+This log records FigJam files and generated diagrams created from the local diagram inventory. It keeps visual work
+connected to the source docs and local Mermaid sketches.
 
 Use `analysis/design/figjam-section-manifest.csv` as the creation checklist. Use this file as the durable log after a
 FigJam file or section URL exists.
@@ -36,18 +36,18 @@ FigJam file or section URL exists.
 | PF-DIAG-006 | Structural Content Rendering Contract | Pending | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Source ready |
 | PF-DIAG-007 | Documentation Toolchain | Pending | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Source ready |
 
-## Creation Steps
+## Generation Steps
 
-1. Create a FigJam file named `Portfolio Analysis Diagrams`.
-2. Create one section for each diagram id.
-3. Add the source docs and local source file path in a note near each section title.
-4. Redraw or refine the Mermaid source into a readable FigJam diagram.
-5. Copy the section URL into this log.
-6. Link the FigJam section from Confluence pages that use the diagram.
+1. Use the Figma MCP `generate_diagram` tool with the Mermaid source from `analysis/design/diagrams`.
+2. Generate into an existing FigJam file when a file key exists; otherwise let the tool create the first FigJam artifact.
+3. Name each generated diagram with the stable `PF-DIAG-*` id and title.
+4. Copy the generated FigJam URL into this log and `figjam-section-manifest.csv`.
+5. Link the FigJam diagram from Confluence pages that use it.
+6. If the generation tool cannot support a diagram type, keep the Mermaid source in Git and mark the FigJam URL as `Pending`.
 
 ## Update Rules
 
 - If the meaning changes, update the local source doc first.
-- If only layout changes, update FigJam and leave local source unchanged.
+- If only layout changes, regenerate from Mermaid or accept the generated layout as-is; avoid manual FigJam-only maintenance.
 - If a diagram becomes obsolete, mark it as Archived rather than deleting the id.
 - Keep product journey diagrams visually separate from technical diagrams.
