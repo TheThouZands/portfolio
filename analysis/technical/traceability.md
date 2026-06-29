@@ -35,11 +35,11 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle`, `analysis/technical/schema-table-catalog.md` | `npm run db:check`, schema catalog review, migrations, query tests as added. |
 | Structural content rendering | `FR-008`, `NFR-003` | `src/cms/structural-content`, `src/components/repeatables/structural-content` | `tests/structural-content/rendering.test.ts` |
 | Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
-| Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`; soft-state model in ADR 0009. |
+| Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`; soft-state model in ADR 0009; owner guard model in ADR 0010. |
 | Auth and session flows | `FR-010`, `FR-011`, `FR-012` | `src/auth`, `src/components/auth`, `src/app/api/auth/[...all]`, `src/app/api/auth-state` | `tests/auth`; future integration tests. |
 | Service conversion path | `FR-017`, `FR-021`, `NFR-012` | Future contact/intake route or component, homepage CTA, service offer links | Planned; briefs in `analysis/product/conversion-path.md` and `analysis/product/service-offer-catalog.md`. |
 | CMS authoring workflow | `FR-019`, `NFR-014` | Future owner-only CMS authoring routes, preview flow, validation, audit fields | Planned; workflow in `analysis/product/cms-authoring-workflow.md`. |
-| Owner account controls | `FR-020`, `NFR-015` | Future owner authorization model for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`. |
+| Owner account controls | `FR-020`, `NFR-015` | Future owner authorization helper for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`; explicit allowlist model in ADR 0010. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
 | Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates; ADR 0007 records route/component boundaries. |
 | Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md`, `analysis/planning/requirements-traceability-matrix.md`, external tool manifests | Docs validate with CSV/import checks; future implementation slices should cite persona, requirement, story, risk, and validation evidence. ADR 0008 records manifest ownership. |
@@ -61,9 +61,9 @@ Detailed command selection, CI coverage, and coverage gaps live in `analysis/tec
 | --- | --- | --- |
 | No complete Confluence/Jira integration yet | Local docs are portable but not connected to external tools. | `PF-601`, `PF-602` |
 | Diagram inventory exists, but no FigJam diagrams have been created yet | Visual artifacts still need external tool setup. | `PF-603` |
-| ADR baseline exists, but future editor and owner-authorization implementation decisions remain uncovered | Route composition is covered by ADR 0007 and comment moderation by ADR 0009; future protected workflows still need decisions when implemented. | `PF-604`, `PF-409`, `PF-411` |
+| ADR baseline exists, but future editor implementation decisions remain uncovered | Route composition is covered by ADR 0007, comment moderation by ADR 0009, and owner authorization by ADR 0010. | `PF-604`, `PF-205`, `PF-206` |
 | No formal public OpenAPI contract | Current route handlers and server actions are inventoried, but ADR 0006 intentionally defers a spec until public API intent is decided. | `PF-506` or future API decision story |
 | Comment moderation decision exists, but implementation is not built | ADR 0009 defines the soft-state model; schema, owner actions, and rendering tests remain future work. | `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
 | Risk, validation, requirement traceability, and verification catalog artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607`, `PF-610` |
-| CMS authoring and owner auth are planned, but not implemented | The data model supports CMS behavior, but safe authoring needs protected workflow decisions. | `PF-205`, `PF-206`, `PF-207`, `PF-409`, `PF-411` |
+| CMS authoring and owner auth are planned, but not implemented | ADR 0010 defines the guard strategy, but protected routes/actions are not built. | `PF-205`, `PF-206`, `PF-207`, `PF-411` |

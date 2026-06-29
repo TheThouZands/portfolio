@@ -32,7 +32,7 @@ Auth does not yet exist to support:
 | Account type | Status | Product reason |
 | --- | --- | --- |
 | Reader account | Implemented/in progress | Allows authenticated comments and future reader trust controls. |
-| Owner account | Planned | Needed for moderation and CMS authoring. |
+| Owner account | Planned; authorization model accepted in ADR 0010 | Needed for moderation and CMS authoring. |
 | Client account | Needs decision | Could support private collaboration, but not yet justified. |
 | Collaborator account | Needs decision | Could support future development/content collaboration. |
 | Public profile | Deferred | Not needed for current service positioning. |
@@ -42,20 +42,20 @@ Auth does not yet exist to support:
 | Phase | Scope | Exit criteria |
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
-| A2 Owner controls | Owner can moderate comments and access protected owner tools. | Owner-only authorization model exists. |
+| A2 Owner controls | Owner can moderate comments and access protected owner tools. | Owner-only authorization model exists in ADR 0010; implementation still pending. |
 | A3 CMS authoring auth | Owner can draft, preview, and publish CMS content. | Authoring workflow has protected routes and audit fields if needed. |
 | A4 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
 
 ## Authorization Model
 
-First planned authorization model:
+First planned authorization model, accepted in ADR 0010:
 
 - Reader: can manage their own session and post comments.
-- Owner: can moderate comments and manage CMS content.
+- Owner: is matched by an explicit server-side allowlist after Better Auth session resolution.
 - Anonymous visitor: can read public content.
 
-Avoid adding a complex role table until owner controls require it. A simple owner identification strategy may be enough
-for the first protected tools, but it should be documented before implementation.
+Avoid adding a complex role table until collaborator, client, or multi-owner needs become real. Owner-only moderation
+and authoring tools should call one server-only authorization helper rather than checking ownership ad hoc.
 
 ## Security And Trust Implications
 
@@ -66,7 +66,7 @@ for the first protected tools, but it should be documented before implementation
 | Account enumeration | Username/email flow separates behavior and avoids exposing email account existence. |
 | Session accuracy | Session state refresh and Better Auth session storage. |
 | Comment trust | Authenticated comments plus planned moderation. |
-| Owner tools | Need protected routes and explicit authorization. |
+| Owner tools | Use the ADR 0010 explicit owner allowlist and server-only guard before protected tools ship. |
 
 ## Requirements Impact
 
@@ -76,8 +76,8 @@ for the first protected tools, but it should be documented before implementation
 | `FR-011` auth flows validate and rate limit | Implemented. |
 | `FR-012` sessions are durable and refresh locally | Implemented/in progress. |
 | `FR-018` owner can moderate comments | Planned. |
-| `FR-020` owner-only account capabilities protect moderation and authoring tools | Planned. |
-| `NFR-015` auth scope should grow only when tied to product needs | Planned. |
+| `FR-020` owner-only account capabilities protect moderation and authoring tools | Planned; owner authorization decision accepted in ADR 0010. |
+| `NFR-015` auth scope should grow only when tied to product needs | Planned; ADR 0010 keeps role scope minimal. |
 
 ## Jira Impact
 
@@ -91,8 +91,7 @@ for the first protected tools, but it should be documented before implementation
 
 | Question | Default until answered |
 | --- | --- |
-| How is the owner identified? | Use the simplest explicit owner strategy that works with Better Auth. |
+| How is the owner identified? | ADR 0010: use explicit server-side owner allowlist, with Better Auth user ids preferred. |
 | Should reader accounts have profiles? | No. Keep reader accounts minimal. |
 | Should client accounts exist? | Defer until a client collaboration use case is real. |
 | Should OAuth providers be added? | Defer until password/identifier flow proves insufficient. |
-

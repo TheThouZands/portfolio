@@ -119,7 +119,7 @@ The first migration should avoid reader report records, reader edit history, tru
 | --- | --- |
 | `FR-013` authenticated readers can comment | Implemented/in progress. |
 | `FR-014` discussion survives account deletion | Implemented. |
-| `FR-018` owner can moderate comments | Planned; moderation state decision accepted in ADR 0009. |
+| `FR-018` owner can moderate comments | Planned; moderation state decision accepted in ADR 0009 and owner authorization decision accepted in ADR 0010. |
 | `NFR-011` comments should preserve trust and safety | Planned; preservation and moderation decisions now have ADR coverage. |
 
 ## Jira Impact

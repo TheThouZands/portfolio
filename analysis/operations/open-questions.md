@@ -30,6 +30,7 @@ instead of disappearing into the background.
 | OQ-005 | Should a public OpenAPI spec be created? | Deferred | No spec until a stable public contract exists. | ADR 0006, `analysis/technical/openapi.md` |
 | OQ-006 | Should pricing be public? | Watching | Service offers are defined, but public pricing remains deferred until offer boundaries repeat with lead feedback. | `analysis/product/service-offer-catalog.md`, `analysis/product/conversion-path.md` |
 | OQ-007 | Should Confluence sync back to Git manually or automatically? | Watching | Manual until page structure stabilizes. | `analysis/confluence/publishing-runbook.md` |
+| OQ-008 | Should owner access use a role table or explicit allowlist first? | Answered | ADR 0010 chooses an explicit server-side owner allowlist first. | `analysis/product/auth-account-roadmap.md`, ADR 0010 |
 
 ## Review Rule
 

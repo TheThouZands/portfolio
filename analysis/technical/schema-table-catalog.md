@@ -44,7 +44,7 @@ query code.
 | `account` | Auth | Better Auth provider/account linkage. | Belongs to `user`; stores provider account metadata. |
 | `verification` | Auth | Better Auth verification data. | Provider/framework-owned auth support table. |
 | `rate_limit` | Auth/security | Database-backed auth rate-limit counters. | Used by auth flows to reduce abuse risk. |
-| `auth_identities` | Auth | Portfolio-owned username/email identity resolution. | Separates portfolio identity from Better Auth provider records; see ADR 0004. |
+| `auth_identities` | Auth | Portfolio-owned username/email identity resolution. | Separates portfolio identity from Better Auth provider records; see ADR 0004. Owner authorization stays config-backed first; see ADR 0010. |
 | `wp_honeypot_logs` | Operations/security | Records fake WordPress installer probes. | Defensive telemetry for suspicious automated requests. |
 | `content_entities` | CMS identity | Shared identity layer for portfolio objects. | Enables cross-content references and mentions across content types. |
 | `media_assets` | Media | Reusable media metadata and storage references. | Translated alt text and use-specific join tables attach media to content. |

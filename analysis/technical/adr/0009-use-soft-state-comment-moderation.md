@@ -70,5 +70,5 @@ Tradeoffs:
 - Update `analysis/technical/schema-table-catalog.md`, `schema-and-migrations.md`, and `migration-catalog.md` when the
   migration exists.
 - Add tests for public filtering, owner review visibility, and hidden/removed placeholder rendering.
-- Define owner authorization before exposing moderation routes or actions.
+- Implement the ADR 0010 owner guard before exposing moderation routes or actions.
 - Revisit reader edit, delete, and report controls after real comment usage creates evidence for them.

@@ -59,7 +59,7 @@ adding isolated admin forms.
 
 | Boundary | Decision for first version |
 | --- | --- |
-| Roles | Owner-only. |
+| Roles | Owner-only, protected by the ADR 0010 explicit owner allowlist. |
 | Approval | Self-review through preview and validation. |
 | Multi-user editorial workflow | Deferred. |
 | Public user-generated content authoring | Not part of CMS authoring; comments remain separate. |
@@ -85,7 +85,7 @@ Do not add these fields one by one without a migration plan.
 | --- | --- |
 | `FR-003` CMS portfolio content is stored in PostgreSQL | Implemented. |
 | `FR-008` rich bodies use structural content | Implemented. |
-| `FR-019` owner can author and preview CMS content through a managed workflow | Planned. |
+| `FR-019` owner can author and preview CMS content through a managed workflow | Planned; authorization model accepted in ADR 0010. |
 | `NFR-014` authoring workflow preserves structured content safety and localization | Planned. |
 
 ## Jira Impact
@@ -100,8 +100,7 @@ Do not add these fields one by one without a migration plan.
 
 | Question | Default until answered |
 | --- | --- |
-| Should authoring start as an admin route or local tooling? | Admin route only after auth/session work stabilizes. |
+| Should authoring start as an admin route or local tooling? | Admin route only after the ADR 0010 owner guard exists. |
 | Should the editor be visual, form-based, or source-oriented? | Source-aware constrained editor until richer needs are proven. |
 | Should CMS records track author/editor ids? | Yes, if an admin surface is built. |
 | Should preview be public behind unguessable token or authenticated only? | Authenticated only for first version. |
-
