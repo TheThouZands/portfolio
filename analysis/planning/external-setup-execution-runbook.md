@@ -70,8 +70,8 @@ Also confirm:
 
 - Project `KAN` exists and is named Portfolio.
 - Project issue types include Epic, Story, Task, Feature, Bug, and Subtask.
-- Components and labels match `analysis/jira/project-setup.md`.
-- Seven epics from `analysis/jira/epics.csv` exist.
+- Labels match `analysis/jira/project-setup.md`; Jira components still need a separate setup pass if component fields are enabled later.
+- Seven epics from `analysis/jira/epics.csv` exist as `KAN-1` through `KAN-7`.
 - Local epic ids remain in summaries or descriptions.
 - Epic key mapping is recorded in `analysis/jira/import-history.md`.
 
@@ -106,10 +106,10 @@ Before each external setup session, capture:
 | --- | --- |
 | Setup run id | `EXT-SETUP-001` |
 | Local branch | `feature/backend` |
-| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check |
-| External tools touched | Confluence, Jira read checks |
+| Source commit | `86015e1` for EXT-001 starter pages; `dd6c8a4` for the Jira access check; `86a2d97` for the Jira epic import source |
+| External tools touched | Confluence, Jira read/write checks |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; Jira project `KAN` is visible; FigJam pending |
+| Result | EXT-001 starter pages created; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; story import and FigJam pending |
 
 Record the final values in the relevant logs after execution.
 

@@ -130,7 +130,7 @@ A story is done when:
 | Task | Target issue type | Priority |
 | --- | --- | --- |
 | Confirm connected Jira project `KAN` settings | Task | High |
-| Create epics from local backlog | Task | High |
+| Confirm created epic keys before story import | Task | High |
 | Import starter story CSV | Task | High |
 | Add components and labels | Task | Medium |
 | Create import history page | Task | Medium |
