@@ -28,6 +28,8 @@ The suite is intended to stay useful in four places:
 | Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |
 | Product strategy | [product/positioning-brief.md](product/positioning-brief.md) | Confluence | Defines the service position, audience, proof strategy, and first conversion hypothesis. |
 | Product strategy | [product/content-strategy.md](product/content-strategy.md) | Confluence | Defines content pillars, templates, publishing workflow, and content gaps. |
+| Product strategy | [product/conversion-path.md](product/conversion-path.md) | Confluence/Jira | Defines service entry points, visitor journey, intake questions, and conversion requirements. |
+| Product policy | [product/interaction-policy.md](product/interaction-policy.md) | Confluence/Jira | Defines comment interaction goals, moderation principles, lifecycle, and future policy decisions. |
 | Planning | [planning/roadmap.md](planning/roadmap.md) | Confluence/Jira | Groups the work into practical stages and identifies next analysis slices. |
 | Jira backlog | [jira/user-stories.md](jira/user-stories.md) | Jira/Confluence | Human-readable epics and user stories with acceptance criteria and evidence commits. |
 | Jira backlog | [jira/backlog.csv](jira/backlog.csv) | Jira CSV import | Starter import file for Jira issues once the Jira project is configured. |

@@ -136,11 +136,11 @@ The CMS can link blog revisions to content entities. Use that intentionally:
 
 | Gap | Why it matters | Candidate next artifact |
 | --- | --- | --- |
-| No explicit service offer page yet | Visitors may understand capability but not how to start working together. | Conversion path brief |
+| No explicit service offer page yet | Visitors may understand capability but not how to start working together. | `product/conversion-path.md` baseline drafted |
 | Demo project/content may not fully represent real service work | Synthetic data proves structure but not business credibility. | Real project case-study backlog |
-| Blog comments lack moderation policy | Interaction evidence needs trust rules. | Interaction policy |
+| Blog comments lack moderation policy | Interaction evidence needs trust rules. | `product/interaction-policy.md` baseline drafted |
 | No diagram outputs yet | Visual explanation still depends on text docs. | First FigJam diagrams |
-| No public contact/conversion requirement | Business outcome is not fully represented in current requirements. | New requirements and stories |
+| No public contact/conversion requirement | Business outcome is not fully represented in current implementation. | `FR-017`, `PF-701` to `PF-704` |
 
 ## Content Quality Checklist
 
@@ -153,4 +153,3 @@ Before publishing a project, experience entry, skill, or post:
 - It distinguishes implemented behavior from planned follow-up.
 - It has localized copy if it is core portfolio content.
 - It has a maintenance trigger if the underlying implementation changes.
-

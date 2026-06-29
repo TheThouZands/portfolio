@@ -34,6 +34,8 @@ content editing, and stronger moderation/observability.
 | FR-014 | The system shall preserve comment discussion context after user deletion. | Implemented | `cc9073d` | `comments.userId` foreign key with `set null`, comment rendering fallback |
 | FR-015 | The project shall support branch-isolated Neon database workflows. | Implemented | `5a50321`, `888fbdf` | `scripts/sync-neon-branch.mjs`, `README.md`, `.env.local` workflow |
 | FR-016 | The app shall expose development-only integration metadata where fixed URLs require route placement. | Implemented | `d98aff7` | `src/app`, route-level architecture notes |
+| FR-017 | Visitors shall be able to choose a scoped service entry point from the portfolio. | Planned | `analysis/product/conversion-path.md` | Future homepage/contact or intake surface |
+| FR-018 | The portfolio owner shall be able to moderate blog comments without breaking thread context. | Planned | `analysis/product/interaction-policy.md`, ADR 0005 | Future moderation state, owner workflow, comment rendering |
 
 ## Non-Functional Requirements
 
@@ -49,13 +51,15 @@ content editing, and stronger moderation/observability.
 | NFR-008 | Testability: important auth, content rendering, and comment behavior should have unit coverage. | Implemented baseline | `213d7a7`, `2870f75` | Tests exist under `tests`. |
 | NFR-009 | Operational safety: production and preview builds should run committed migrations predictably. | Implemented | `README.md`, `build:vercel` | Vercel build runs `npm run db:migrate && next build`. |
 | NFR-010 | Accessibility and SEO: heroes should align with route-level heading semantics. | Documented | `c4ea874` | Hero docs note SEO H1 assumptions. |
+| NFR-011 | Trust and safety: account-backed comments should have clear moderation and preservation rules. | Planned | `analysis/product/interaction-policy.md` | Policy baseline exists; implementation still needs stories and schema decisions. |
+| NFR-012 | Business clarity: conversion paths should keep service claims tied to implementation evidence. | Planned | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future contact/intake surfaces should route to service wedges and proof. |
 
 ## Out Of Current Scope
 
 | ID | Item | Reason |
 | --- | --- | --- |
 | OOS-001 | Full CMS editor UI | The schema and rendering model exist, but authoring workflows need separate product analysis. |
-| OOS-002 | Moderation dashboard | Comments exist, but moderation policy and admin flows are not yet defined. |
+| OOS-002 | Moderation dashboard implementation | Comments and policy exist, but admin flows and schema changes need separate implementation planning. |
 | OOS-003 | Public API promise | Current APIs are route handlers and server actions; OpenAPI scope needs a decision. |
 | OOS-004 | Complete Confluence/Jira automation | Local files come first so the artifact model can stabilize before tool setup. |
 | OOS-005 | Figma/FigJam diagrams | Diagram inventory should be defined before creating connected design artifacts. |
@@ -66,4 +70,3 @@ content editing, and stronger moderation/observability.
 - Mark evidence as `Implemented/in progress` when commits exist but the local worktree has active related changes.
 - Add one requirement per meaningful product behavior, not one requirement per component.
 - When a requirement becomes too large, split it into narrower stories instead of expanding its acceptance criteria forever.
-

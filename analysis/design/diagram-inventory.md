@@ -28,10 +28,10 @@ PF-DIAG-001 - Visitor Discovery Journey
 
 | ID | Title | Type | Primary audience | Source docs | Status |
 | --- | --- | --- | --- | --- | --- |
-| PF-DIAG-001 | Visitor Discovery Journey | Journey map | Product, Confluence | `problem-statement.md`, `scope-and-requirements.md` | Planned |
+| PF-DIAG-001 | Visitor Discovery Journey | Journey map | Product, Confluence | `problem-statement.md`, `scope-and-requirements.md`, `conversion-path.md` | Planned |
 | PF-DIAG-002 | Portfolio Content Model | Entity relationship map | Technical, product | `schema-and-migrations.md`, `src/db/schema.ts` | Planned |
 | PF-DIAG-003 | Auth Identifier And Session Flow | Flowchart | Technical, security | `src/auth/auth.md`, auth stories | Planned |
-| PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `src/blog/actions.ts` | Planned |
+| PF-DIAG-004 | Blog Comment Flow | Flowchart | Product, technical | comment stories, `interaction-policy.md`, `src/blog/actions.ts` | Planned |
 | PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Planned |
 | PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests | Planned |
 | PF-DIAG-007 | Documentation Toolchain | System/process map | Owner, collaborators | `analysis/README.md`, this suite | Planned |
@@ -47,7 +47,7 @@ Include:
 - Entry point: localized homepage.
 - Decision points: hero, experience, skills, projects, blog.
 - Proof moments: project details, related skills/jobs, technical writing.
-- Conversion gap: contact or next action is not yet fully analyzed.
+- Conversion path: service wedge, trust check, and scoped discovery/build action.
 
 Update trigger: homepage positioning, project storytelling, or conversion path changes.
 
@@ -156,4 +156,3 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 | PF-DIAG-001 Visitor Discovery Journey | Clarifies product value and missing conversion path. |
 | PF-DIAG-002 Portfolio Content Model | Gives technical reviewers a fast schema overview. |
 | PF-DIAG-003 Auth Identifier And Session Flow | Captures the most security-sensitive user flow. |
-

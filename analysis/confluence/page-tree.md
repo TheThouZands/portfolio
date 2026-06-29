@@ -30,6 +30,8 @@ Portfolio Analysis Home
     1.2 Scope And Requirements
     1.3 Positioning Brief
     1.4 Content Strategy
+    1.5 Conversion Path Brief
+    1.6 Interaction Policy
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
@@ -66,6 +68,8 @@ Portfolio Analysis Home
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | Local to Confluence |
 | Positioning Brief | `analysis/product/positioning-brief.md` | Local to Confluence |
 | Content Strategy | `analysis/product/content-strategy.md` | Local to Confluence |
+| Conversion Path Brief | `analysis/product/conversion-path.md` | Local to Confluence and Jira |
+| Interaction Policy | `analysis/product/interaction-policy.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Backlog Notes | `analysis/jira/README.md` | Local to Confluence |
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |

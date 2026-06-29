@@ -102,8 +102,7 @@ The strongest next conversion path is not a broad "hire me" page. It is a scoped
 
 | Decision | Default for now |
 | --- | --- |
-| Primary call to action | Discovery/build slice. |
+| Primary call to action | Discovery/build slice, detailed in `product/conversion-path.md`. |
 | Primary language | Bilingual, with English and Spanish kept parallel where public copy exists. |
 | Strongest proof surface | Projects first, then technical writing, then architecture/docs. |
 | Whether to sell planning as a standalone service | Yes, but anchored to implementation rather than abstract consulting. |
-

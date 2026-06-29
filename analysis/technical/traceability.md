@@ -34,7 +34,9 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle` | `npm run db:check`, migrations, query tests as added. |
 | Structural content rendering | `FR-008`, `NFR-003` | `src/cms/structural-content`, `src/components/repeatables/structural-content` | `tests/structural-content/rendering.test.ts` |
 | Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
+| Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`. |
 | Auth and session flows | `FR-010`, `FR-011`, `FR-012` | `src/auth`, `src/components/auth`, `src/app/api/auth/[...all]`, `src/app/api/auth-state` | `tests/auth`; future integration tests. |
+| Service conversion path | `FR-017`, `NFR-012` | Future contact/intake route or component, homepage CTA, service wedge links | Planned; brief in `analysis/product/conversion-path.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
 | Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates. |
 
@@ -55,4 +57,5 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Diagram inventory exists, but no FigJam diagrams have been created yet | Visual artifacts still need external tool setup. | `PF-603` |
 | ADR baseline exists, but route composition and future moderation/editor decisions remain uncovered | Some technical decisions are still only documented in local notes. | `PF-604` |
 | No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
-| Comment moderation is not defined | Account-backed comments introduce trust and abuse questions. | Future moderation epic |
+| Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
+| Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |

@@ -40,6 +40,9 @@ Target home: Jira/Confluence
 | PF-403 | As the portfolio owner, I want credential validation and rate limiting, so auth flows are harder to abuse. | High | Implemented | Zod validation covers usernames, emails, identifiers, passwords, and sign-up shapes; rate limit table and enforcement exist. | `c0fa0fc`, `7333bb1`, `bbdf312`, `213d7a7` |
 | PF-404 | As an authenticated reader, I want to comment on blog posts, so I can engage with technical writing. | High | Implemented/in progress | Comments table links to posts and optional users; comments render on posts; composer/action exist; active local files refine session-aware rendering. | `4083894`, `1033065`, `3d145da`, `94566f8`, current worktree |
 | PF-405 | As a reader, I want discussion history preserved even if an account is removed, so conversation context does not disappear unexpectedly. | Medium | Implemented | Comment user foreign key uses account deletion behavior that preserves comments; rendering has fallback author handling. | `cc9073d`, `tests/blog/comments.test.ts` |
+| PF-406 | As the portfolio owner, I want comment moderation states defined before schema changes, so moderation does not become a pile of unrelated flags. | High | Planned | Interaction policy defines lifecycle states, moderation principles, data implications, and first recommended moderation model. | `analysis/product/interaction-policy.md` |
+| PF-407 | As the portfolio owner, I want to hide or remove abusive comments while preserving thread structure, so discussion stays readable and trustworthy. | High | Planned | Owner-only moderation path is defined; hidden/removed rendering behavior is specified before implementation. | `analysis/product/interaction-policy.md`, ADR 0005 |
+| PF-408 | As a reader, I want clear rules for comment editing, deletion, and reporting, so I understand what control I have after posting. | Medium | Planned | Policy captures open decisions for edit/delete/report behavior and defaults until implemented. | `analysis/product/interaction-policy.md` |
 
 ## Epic PF-E05 - Quality, Operations, And Architecture
 
@@ -60,3 +63,11 @@ Target home: Jira/Confluence
 | PF-603 | As the portfolio owner, I want a diagram inventory for Figma/FigJam, so visual artifacts are created with purpose. | Medium | Planned | Required diagrams are listed with owners, source docs, and update triggers. | `analysis/planning/roadmap.md` |
 | PF-604 | As a technical reviewer, I want ADR coverage for major decisions, so I can understand why the system evolved this way. | Medium | Planned | ADR index exists; future ADR candidates are listed. | `analysis/technical/adr` |
 
+## Epic PF-E07 - Service Conversion
+
+| ID | Story | Priority | Status | Acceptance criteria | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| PF-701 | As a potential client, I want clear service entry points, so I can choose the kind of help I need without guessing. | High | Planned | Conversion path defines service wedges, entry offers, recommended CTA, and page implications. | `analysis/product/conversion-path.md` |
+| PF-702 | As a potential client, I want a focused intake path, so I can describe the problem and start a scoped conversation. | High | Planned | Intake questions are defined; future route/component can collect contact and problem context. | `analysis/product/conversion-path.md` |
+| PF-703 | As a visitor, I want projects and posts linked to service wedges, so I can connect proof to the service I need. | Medium | Planned | Content strategy and conversion path define how proof surfaces should support service wedges. | `analysis/product/content-strategy.md`, `analysis/product/conversion-path.md` |
+| PF-704 | As the portfolio owner, I want a visitor journey diagram, so the conversion path can be reviewed visually before implementation. | Medium | Planned | FigJam diagram `PF-DIAG-001` includes homepage, proof review, trust check, and action path. | `analysis/design/diagram-inventory.md`, `analysis/product/conversion-path.md` |
