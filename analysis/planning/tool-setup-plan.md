@@ -20,8 +20,8 @@ large migration.
 | 3 | Jira | Create project, epics, labels, components, workflow. | `analysis/jira/project-setup.md` |
 | 4 | Jira | Import or manually create epics and stories from CSV. | `analysis/jira/epics.csv`, `analysis/jira/backlog.csv` |
 | 5 | Jira | Record local story id to Jira key mappings. | `analysis/jira/import-history.md` |
-| 6 | FigJam | Create diagram file and sections. | `analysis/design/diagram-inventory.md` |
-| 7 | FigJam | Recreate/refine local Mermaid sketches. | `analysis/design/diagrams` |
+| 6 | FigJam | Create diagram file and sections. | `analysis/design/diagram-inventory.md`, `analysis/design/figjam-section-manifest.csv` |
+| 7 | FigJam | Recreate/refine local Mermaid sketches and record URLs. | `analysis/design/diagrams`, `analysis/design/figjam-creation-log.md` |
 | 8 | Confluence | Link Jira issues, FigJam sections, and GitHub source files. | Tool logs and page metadata |
 
 ## Source Of Truth
@@ -30,7 +30,7 @@ large migration.
 | --- | --- | --- |
 | Product/business narrative | `analysis/product` | Confluence readable copy, Git local source retained. |
 | Jira execution state | `analysis/jira/user-stories.md`, `analysis/jira/epics.csv`, and `analysis/jira/backlog.csv` | Jira becomes execution state; local docs preserve context. |
-| Diagrams | `analysis/design/diagrams` | FigJam becomes collaborative visual home; local source sketches remain references. |
+| Diagrams | `analysis/design/diagram-inventory.md`, `analysis/design/figjam-section-manifest.csv`, and `analysis/design/diagrams` | FigJam becomes collaborative visual home; local source sketches remain references. |
 | ADRs/schema/OpenAPI | GitHub | GitHub remains source of truth. |
 | Import mappings/logs | Local docs | Local docs record external ids and links. |
 
@@ -40,7 +40,7 @@ large migration.
 | --- | --- |
 | Confluence | Space key, root page, page tree, source metadata, and publishing cadence are defined. |
 | Jira | Project key, issue types, components, labels, workflow, epics, CSV mapping, and import history are defined. |
-| FigJam | File/section naming, diagram ids, source links, and creation log are defined. |
+| FigJam | File/section naming, diagram ids, section manifest, source links, and creation log are defined. |
 | GitHub | ADR/schema/API ownership and documentation review rules are defined. |
 
 ## Setup Rules
@@ -58,7 +58,7 @@ large migration.
 | --- | --- | --- |
 | Batch 1 | Confluence root, product analysis pages, roadmap. | Pages exist and link back to Git source files. |
 | Batch 2 | Jira project, epics, CSV import, key mapping. | Local story ids map to Jira issue keys. |
-| Batch 3 | FigJam file and first four diagram sections. | FigJam sections link to local diagram sources. |
+| Batch 3 | FigJam file and first four diagram sections. | Section manifest rows have FigJam URLs and link to local diagram sources. |
 | Batch 4 | Technical reference pages or links. | ADR/schema/API pages point back to GitHub. |
 
 ## Open Questions

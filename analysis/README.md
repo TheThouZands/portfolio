@@ -51,6 +51,7 @@ The suite is intended to stay useful in four places:
 | Jira setup | [jira/project-setup.md](jira/project-setup.md) | Jira/Confluence | Defines project key, issue types, components, workflow, import order, and done/ready rules. |
 | Jira setup | [jira/import-history.md](jira/import-history.md) | Jira/Confluence/GitHub | Records import runs and local story id to Jira key mappings. |
 | Design setup | [design/diagram-inventory.md](design/diagram-inventory.md) | Figma/FigJam/Confluence | Lists planned diagrams, source docs, update triggers, and FigJam creation rules. |
+| Design setup | [design/figjam-section-manifest.csv](design/figjam-section-manifest.csv) | Figma/FigJam/Confluence | CSV checklist for FigJam section creation, priorities, sources, statuses, and URLs. |
 | Design setup | [design/figjam-creation-log.md](design/figjam-creation-log.md) | Figma/FigJam/Confluence | Tracks FigJam file and section URLs against local diagram ids. |
 | Design sources | [design/diagrams/README.md](design/diagrams/README.md) | Figma/FigJam/GitHub | Keeps first Mermaid diagram sketches reviewable before FigJam setup. |
 | GitHub setup | [github/documentation-rules.md](github/documentation-rules.md) | GitHub/Confluence | Defines source-of-truth rules, naming conventions, commit sizing, and doc review checks. |

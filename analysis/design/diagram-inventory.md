@@ -10,6 +10,9 @@ Target home: Figma/FigJam and Confluence
 This inventory defines the diagrams worth creating before connected Figma/FigJam work begins. It keeps each diagram tied
 to a product or technical question, so visual work supports analysis instead of becoming decorative documentation.
 
+Use `analysis/design/figjam-section-manifest.csv` as the section creation checklist when creating or updating the FigJam
+file.
+
 ## Naming Convention
 
 Use this format for FigJam files or sections:
@@ -148,6 +151,7 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 - Link Confluence pages back to the diagram sections after creation.
 - Do not treat the diagram as authoritative unless its source docs are updated too.
 - Record created file and section URLs in [figjam-creation-log.md](figjam-creation-log.md).
+- Keep section status and URLs aligned with [figjam-section-manifest.csv](figjam-section-manifest.csv).
 
 ## Suggested First FigJam Sections
 

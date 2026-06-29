@@ -53,14 +53,15 @@ Portfolio Analysis Home
     3.4 Import History
   4. Diagrams
     4.1 Diagram Inventory
-    4.2 Diagram Sources
-    4.3 Visitor Discovery Journey
-    4.4 CMS Content Model
-    4.5 Auth And Session Flow
-    4.6 Blog Comment Flow
-    4.7 Deployment And Neon Branch Workflow
-    4.8 Structural Content Rendering Contract
-    4.9 Documentation Toolchain
+    4.2 FigJam Section Manifest
+    4.3 Diagram Sources
+    4.4 Visitor Discovery Journey
+    4.5 CMS Content Model
+    4.6 Auth And Session Flow
+    4.7 Blog Comment Flow
+    4.8 Deployment And Neon Branch Workflow
+    4.9 Structural Content Rendering Contract
+    4.10 Documentation Toolchain
   5. Technical Reference
     5.1 Traceability
     5.2 Schema And Migrations
@@ -101,6 +102,7 @@ Portfolio Analysis Home
 | Jira Project Setup | `analysis/jira/project-setup.md` | Local to Confluence and Jira admin |
 | Import History | `analysis/jira/import-history.md` | Local to Confluence and Jira |
 | Diagram Inventory | `analysis/design/diagram-inventory.md` | Local to Confluence and FigJam |
+| FigJam Section Manifest | `analysis/design/figjam-section-manifest.csv` | Local to Confluence and FigJam |
 | Diagram Sources | `analysis/design/diagrams/README.md` | Local to Confluence and FigJam |
 | Structural Content Rendering Contract | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Local to Confluence and FigJam |
 | Documentation Toolchain | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Local to Confluence and FigJam |

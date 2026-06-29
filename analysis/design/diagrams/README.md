@@ -14,6 +14,7 @@ The source of truth is still split by artifact type:
 
 - Product and technical meaning: local analysis docs.
 - Collaborative visual board: future FigJam sections.
+- FigJam setup checklist: `analysis/design/figjam-section-manifest.csv`.
 - Lightweight source sketch: these Mermaid files.
 
 ## Current Diagram Sources

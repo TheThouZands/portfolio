@@ -45,7 +45,7 @@ A change is validated when:
 | Schema change | Drizzle migration generated and reviewed; schema docs updated if product meaning changes. |
 | Route/page change | Manual route check; metadata/locale behavior checked when relevant. |
 | Auth/comment change | Unit or integration coverage for validation/session/comment behavior; policy reviewed. |
-| Diagram change | Diagram inventory updated; source docs and update triggers named. |
+| Diagram change | Diagram inventory and FigJam section manifest updated; source docs and update triggers named. |
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
 | External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
 | Requirement traceability update | Matrix maps requirement, persona, story, evidence, verification signal, and remaining gaps. |
@@ -62,6 +62,7 @@ rg "TO[D]O|TB[D]|FIX[M]E" analysis
 Import-Csv analysis\jira\backlog.csv | Measure-Object
 Import-Csv analysis\jira\epics.csv | Measure-Object
 Import-Csv analysis\confluence\page-manifest.csv | Measure-Object
+Import-Csv analysis\design\figjam-section-manifest.csv | Measure-Object
 ```
 
 Useful checks for application changes, chosen by risk:
@@ -110,6 +111,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/schema-and-migrations.md`
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
+- `analysis/design/figjam-section-manifest.csv`
 - `analysis/planning/risk-register.md`
 - `analysis/planning/readiness-audit.md`
 - `analysis/operations/release-and-review-cadence.md`

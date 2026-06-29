@@ -26,6 +26,7 @@ Page Title,Parent Page,Local Source,Target Area,Source Of Truth,Publish Priority
 "Import History","Jira Backlog","analysis/jira/import-history.md","Jira","Local Git source","1","Pending","","Local id to Jira key mapping log."
 "Diagrams","Portfolio Analysis Home","","Design","Confluence container","2","Pending","","Container page for FigJam-ready diagrams and local sources."
 "Diagram Inventory","Diagrams","analysis/design/diagram-inventory.md","Design","Local Git source","1","Pending","","Diagram ids, source docs, owners, and update triggers."
+"FigJam Section Manifest","Diagrams","analysis/design/figjam-section-manifest.csv","Design","Local Git source","1","Pending","","FigJam section creation checklist, priorities, status, and URL tracking."
 "Diagram Sources","Diagrams","analysis/design/diagrams/README.md","Design","Local Git source","1","Pending","","Local Mermaid source index before FigJam setup."
 "Visitor Discovery Journey","Diagrams","analysis/design/diagrams/pf-diag-001-visitor-discovery-journey.md","Design","Local Git source","1","Pending","","Visitor journey from arrival to action."
 "CMS Content Model","Diagrams","analysis/design/diagrams/pf-diag-002-portfolio-content-model.md","Design","Local Git source","1","Pending","","Portfolio CMS entity relationship sketch."

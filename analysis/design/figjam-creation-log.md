@@ -10,6 +10,9 @@ Target home: Figma/FigJam and Confluence
 This log records FigJam files and sections created from the local diagram inventory. It keeps visual work connected to
 the source docs and local Mermaid sketches.
 
+Use `analysis/design/figjam-section-manifest.csv` as the creation checklist. Use this file as the durable log after a
+FigJam file or section URL exists.
+
 ## FigJam File
 
 | Field | Value |
@@ -18,6 +21,7 @@ the source docs and local Mermaid sketches.
 | File URL | Pending |
 | Owner | Thouzands |
 | Source inventory | `analysis/design/diagram-inventory.md` |
+| Section manifest | `analysis/design/figjam-section-manifest.csv` |
 | Source sketches | `analysis/design/diagrams` |
 
 ## Section Mapping
@@ -47,4 +51,3 @@ the source docs and local Mermaid sketches.
 - If only layout changes, update FigJam and leave local source unchanged.
 - If a diagram becomes obsolete, mark it as Archived rather than deleting the id.
 - Keep product journey diagrams visually separate from technical diagrams.
-
