@@ -33,6 +33,7 @@ is to keep technical truth close to code while letting planning tools do the job
 | `analysis/confluence/` | Confluence page tree and publishing rules. |
 | `analysis/design/` | FigJam/Figma diagram inventory and diagram specs. |
 | `analysis/technical/` | Traceability, schema notes, API planning, and ADRs. |
+| `analysis/github/change-traceability-template.md` | Reusable change/PR traceability template. |
 | `ARCHITECTURE.md` | Repo-level architecture entrypoint for developers. |
 | `src/**/**/*.md` | Local module notes close to implementation. |
 
@@ -90,6 +91,9 @@ Each meaningful new implementation should eventually link to at least one of:
 - Diagram id.
 - Schema/migration note.
 - Test file or manual verification note.
+
+Use [change-traceability-template.md](change-traceability-template.md) when a change touches product behavior, schema,
+auth, comments, public routes, conversion paths, or external tool setup.
 
 ## Open Questions
 

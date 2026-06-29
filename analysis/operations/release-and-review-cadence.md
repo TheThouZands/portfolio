@@ -30,6 +30,9 @@ Use this for each small commit or implementation step:
 - Did any docs, ADRs, schema notes, diagrams, or backlog rows need updates?
 - Is there a residual risk or follow-up story?
 
+For implementation slices, use `analysis/github/change-traceability-template.md` or include equivalent details in the
+PR/story notes.
+
 ## Monthly Product Review
 
 Review:
@@ -64,4 +67,3 @@ Use before a feature becomes public-facing or materially changes user trust.
 | `analysis/operations/open-questions.md` | A decision is not ready but must remain visible. |
 | `analysis/jira/user-stories.md` and `backlog.csv` | Story, priority, acceptance, or evidence changes. |
 | `analysis/technical/adr` | Technical decision changes architecture, data, security, or contract behavior. |
-

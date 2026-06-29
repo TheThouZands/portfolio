@@ -50,6 +50,7 @@ The suite is intended to stay useful in four places:
 | Design setup | [design/figjam-creation-log.md](design/figjam-creation-log.md) | Figma/FigJam/Confluence | Tracks FigJam file and section URLs against local diagram ids. |
 | Design sources | [design/diagrams/README.md](design/diagrams/README.md) | Figma/FigJam/GitHub | Keeps first Mermaid diagram sketches reviewable before FigJam setup. |
 | GitHub setup | [github/documentation-rules.md](github/documentation-rules.md) | GitHub/Confluence | Defines source-of-truth rules, naming conventions, commit sizing, and doc review checks. |
+| GitHub setup | [github/change-traceability-template.md](github/change-traceability-template.md) | GitHub/Jira/Confluence | Provides a reusable PR/change template for requirements, stories, risks, ADRs, and verification. |
 | Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |
 | Technical | [technical/schema-and-migrations.md](technical/schema-and-migrations.md) | GitHub | Current schema inventory and migration history summary. |
 | Technical | [technical/migration-catalog.md](technical/migration-catalog.md) | GitHub/Confluence | Maps each committed Drizzle migration to product intent and evidence. |

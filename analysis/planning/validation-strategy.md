@@ -47,6 +47,7 @@ A change is validated when:
 | Diagram change | Diagram inventory updated; source docs and update triggers named. |
 | Conversion path change | Persona, CTA, and intake assumptions checked against positioning brief. |
 | External tool setup | Import or publish history records local source, source commit, external URL/key, and owner. |
+| Pull request or implementation slice | Change traceability template completed or equivalent details included in PR/story notes. |
 
 ## Current Verification Commands
 
@@ -112,6 +113,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/confluence/publishing-runbook.md`
 - `analysis/jira/import-history.md`
 - `analysis/design/figjam-creation-log.md`
+- `analysis/github/change-traceability-template.md`
 
 ## Residual Risk
 
