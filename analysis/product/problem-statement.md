@@ -42,6 +42,8 @@ Build a portfolio that behaves like a compact production product:
 | Returning reader | Engage with technical writing and discussion. | Blog post routes, comments, authenticated commenting, and preserved discussion history. |
 | Future collaborator | Understand why the system exists and how to extend it. | Analysis suite, architecture notes, requirements, Jira-compatible backlog, and ADRs. |
 
+Detailed stakeholder and persona analysis lives in [stakeholders-and-personas.md](stakeholders-and-personas.md).
+
 ## Goals
 
 | Goal id | Goal | Current evidence |

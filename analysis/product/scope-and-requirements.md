@@ -53,6 +53,7 @@ content editing, and stronger moderation/observability.
 | NFR-010 | Accessibility and SEO: heroes should align with route-level heading semantics. | Documented | `c4ea874` | Hero docs note SEO H1 assumptions. |
 | NFR-011 | Trust and safety: account-backed comments should have clear moderation and preservation rules. | Planned | `analysis/product/interaction-policy.md` | Policy baseline exists; implementation still needs stories and schema decisions. |
 | NFR-012 | Business clarity: conversion paths should keep service claims tied to implementation evidence. | Planned | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Future contact/intake surfaces should route to service wedges and proof. |
+| NFR-013 | Planning quality: future work should remain traceable to personas, risks, requirements, and validation evidence. | In progress | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Planning artifacts exist; implementation changes still need per-slice traceability. |
 
 ## Out Of Current Scope
 

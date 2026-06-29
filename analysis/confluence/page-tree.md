@@ -25,17 +25,20 @@ without losing stable ids, owners, or references back to GitHub.
 
 ```text
 Portfolio Analysis Home
-  1. Product Analysis
+    1. Product Analysis
     1.1 Problem Statement
-    1.2 Scope And Requirements
-    1.3 Positioning Brief
-    1.4 Content Strategy
-    1.5 Conversion Path Brief
-    1.6 Interaction Policy
+    1.2 Stakeholders And Personas
+    1.3 Scope And Requirements
+    1.4 Positioning Brief
+    1.5 Content Strategy
+    1.6 Conversion Path Brief
+    1.7 Interaction Policy
   2. Planning
     2.1 Roadmap
     2.2 Tool Setup Plan
-    2.3 Release And Review Cadence
+    2.3 Risk Register
+    2.4 Validation Strategy
+    2.5 Release And Review Cadence
   3. Jira Backlog
     3.1 Backlog Notes
     3.2 User Stories
@@ -65,12 +68,15 @@ Portfolio Analysis Home
 | --- | --- | --- |
 | Portfolio Analysis Home | `analysis/README.md` | Local to Confluence |
 | Problem Statement | `analysis/product/problem-statement.md` | Local to Confluence |
+| Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | Local to Confluence and Jira |
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | Local to Confluence |
 | Positioning Brief | `analysis/product/positioning-brief.md` | Local to Confluence |
 | Content Strategy | `analysis/product/content-strategy.md` | Local to Confluence |
 | Conversion Path Brief | `analysis/product/conversion-path.md` | Local to Confluence and Jira |
 | Interaction Policy | `analysis/product/interaction-policy.md` | Local to Confluence and Jira |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
+| Risk Register | `analysis/planning/risk-register.md` | Local to Confluence and Jira |
+| Validation Strategy | `analysis/planning/validation-strategy.md` | Local to Confluence and Jira |
 | Backlog Notes | `analysis/jira/README.md` | Local to Confluence |
 | User Stories | `analysis/jira/user-stories.md` | Local to Confluence and Jira |
 | Jira Project Setup | `analysis/jira/project-setup.md` | Local to Confluence and Jira admin |

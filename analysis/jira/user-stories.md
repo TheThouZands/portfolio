@@ -62,6 +62,9 @@ Target home: Jira/Confluence
 | PF-602 | As the portfolio owner, I want a Jira setup plan, so stories can be imported with stable labels, epics, and acceptance criteria. | Medium | Planned | Jira project fields, issue types, labels, and CSV mapping are documented. | `analysis/jira` |
 | PF-603 | As the portfolio owner, I want a diagram inventory for Figma/FigJam, so visual artifacts are created with purpose. | Medium | Planned | Required diagrams are listed with owners, source docs, and update triggers. | `analysis/planning/roadmap.md` |
 | PF-604 | As a technical reviewer, I want ADR coverage for major decisions, so I can understand why the system evolved this way. | Medium | Planned | ADR index exists; future ADR candidates are listed. | `analysis/technical/adr` |
+| PF-605 | As the portfolio owner, I want stakeholder and persona analysis, so requirements and content choices are grounded in real audiences. | Medium | Planned | Stakeholder map, personas, persona-to-requirement map, and product implications are documented. | `analysis/product/stakeholders-and-personas.md` |
+| PF-606 | As the portfolio owner, I want a risk register, so product, technical, process, and tooling risks stay visible before implementation. | Medium | Planned | Risk register includes ids, areas, likelihood, impact, mitigations, related docs/stories, cadence, and escalation rules. | `analysis/planning/risk-register.md` |
+| PF-607 | As a maintainer, I want a validation strategy, so each future slice has clear evidence before being treated as done. | Medium | Planned | Validation layers, done definition, work-type checks, verification commands, and traceability checklist are documented. | `analysis/planning/validation-strategy.md` |
 
 ## Epic PF-E07 - Service Conversion
 

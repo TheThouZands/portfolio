@@ -39,6 +39,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Service conversion path | `FR-017`, `NFR-012` | Future contact/intake route or component, homepage CTA, service wedge links | Planned; brief in `analysis/product/conversion-path.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
 | Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates. |
+| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Docs validate with CSV/import checks; future implementation slices should cite persona, risk, and validation evidence. |
 
 ## Tests Inventory
 
@@ -59,3 +60,4 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
 | Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
+| Risk and validation artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality still depends on manual discipline. | `PF-606`, `PF-607` |

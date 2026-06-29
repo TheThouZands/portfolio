@@ -60,17 +60,21 @@ Goal: decide where the portfolio should go next, not merely describe where it is
 
 Candidate slices:
 
+- Stakeholder and persona analysis. Current local output: `analysis/product/stakeholders-and-personas.md`.
 - Positioning brief for services sold through the portfolio. Current local output: `analysis/product/positioning-brief.md`.
 - Visitor journey from homepage to project proof to contact/action. Current local output: `analysis/product/conversion-path.md`.
 - Content strategy for projects, experience, skills, and blog posts. Current local output: `analysis/product/content-strategy.md`.
 - Comment interaction policy, moderation scope, and abuse handling. Current local output: `analysis/product/interaction-policy.md`.
 - Auth/account roadmap: reader accounts, client accounts, or private collaboration.
+- Product and delivery risk register. Current local output: `analysis/planning/risk-register.md`.
+- Validation strategy. Current local output: `analysis/planning/validation-strategy.md`.
 
 Exit check:
 
 - Future work can be prioritized by business value.
 - Each major feature has a reason to exist in the service portfolio.
 - Risks have owners or explicit deferrals.
+- Validation expectations are clear before implementation slices begin.
 
 ## Stage 3 - Design And Flow Diagrams
 
