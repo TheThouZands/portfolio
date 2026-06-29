@@ -42,24 +42,24 @@ below is the first publishing batch, not the full page inventory.
 
 | Confluence page | Local source | Source commit | Confluence URL | Last published | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio Analysis Home | `analysis/README.md` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/655361/Portfolio+Analysis+Home | 2026-06-29 | Root analysis page under existing Portfolio Home. |
+| Portfolio Analysis Home | `analysis/README.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/655361/Portfolio+Analysis+Home | 2026-06-29 | Root analysis page under existing Portfolio Home; source-first framing synced. |
 | Product Analysis | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/98317/Product+Analysis | 2026-06-29 | Starter container page. |
 | Planning | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/688129/Planning | 2026-06-29 | Starter container page. |
-| Jira Backlog | `analysis/jira/import-history.md` | `fd213fb` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-06-29 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-55` are mapped, with implemented created stories marked `Done`, current-worktree stories marked `In Progress`, planned created stories left `To Do`, and no pending story batches. |
+| Jira Backlog | `analysis/jira/import-history.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-06-29 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-55` are mapped, with implemented created stories marked `Done`, current-worktree stories marked `In Progress`, planned created stories left `To Do`, and no pending story batches. KAN-38 summary and description are synced to source-controlled analysis wording. |
 | Diagrams | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/163842/Diagrams | 2026-06-29 | Starter container page; first FigJam board exists at https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW. |
 | Technical Reference | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/557058/Technical+Reference | 2026-06-29 | Starter container page. |
 | Operations | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/622594/Operations | 2026-06-29 | Starter container page. |
-| Problem Statement | `analysis/product/problem-statement.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1376257/Problem+Statement | 2026-06-29 | Product baseline. |
-| Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179650/Stakeholders+And+Personas | 2026-06-29 | Audience model. |
+| Problem Statement | `analysis/product/problem-statement.md` | `b1138ea` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1376257/Problem+Statement | 2026-06-29 | Product baseline; portfolio showcase premise synced. |
+| Stakeholders And Personas | `analysis/product/stakeholders-and-personas.md` | `b1138ea` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179650/Stakeholders+And+Personas | 2026-06-29 | Audience model; PERS-001 reflects proof-driven portfolio showcase. |
 | Scope And Requirements | `analysis/product/scope-and-requirements.md` | `4ced0fc` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1343502/Scope+And+Requirements | 2026-06-29 | Requirement ids must stay stable. |
-| Positioning Brief | `analysis/product/positioning-brief.md` | `6baedcd` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1409025/Positioning+Brief | 2026-06-29 | Service position and proof strategy. |
-| Service Offer Catalog | `analysis/product/service-offer-catalog.md` | `6baedcd` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1212428/Service+Offer+Catalog | 2026-06-29 | Offer fit, outputs, proof, and pricing stance. |
+| Positioning Brief | `analysis/product/positioning-brief.md` | `b1138ea` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1409025/Positioning+Brief | 2026-06-29 | Service position and proof strategy; coherent product-direction wording synced. |
+| Service Offer Catalog | `analysis/product/service-offer-catalog.md` | `706beee` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1212428/Service+Offer+Catalog | 2026-06-29 | Offer fit, outputs, proof, and pricing stance; service audit fit refined. |
 | Content Strategy | `analysis/product/content-strategy.md` | Pending | Pending | Pending | Content pillars and publication workflow. |
-| Conversion Path Brief | `analysis/product/conversion-path.md` | `6baedcd` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441793/Conversion+Path+Brief | 2026-06-29 | Visitor journey and intake path. |
-| Roadmap | `analysis/planning/roadmap.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/884745/Roadmap | 2026-06-29 | Stage map. |
+| Conversion Path Brief | `analysis/product/conversion-path.md` | `b1138ea` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441793/Conversion+Path+Brief | 2026-06-29 | Visitor journey and intake path; coherent entry-offer wording synced. |
+| Roadmap | `analysis/planning/roadmap.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/884745/Roadmap | 2026-06-29 | Stage map; product-baseline framing synced. |
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1507329/Tool+Setup+Plan | 2026-06-29 | External tool sequence and source-of-truth rules. |
 | Risk Register | `analysis/planning/risk-register.md` | Pending | Pending | Pending | Review before implementation slices. |
-| Validation Strategy | `analysis/planning/validation-strategy.md` | `983ab1c` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179670/Validation+Strategy | 2026-06-29 | Done/verification expectations. |
+| Validation Strategy | `analysis/planning/validation-strategy.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179670/Validation+Strategy | 2026-06-29 | Done/verification expectations; source-first validation wording synced. |
 
 ## Formatting Notes
 
