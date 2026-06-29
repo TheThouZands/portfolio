@@ -31,7 +31,7 @@ visitor can choose a service wedge and the owner can convert that request into a
 | `OFF-003` | Auth and interaction workflow slice | Users need accounts, comments, submissions, or protected workflows. | Flow diagram, data model changes, validation/rate-limit plan, and test checklist. | Better Auth integration, custom identifier flow, comments, ADR 0004 and ADR 0005. |
 | `OFF-004` | Database and deployment workflow setup | Schema changes, preview data, or deployment steps are fragile. | Migration workflow, preview database strategy, branch sync checklist, and operational notes. | Drizzle migrations, Neon branch sync, migration catalog, ADR 0002. |
 | `OFF-005` | Fullstack feature delivery sprint | A scoped feature is clear enough to build and review. | Jira-ready stories, implementation PRs, verification notes, and docs updates. | Current feature history, tests, route composition, change traceability template. |
-| `OFF-006` | Analysis-to-delivery documentation setup | A project already exists but lacks requirements, decisions, and planning history. | Confluence-ready docs, Jira backlog, ADR seed, diagrams inventory, and traceability rules. | This `analysis/` suite, Confluence/Jira runbooks, diagram sources. |
+| `OFF-006` | Analysis-to-delivery documentation setup | A product or project lacks clear requirements, decisions, and planning history. | Confluence-ready docs, Jira backlog, ADR seed, diagrams inventory, and traceability rules. | This `analysis/` suite, Confluence/Jira runbooks, diagram sources. |
 
 ## Offer Detail
 
@@ -98,7 +98,7 @@ visitor can choose a service wedge and the owner can convert that request into a
 | Accounts, sessions, comments, forms, submissions, or moderation | `OFF-003` | What user action needs protection, validation, or abuse handling? |
 | Migrations, preview databases, deployment fragility, or environment drift | `OFF-004` | What database or deployment action currently feels risky? |
 | Clear feature request with users and acceptance criteria | `OFF-005` | What is the smallest version that proves the feature works? |
-| Existing codebase with missing requirements, ADRs, stories, or diagrams | `OFF-006` | Which decision or capability is hardest to explain today? |
+| Working product with missing requirements, ADRs, stories, or diagrams | `OFF-006` | Which decision or capability is hardest to explain today? |
 
 ## Public Page Implications
 

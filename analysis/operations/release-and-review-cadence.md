@@ -8,7 +8,7 @@ Target home: Confluence/Jira
 ## Purpose
 
 This document defines a lightweight cadence for reviewing the portfolio product, its analysis suite, and future delivery
-slices. It keeps the project from returning to aimless feature accumulation.
+slices. It keeps delivery from drifting into undocumented feature accumulation.
 
 ## Cadence Summary
 

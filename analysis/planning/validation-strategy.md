@@ -17,7 +17,7 @@ trust the implementation evidence, and take a useful next action.
 
 | Layer | Question | Evidence |
 | --- | --- | --- |
-| Product | Does the work make the portfolio less aimless and more useful to the target persona? | Updated problem, persona, positioning, conversion, or content docs. |
+| Product | Does the work make the portfolio clearer, more credible, and more useful to the target persona? | Updated problem, persona, positioning, conversion, or content docs. |
 | Requirements | Does the work map to a functional or non-functional requirement? | Requirement id in docs or PR notes. |
 | Jira | Can the work be described as a small deliverable with acceptance criteria? | Jira story id or local backlog row. |
 | Technical | Does implementation behavior match the expected system behavior? | Tests, manual verification, schema checks, screenshots, or code review. |

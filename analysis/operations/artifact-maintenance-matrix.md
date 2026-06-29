@@ -8,7 +8,7 @@ Target home: Confluence/GitHub/Jira
 ## Purpose
 
 This matrix defines which analysis artifacts should be updated when the portfolio changes. It keeps the suite useful
-after the initial retrospective baseline, so future work does not slide back into undocumented feature accumulation.
+after the initial planning baseline, so future work does not slide back into undocumented feature accumulation.
 
 Use it during per-slice review, monthly review, and external tool setup.
 

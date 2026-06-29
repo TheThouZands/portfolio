@@ -10,7 +10,7 @@ Target home: GitHub
 ADRs live in this directory and use sequential four-digit ids.
 
 ```text
-0001-record-retrospective-analysis-suite.md
+0001-adopt-analysis-suite-as-planning-source.md
 0002-example-future-decision.md
 ```
 
@@ -26,7 +26,7 @@ Each ADR should include:
 
 | ID | Title | Status |
 | --- | --- | --- |
-| [0001](0001-record-retrospective-analysis-suite.md) | Record retrospective analysis suite in the repository | Accepted |
+| [0001](0001-adopt-analysis-suite-as-planning-source.md) | Adopt analysis suite as planning source | Accepted |
 | [0002](0002-use-drizzle-schema-and-migrations.md) | Use Drizzle schema and migrations as database source of truth | Accepted |
 | [0003](0003-use-structural-content-json.md) | Use structural content JSON instead of stored rendered HTML | Accepted |
 | [0004](0004-separate-portfolio-identity-from-auth-provider-records.md) | Separate portfolio identity from auth provider records | Accepted |

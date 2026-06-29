@@ -74,7 +74,7 @@ form.
 | Question | Why it matters |
 | --- | --- |
 | What kind of system or workflow are you trying to build or improve? | Routes the lead to the right service wedge. |
-| What already exists? | Separates greenfield planning from improvement work. |
+| What context or assets already exist? | Separates greenfield planning from improvement work. |
 | What is the riskiest part right now? | Reveals whether the need is product clarity, data, auth, deployment, or UI. |
 | What outcome would make a first slice successful? | Keeps scope small and measurable. |
 | How should I contact you? | Enables follow-up. |

@@ -24,9 +24,9 @@ should remain stable even after Jira assigns keys.
 
 ## Status Mapping Decision
 
-| Local retrospective status | Jira status | Applies to | Notes |
+| Local analysis status | Jira status | Applies to | Notes |
 | --- | --- | --- | --- |
-| Implemented | Done | Created story issues `KAN-8` through `KAN-16`, `KAN-18`, `KAN-20` through `KAN-23`, `KAN-25`, `KAN-27`, `KAN-28`, `KAN-31`, and `KAN-34` through `KAN-37`. | These stories represent completed public portfolio, backend, CMS, i18n, auth, blog, quality, operations, architecture, and decision work extracted from existing code or accepted docs. |
+| Implemented | Done | Created story issues `KAN-8` through `KAN-16`, `KAN-18`, `KAN-20` through `KAN-23`, `KAN-25`, `KAN-27`, `KAN-28`, `KAN-31`, and `KAN-34` through `KAN-37`. | These stories represent completed public portfolio, backend, CMS, i18n, auth, blog, quality, operations, architecture, and decision work with implementation or documentation evidence. |
 | Implemented/in progress | In Progress | Created story issues `KAN-24` and `KAN-26`. | These stories include committed behavior plus current worktree follow-up changes, so they stay active until the current work is verified and committed. |
 | Planned | To Do | Created story issues `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-32`, `KAN-33`, `KAN-38` through `KAN-40`, `KAN-41` through `KAN-50`, and `KAN-51` through `KAN-55`. | These are writer/content-producer implementation tasks, moderation follow-ups, account-scope follow-ups, analysis maintenance follow-ups, forward-planning work, service-conversion work, or other future work, so they stay open. |
 
@@ -79,7 +79,7 @@ already existed in Jira.
 | PF-502 | [KAN-35](https://thouzands.atlassian.net/browse/KAN-35) | Use branch-isolated Neon workflows | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: Medium. |
 | PF-503 | [KAN-36](https://thouzands.atlassian.net/browse/KAN-36) | Preserve architecture boundaries | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: High. |
 | PF-504 | [KAN-37](https://thouzands.atlassian.net/browse/KAN-37) | Run automated behavioral checks | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: High. |
-| PF-505 | [KAN-38](https://thouzands.atlassian.net/browse/KAN-38) | Maintain retrospective analysis suite | JIRA-IMPORT-004 | To Do | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Planned; local priority: High. |
+| PF-505 | [KAN-38](https://thouzands.atlassian.net/browse/KAN-38) | Maintain source-controlled analysis suite | JIRA-IMPORT-004 | To Do | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Planned; local priority: High. |
 | PF-506 | [KAN-39](https://thouzands.atlassian.net/browse/KAN-39) | Maintain API surface inventory | JIRA-IMPORT-004 | To Do | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Planned; local priority: Medium. |
 | PF-507 | [KAN-40](https://thouzands.atlassian.net/browse/KAN-40) | Maintain schema table catalog | JIRA-IMPORT-004 | To Do | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Planned; local priority: Medium. |
 | PF-601 | [KAN-41](https://thouzands.atlassian.net/browse/KAN-41) | Plan Confluence page tree | JIRA-IMPORT-005 | To Do | Parent: [KAN-6](https://thouzands.atlassian.net/browse/KAN-6). Local status: Planned; local priority: Medium. |
@@ -126,5 +126,5 @@ After story import:
 - Never replace local ids with Jira keys in source docs.
 - Add Jira keys beside local ids after import.
 - Keep import run ids stable.
-- Keep the Jira status aligned with the local retrospective status after each import batch.
+- Keep the Jira status aligned with the local analysis status after each import batch.
 - If a story is split in Jira, record the split in Notes instead of deleting the local story id.

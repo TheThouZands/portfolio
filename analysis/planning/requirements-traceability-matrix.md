@@ -7,7 +7,7 @@ Target home: Confluence/Jira/GitHub
 
 ## Purpose
 
-This matrix connects the reconstructed functional and non-functional requirements to personas, Jira-ready stories,
+This matrix connects the functional and non-functional requirements to personas, Jira-ready stories,
 implementation evidence, verification signals, and known gaps.
 
 It does not replace `analysis/product/scope-and-requirements.md` or `analysis/jira/user-stories.md`. The requirements

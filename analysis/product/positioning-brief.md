@@ -10,9 +10,9 @@ Target home: Confluence
 This brief answers the first product clarification question from the problem statement: which services should the
 portfolio optimize for selling first?
 
-The answer is reconstructed from the current app, not invented from scratch. The portfolio already emphasizes systems,
-stability, maintainability, responsiveness, accessibility, efficiency, and "tools, not just websites." That points to a
-service position centered on durable fullstack product work.
+The answer is grounded in the services the portfolio is designed to prove: systems, stability, maintainability,
+responsiveness, accessibility, efficiency, and "tools, not just websites." That points to a service position centered on
+durable fullstack product work.
 
 ## Positioning Statement
 

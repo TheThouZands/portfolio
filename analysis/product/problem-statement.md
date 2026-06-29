@@ -7,12 +7,11 @@ Target home: Confluence
 
 ## Background
 
-The portfolio began as implementation-first work. Features were added in short bursts on a single feature branch, and
-the product became coherent through iteration rather than through an upfront analysis phase.
+The portfolio is planned as a service product, not only as a personal website. It needs a clear problem definition,
+audience model, requirement set, and delivery path before individual features are treated as complete.
 
-This document reconstructs that missing analysis from the current product. It should not pretend every choice was known
-in advance. Instead, it explains the strongest product logic visible in the existing code, data model, migrations, tests,
-and commit history.
+This document defines the product logic that guides the portfolio: what problem it solves, which proof surfaces matter,
+and how implementation evidence should support the service story.
 
 ## Core Problem
 
@@ -60,26 +59,26 @@ Detailed stakeholder and persona analysis lives in [stakeholders-and-personas.md
 | Non-goal id | Non-goal | Rationale |
 | --- | --- | --- |
 | NG-001 | Replace the existing app with a generated static portfolio. | The product value comes from real fullstack behavior. |
-| NG-002 | Build a full public CMS admin interface immediately. | The current system can use seed scripts and database workflows while admin needs are clarified. |
-| NG-003 | Treat every historical commit as a perfect planned requirement. | The analysis is retrospective and should keep uncertainty visible. |
+| NG-002 | Build a full public CMS admin interface immediately. | Owner-managed authoring can use seed scripts and database workflows while admin needs are clarified. |
+| NG-003 | Treat every implementation detail as a product requirement. | Requirements should stay outcome-led and use implementation details as evidence, not as automatic scope. |
 | NG-004 | Lock the product into one planning tool. | Local Markdown should remain portable to Confluence, Jira, Figma/FigJam, and GitHub. |
 
 ## Success Signals
 
 | Signal | Why it matters |
 | --- | --- |
-| A reviewer can explain the product purpose after reading the analysis index and problem statement. | Confirms the project is no longer aimless. |
-| Each major feature has a requirement and user story with implementation evidence. | Makes the past work traceable. |
+| A reviewer can explain the product purpose after reading the analysis index and problem statement. | Confirms the product direction is clear. |
+| Each major feature has a requirement and user story with implementation evidence. | Makes delivery traceable. |
 | Future work can be expressed as smaller Jira stories instead of broad feature impulses. | Keeps planning practical. |
 | ADRs describe current and future technical choices in the same repo as implementation. | Keeps architecture memory near code. |
 | Schema and migration docs explain how data evolved. | Makes database work easier to review and operate. |
 
 ## Constraints
 
-- The source of truth is the already-built app and commit history.
+- The analysis suite is the planning source; implementation evidence and commit history verify delivery.
 - The initial tool setup is local; Confluence, Jira, and Figma/FigJam references must be portable.
 - GitHub-facing technical artifacts should stay small enough for focused commits.
-- Existing uncommitted application changes should not be disturbed while analysis docs are created.
+- Active implementation work should not bypass analysis, traceability, or validation updates.
 - Any future import into Jira or Confluence should preserve stable ids from these files.
 
 ## Open Questions

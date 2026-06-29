@@ -7,7 +7,7 @@ Target home: Jira/Confluence
 
 ## Purpose
 
-This document defines a Jira setup that can receive the local backlog without losing the retrospective analysis context.
+This document defines a Jira setup that can receive the local backlog without losing the analysis context.
 It is designed for a small portfolio product with one owner today and possible collaborators later.
 
 ## Connected Project

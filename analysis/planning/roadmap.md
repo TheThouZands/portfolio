@@ -7,12 +7,12 @@ Target home: Confluence/Jira
 
 ## Planning Principle
 
-The product should move from retrospective reconstruction to forward planning in small, checkable increments. Each slice
-should produce artifacts that are useful locally first, then portable into Confluence, Jira, Figma/FigJam, or GitHub.
+The product should move from analysis baseline to forward delivery in small, checkable increments. Each slice should
+produce artifacts that are useful locally first, then portable into Confluence, Jira, Figma/FigJam, or GitHub.
 
-## Stage 0 - Retrospective Baseline
+## Stage 0 - Product Baseline
 
-Goal: explain the product that already exists.
+Goal: define the product foundation before forward delivery.
 
 | Slice | Output | Status |
 | --- | --- | --- |
@@ -109,7 +109,7 @@ Exit check:
 
 ## Stage 4 - Forward Delivery
 
-Goal: use the reconstructed analysis to plan new work.
+Goal: use the analysis baseline to plan new work.
 
 Candidate epics:
 

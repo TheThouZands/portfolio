@@ -7,15 +7,15 @@ Target home: Confluence/GitHub
 
 ## Purpose
 
-This audit checks the current `analysis/` suite against the original objective: reconstruct the missing pre-build
-analysis process for the portfolio, keep artifacts compatible with Confluence/Jira/FigJam, and keep GitHub-owned
-technical artifacts near the code.
+This audit checks the current `analysis/` suite against the objective: maintain the pre-build product analysis source
+for the portfolio, keep artifacts compatible with Confluence/Jira/FigJam, and keep GitHub-owned technical artifacts near
+the code.
 
 ## Audit Summary
 
 | Area | Current readiness | Evidence | Remaining work |
 | --- | --- | --- | --- |
-| Retrospective analysis directory | Strong local baseline | `analysis/README.md` and 40+ linked artifacts | Keep updated as implementation changes. |
+| Analysis source directory | Strong local baseline | `analysis/README.md` and 40+ linked artifacts | Keep updated as implementation changes. |
 | Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
@@ -32,7 +32,7 @@ technical artifacts near the code.
 
 | Objective requirement | Status | Evidence |
 | --- | --- | --- |
-| Reconstruct the missing analysis stage as if it happened before building. | Locally satisfied baseline | Problem, stakeholders, positioning, requirements, risks, validation, roadmap, and workflows exist. |
+| Maintain the analysis stage as the source that guides building. | Locally satisfied baseline | Problem, stakeholders, positioning, requirements, risks, validation, roadmap, and workflows exist. |
 | Include the problem itself. | Satisfied | `analysis/product/problem-statement.md` |
 | Slowly get more specific with functionality and planning artifacts. | Satisfied baseline | Scope/requirements, Jira stories, roadmap, risk register, validation strategy, workflow docs. |
 | Make artifacts refer to already existing commits/features. | Satisfied baseline | Requirements, matrix, stories, traceability, ADRs, schema notes reference commits/code areas. |
@@ -70,6 +70,6 @@ These are not local analysis gaps; they are execution or external setup gaps.
 
 ## Audit Conclusion
 
-The local analysis suite is now a strong retrospective baseline and is ready for external tool setup. The goal should not
-be considered globally complete until external Confluence/Jira/FigJam setup is either completed, explicitly deferred, or
-declared out of scope for the current local phase.
+The local analysis suite is now a strong planning baseline and is ready for continued external tool setup. The goal
+should not be considered globally complete until external Confluence/Jira/FigJam setup is either completed, explicitly
+deferred, or declared out of scope for the current local phase.

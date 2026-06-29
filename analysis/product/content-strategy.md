@@ -95,7 +95,7 @@ positioning.
 | Data model note | Explain schema choices. | Content entities, translations, revisions, mentions. |
 | Security note | Explain protection choices. | Auth validation, rate limiting, safe structural rendering. |
 | Operations note | Explain deployment and maintenance. | Drizzle migrations and Neon branch sync. |
-| Retrospective note | Explain what was learned after implementation. | Reconstructing analysis after building. |
+| Decision note | Explain why a product/content decision exists. | Keeping planning and delivery reasoning visible. |
 
 ## Translation Strategy
 

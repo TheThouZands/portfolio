@@ -7,7 +7,7 @@ Target home: GitHub/Confluence
 
 ## Purpose
 
-This document connects product capabilities to the implemented codebase, database schema, tests, and historical commits.
+This document connects product capabilities to the codebase, database schema, tests, and delivery commits.
 It is intentionally practical: it should help a reviewer move from "why does this exist?" to "where is it implemented?"
 
 ## Commit Clusters
@@ -24,7 +24,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Auth hardening | `c0fa0fc`, `7333bb1`, `bbdf312`, `ca983df` | Added validation, auth rate limiting, and baseline security headers. |
 | Blog comments | `4083894`, `8af92b5`, `1033065`, `cc9073d`, `3d145da`, `94566f8` | Attached comments to blog posts, associated comments with accounts, preserved orphaned comments, and rendered/composed comments. |
 | Operations and quality | `5a50321`, `888fbdf`, `fe788f7`, `213d7a7`, `2870f75` | Added Neon branch sync, cleanup job, unit tests, and CI workflow. |
-| Analysis and planning reconstruction | `88702ce` through current docs commits | Rebuilt product analysis, tool setup, diagrams, ADRs, risks, validation, and readiness artifacts locally. |
+| Analysis and planning source | `88702ce` through current docs commits | Established product analysis, tool setup, diagrams, ADRs, risks, validation, and readiness artifacts locally. |
 
 ## Capability To Code Map
 

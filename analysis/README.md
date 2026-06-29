@@ -3,14 +3,13 @@
 Status: Draft  
 Owner: Thouzands  
 Last updated: 2026-06-29  
-Source basis: Existing codebase, local architecture notes, database schema, migrations, tests, and git commit history.
+Planning source: Product goals, service strategy, requirements, architecture notes, schema, migrations, tests, and commit traceability.
 
 ## Purpose
 
-This directory reconstructs the product and business analysis that would normally happen before implementation. The
-project was built iteratively in one main feature branch, so these docs are a retrospective baseline: they explain the
-problem, goals, requirements, user stories, architecture decisions, and technical inventory that the current product has
-already started to satisfy.
+This directory is the product and business analysis source for the portfolio. It defines the problem, goals,
+requirements, user stories, architecture decisions, and technical inventory that guide implementation and external tool
+setup.
 
 The suite is intended to stay useful in four places:
 
@@ -26,9 +25,9 @@ The suite is intended to stay useful in four places:
 | Tool setup | [confluence/page-tree.md](confluence/page-tree.md) | Confluence | Defines the first Confluence space, page hierarchy, publishing rules, and templates. |
 | Tool setup | [confluence/publishing-runbook.md](confluence/publishing-runbook.md) | Confluence/GitHub | Defines page metadata, publishing steps, mapping table, and update triggers. |
 | Tool setup | [confluence/page-manifest.csv](confluence/page-manifest.csv) | Confluence | CSV checklist for page creation order, source files, priorities, statuses, and URLs. |
-| Product analysis | [product/problem-statement.md](product/problem-statement.md) | Confluence | Defines the reconstructed problem, opportunity, stakeholders, goals, and constraints. |
+| Product analysis | [product/problem-statement.md](product/problem-statement.md) | Confluence | Defines the problem, opportunity, stakeholders, goals, and constraints. |
 | Product analysis | [product/stakeholders-and-personas.md](product/stakeholders-and-personas.md) | Confluence/Jira | Defines stakeholders, personas, persona-to-requirement mapping, and product implications. |
-| Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to existing implementation evidence. |
+| Product analysis | [product/scope-and-requirements.md](product/scope-and-requirements.md) | Confluence | Captures functional and non-functional requirements mapped to implementation evidence. |
 | Product strategy | [product/positioning-brief.md](product/positioning-brief.md) | Confluence | Defines the service position, audience, proof strategy, and first conversion hypothesis. |
 | Product strategy | [product/service-offer-catalog.md](product/service-offer-catalog.md) | Confluence/Jira | Defines service offers, buyer fit, outputs, proof surfaces, intake routing, and pricing stance. |
 | Product strategy | [product/content-strategy.md](product/content-strategy.md) | Confluence | Defines content pillars, templates, publishing workflow, and content gaps. |
@@ -66,7 +65,7 @@ The suite is intended to stay useful in four places:
 | Technical | [technical/migration-catalog.md](technical/migration-catalog.md) | GitHub/Confluence | Maps each committed Drizzle migration to product intent and evidence. |
 | Technical | [technical/api-surface-inventory.md](technical/api-surface-inventory.md) | GitHub/Confluence | Inventories current route handlers, server actions, contract status, and OpenAPI triggers. |
 | Technical decisions | [technical/adr/README.md](technical/adr/README.md) | GitHub | ADR index and conventions. |
-| Technical decisions | [technical/adr/0001-record-retrospective-analysis-suite.md](technical/adr/0001-record-retrospective-analysis-suite.md) | GitHub | First ADR for keeping retrospective analysis in the repository. |
+| Technical decisions | [technical/adr/0001-adopt-analysis-suite-as-planning-source.md](technical/adr/0001-adopt-analysis-suite-as-planning-source.md) | GitHub | First ADR for keeping the analysis suite in the repository as planning source. |
 | API contracts | [technical/openapi.md](technical/openapi.md) | GitHub | Current API surface and OpenAPI planning notes. |
 
 ## Traceability Model
@@ -75,7 +74,7 @@ Each artifact should prefer concrete evidence:
 
 - Requirement id: stable id such as `FR-001` or `NFR-003`.
 - User story id: stable id such as `PF-101`.
-- Evidence commits: short hashes from the existing branch history.
+- Evidence commits: short hashes proving implementation or documentation delivery.
 - Code areas: paths or route groups that currently satisfy the behavior.
 - Verification: existing tests, manual checks, or planned tests.
 - Tool target: Confluence, Jira, Figma/FigJam, or GitHub.
@@ -86,7 +85,7 @@ The portfolio is a fullstack service showcase rather than a static brochure. It 
 projects, and blog content through a CMS-backed Next.js application with PostgreSQL/Neon, Drizzle migrations,
 internationalized routing, auth flows, blog comments, and operational workflows for preview database branches.
 
-The current product already demonstrates:
+The implementation evidence demonstrates:
 
 - Content modeling for experience, skills, projects, blog posts, media, mentions, and revisions.
 - Public routes for localized portfolio browsing.
@@ -98,5 +97,5 @@ The current product already demonstrates:
 
 ## Working Rule
 
-Keep future changes small and reviewable. Prefer one focused documentation slice at a time, then check whether it still
-matches the implemented product before expanding the suite.
+Keep future changes small and reviewable. Prefer one focused documentation slice at a time, then check whether planned
+behavior, implementation evidence, and external-tool records still agree before expanding the suite.
