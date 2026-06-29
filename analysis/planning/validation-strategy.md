@@ -105,6 +105,7 @@ Before marking a story done, confirm whether the change should update:
 - `analysis/technical/openapi.md`
 - `analysis/design/diagram-inventory.md`
 - `analysis/planning/risk-register.md`
+- `analysis/planning/readiness-audit.md`
 - `analysis/operations/release-and-review-cadence.md`
 - `analysis/operations/decision-log.md`
 - `analysis/operations/open-questions.md`
