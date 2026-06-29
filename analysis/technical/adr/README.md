@@ -32,11 +32,11 @@ Each ADR should include:
 | [0004](0004-separate-portfolio-identity-from-auth-provider-records.md) | Separate portfolio identity from auth provider records | Accepted |
 | [0005](0005-preserve-comments-after-user-deletion.md) | Preserve blog comments after user deletion | Accepted |
 | [0006](0006-defer-openapi-until-public-contract.md) | Defer OpenAPI until a stable public contract exists | Accepted |
+| [0007](0007-compose-routes-from-partials-and-repeatables.md) | Compose routes from partials and repeatables | Accepted |
 
 ## Candidate ADRs
 
 | Candidate | Reason |
 | --- | --- |
-| Use Next.js App Router with route files as composition boundaries | Existing architecture docs already describe this separation. |
 | Define comment moderation model | Needed before comments become a more public interaction surface. |
 | Define CMS authoring workflow ownership | Needed before adding an editor/admin surface. |

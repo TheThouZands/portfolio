@@ -13,6 +13,8 @@ committed migrations with `npm run db:migrate`.
 
 Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
 
+Detailed catalog: [migration-catalog.md](migration-catalog.md).
+
 ## Current Schema Domains
 
 | Domain | Tables/enums | Product purpose |

@@ -22,8 +22,8 @@ technical artifacts near the code.
 | Jira-compatible user stories | Strong local baseline | `jira/user-stories.md`, `jira/backlog.csv` | Import into Jira and fill `jira/import-history.md`. |
 | Confluence-compatible docs | Strong local baseline | `confluence/page-tree.md`, `confluence/publishing-runbook.md` | Create Confluence space/pages and record source commits/URLs. |
 | FigJam/Figma diagrams | Local source ready | `design/diagram-inventory.md`, `design/diagrams`, `figjam-creation-log.md` | Create FigJam file/sections and record URLs. |
-| ADRs | Strong local baseline | `technical/adr/0001` through `0006` | Add ADRs for route composition, moderation schema, CMS authoring implementation, or owner auth when decided. |
-| Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, ADR 0002 | Update after material schema changes. |
+| ADRs | Strong local baseline | `technical/adr/0001` through `0007` | Add ADRs for moderation schema, CMS authoring implementation, or owner auth when decided. |
+| Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, ADR 0006 | Create spec only when stable external API contract exists. |
 | Tool setup operations | Local runbooks ready | `planning/tool-setup-plan.md`, import/log files | Execute setup in external tools. |
 | Ongoing governance | Local baseline | `risk-register.md`, `validation-strategy.md`, operations docs | Apply cadence during future slices. |
@@ -64,7 +64,6 @@ These are not local analysis gaps; they are execution or external setup gaps.
 | External Confluence setup | Create space/page tree and fill publishing metadata. |
 | External Jira setup | Create project/epics, import CSV, record key mappings. |
 | External FigJam setup | Create diagram file/sections, redraw first diagrams, record URLs. |
-| Route composition ADR | Capture existing App Router/component boundary decision as ADR 0007. |
 | Moderation schema decision | Decide owner hide/remove model before migration work. |
 | Conversion implementation | Add service CTA and minimal intake path. |
 
@@ -73,4 +72,3 @@ These are not local analysis gaps; they are execution or external setup gaps.
 The local analysis suite is now a strong retrospective baseline and is ready for external tool setup. The goal should not
 be considered globally complete until external Confluence/Jira/FigJam setup is either completed, explicitly deferred, or
 declared out of scope for the current local phase.
-

@@ -52,6 +52,7 @@ The suite is intended to stay useful in four places:
 | GitHub setup | [github/documentation-rules.md](github/documentation-rules.md) | GitHub/Confluence | Defines source-of-truth rules, naming conventions, commit sizing, and doc review checks. |
 | Technical | [technical/traceability.md](technical/traceability.md) | GitHub/Confluence | Links product capabilities to code areas, tests, migrations, and commit clusters. |
 | Technical | [technical/schema-and-migrations.md](technical/schema-and-migrations.md) | GitHub | Current schema inventory and migration history summary. |
+| Technical | [technical/migration-catalog.md](technical/migration-catalog.md) | GitHub/Confluence | Maps each committed Drizzle migration to product intent and evidence. |
 | Technical decisions | [technical/adr/README.md](technical/adr/README.md) | GitHub | ADR index and conventions. |
 | Technical decisions | [technical/adr/0001-record-retrospective-analysis-suite.md](technical/adr/0001-record-retrospective-analysis-suite.md) | GitHub | First ADR for keeping retrospective analysis in the repository. |
 | API contracts | [technical/openapi.md](technical/openapi.md) | GitHub | Current API surface and OpenAPI planning notes. |

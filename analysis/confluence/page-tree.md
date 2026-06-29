@@ -57,8 +57,9 @@ Portfolio Analysis Home
   5. Technical Reference
     5.1 Traceability
     5.2 Schema And Migrations
-    5.3 OpenAPI Planning Notes
-    5.4 ADR Index
+    5.3 Migration Catalog
+    5.4 OpenAPI Planning Notes
+    5.5 ADR Index
   6. Operations
     6.1 Documentation Maintenance
     6.2 Confluence Publishing Runbook
@@ -95,6 +96,7 @@ Portfolio Analysis Home
 | FigJam Creation Log | `analysis/design/figjam-creation-log.md` | Local to Confluence and FigJam |
 | Traceability | `analysis/technical/traceability.md` | Local to Confluence and GitHub |
 | Schema And Migrations | `analysis/technical/schema-and-migrations.md` | GitHub to Confluence reference |
+| Migration Catalog | `analysis/technical/migration-catalog.md` | GitHub to Confluence reference |
 | OpenAPI Planning Notes | `analysis/technical/openapi.md` | GitHub to Confluence reference |
 | ADR Index | `analysis/technical/adr/README.md` | GitHub to Confluence reference |
 | Documentation Maintenance | `analysis/github/documentation-rules.md` | GitHub to Confluence reference |

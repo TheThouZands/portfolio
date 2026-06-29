@@ -24,6 +24,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | Auth hardening | `c0fa0fc`, `7333bb1`, `bbdf312`, `ca983df` | Added validation, auth rate limiting, and baseline security headers. |
 | Blog comments | `4083894`, `8af92b5`, `1033065`, `cc9073d`, `3d145da`, `94566f8` | Attached comments to blog posts, associated comments with accounts, preserved orphaned comments, and rendered/composed comments. |
 | Operations and quality | `5a50321`, `888fbdf`, `fe788f7`, `213d7a7`, `2870f75` | Added Neon branch sync, cleanup job, unit tests, and CI workflow. |
+| Analysis and planning reconstruction | `88702ce` through current docs commits | Rebuilt product analysis, tool setup, diagrams, ADRs, risks, validation, and readiness artifacts locally. |
 
 ## Capability To Code Map
 
@@ -40,7 +41,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | CMS authoring workflow | `FR-019`, `NFR-014` | Future owner-only CMS authoring routes, preview flow, validation, audit fields | Planned; workflow in `analysis/product/cms-authoring-workflow.md`. |
 | Owner account controls | `FR-020`, `NFR-015` | Future owner authorization model for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`. |
 | Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
-| Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates. |
+| Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates; ADR 0007 records route/component boundaries. |
 | Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md` | Docs validate with CSV/import checks; future implementation slices should cite persona, risk, and validation evidence. |
 
 ## Tests Inventory
@@ -58,7 +59,7 @@ It is intentionally practical: it should help a reviewer move from "why does thi
 | --- | --- | --- |
 | No complete Confluence/Jira integration yet | Local docs are portable but not connected to external tools. | `PF-601`, `PF-602` |
 | Diagram inventory exists, but no FigJam diagrams have been created yet | Visual artifacts still need external tool setup. | `PF-603` |
-| ADR baseline exists, but route composition and future moderation/editor decisions remain uncovered | Some technical decisions are still only documented in local notes. | `PF-604` |
+| ADR baseline exists, but future moderation/editor implementation decisions remain uncovered | Route composition is covered by ADR 0007; future protected workflows still need decisions when implemented. | `PF-604` |
 | No formal public OpenAPI contract | Current route handlers exist, but ADR 0006 intentionally defers a spec until public API intent is decided. | Future API decision story |
 | Comment moderation policy exists, but implementation is not designed or built | Account-backed comments introduce trust and abuse questions beyond current rendering. | `PF-406`, `PF-407`, `PF-408` |
 | Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-701`, `PF-702`, `PF-703`, `PF-704` |
