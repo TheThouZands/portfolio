@@ -46,11 +46,11 @@ the code.
 
 ## Known Not-Yet-Done Items
 
-These are not local analysis gaps; they are execution or external setup gaps.
+These are not analysis-suite handoff blockers; they are future product implementation or maintenance items.
 
 | Item | Why it remains |
 | --- | --- |
-| FigJam Confluence cross-linking is partial. | All seven current diagram sources are generated in FigJam; section-specific anchors remain future cleanup if the connector exposes durable links. |
+| FigJam Confluence cross-linking can be refined. | All seven current diagram sources are generated in FigJam; section-specific anchors are optional cleanup if the connector exposes durable links. |
 | Contact/intake UI is not implemented. | Service definition and proof-mapping artifacts are complete; focused intake implementation remains planned in `PF-702`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
 | CMS authoring UI is not implemented. | ADR 0011 defines the first owner-only source-aware boundary and ADR 0012 defines media lifecycle; implementation remains planned in `PF-206`, `PF-208`, and `PF-411`. |
@@ -60,16 +60,18 @@ These are not local analysis gaps; they are execution or external setup gaps.
 
 | Slice | Purpose |
 | --- | --- |
-| Confluence freshness sync | Keep published pages synced after source changes and refresh source commit metadata after each external update batch. |
-| Jira upkeep and cross-linking | Keep story statuses current and add useful Confluence/GitHub links as pages are published. |
-| Continue FigJam setup | Keep generated diagrams synced from Mermaid and improve Confluence links when durable section anchors are available. |
+| Confluence upkeep | Keep published pages synced after source changes and refresh source commit metadata after each external update batch. |
+| Jira upkeep and cross-linking | Keep story statuses current and add useful Confluence/GitHub links as pages or implementation slices change. |
+| FigJam upkeep | Keep generated diagrams synced from Mermaid and improve Confluence links when durable section anchors are available. |
 | External setup upkeep | Follow `analysis/planning/external-setup-execution-runbook.md` when new pages, diagrams, Jira stories, or external links are added. |
 | Owner authorization implementation prep | Define and test the shared server-only guard before moderation or authoring routes. |
 | Conversion implementation | Add service CTA and minimal intake path. |
 
 ## Audit Conclusion
 
-The local analysis suite is now a strong planning baseline with the current Confluence manifest published, Jira story
-import complete, and the current FigJam diagram inventory generated. The goal should not be considered globally
-complete until source-framing, external sync freshness, Jira status reconciliation, and planned product implementation
-scope are either completed, explicitly deferred, or declared out of scope for the current phase.
+The analysis suite is handoff-ready for the current goal. Source-framing leaks are cleaned, the Confluence manifest is
+published and freshly synced, Jira import/status mapping is reconciled, and the current FigJam diagram inventory is
+generated with the documentation-toolchain refresh applied.
+
+Remaining items are future product implementation or routine maintenance: focused intake UI, moderation controls, CMS
+authoring/media tooling, owner auth guards, and ongoing sync after future source changes.

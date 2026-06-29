@@ -42,6 +42,7 @@ FigJam file or section URL exists.
 | --- | --- | --- | --- | --- |
 | 2026-06-29 | `2ca08e0` | `PF-DIAG-007`, `PF-DIAG-001`, `PF-DIAG-002`, `PF-DIAG-003` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram`; Git Mermaid remains source of truth. |
 | 2026-06-29 | `b5249e3` | `PF-DIAG-004`, `PF-DIAG-005`, `PF-DIAG-006` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Generated through Figma MCP `generate_diagram` into the existing FigJam board; Git Mermaid remains source of truth. |
+| 2026-06-29 | `a9cdad4` | `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Refreshed the documentation-toolchain wording in place: the old implementation-first label became `Delivery evidence`, and the backward connector into `analysis/` was removed. |
 
 ## Generation Steps
 
