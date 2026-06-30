@@ -2,7 +2,7 @@
 
 Status: Active
 Owner: Thouzands
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 Target home: GitHub
 
 ## Purpose
@@ -16,9 +16,9 @@ The gross analysis-suite goal is substantially complete:
 
 - Local `analysis/` sources cover product, planning, Jira, Confluence, design/FigJam, GitHub rules, ADRs, schema and
   migrations, OpenAPI notes, and operations.
-- Jira project `KAN` is reachable, with `KAN-1` through `KAN-55` created and mapped.
-- Confluence page manifest has 55 rows, all published with external URLs.
-- FigJam board `Portfolio Analysis Diagrams` is reachable, with seven generated diagram records.
+- Jira project `KAN` is reachable, with `KAN-1` through `KAN-56` created and mapped.
+- Confluence page manifest has 56 rows, all published with external URLs.
+- FigJam board `Portfolio Analysis Diagrams` is reachable, with eight generated diagram records.
 - Legacy Jira provenance wording has been removed.
 
 ## Remaining Handoff Items

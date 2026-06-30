@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Figma/FigJam, Confluence, GitHub
 
 ## Purpose
@@ -28,6 +28,7 @@ The source of truth is still split by artifact type:
 | PF-DIAG-005 | [pf-diag-005-deployment-neon-branch-workflow.md](pf-diag-005-deployment-neon-branch-workflow.md) | Deployment And Neon Branch Workflow |
 | PF-DIAG-006 | [pf-diag-006-structural-content-rendering-contract.md](pf-diag-006-structural-content-rendering-contract.md) | Structural Content Rendering Contract |
 | PF-DIAG-007 | [pf-diag-007-documentation-toolchain.md](pf-diag-007-documentation-toolchain.md) | Documentation Toolchain |
+| PF-DIAG-008 | [pf-diag-008-user-role-authorization-model.md](pf-diag-008-user-role-authorization-model.md) | User Role Authorization Model |
 
 ## Usage Rules
 

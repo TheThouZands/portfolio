@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Confluence/Jira
 
 ## Purpose
@@ -58,9 +58,9 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 
 | Batch | Scope | Current result |
 | --- | --- | --- |
-| Batch 1 | Confluence root, product, planning, Jira, design, technical, and operations pages. | All 55 current rows in `analysis/confluence/page-manifest.csv` are published with Confluence URLs. |
-| Batch 2 | Jira project `KAN`, epics, story import, key mapping, and status mapping. | Seven epics and 48 stories exist as `KAN-1` through `KAN-55`; 40 implemented stories are `Done`, `KAN-24` and `KAN-26` are `In Progress`, and planned implementation stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52` remain `To Do`. |
-| Batch 3 | Generated FigJam diagrams for the current Mermaid source inventory. | All seven current diagram rows are generated in the FigJam board and recorded in the section manifest and creation log. |
+| Batch 1 | Confluence root, product, planning, Jira, design, technical, and operations pages. | All 56 current rows in `analysis/confluence/page-manifest.csv` are published with Confluence URLs. |
+| Batch 2 | Jira project `KAN`, epics, story import, key mapping, and status mapping. | Seven epics and 49 stories exist as `KAN-1` through `KAN-56`; 40 implemented stories are `Done`, `KAN-24` and `KAN-26` are `In Progress`, and planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` remain `To Do`. |
+| Batch 3 | Generated FigJam diagrams for the current Mermaid source inventory. | All eight current diagram rows are generated in the FigJam board and recorded in the section manifest and creation log. |
 | Batch 4 | Technical reference pages or links. | ADR, schema, migration, API surface, verification, and traceability pages are published while Git remains authoritative. |
 
 The detailed execution gates for these batches live in `analysis/planning/external-setup-execution-runbook.md`.
@@ -70,5 +70,5 @@ The detailed execution gates for these batches live in `analysis/planning/extern
 | Question | Default until answered |
 | --- | --- |
 | Should Confluence pages be manually copied or imported with automation? | Manual first, automation only after format stabilizes. |
-| Should Jira implemented stories import as Done? | Answered for the current setup: implemented stories import as `Done`, current-worktree stories as `In Progress`, and the six planned implementation stories remain `To Do`. |
+| Should Jira implemented stories import as Done? | Answered for the current setup: implemented stories import as `Done`, current-worktree stories as `In Progress`, and planned stories remain `To Do`. |
 | How should FigJam diagrams be created? | Use Figma MCP `generate_diagram` from Mermaid. Do not make FigJam canvas edits the maintenance path. |

@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Confluence/Jira
 
 ## Purpose
@@ -23,7 +23,7 @@ Auth does not yet exist to support:
 
 - Paid client portals.
 - Private project collaboration.
-- Multi-role teams.
+- Multi-role teams beyond the planned Reader/Moderator/Owner model.
 - Public community profiles.
 - Social networking behavior.
 
@@ -32,6 +32,7 @@ Auth does not yet exist to support:
 | Account type | Status | Product reason |
 | --- | --- | --- |
 | Reader account | Implemented/in progress | Allows authenticated comments and future reader trust controls. |
+| Moderator account | Planned in `PF-412` / `KAN-56` | Allows future moderation tools without treating every privileged action as owner-only. |
 | Owner account | Planned; authorization model accepted in ADR 0010 | Needed for moderation and CMS authoring. |
 | Client account | Needs decision | Could support private collaboration, but not yet justified. |
 | Collaborator account | Needs decision | Could support future development/content collaboration. |
@@ -42,20 +43,30 @@ Auth does not yet exist to support:
 | Phase | Scope | Exit criteria |
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
-| A2 Owner controls | Owner can moderate comments and access protected owner tools. | Owner-only authorization model exists in ADR 0010; implementation still pending. |
-| A3 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
-| A4 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
+| A2 Role vocabulary and privileged-action boundaries | Define the first role model before adding schema, guards, or privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; implementation remains deferred. |
+| A3 Owner and moderation controls | Moderator can perform moderation actions; owner can access protected owner tools. | Role-aware server guards exist and preserve the ADR 0010 owner allowlist migration path. |
+| A4 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
+| A5 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
 
 ## Authorization Model
 
-First planned authorization model, accepted in ADR 0010:
+Current authorization model, accepted in ADR 0010:
 
 - Reader: can manage their own session and post comments.
 - Owner: is matched by an explicit server-side allowlist after Better Auth session resolution.
 - Anonymous visitor: can read public content.
 
-Avoid adding a complex role table until collaborator, client, or multi-owner needs become real. Owner-only moderation
-and authoring tools should call one server-only authorization helper rather than checking ownership ad hoc.
+Planned first role vocabulary, tracked by `PF-412` / `KAN-56`:
+
+| Role | Planned authority |
+| --- | --- |
+| Reader | Authenticated baseline role. Can manage their own session and post comments. |
+| Moderator | Reader capabilities plus future comment moderation actions. |
+| Owner | Moderator capabilities plus owner-only CMS authoring, admin decisions, and protected portfolio tools. |
+
+Role checks must stay server-authoritative. Client session state can show or hide affordances, but cannot grant a
+privileged action. The first implementation should explain how it evolves from the ADR 0010 owner allowlist without
+breaking existing reader auth or comment behavior.
 
 ## Security And Trust Implications
 
@@ -67,6 +78,7 @@ and authoring tools should call one server-only authorization helper rather than
 | Session accuracy | Session state refresh and Better Auth session storage. |
 | Comment trust | Authenticated comments plus planned moderation. |
 | Owner tools | Use the ADR 0010 explicit owner allowlist and server-only guard before protected tools ship; use ADR 0011 for the first CMS authoring boundary. |
+| Role escalation | Keep role resolution and guard decisions server-side; reject privileged writes without a valid session and role. |
 
 ## Requirements Impact
 
@@ -77,6 +89,7 @@ and authoring tools should call one server-only authorization helper rather than
 | `FR-012` sessions are durable and refresh locally | Implemented/in progress. |
 | `FR-018` owner can moderate comments | Planned. |
 | `FR-020` owner-only account capabilities protect moderation and authoring tools | Planned; owner authorization decision accepted in ADR 0010. |
+| Future role-gated privileged actions | Planned in `PF-412` / `KAN-56` before schema and guard implementation. |
 | `NFR-015` auth scope should grow only when tied to product needs | Planned; ADR 0010 keeps role scope minimal. |
 
 ## Jira Impact
@@ -86,6 +99,7 @@ and authoring tools should call one server-only authorization helper rather than
 | `PF-409` | Define owner authorization model before protected tools. |
 | `PF-410` | Decide whether client/private accounts belong in the portfolio. |
 | `PF-411` | Connect owner auth to moderation and CMS authoring workflows. |
+| `PF-412` / `KAN-56` | Define the first user-role model for privileged actions. |
 
 ## Open Questions
 
@@ -95,3 +109,5 @@ and authoring tools should call one server-only authorization helper rather than
 | Should reader accounts have profiles? | No. Keep reader accounts minimal. |
 | Should client accounts exist? | Defer until a client collaboration use case is real. |
 | Should OAuth providers be added? | Defer until password/identifier flow proves insufficient. |
+| Where should roles be stored? | Defer until `PF-412` reviews migration and guard design. |
+| Should Moderator remain separate from Owner? | Start with a planned role vocabulary; validate against real moderation tooling before implementation. |

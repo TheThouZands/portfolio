@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Figma/FigJam and Confluence
 
 ## Purpose
@@ -39,6 +39,7 @@ PF-DIAG-001 - Visitor Discovery Journey
 | PF-DIAG-005 | Deployment And Neon Branch Workflow | Sequence/process map | Operations | `README.md`, `scripts/sync-neon-branch.mjs` | Generated |
 | PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests, ADR 0003, ADR 0011 | Generated |
 | PF-DIAG-007 | Documentation Toolchain | System/process map | Owner, collaborators | `analysis/README.md`, this suite | Generated |
+| PF-DIAG-008 | User Role Authorization Model | Flowchart | Product, technical, security | `auth-account-roadmap.md`, auth stories, ADR 0010, `KAN-56` | Generated |
 
 ## Diagram Specs
 
@@ -145,6 +146,22 @@ Include:
 
 Update trigger: tool setup changes, source-of-truth changes, or import/sync workflow changes.
 
+### PF-DIAG-008 - User Role Authorization Model
+
+Goal: show the planned Reader, Moderator, and Owner role vocabulary before schema, migration, or guard implementation.
+
+Include:
+
+- Anonymous visitor and authenticated Better Auth session.
+- Reader as the default authenticated baseline role.
+- Moderator as future comment-moderation authority.
+- Owner as moderator plus CMS authoring and admin-decision authority.
+- Client UI affordances separated from server-side guard decisions.
+- Allowed and rejected privileged-action outcomes.
+
+Update trigger: role names, role storage, authorization guards, moderation capabilities, owner tools, or CMS authoring
+privilege boundaries.
+
 ## FigJam Generation Rules
 
 - Keep the Mermaid files in `analysis/design/diagrams` as the source of truth.
@@ -169,6 +186,7 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 | PF-DIAG-004 Blog Comment Flow | Shows current comment behavior and future moderation boundary. |
 | PF-DIAG-005 Deployment And Neon Branch Workflow | Makes database branch and migration operations reviewable. |
 | PF-DIAG-006 Structural Content Rendering Contract | Explains safe rendering without raw HTML trust. |
+| PF-DIAG-008 User Role Authorization Model | Separates role-driven affordances from server-enforced privileged actions. |
 
 ## Local Source Sketches
 
@@ -181,3 +199,4 @@ Update trigger: tool setup changes, source-of-truth changes, or import/sync work
 | PF-DIAG-005 | [diagrams/pf-diag-005-deployment-neon-branch-workflow.md](diagrams/pf-diag-005-deployment-neon-branch-workflow.md) |
 | PF-DIAG-006 | [diagrams/pf-diag-006-structural-content-rendering-contract.md](diagrams/pf-diag-006-structural-content-rendering-contract.md) |
 | PF-DIAG-007 | [diagrams/pf-diag-007-documentation-toolchain.md](diagrams/pf-diag-007-documentation-toolchain.md) |
+| PF-DIAG-008 | [diagrams/pf-diag-008-user-role-authorization-model.md](diagrams/pf-diag-008-user-role-authorization-model.md) |

@@ -2,12 +2,13 @@
 
 Status: Draft source  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: FigJam and Confluence
 
 ## Purpose
 
-Show how the portfolio-specific identifier flow relates to Better Auth session behavior.
+Show how the portfolio-specific identifier flow relates to Better Auth session behavior and the planned role
+authorization boundary.
 
 Source docs:
 
@@ -15,7 +16,9 @@ Source docs:
 - `analysis/technical/adr/0004-separate-portfolio-identity-from-auth-provider-records.md`
 - `analysis/technical/adr/0010-use-explicit-owner-allowlist-for-protected-tools.md`
 - `analysis/product/interaction-policy.md`
+- `analysis/product/auth-account-roadmap.md`
 - `analysis/jira/user-stories.md`
+- `KAN-56`
 
 ## Mermaid Source
 
@@ -44,10 +47,18 @@ flowchart TD
   P --> Q["Local auth state refresh"]
   Q --> R["Authenticated reader UI"]
   R --> S["Can comment on blog posts"]
-  R --> T{"Matches owner allowlist?"}
-  T -->|"No"| U["Reader-only permissions"]
-  T -->|"Yes"| V["Owner tool guard passes"]
-  V --> W["Future moderation/CMS tools"]
+  R --> T{"Role model available?"}
+  T -->|"No"| U{"Matches owner allowlist?"}
+  U -->|"No"| V["Reader-only permissions"]
+  U -->|"Yes"| W["Owner tool guard passes"]
+  W --> X["Future moderation/CMS tools"]
+  T -->|"Planned"| Y["Resolve server role"]
+  Y --> Z{"Role"}
+  Z -->|"Reader"| V
+  Z -->|"Moderator"| AA["Moderation guard passes"]
+  Z -->|"Owner"| W
+  AA --> AB["Future moderation tools"]
+  W --> AC["Future CMS authoring tools"]
 ```
 
 ## FigJam Notes
@@ -56,6 +67,8 @@ flowchart TD
 - Mark email OTP as future/decision territory.
 - Link rate limiting to security requirements `NFR-003` and `NFR-004`.
 - Link owner-only path to ADR 0010, `FR-020`, and `PF-409`.
+- Link planned Reader/Moderator/Owner role vocabulary to `PF-412`, `KAN-56`, and `PF-DIAG-008`.
+- Client UI state can show affordances, but server role checks remain authoritative.
 
 ## Update Trigger
 

@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Jira/Confluence
 
 ## Epic PF-E01 - Public Portfolio Discovery
@@ -50,6 +50,7 @@ Target home: Jira/Confluence
 | PF-409 | As the portfolio owner, I want an owner authorization model before protected tools, so moderation and authoring routes are not guarded ad hoc. | High | Implemented | ADR 0010 defines explicit server-side owner allowlist matching, rejects first-version RBAC, and requires one shared guard for owner tools. | `analysis/product/auth-account-roadmap.md`, `analysis/technical/adr/0010-use-explicit-owner-allowlist-for-protected-tools.md` |
 | PF-410 | As the portfolio owner, I want to decide whether client/private accounts belong in the portfolio, so account scope does not grow without a use case. | Medium | Implemented | Auth roadmap separates reader, owner, client, collaborator, and public profile account types with decisions. | `analysis/product/auth-account-roadmap.md` |
 | PF-411 | As the portfolio owner, I want owner auth connected to moderation and CMS authoring workflows, so protected tools share one account strategy. | High | Planned | ADR 0010 defines the shared owner guard strategy and ADR 0011 requires CMS authoring to use it; moderation and CMS implementation still need to call it. | `analysis/product/auth-account-roadmap.md`, `analysis/product/cms-authoring-workflow.md`, `analysis/technical/adr/0010-use-explicit-owner-allowlist-for-protected-tools.md`, `analysis/technical/adr/0011-use-owner-only-source-aware-cms-authoring.md` |
+| PF-412 | As the portfolio owner, I want user roles to distinguish normal readers from higher-privilege users, so moderation, authoring, and future protected actions do not rely on one-off authorization checks. | High | Planned | First role vocabulary is documented before schema or guard implementation; initial roles are bounded to Reader, Moderator, and Owner; server-side authorization responsibilities are defined; the plan explains how this evolves from ADR 0010 without breaking reader auth/comment behavior. | `analysis/product/auth-account-roadmap.md`, `analysis/design/diagrams/pf-diag-008-user-role-authorization-model.md`, `KAN-56` |
 
 ## Epic PF-E05 - Quality, Operations, And Architecture
 

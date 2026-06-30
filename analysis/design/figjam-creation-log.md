@@ -2,7 +2,7 @@
 
 Status: Current diagram inventory generated
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Figma/FigJam and Confluence
 
 ## Purpose
@@ -18,7 +18,7 @@ FigJam file or section URL exists.
 | Field | Value |
 | --- | --- |
 | File title | Portfolio Analysis Diagrams |
-| File contents | Seven generated diagrams, `PF-DIAG-001` through `PF-DIAG-007` |
+| File contents | Eight generated diagrams, `PF-DIAG-001` through `PF-DIAG-008` |
 | File URL | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW |
 | Project folder | Portfolio |
 | Project URL | https://www.figma.com/files/team/1285044710574723356/project/619873187 |
@@ -38,6 +38,7 @@ FigJam file or section URL exists.
 | PF-DIAG-005 | PF-DIAG-005 - Deployment And Neon Branch Workflow | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-749 | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | Generated |
 | PF-DIAG-006 | PF-DIAG-006 - Structural Content Rendering Contract | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-750 | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Generated |
 | PF-DIAG-007 | PF-DIAG-007 - Documentation Toolchain | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=13-744 | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Generated |
+| PF-DIAG-008 | PF-DIAG-008 - User Role Authorization Model | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=25-841 | `analysis/design/diagrams/pf-diag-008-user-role-authorization-model.md` | Generated |
 
 ## Generation History
 
@@ -48,6 +49,7 @@ FigJam file or section URL exists.
 | 2026-06-29 | `a9cdad4` | `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Refreshed the documentation-toolchain wording in place: the old implementation-first label became `Delivery evidence`, and the backward connector into `analysis/` was removed. |
 | 2026-06-29 | N/A | `PF-DIAG-001` through `PF-DIAG-007` | https://www.figma.com/files/team/1285044710574723356/project/619873187 | Moved the single FigJam file containing all seven generated diagrams from Drafts into the `Portfolio` project folder. |
 | 2026-06-29 | N/A | `PF-DIAG-001` through `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams | Renamed the FigJam file to `Portfolio Analysis Diagrams` and added visible section groupings. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
+| 2026-06-30 | N/A | `PF-DIAG-008` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=25-841 | Generated the planned Reader/Moderator/Owner role authorization model from the local Mermaid source and added a visible section grouping. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
 
 ## Generation Steps
 

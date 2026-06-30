@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-06-30  
 Target home: Jira/Confluence
 
 ## Purpose
@@ -23,6 +23,7 @@ should remain stable even after Jira assigns keys.
 | JIRA-IMPORT-006 | 2026-06-29 | `KAN` | `analysis/jira/backlog.csv` | `aaf0128` | Thouzands | Imported the `PF-E07` Service Conversion story batch as `KAN-51` through `KAN-55` under `KAN-7`; all five planned stories remained `To Do`. Jira story import is complete for the current backlog. |
 | JIRA-DESC-001 | 2026-06-29 | `KAN` | Jira issue descriptions | `7b49856` | Thouzands | Description maintenance: cleaned legacy source wording in `KAN-1` through `KAN-33`, replacing the older priority/status provenance labels with `Local priority` and `Local analysis status`. Jira statuses, summaries, parents, labels, and evidence references were not changed. |
 | JIRA-STATUS-002 | 2026-06-29 | `KAN` | `analysis/jira/import-history.md`, `analysis/jira/backlog.csv`, `analysis/jira/user-stories.md` | `a9cdad4` | Thouzands | Status reconciliation: completed analysis, setup, technical inventory, planning, and service-definition stories are marked Done; `KAN-52` remains To Do for the future focused intake implementation; current-worktree stories remain In Progress. |
+| JIRA-MANUAL-001 | 2026-06-30 | `KAN` | `analysis/jira/user-stories.md`, `analysis/jira/backlog.csv`, `analysis/product/auth-account-roadmap.md` | N/A | Codex | Manually created `PF-412` as `KAN-56` under `KAN-4` for planned Reader/Moderator/Owner role vocabulary and privileged-action authorization design. |
 
 ## Status Mapping Decision
 
@@ -30,7 +31,7 @@ should remain stable even after Jira assigns keys.
 | --- | --- | --- | --- |
 | Implemented | Done | Created story issues `KAN-8` through `KAN-16`, `KAN-18`, `KAN-20` through `KAN-23`, `KAN-25`, `KAN-27`, `KAN-28`, `KAN-31`, `KAN-32`, `KAN-34` through `KAN-51`, and `KAN-53` through `KAN-55`. | These stories represent completed public portfolio, backend, CMS, i18n, auth, blog, quality, operations, architecture, analysis setup, technical inventory, planning, and service-definition work with implementation or documentation evidence. |
 | Implemented/in progress | In Progress | Created story issues `KAN-24` and `KAN-26`. | These stories include committed behavior plus current worktree follow-up changes, so they stay active until the current work is verified and committed. |
-| Planned | To Do | Created story issues `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52`. | These are writer/content-producer implementation tasks, moderation follow-ups, owner workflow follow-ups, or the future focused intake implementation, so they stay open. |
+| Planned | To Do | Created story issues `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56`. | These are writer/content-producer implementation tasks, moderation follow-ups, owner workflow follow-ups, role-model planning, or the future focused intake implementation, so they stay open. |
 
 Epic statuses stay open until child story batches are imported and reconciled. The status pass only changed story issues that
 already existed in Jira.
@@ -77,6 +78,7 @@ already existed in Jira.
 | PF-409 | [KAN-31](https://thouzands.atlassian.net/browse/KAN-31) | Define owner authorization model | JIRA-IMPORT-003 | Done | Parent: [KAN-4](https://thouzands.atlassian.net/browse/KAN-4). Local status: Implemented; local priority: High. |
 | PF-410 | [KAN-32](https://thouzands.atlassian.net/browse/KAN-32) | Decide client account scope | JIRA-IMPORT-003 | Done | Parent: [KAN-4](https://thouzands.atlassian.net/browse/KAN-4). Local status: Implemented; local priority: Medium. |
 | PF-411 | [KAN-33](https://thouzands.atlassian.net/browse/KAN-33) | Connect owner auth to protected workflows | JIRA-IMPORT-003 | To Do | Parent: [KAN-4](https://thouzands.atlassian.net/browse/KAN-4). Local status: Planned; local priority: High. |
+| PF-412 | [KAN-56](https://thouzands.atlassian.net/browse/KAN-56) | Define user roles for privileged actions | JIRA-MANUAL-001 | To Do | Parent: [KAN-4](https://thouzands.atlassian.net/browse/KAN-4). Local status: Planned; local priority: High. |
 | PF-501 | [KAN-34](https://thouzands.atlassian.net/browse/KAN-34) | Version schema changes as migrations | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: High. |
 | PF-502 | [KAN-35](https://thouzands.atlassian.net/browse/KAN-35) | Use branch-isolated Neon workflows | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: Medium. |
 | PF-503 | [KAN-36](https://thouzands.atlassian.net/browse/KAN-36) | Preserve architecture boundaries | JIRA-IMPORT-004 | Done | Parent: [KAN-5](https://thouzands.atlassian.net/browse/KAN-5). Local status: Implemented; local priority: High. |
