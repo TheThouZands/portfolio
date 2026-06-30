@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 
 import { type AuthActionState, signUpAction } from "@/auth/actions";
+import { useAuthSession } from "@/components/auth/AuthSessionProvider";
 
 type IdentifierType = NonNullable<AuthActionState["identifierType"]>;
 
@@ -25,6 +26,7 @@ export function SignUpForm({
   initialIdentifierType,
   onSuccess,
 }: SignUpFormProps) {
+  const { refreshSession, setAuthenticated } = useAuthSession();
   const handledStateRef = useRef<AuthActionState | null>(null);
   const [identifierInput, setIdentifierInput] = useState(initialIdentifier);
   const identifierType = identifierInput
@@ -47,8 +49,18 @@ export function SignUpForm({
     }
 
     handledStateRef.current = state;
+    if (state.userId) {
+      setAuthenticated({
+        id: state.userId,
+        name: state.username ?? state.identifier ?? "Signed in",
+        username: state.username ?? null,
+      });
+    } else {
+      void refreshSession();
+    }
+
     onSuccess?.(state);
-  }, [onSuccess, state]);
+  }, [onSuccess, refreshSession, setAuthenticated, state]);
 
   return (
     <form action={formAction}>

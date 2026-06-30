@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 import { auth } from "@/auth/server";
@@ -15,6 +16,22 @@ function readFormString(formData: FormData, key: string): string {
   const value = formData.get(key);
 
   return typeof value === "string" ? value : "";
+}
+
+function readSafePathname(formData: FormData): string | null {
+  const pathname = readFormString(formData, "pathname");
+
+  if (
+    !pathname ||
+    pathname.length > 2048 ||
+    !pathname.startsWith("/") ||
+    pathname.startsWith("//") ||
+    pathname.includes("\\")
+  ) {
+    return null;
+  }
+
+  return pathname;
 }
 
 export async function createBlogCommentAction(
@@ -38,6 +55,7 @@ export async function createBlogCommentAction(
 
   const blogPostId = Number.parseInt(readFormString(formData, "blogPostId"), 10);
   const body = readFormString(formData, "body").trim();
+  const pathname = readSafePathname(formData);
 
   if (!Number.isSafeInteger(blogPostId) || blogPostId <= 0) {
     return {
@@ -59,6 +77,10 @@ export async function createBlogCommentAction(
       body,
       userId: currentSession.user.id,
     });
+
+    if (pathname) {
+      revalidatePath(pathname);
+    }
 
     return {
       status: "success",

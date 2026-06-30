@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef } from "react";
 
 import { type AuthActionState, signInAction } from "@/auth/actions";
+import { useAuthSession } from "@/components/auth/AuthSessionProvider";
 
 type LoginFormProps = {
   initialIdentifier?: string;
@@ -15,6 +16,7 @@ export function LoginForm({
   initialIdentifierType,
   onSuccess,
 }: LoginFormProps) {
+  const { refreshSession, setAuthenticated } = useAuthSession();
   const handledStateRef = useRef<AuthActionState | null>(null);
   const [state, formAction, isPending] = useActionState(signInAction, {
     status: "idle",
@@ -34,8 +36,18 @@ export function LoginForm({
     }
 
     handledStateRef.current = state;
+    if (state.userId) {
+      setAuthenticated({
+        id: state.userId,
+        name: state.username ?? state.identifier ?? "Signed in",
+        username: state.username ?? null,
+      });
+    } else {
+      void refreshSession();
+    }
+
     onSuccess?.(state);
-  }, [onSuccess, state]);
+  }, [onSuccess, refreshSession, setAuthenticated, state]);
 
   return (
     <form action={formAction}>

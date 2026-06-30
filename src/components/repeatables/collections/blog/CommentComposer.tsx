@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useActionState, useEffect, useRef } from "react";
 
 import {
@@ -8,7 +8,7 @@ import {
   type CreateBlogCommentActionState,
 } from "@/blog/actions";
 
-type CommentComposerLabels = {
+export type CommentComposerLabels = {
   bodyLabel: string;
   bodyPlaceholder: string;
   postButton: string;
@@ -32,6 +32,7 @@ export default function CommentComposer({
   labels,
   posterName,
 }: CommentComposerProps) {
+  const pathname = usePathname();
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const handledStateRef = useRef<CreateBlogCommentActionState | null>(null);
@@ -54,6 +55,7 @@ export default function CommentComposer({
   return (
     <form action={formAction} ref={formRef}>
       <input name="blogPostId" type="hidden" value={blogPostId} />
+      <input name="pathname" type="hidden" value={pathname} />
 
       <p>
         {labels.posterPrefix} <strong>{posterName}</strong>

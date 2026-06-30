@@ -6,6 +6,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { AuthSessionProvider } from "@/components/auth/AuthSessionProvider";
 import { routing } from "@/i18n/routing";
 
 type LocaleLayoutProps = Readonly<{
@@ -54,7 +55,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <AuthSessionProvider>{children}</AuthSessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>
