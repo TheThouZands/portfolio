@@ -107,6 +107,7 @@ Include:
 
 - Current git branch.
 - Neon branch sync script.
+- Shared `preview/<git-branch>` Neon branch naming for local and Vercel preview workflows.
 - `.env.local` update.
 - Drizzle migration.
 - Vercel build migration step.

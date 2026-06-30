@@ -7,7 +7,8 @@ Target home: FigJam and Confluence
 
 ## Purpose
 
-Show how local and Vercel workflows should apply Drizzle migrations against the intended Neon database branch.
+Show how local and Vercel workflows should apply Drizzle migrations against the intended Neon database branch, with
+feature-branch development sharing the `preview/<git-branch>` Neon branch used by Vercel preview deployments.
 
 Source docs:
 
@@ -22,7 +23,7 @@ Source docs:
 ```mermaid
 flowchart TD
   A["Developer selects git branch"] --> B["Run db:branch:sync"]
-  B --> C["Read current branch name"]
+  B --> C["Derive preview/<git-branch> Neon branch"]
   C --> D["Create or reuse Neon branch"]
   D --> E["Write branch URLs to .env.local"]
   E --> F{"Shell env already has PF_DATABASE_URL?"}
@@ -37,19 +38,22 @@ flowchart TD
   J --> K["Apply committed Drizzle migrations"]
   K --> L["Run app or seed demo data"]
 
-  M["Vercel build"] --> N["Receive deployment database URL"]
+  M["Vercel preview build"] --> N["Neon integration injects preview/<git-branch> database URL"]
   N --> O["Run build:vercel"]
   O --> P["db:migrate"]
   P --> Q["next build"]
+
+  R["Vercel production build"] --> S["Use production database environment"]
+  S --> O
 ```
 
 ## FigJam Notes
 
-- Use separate lanes for local developer workflow and Vercel deployment workflow.
+- Use separate lanes for local developer workflow, Vercel preview deployment workflow, and production deployment
+  workflow.
 - Emphasize the stale environment variable warning.
 - Link migration ownership to ADR 0002.
 
 ## Update Trigger
 
 Update when Neon branch sync, Vercel build scripts, environment variable names, or migration commands change.
-

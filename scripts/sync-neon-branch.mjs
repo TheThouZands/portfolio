@@ -15,7 +15,8 @@ Usage:
   npm run db:branch:sync
   npm run db:branch:sync -- --list
   npm run db:branch:sync -- --branch feature/backend
-  npm run db:branch:sync -- --neon-branch local/feature/backend
+  npm run db:branch:sync -- --branch-prefix local
+  npm run db:branch:sync -- --neon-branch preview/feature/backend
   npm run db:branch:sync -- --parent main
 
 Required:
@@ -23,7 +24,10 @@ Required:
   PF_NEON_PROJECT_ID   Neon project id, usually from Vercel env pull
 
 Optional:
-  NEON_PARENT_BRANCH   Parent Neon branch for newly created local branches
+  NEON_BRANCH           Exact Neon branch name to use
+  NEON_BRANCH_PREFIX    Prefix for inferred branches, defaults to preview
+  NEON_LOCAL_BRANCH     Legacy exact Neon branch name override
+  NEON_PARENT_BRANCH   Parent Neon branch for newly created Neon branches
   NEON_ENV_FILE        Env file to update, defaults to .env.local
 `);
   process.exit(0);
@@ -63,10 +67,13 @@ if (!roleName || !databaseName) {
 
 const sourceBranch =
   readFlag("--branch") ?? process.env.GIT_BRANCH ?? currentGitBranch();
+const branchPrefix =
+  readFlag("--branch-prefix") ?? process.env.NEON_BRANCH_PREFIX ?? "preview";
 const neonBranch =
   readFlag("--neon-branch") ??
+  process.env.NEON_BRANCH ??
   process.env.NEON_LOCAL_BRANCH ??
-  toNeonBranchName(sourceBranch);
+  toNeonBranchName(sourceBranch, branchPrefix);
 const parentBranch = readFlag("--parent") ?? process.env.NEON_PARENT_BRANCH;
 
 console.log(`Syncing local env to Neon branch "${neonBranch}"...`);
@@ -200,7 +207,7 @@ function updateEnvFile(filePath, updates) {
       updatedLines.push("");
     }
 
-    updatedLines.push("# Neon local branch sync");
+    updatedLines.push("# Neon preview branch sync");
 
     for (const key of missingKeys) {
       updatedLines.push(`${key}=${formatEnvValue(updates[key])}`);
@@ -269,7 +276,7 @@ function currentGitBranch() {
   return branch;
 }
 
-function toNeonBranchName(branchName) {
+function toNeonBranchName(branchName, prefix) {
   const sanitized = branchName
     .trim()
     .replace(/^refs\/heads\//, "")
@@ -282,7 +289,18 @@ function toNeonBranchName(branchName) {
     throw new Error("Could not derive a Neon branch name from the current Git branch.");
   }
 
-  return `local/${sanitized}`.slice(0, 256);
+  const sanitizedPrefix = prefix
+    .trim()
+    .replace(/\\/g, "/")
+    .replace(/[^A-Za-z0-9._/-]+/g, "-")
+    .replace(/\/+/g, "/")
+    .replace(/^\/+|\/+$/g, "");
+
+  if (!sanitizedPrefix) {
+    return sanitized.slice(0, 256);
+  }
+
+  return `${sanitizedPrefix}/${sanitized}`.slice(0, 256);
 }
 
 function readFlag(name) {

@@ -36,7 +36,7 @@ The source of truth for schema changes is `src/db/schema.ts`. Make table additio
 
 Use `npm run db:pull` only when you need to introspect an existing database state for review or bootstrap work. Normal development should stay codebase-first so `drizzle/` contains the SQL migration history and snapshots that belong in version control.
 
-Vercel uses `npm run build:vercel`, which applies committed Drizzle migrations before `next build`. With Neon preview branching enabled, preview deployments receive branch-scoped database URLs from Neon before that migration step runs.
+Vercel uses `npm run build:vercel`, which applies committed Drizzle migrations before `next build`. With Neon preview branching enabled, preview deployments receive branch-scoped database URLs from Neon before that migration step runs. The local sync workflow uses the same `preview/<git-branch>` Neon branch naming convention, so local development and Vercel preview deployments share one database branch per Git branch. Production deployments continue to use the Vercel production database environment after changes land on the production Git branch.
 
 For local branch-isolated development, create a Neon API key and make it available as `NEON_API_KEY` in your shell or ignored `.env.local`, then run:
 
@@ -45,7 +45,7 @@ npm run db:branch:sync
 npm run db:migrate
 ```
 
-The sync command creates or reuses a Neon branch named `local/<current-git-branch>`, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together.
+The sync command creates or reuses a Neon branch named `preview/<current-git-branch>`, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together. To target an existing legacy local branch or a manually named branch, pass `-- --neon-branch <branch-name>`; to change only the inferred prefix, pass `-- --branch-prefix local` or set `NEON_BRANCH_PREFIX=local`.
 
 Before running local migrations, make sure the terminal does not already export `PF_DATABASE_URL` or `PF_DATABASE_URL_UNPOOLED` for another branch. Dotenv keeps existing process env values by default, so `npm run db:branch:sync` can write the correct `.env.local` while `npm run db:migrate` still uses a stale shell value. If Drizzle reports that it injected `0` values from `.env.local`, restart from a clean terminal or explicitly load the synced `.env.local` values.
 

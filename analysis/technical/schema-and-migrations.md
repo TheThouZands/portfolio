@@ -49,8 +49,8 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 | `npm run db:generate` | Generate reviewable SQL migration from schema changes. |
 | `npm run db:check` | Check schema/migration consistency. |
 | `npm run db:migrate` | Apply committed migrations. |
-| `npm run db:branch:sync` | Create or reuse a Neon branch for the current git branch and update local env. |
-| `npm run db:branch:migrate` | Sync the Neon branch and apply migrations. |
+| `npm run db:branch:sync` | Create or reuse the `preview/<git-branch>` Neon branch used by Vercel preview deployments and update local env. |
+| `npm run db:branch:migrate` | Sync the preview Neon branch and apply migrations. |
 | `npm run db:seed:demo` | Insert demo CMS content for local/design testing. |
 | `npm run db:studio` | Open Drizzle Studio. |
 

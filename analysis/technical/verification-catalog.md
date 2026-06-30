@@ -41,8 +41,8 @@ Windows PowerShell note: if `npm` resolves to a blocked `npm.ps1`, run the same 
 | `npm run db:check` | Schema, migration, Drizzle config, or database workflow docs change. | Drizzle schema check passes. | Not included in current CI baseline. |
 | `npm run build` | Route, metadata, layout, config, or deploy-sensitive changes. | Next build succeeds. | Use when runtime integration risk is higher than a unit slice. |
 | `npm run build:vercel` | Deployment pipeline or migration-on-build behavior changes. | Migrations run before Next build. | Requires correct database environment; avoid casual local use against the wrong Neon branch. |
-| `npm run db:branch:sync` | Preview branch environment or Neon branch workflow changes. | Neon branch/env sync succeeds. | Requires authenticated/valid Neon and Vercel environment. |
-| `npm run db:branch:migrate` | Preview branch migration flow changes. | Sync then migration succeeds. | Use only after confirming the target branch/environment. |
+| `npm run db:branch:sync` | Preview branch environment or Neon branch workflow changes. | `preview/<git-branch>` Neon branch/env sync succeeds. | Requires authenticated/valid Neon and Vercel environment. |
+| `npm run db:branch:migrate` | Preview branch migration flow changes. | Sync then migration succeeds against the preview branch. | Use only after confirming the target branch/environment. |
 
 ## Focused Test Inventory
 
