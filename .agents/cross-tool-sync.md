@@ -36,7 +36,10 @@ Confluence, Jira, and FigJam. Read it before changing `analysis/`, Jira issues, 
 
 1. Inspect first:
    - Run `git status --short`.
-   - Read the relevant local source file and its matching manifest/log.
+   - Find and read the relevant canonical local source docs for the task, regardless of section. Check across
+     `analysis/product`, `analysis/planning`, `analysis/technical`, `analysis/jira`, `analysis/confluence`,
+     `analysis/design`, and `analysis/operations` as applicable before relying on a single artifact.
+   - Read matching manifests/logs for any Jira, Confluence, or FigJam records the task touches.
    - Preserve unrelated dirty files.
 
 2. Change Git first when meaning changes:
