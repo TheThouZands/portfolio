@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { AuthenticatedLogoutSlot } from "@/components/auth/AuthenticatedLogoutSlot";
 import { AuthFlowProvider } from "@/components/auth/AuthFlowProvider";
 
 type AuthLayoutProps = {
@@ -7,5 +8,10 @@ type AuthLayoutProps = {
 };
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  return <AuthFlowProvider>{children}</AuthFlowProvider>;
+  return (
+    <AuthFlowProvider>
+      {children}
+      <AuthenticatedLogoutSlot />
+    </AuthFlowProvider>
+  );
 }
