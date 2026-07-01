@@ -35,6 +35,20 @@ The island has two layers:
 For a post status selector, the client-rendered shell can be an empty `<select>` until the server confirms that the
 current account can view and use the control for the specific post.
 
+## Route Boundary Rule
+
+Prefer permission-gated reactive islands when the base page is valid without the privileged capability. Public blog
+posts, public project pages, and other read-only surfaces can stay quick while optional controls fill themselves from a
+server-authorized payload after mount or after a login modal succeeds.
+
+Use route-level server guards when the route itself is the protected resource. Writer pages, owner dashboards,
+authenticated previews, and other privileged workspaces should resolve the session and role before render, then return
+the appropriate page, redirect, `403`, or `404`. In those cases a navigation or refresh after login is expected because
+the whole route identity depends on authorization.
+
+The default client-side refresh mechanism for islands should be a small authenticated payload read, not `router.refresh`.
+Use `router.refresh` only when several server-rendered regions need to be recalculated as a route tree.
+
 ## Flow
 
 1. Static or server-rendered page delivers public content quickly.
@@ -70,8 +84,8 @@ current account can view and use the control for the specific post.
 
 If a user enters the page already logged in, a server component may provide an initial authorized payload for the island,
 but only where accepting that dynamic boundary is worth it. The default posture remains mostly static pages with small
-client islands that fetch privileged payloads after mount. This keeps public views quick while still allowing logged-in
-owner or moderator tools to feel responsive.
+client islands that fetch privileged payloads after mount or after auth state changes. This keeps public views quick
+while still allowing logged-in owner or moderator tools to feel responsive without refreshing the whole route.
 
 ## Example: Post Status Selector
 

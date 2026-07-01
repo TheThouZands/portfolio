@@ -80,6 +80,10 @@ but add a server-authorized data layer:
 - Server-rendered initial payloads are allowed for already authenticated entry when the dynamic boundary is intentional.
 - If the browser renders or tampers with the shell, no privileged data or mutation authority is gained without server
   approval.
+- Use the island model when the base route remains valid without the privileged control; use route-level server guards
+  for writer pages, owner workspaces, authenticated previews, and any route whose identity depends on authorization.
+- Prefer small authenticated payload reads for post-login island updates; reserve `router.refresh` for cases where the
+  route tree itself needs to be recalculated.
 
 ## Security And Trust Implications
 
