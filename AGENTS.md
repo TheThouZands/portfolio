@@ -19,6 +19,10 @@ artifacts.
 - When an external tool changes, update the matching local manifest or log in the same small slice when practical.
 - When local analysis content changes, check whether the matching Confluence page, Jira story, or FigJam diagram also
   needs a sync.
+- Before changing auth/account architecture, reactive session islands, permission-gated controls, RBAC/roles, or
+  protected-route behavior, check the related local docs and the full cross-tool record: Jira stories/status, Confluence
+  pages/manifests, and FigJam diagrams/manifests. At minimum, inspect `analysis/technical/permission-gated-reactive-islands.md`,
+  `analysis/product/auth-account-roadmap.md`, `analysis/jira`, `analysis/confluence`, and `analysis/design`.
 - Do not describe the suite as reverse-engineered from code. Write as normal source planning material.
 - Do not nest generated FigJam diagram shapes/connectors inside sections unless connector routing is verified. Sections
   are safe as visible grouping labels; generated shapes and dynamic connectors should remain page-level.
