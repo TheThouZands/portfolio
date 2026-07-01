@@ -66,6 +66,7 @@ Portfolio Home
       4.8 Deployment And Neon Branch Workflow
       4.9 Structural Content Rendering Contract
       4.10 Documentation Toolchain
+      4.11 Permission-Gated Reactive Island Flow
     5. Technical Reference
       5.1 Traceability
       5.2 Schema And Migrations
@@ -75,6 +76,7 @@ Portfolio Home
       5.6 OpenAPI Planning Notes
       5.7 Verification Catalog
       5.8 ADR Index
+      5.9 Permission-Gated Reactive Islands
     6. Operations
       6.1 Documentation Maintenance
       6.2 Artifact Maintenance Matrix
@@ -100,6 +102,7 @@ Portfolio Home
 | CMS Authoring Workflow | `analysis/product/cms-authoring-workflow.md` | Local to Confluence and Jira |
 | Media Asset Lifecycle | `analysis/product/media-asset-lifecycle.md` | Local to Confluence and Jira |
 | Auth And Account Roadmap | `analysis/product/auth-account-roadmap.md` | Local to Confluence and Jira |
+| Permission-Gated Reactive Islands | `analysis/technical/permission-gated-reactive-islands.md` | Local to Confluence, Jira, and FigJam |
 | Roadmap | `analysis/planning/roadmap.md` | Local to Confluence |
 | Tool Setup Plan | `analysis/planning/tool-setup-plan.md` | Local to Confluence, Jira, and FigJam |
 | External Setup Execution Runbook | `analysis/planning/external-setup-execution-runbook.md` | Local to Confluence, Jira, FigJam, and GitHub |
@@ -116,6 +119,7 @@ Portfolio Home
 | Diagram Sources | `analysis/design/diagrams/README.md` | Local to Confluence and FigJam |
 | Structural Content Rendering Contract | `analysis/design/diagrams/pf-diag-006-structural-content-rendering-contract.md` | Local to Confluence and FigJam |
 | Documentation Toolchain | `analysis/design/diagrams/pf-diag-007-documentation-toolchain.md` | Local to Confluence and FigJam |
+| Permission-Gated Reactive Island Flow | `analysis/design/diagrams/pf-diag-009-permission-gated-reactive-island-flow.md` | Local to Confluence and FigJam |
 | FigJam Creation Log | `analysis/design/figjam-creation-log.md` | Local to Confluence and FigJam |
 | Traceability | `analysis/technical/traceability.md` | Local to Confluence and GitHub |
 | Schema And Migrations | `analysis/technical/schema-and-migrations.md` | GitHub to Confluence reference |

@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-30  
+Last updated: 2026-07-01  
 Target home: Confluence/Jira
 
 ## Purpose
@@ -44,6 +44,7 @@ Auth does not yet exist to support:
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
 | A2 Role vocabulary and privileged-action boundaries | Define the first role model before adding schema, guards, or privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; implementation remains deferred. |
+| A2.5 Permission-gated reactive islands | Define how privileged UI shells can appear reactively while fetching privileged payloads and submitting mutations through server authorization. | Pattern is documented in `PF-413` / `KAN-57`; FigJam flow `PF-DIAG-009` shows shell, payload, mutation, and rejection paths. |
 | A3 Owner and moderation controls | Moderator can perform moderation actions; owner can access protected owner tools. | Role-aware server guards exist and preserve the ADR 0010 owner allowlist migration path. |
 | A4 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
 | A5 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
@@ -67,6 +68,18 @@ Planned first role vocabulary, tracked by `PF-412` / `KAN-56`:
 Role checks must stay server-authoritative. Client session state can show or hide affordances, but cannot grant a
 privileged action. The first implementation should explain how it evolves from the ADR 0010 owner allowlist without
 breaking existing reader auth or comment behavior.
+
+## Permission-Gated Island Pattern
+
+The first privileged UI controls should follow the reactive island model proven by logout and comment composer behavior,
+but add a server-authorized data layer:
+
+- The client island can render `null`, an empty shell, or a loading shell from shared session/role state.
+- Privileged options, current object state, and allowed transitions must come from a server-authenticated payload.
+- Every write must re-check session, role, object capability, and requested transition in a server action or route.
+- Server-rendered initial payloads are allowed for already authenticated entry when the dynamic boundary is intentional.
+- If the browser renders or tampers with the shell, no privileged data or mutation authority is gained without server
+  approval.
 
 ## Security And Trust Implications
 
@@ -100,6 +113,7 @@ breaking existing reader auth or comment behavior.
 | `PF-410` | Decide whether client/private accounts belong in the portfolio. |
 | `PF-411` | Connect owner auth to moderation and CMS authoring workflows. |
 | `PF-412` / `KAN-56` | Define the first user-role model for privileged actions. |
+| `PF-413` / `KAN-57` | Define permission-gated reactive island architecture for role/capability-gated controls. |
 
 ## Open Questions
 

@@ -15,10 +15,10 @@ Confluence, Jira, and FigJam. Read it before changing `analysis/`, Jira issues, 
 | Tool | Current state |
 | --- | --- |
 | Confluence | Portfolio space is published from `analysis/confluence/page-manifest.csv`; Page Manifest page is versioned from source commit `004614f`. |
-| Jira | Portfolio project uses key `KAN`; local ids map to `KAN-1` through `KAN-55` in `analysis/jira/import-history.md`. |
+| Jira | Portfolio project uses key `KAN`; local ids map to `KAN-1` through `KAN-57` in `analysis/jira/import-history.md`. |
 | Jira docs | User confirmed on 2026-06-29 that Jira docs now link to the Portfolio Confluence space. Treat that project-docs link as the concise bridge instead of duplicating every Confluence page in Jira. |
 | FigJam | Board title is `Portfolio Analysis Diagrams`, URL `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams`, project folder `Portfolio`. |
-| FigJam sections | Section ids `13:744` through `13:750` group `PF-DIAG-007`, then `PF-DIAG-001` through `PF-DIAG-006`; generated diagram shapes and connectors remain page-level. |
+| FigJam sections | Section ids `13:744` through `13:750`, `25:841`, and `27:929` group generated diagrams; generated diagram shapes and connectors remain page-level. |
 
 ## Source-Of-Truth Map
 

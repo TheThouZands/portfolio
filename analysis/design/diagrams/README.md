@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-30  
+Last updated: 2026-07-01  
 Target home: Figma/FigJam, Confluence, GitHub
 
 ## Purpose
@@ -29,6 +29,7 @@ The source of truth is still split by artifact type:
 | PF-DIAG-006 | [pf-diag-006-structural-content-rendering-contract.md](pf-diag-006-structural-content-rendering-contract.md) | Structural Content Rendering Contract |
 | PF-DIAG-007 | [pf-diag-007-documentation-toolchain.md](pf-diag-007-documentation-toolchain.md) | Documentation Toolchain |
 | PF-DIAG-008 | [pf-diag-008-user-role-authorization-model.md](pf-diag-008-user-role-authorization-model.md) | User Role Authorization Model |
+| PF-DIAG-009 | [pf-diag-009-permission-gated-reactive-island-flow.md](pf-diag-009-permission-gated-reactive-island-flow.md) | Permission-Gated Reactive Island Flow |
 
 ## Usage Rules
 

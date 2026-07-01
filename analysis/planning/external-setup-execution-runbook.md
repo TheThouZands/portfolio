@@ -52,7 +52,7 @@ Also confirm:
 | EXT-001 | Confluence | Create or use the Portfolio space, root page, and current page tree from `page-manifest.csv`. | All current Confluence manifest rows are published with source metadata and URLs. | `analysis/confluence/page-manifest.csv`, `analysis/confluence/publishing-runbook.md` |
 | EXT-002 | Jira | Use the connected Portfolio project, confirm components/labels/workflow, and create epics from `epics.csv`. | Seven local epics have Jira keys and labels/components exist. | `analysis/jira/import-history.md` |
 | EXT-003 | Jira | Import or manually create stories from `backlog.csv`. | Local story ids map to Jira keys and parents. | `analysis/jira/import-history.md` |
-| EXT-004 | FigJam | Generate diagrams from Mermaid using the Figma MCP and record the generated URLs. | All eight current diagram rows have FigJam URLs or a recorded unsupported-tool reason. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
+| EXT-004 | FigJam | Generate diagrams from Mermaid using the Figma MCP and record the generated URLs. | All nine current diagram rows have FigJam URLs or a recorded unsupported-tool reason. | `analysis/design/figjam-section-manifest.csv`, `analysis/design/figjam-creation-log.md` |
 | EXT-005 | Confluence | Link Jira issues, FigJam sections, and GitHub sources back into copied pages. | Published pages expose source commit, Jira links, FigJam links, and GitHub references where useful. | `analysis/confluence/page-manifest.csv`, relevant source docs |
 
 ## Batch Exit Checks
@@ -96,7 +96,7 @@ Also confirm:
 ### EXT-004 FigJam
 
 - Figma connector access is verified; authenticated account has one available Pro team plan.
-- All eight current Mermaid diagram sources are generated through the MCP in `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW`.
+- All nine current Mermaid diagram sources are generated through the MCP in `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW`.
 - No current FigJam manifest rows remain pending.
 - Each generated diagram name includes the diagram id and title.
 - Generated FigJam board URL is recorded in both the section manifest and creation log.
@@ -120,7 +120,7 @@ Before each external setup session, capture:
 | Source commit | Setup history spans the recorded Confluence, Jira, and FigJam batches: starter pages `86015e1`; Jira import and status records from `86a2d97` through `fd213fb`; product, planning, Jira, design, diagram, technical, and operations Confluence publication batches from `4ced0fc` through `bf2900b`; remaining FigJam generation batch `b5249e3`; diagram/page state sync `695e4d8`; remaining analysis-page publication `39b5f6a`. |
 | External tools touched | Confluence, Jira read/write checks, Figma/FigJam diagram generation |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; product, planning, Jira, design, diagram, technical, and operations pages published in Confluence; all 56 current Confluence manifest rows have external URLs; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` generated from source commit `b5249e3`; diagram and page publication state synced from source commit `695e4d8`; remaining analysis pages published and recorded from source commit `39b5f6a`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-56` created under `KAN-1` through `KAN-7`; 40 implemented stories are `Done`; current-worktree stories `KAN-24` and `KAN-26` are `In Progress`; planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` remain `To Do`; Jira Backlog Confluence page version 14 was synced; current Confluence manifest publication, Jira story import, and FigJam diagram generation are complete |
+| Result | EXT-001 starter pages created; product, planning, Jira, design, diagram, technical, and operations pages published in Confluence; all 58 current Confluence manifest rows have external URLs; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` generated from source commit `b5249e3`; diagram and page publication state synced from source commit `695e4d8`; remaining analysis pages published and recorded from source commit `39b5f6a`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-57` created under `KAN-1` through `KAN-7`; 40 implemented stories are `Done`; active stories `KAN-24`, `KAN-26`, and `KAN-57` are `In Progress`; planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` remain `To Do`; Jira Backlog Confluence page version 14 was synced; current Confluence manifest publication, Jira story import, and FigJam diagram generation are complete |
 
 Record the final values in the relevant logs after execution.
 

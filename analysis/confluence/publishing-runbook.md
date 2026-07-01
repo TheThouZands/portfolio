@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-30  
+Last updated: 2026-07-01  
 Target home: Confluence
 
 ## Purpose
@@ -45,7 +45,7 @@ below records published pages that need a human-readable operations trail in add
 | Portfolio Analysis Home | `analysis/README.md` | `ef75d4f` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/655361/Portfolio+Analysis+Home | 2026-06-29 | Root analysis page under existing Portfolio Home; source-first framing synced. |
 | Product Analysis | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/98317/Product+Analysis | 2026-06-29 | Starter container page. |
 | Planning | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/688129/Planning | 2026-06-29 | Starter container page. |
-| Jira Backlog | `analysis/jira/import-history.md` | Current local sync | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-06-30 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-56` are mapped, with 40 implemented stories marked `Done`, `KAN-24` and `KAN-26` marked `In Progress`, and `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` left `To Do`. |
+| Jira Backlog | `analysis/jira/import-history.md` | Current local sync | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/720897/Jira+Backlog | 2026-07-01 | Starter container page; Jira epics `KAN-1` through `KAN-7` and stories `KAN-8` through `KAN-57` are mapped, with 40 implemented stories marked `Done`, `KAN-24`, `KAN-26`, and `KAN-57` marked `In Progress`, and `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` left `To Do`. |
 | Diagrams | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/163842/Diagrams | 2026-06-29 | Starter container page; first FigJam board exists at https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW. |
 | Diagram Inventory | `analysis/design/diagram-inventory.md` | `6b61551` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441814/Diagram+Inventory | 2026-06-29 | Diagram ids, source docs, status, update triggers, and FigJam generation rules. |
 | FigJam Section Manifest | `analysis/design/figjam-section-manifest.csv` | `6b61551` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1310736/FigJam+Section+Manifest | 2026-06-29 | Confluence-readable copy of the Git-owned FigJam CSV checklist. |
@@ -54,6 +54,7 @@ below records published pages that need a human-readable operations trail in add
 | CMS Content Model | `analysis/design/diagrams/pf-diag-002-portfolio-content-model.md` | `c130050` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1441837/CMS+Content+Model | 2026-06-29 | Generated FigJam-backed CMS relationship source page. |
 | Auth And Session Flow | `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md` | `c130050` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1933313/Auth+And+Session+Flow | 2026-06-29 | Generated FigJam-backed auth/session source page. |
 | User Role Authorization Model | `analysis/design/diagrams/pf-diag-008-user-role-authorization-model.md` | Current local sync | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/3112991/User+Role+Authorization+Model | 2026-06-30 | Generated FigJam-backed role authorization source page for `PF-412` / `KAN-56`. |
+| Permission-Gated Reactive Island Flow | `analysis/design/diagrams/pf-diag-009-permission-gated-reactive-island-flow.md` | Current local sync | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/3506177/Permission-Gated+Reactive+Island+Flow | 2026-07-01 | Generated FigJam-backed permission island flow page for `PF-413` / `KAN-57`. |
 | Blog Comment Flow | `analysis/design/diagrams/pf-diag-004-blog-comment-flow.md` | `d335479` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1474563/Blog+Comment+Flow | 2026-06-29 | Comment flow page; FigJam generated from source commit `b5249e3`. |
 | Deployment And Neon Branch Workflow | `analysis/design/diagrams/pf-diag-005-deployment-neon-branch-workflow.md` | `d335479` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1114129/Deployment+And+Neon+Branch+Workflow | 2026-06-29 | Database branch workflow page; FigJam generated from source commit `b5249e3`. |
 | Technical Reference | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/557058/Technical+Reference | 2026-06-29 | Starter container page. |
@@ -64,6 +65,7 @@ below records published pages that need a human-readable operations trail in add
 | API Surface Inventory | `analysis/technical/api-surface-inventory.md` | `d7ba04b` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/786472/API+Surface+Inventory | 2026-06-29 | HTTP route and server action inventory with OpenAPI deferral boundary. |
 | Verification Catalog | `analysis/technical/verification-catalog.md` | `d7ba04b` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1966081/Verification+Catalog | 2026-06-29 | CI, command, focused test, coverage, and evidence recording guide. |
 | ADR Index | `analysis/technical/adr/README.md` | `d7ba04b` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1179691/ADR+Index | 2026-06-29 | Readable ADR index; individual ADR files remain authoritative in Git. |
+| Permission-Gated Reactive Islands | `analysis/technical/permission-gated-reactive-islands.md` | Current local sync | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/3473409/Permission-Gated+Reactive+Islands | 2026-07-01 | Server-authoritative client island pattern for `PF-413` / `KAN-57`. |
 | Operations | `analysis/confluence/page-manifest.csv` | `86015e1` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/622594/Operations | 2026-06-29 | Starter container page. |
 | Artifact Maintenance Matrix | `analysis/operations/artifact-maintenance-matrix.md` | `bf2900b` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1998849/Artifact+Maintenance+Matrix | 2026-06-29 | Artifact ownership, maintenance triggers, validation checks, and sync cadence. |
 | Confluence Publishing Runbook | `analysis/confluence/publishing-runbook.md` | `a9cdad4` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/2031617/Confluence+Publishing+Runbook | 2026-06-29 | Readable publishing steps, metadata rules, and synced source-commit mappings; Git runbook remains authoritative. |

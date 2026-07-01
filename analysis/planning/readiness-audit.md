@@ -19,9 +19,9 @@ the code.
 | Problem and product goal | Strong local baseline | `product/problem-statement.md`, `positioning-brief.md`, `service-offer-catalog.md`, `conversion-path.md` | Validate against real visitor/client feedback later. |
 | Stakeholders and personas | Strong local baseline | `product/stakeholders-and-personas.md` | Revisit after real traffic or leads. |
 | Requirements | Strong local baseline | `product/scope-and-requirements.md`, `planning/requirements-traceability-matrix.md` | Keep statuses current as planned stories are implemented. |
-| Jira-compatible user stories | Jira story import complete with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-56`; implemented created stories are `Done` and current-worktree stories are `In Progress` | Keep story statuses current as planned work is implemented. |
-| Confluence-compatible docs | Current manifest published | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`; all 56 current manifest rows are published in the Portfolio Confluence space | Keep source commits/URLs current as published pages change. |
-| FigJam/Figma diagrams | Current inventory generated | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; all eight current diagram sources are generated in `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW` | Keep Confluence links current and replace board-level links with section-specific anchors if the connector exposes them later. |
+| Jira-compatible user stories | Jira story import complete with status mapping applied | `jira/user-stories.md`, `jira/epics.csv`, `jira/backlog.csv`, Jira epics `KAN-1` to `KAN-7`, Jira stories `KAN-8` to `KAN-57`; implemented created stories are `Done` and active stories are `In Progress` | Keep story statuses current as planned work is implemented. |
+| Confluence-compatible docs | Current manifest published | `confluence/page-tree.md`, `confluence/page-manifest.csv`, `confluence/publishing-runbook.md`; all 58 current manifest rows are published in the Portfolio Confluence space | Keep source commits/URLs current as published pages change. |
+| FigJam/Figma diagrams | Current inventory generated | `design/diagram-inventory.md`, `design/figjam-section-manifest.csv`, `design/diagrams`, `figjam-creation-log.md`; all nine current diagram sources are generated in `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW` | Keep Confluence links current and replace board-level links with section-specific anchors if the connector exposes them later. |
 | ADRs | Strong local baseline | `technical/adr/0001` through `0012` | Add ADRs for intake data, public preview sharing, or future collaborator scope when decided. |
 | Schema and migrations | Strong local baseline | `technical/schema-and-migrations.md`, `technical/schema-table-catalog.md`, `technical/migration-catalog.md`, ADR 0002 | Update after material schema changes. |
 | OpenAPI | Intentionally deferred | `technical/openapi.md`, `technical/api-surface-inventory.md`, ADR 0006 | Create spec only when stable external API contract exists. |
@@ -38,7 +38,7 @@ the code.
 | Tie artifacts to delivery evidence. | Satisfied baseline | Requirements, matrix, stories, traceability, ADRs, schema notes, and verification docs reference code areas, commits, tests, schemas, or external tool records where useful. |
 | Connect requirements to personas, stories, evidence, and verification. | Locally satisfied baseline | `analysis/planning/requirements-traceability-matrix.md`, `analysis/technical/verification-catalog.md` |
 | Product/business docs compatible with Confluence. | Published | Page tree, publishing runbook, product docs, planning docs, operations docs; every current Confluence manifest row is published with source metadata. |
-| User stories compatible with Jira. | Jira imported | Markdown backlog and importable CSV parse successfully; Jira epics `KAN-1` to `KAN-7` and stories `KAN-8` to `KAN-56` exist with status mapping. |
+| User stories compatible with Jira. | Jira imported | Markdown backlog and importable CSV parse successfully; Jira epics `KAN-1` to `KAN-7` and stories `KAN-8` to `KAN-57` exist with status mapping. |
 | ADRs kept in GitHub. | Satisfied baseline | `analysis/technical/adr` |
 | Current schema and migrations documented in Git. | Satisfied baseline | `analysis/technical/schema-and-migrations.md` |
 | Potential OpenAPI considered. | Satisfied by decision | OpenAPI planning note and ADR 0006 intentionally defer spec until public contract exists. |
@@ -50,7 +50,7 @@ These are not analysis-suite handoff blockers; they are future product implement
 
 | Item | Why it remains |
 | --- | --- |
-| FigJam Confluence cross-linking can be refined. | All eight current diagram sources are generated in FigJam; section-specific anchors are optional cleanup if the connector exposes durable links. |
+| FigJam Confluence cross-linking can be refined. | All nine current diagram sources are generated in FigJam; section-specific anchors are recorded where available. |
 | Contact/intake UI is not implemented. | Service definition and proof-mapping artifacts are complete; focused intake implementation remains planned in `PF-702`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
 | CMS authoring UI is not implemented. | ADR 0011 defines the first owner-only source-aware boundary and ADR 0012 defines media lifecycle; implementation remains planned in `PF-206`, `PF-208`, and `PF-411`. |

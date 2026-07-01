@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-30  
+Last updated: 2026-07-01  
 Target home: Figma/FigJam and Confluence
 
 ## Purpose
@@ -40,6 +40,7 @@ PF-DIAG-001 - Visitor Discovery Journey
 | PF-DIAG-006 | Structural Content Rendering Contract | System map | Technical, content | `src/cms/structural-content/types.ts`, rendering tests, ADR 0003, ADR 0011 | Generated |
 | PF-DIAG-007 | Documentation Toolchain | System/process map | Owner, collaborators | `analysis/README.md`, this suite | Generated |
 | PF-DIAG-008 | User Role Authorization Model | Flowchart | Product, technical, security | `auth-account-roadmap.md`, auth stories, ADR 0010, `KAN-56` | Generated |
+| PF-DIAG-009 | Permission-Gated Reactive Island Flow | Flowchart | Product, technical, security | `permission-gated-reactive-islands.md`, `auth-account-roadmap.md`, `PF-413`, `KAN-57`, `KAN-56` | Generated |
 
 ## Diagram Specs
 
@@ -162,6 +163,24 @@ Include:
 Update trigger: role names, role storage, authorization guards, moderation capabilities, owner tools, or CMS authoring
 privilege boundaries.
 
+### PF-DIAG-009 - Permission-Gated Reactive Island Flow
+
+Goal: show how a privileged UI island can appear reactively while privileged options and mutations remain
+server-authorized.
+
+Include:
+
+- Public page delivering the fast static or server-rendered view.
+- Client island shell driven by shared session state.
+- Coarse role/session gate before attempting payload fetch.
+- Server capability payload for current object state and allowed options.
+- Unauthorized hide/reset path.
+- Mutation reauthorization path before CMS state changes.
+- Revalidation/refresh path after successful mutation.
+
+Update trigger: permission gate helpers, capability payload endpoint, role/capability vocabulary, post status selector,
+or privileged mutation authorization changes.
+
 ## FigJam Generation Rules
 
 - Keep the Mermaid files in `analysis/design/diagrams` as the source of truth.
@@ -187,6 +206,7 @@ privilege boundaries.
 | PF-DIAG-005 Deployment And Neon Branch Workflow | Makes database branch and migration operations reviewable. |
 | PF-DIAG-006 Structural Content Rendering Contract | Explains safe rendering without raw HTML trust. |
 | PF-DIAG-008 User Role Authorization Model | Separates role-driven affordances from server-enforced privileged actions. |
+| PF-DIAG-009 Permission-Gated Reactive Island Flow | Shows shell, authorized payload, mutation, denial, and revalidation paths for future privileged islands. |
 
 ## Local Source Sketches
 
@@ -200,3 +220,4 @@ privilege boundaries.
 | PF-DIAG-006 | [diagrams/pf-diag-006-structural-content-rendering-contract.md](diagrams/pf-diag-006-structural-content-rendering-contract.md) |
 | PF-DIAG-007 | [diagrams/pf-diag-007-documentation-toolchain.md](diagrams/pf-diag-007-documentation-toolchain.md) |
 | PF-DIAG-008 | [diagrams/pf-diag-008-user-role-authorization-model.md](diagrams/pf-diag-008-user-role-authorization-model.md) |
+| PF-DIAG-009 | [diagrams/pf-diag-009-permission-gated-reactive-island-flow.md](diagrams/pf-diag-009-permission-gated-reactive-island-flow.md) |

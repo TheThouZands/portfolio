@@ -16,8 +16,8 @@ The gross analysis-suite goal is substantially complete:
 
 - Local `analysis/` sources cover product, planning, Jira, Confluence, design/FigJam, GitHub rules, ADRs, schema and
   migrations, OpenAPI notes, and operations.
-- Jira project `KAN` is reachable, with `KAN-1` through `KAN-56` created and mapped.
-- Confluence page manifest has 56 rows, all published with external URLs.
+- Jira project `KAN` is reachable, with `KAN-1` through `KAN-57` created and mapped.
+- Confluence page manifest has 58 rows, all published with external URLs.
 - FigJam board `Portfolio Analysis Diagrams` is reachable, with eight generated diagram records.
 - Legacy Jira provenance wording has been removed.
 
