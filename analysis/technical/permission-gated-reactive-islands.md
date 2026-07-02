@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-07-01
+Last updated: 2026-07-02
 Target home: Confluence/Jira/FigJam
 
 ## Purpose
@@ -28,7 +28,7 @@ The island has two layers:
 
 | Layer | Responsibility | Trust boundary |
 | --- | --- | --- |
-| Client shell | Reacts to session state, coarse role state, loading state, and user interaction. | Convenience only; never grants authority. |
+| Client shell | Reacts to session state, coarse role hint, loading state, and user interaction. | Convenience only; never grants authority. |
 | Server capability payload | Returns privileged options, current values, and allowed actions for the specific user and object. | Authoritative for data visibility. |
 | Server mutation | Re-checks session, role, object capability, and requested transition before changing state. | Authoritative for writes. |
 
@@ -57,7 +57,7 @@ Use `router.refresh` only when several server-rendered regions need to be recalc
 4. If there is no session, the island renders nothing.
 5. If the session is clearly ineligible, the island renders nothing.
 6. If the session might be eligible, the island renders an empty/loading shell and requests a server-filtered payload.
-7. The server resolves the session, role, object capability, and current object state.
+7. The server resolves the session through the shared auth account helper, checks role, object capability, and current object state.
 8. If authorized, the server returns the available control data.
 9. If unauthorized, the server returns `403` or a neutral unavailable response and the island hides.
 10. Every submitted change goes through a server action or authenticated route that repeats authorization before writing.
@@ -103,8 +103,8 @@ while still allowing logged-in owner or moderator tools to feel responsive witho
 - This pattern does not replace server guards; it makes the UI feel immediate while preserving server trust.
 - Role checks should evolve into capability checks: role says a user may have a class of authority, capability says the
   user may act on this specific object now.
-- The first implementation should reuse the existing session provider where possible and introduce a reusable permission
-  gate only when multiple islands need the same role/capability clauses.
+- Server code should reuse the shared auth role helper before adding object-specific capability checks. Introduce a
+  reusable client permission gate only when multiple islands need the same role/capability clauses.
 
 ## Update Trigger
 

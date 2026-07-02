@@ -3,7 +3,6 @@ import "server-only";
 import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/db/client";
 import {
-  authIdentities,
   blogPostMentions,
   blogPostRevisions,
   blogPosts,
@@ -219,7 +218,7 @@ export async function getBlogPostComments({
   const rows = await db
     .select({
       authorDisplayName: authUser.name,
-      authorUsername: authIdentities.username,
+      authorUsername: authUser.username,
       body: comments.body,
       createdAt: comments.created_at,
       id: comments.id,
@@ -228,7 +227,6 @@ export async function getBlogPostComments({
     })
     .from(comments)
     .leftJoin(authUser, eq(authUser.id, comments.userId))
-    .leftJoin(authIdentities, eq(authIdentities.userId, comments.userId))
     .where(eq(comments.blog_post_id, blogPostId))
     .orderBy(asc(comments.created_at), asc(comments.id));
 

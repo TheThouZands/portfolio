@@ -45,7 +45,7 @@ Auth does not yet exist to support:
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
 | A1.5 Email identity and verification semantics | Keep username-first accounts compatible with Better Auth's required email field while treating generated placeholder emails as internal-only. | App-facing account helpers hide generated `.invalid` emails, login and verification reject placeholder identifiers before Better Auth handoff, and real emails can be verified through Better Auth's verification table and `emailVerified` flag. |
-| A2 Role vocabulary and privileged-action boundaries | Define the first role model before adding schema, guards, or privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; role storage and guard design are now in progress. |
+| A2 Role vocabulary and privileged-action boundaries | Define and begin implementing the first role model before privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; role storage and shared server role helpers now exist, while privileged actions still need to adopt them. |
 | A2.5 Permission-gated reactive islands | Define how privileged UI shells can appear reactively while fetching privileged payloads and submitting mutations through server authorization. | Pattern is documented in `PF-413` / `KAN-57`; FigJam flow `PF-DIAG-009` shows shell, payload, mutation, and rejection paths. |
 | A3 Owner and moderation controls | Moderator can perform moderation actions; owner can access protected owner tools. | Role-aware server guards exist and preserve the ADR 0010 owner allowlist migration path. |
 | A4 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
@@ -53,10 +53,12 @@ Auth does not yet exist to support:
 
 ## Authorization Model
 
-Current authorization model, accepted in ADR 0010:
+Current authorization model, originally accepted in ADR 0010 and now evolving through `PF-412`:
 
 - Reader: can manage their own session and post comments.
-- Owner: is matched by an explicit server-side allowlist after Better Auth session resolution.
+- Moderator: can be distinguished from Reader before moderation actions are exposed.
+- Owner: is represented by the centralized `user.role` field; the explicit allowlist remains a bootstrap/fallback
+  consideration for first owner-tool rollout.
 - Anonymous visitor: can read public content.
 
 Active first role vocabulary, tracked by `PF-412` / `KAN-56`:
@@ -68,8 +70,8 @@ Active first role vocabulary, tracked by `PF-412` / `KAN-56`:
 | Owner | Moderator capabilities plus owner-only CMS authoring, admin decisions, and protected portfolio tools. |
 
 Role checks must stay server-authoritative. Client session state can show or hide affordances, but cannot grant a
-privileged action. The first implementation should explain how it evolves from the ADR 0010 owner allowlist without
-breaking existing reader auth or comment behavior.
+privileged action. Runtime helpers now resolve the Better Auth session into an app account, normalize unknown roles to
+Reader, and check Reader/Moderator/Owner ordering on the server without breaking reader auth or comment behavior.
 
 ## Permission-Gated Island Pattern
 
@@ -149,5 +151,5 @@ App-facing rules:
 | Should reader accounts have profiles? | No. Keep reader accounts minimal. |
 | Should client accounts exist? | Defer until a client collaboration use case is real. |
 | Should OAuth providers be added? | Defer until password/identifier flow proves insufficient. |
-| Where should roles be stored? | Under active review in `PF-412`; preserve Better Auth core tables and the portfolio-owned identity boundary. |
+| Where should roles be stored? | First implementation stores roles on the Better Auth `user` row as `user.role`; future cleanup should remove legacy `auth_identities` after preview verification. |
 | Should Moderator remain separate from Owner? | Start with a planned role vocabulary; validate against real moderation tooling before implementation. |

@@ -90,6 +90,12 @@ below records published pages that need a human-readable operations trail in add
 | Jira Project Setup | `analysis/jira/project-setup.md` | `a1ecc22` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1540098/Jira+Project+Setup | 2026-06-29 | Project key, issue types, workflow, labels, components, and import order. |
 | Import History | `analysis/jira/import-history.md` | `a9cdad4` | https://thouzands.atlassian.net/wiki/spaces/Portfolio/pages/1835009/Import+History | 2026-06-29 | Local id to Jira key mapping, import run log, status mapping decision, and `JIRA-STATUS-002`. |
 
+## Pending Sync Notes
+
+| Date | Local sources | External targets | Reason |
+| --- | --- | --- | --- |
+| 2026-07-02 | `analysis/product/auth-account-roadmap.md`; `analysis/technical/schema-and-migrations.md`; `analysis/technical/schema-table-catalog.md`; `analysis/technical/migration-catalog.md`; `analysis/technical/permission-gated-reactive-islands.md`; `analysis/technical/verification-catalog.md`; `analysis/technical/adr/README.md`; `analysis/design/diagrams/pf-diag-003-auth-identifier-session-flow.md`; `analysis/design/diagrams/pf-diag-008-user-role-authorization-model.md` | Matching Confluence pages in `analysis/confluence/page-manifest.csv` | Local account-centralization and role-helper implementation is not committed yet; refresh Confluence from the committed source hash after this slice is accepted. |
+
 ## Formatting Notes
 
 - Keep ids such as `FR-017`, `PF-701`, `ADR 0006`, and `PF-DIAG-001` unchanged.

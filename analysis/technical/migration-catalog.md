@@ -37,7 +37,7 @@ Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
 | `0018_thankful_black_bird.sql` | Auth rate limiting | Add database-backed auth rate limit storage. | `7333bb1`, `bbdf312` |
 | `0019_useful_purifiers.sql` | Comment authorship | Associate blog comments to account users. | `1033065` |
 | `0020_chilly_punisher.sql` | Comment preservation | Preserve comments when user accounts are deleted. | `cc9073d`, ADR 0005 |
-| `0021_violet_arclight.sql` | Account role and username foundation | Add Reader/Moderator/Owner role storage and a canonical `user.username` backfilled from `auth_identities`, while keeping runtime identity lookup unchanged for the next slice. | `PF-412`, `KAN-56`, `5780df5` |
+| `0021_violet_arclight.sql` | Account role and username foundation | Add Reader/Moderator/Owner role storage and a canonical `user.username` backfilled from `auth_identities`; the follow-up runtime slice now resolves signup, signin, comments, session hints, and role helpers through `user`. | `PF-412`, `KAN-56`, `5780df5` |
 
 ## Review Rules
 
@@ -52,6 +52,6 @@ Decision record: [ADR 0002](adr/0002-use-drizzle-schema-and-migrations.md).
 | --- | --- |
 | Moderation migration plan | ADR 0009 defines the future soft-state model, but schema is intentionally not implemented yet. |
 | CMS authoring migration plan | ADR 0011 defines the first authoring boundary; author/editor, audit, preview, or validation metadata should wait for implementation planning. |
-| Runtime role guard implementation | `0021_violet_arclight.sql` adds role storage, but runtime guards still need a dedicated code slice before role-backed authorization replaces or augments ADR 0010's owner allowlist. |
-| Account identity consolidation code migration | `0021_violet_arclight.sql` backfills `user.username`, but `auth_identities` remains until identifier lookup, signup, comment author display, and session state are migrated and verified. |
+| Privileged action integration | Role storage and shared server helpers exist; moderation, CMS authoring, and permission-gated island payloads still need to call them before exposing privileged actions. |
+| Legacy auth identity cleanup migration | Runtime lookup, signup, comment author display, and session state now use `user`; `auth_identities` remains until a future migration safely removes the old table after preview verification. |
 | Media lifecycle migration plan | ADR 0012 defines upload, cleanup, and reconciliation rules; add schema only when owner media tooling is implemented. |

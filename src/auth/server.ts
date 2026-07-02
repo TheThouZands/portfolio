@@ -29,6 +29,21 @@ export const auth = betterAuth({
       generateId: "uuid",
     },
   },
+  user: {
+    additionalFields: {
+      username: {
+        type: "string",
+        required: true,
+        sortable: true,
+      },
+      role: {
+        type: "string",
+        required: true,
+        defaultValue: "reader",
+        input: false,
+      },
+    },
+  },
   session: {
     expiresIn: THIRTY_DAYS_IN_SECONDS,
     updateAge: ONE_DAY_IN_SECONDS,

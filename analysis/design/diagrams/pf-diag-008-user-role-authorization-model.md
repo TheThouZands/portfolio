@@ -2,13 +2,13 @@
 
 Status: Draft source  
 Owner: Thouzands  
-Last updated: 2026-06-30  
+Last updated: 2026-07-02
 Target home: FigJam and Confluence
 
 ## Purpose
 
-Show the planned Reader, Moderator, and Owner role vocabulary before schema, migration, or guard implementation. The
-diagram keeps role-driven UI affordances separate from server-authoritative authorization checks.
+Show the Reader, Moderator, and Owner role vocabulary now stored on the centralized account row. The diagram keeps
+role-driven UI affordances separate from server-authoritative authorization checks.
 
 Source docs:
 
@@ -24,8 +24,8 @@ flowchart LR
   A(["Anonymous visitor"]) -->|"Public content"| B["Read portfolio"]
   A -->|"Sign up or sign in"| C["Better Auth session"]
 
-  C -->|"Default role"| D["Reader"]
-  C -->|"Planned role lookup"| E{"Server role"}
+  C -->|"Default signup role"| D["Reader"]
+  C -->|"Server role lookup"| E{"user.role"}
   E -->|"Reader"| D
   E -->|"Moderator"| F["Moderator"]
   E -->|"Owner"| G["Owner"]
@@ -54,7 +54,8 @@ flowchart LR
 - Section URL: `https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=25-841`.
 - Generated shapes and connectors remain page-level for connector-routing safety; the section is a visible grouping
   label.
-- Keep role storage and guard implementation out of scope until `PF-412` reviews the migration and server helper design.
+- Role storage and shared server helper implementation started in `PF-412`; privileged moderation/CMS actions still
+  need to adopt the helpers before UI controls are exposed.
 
 ## Update Trigger
 

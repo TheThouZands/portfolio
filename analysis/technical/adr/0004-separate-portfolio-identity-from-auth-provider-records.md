@@ -1,8 +1,12 @@
 # ADR 0004: Separate Portfolio Identity From Auth Provider Records
 
-Status: Accepted  
+Status: Superseded by [ADR 0013](0013-centralize-portfolio-account-fields-on-better-auth-user.md)
 Date: 2026-06-29  
 Owner: Thouzands
+
+Superseded note, 2026-07-02: `0021_violet_arclight.sql` added `user.username` and `user.role`, and ADR 0013 moves
+runtime signup, signin, session state, comment display, and role resolution to the centralized Better Auth `user` row.
+`auth_identities` remains only until a cleanup migration removes the legacy table.
 
 ## Context
 
@@ -63,4 +67,3 @@ Tradeoffs:
 - Document account recovery and email verification decisions before exposing them publicly.
 - Add integration tests around identifier resolution and session creation.
 - Add diagram `PF-DIAG-003` for auth identifier and session flow.
-

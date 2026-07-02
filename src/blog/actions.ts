@@ -1,9 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 
-import { auth } from "@/auth/server";
+import { getCurrentAuthAccount } from "@/auth/roles";
 import { db } from "@/db/client";
 import { comments } from "@/db/schema";
 
@@ -38,15 +37,9 @@ export async function createBlogCommentAction(
   _previousState: CreateBlogCommentActionState,
   formData: FormData,
 ): Promise<CreateBlogCommentActionState> {
-  const requestHeaders = await headers();
-  const currentSession = await auth.api.getSession({
-    headers: requestHeaders,
-    query: {
-      disableCookieCache: true,
-    },
-  });
+  const account = await getCurrentAuthAccount();
 
-  if (!currentSession) {
+  if (!account) {
     return {
       status: "error",
       message: "Sign in to comment.",
@@ -75,7 +68,7 @@ export async function createBlogCommentAction(
     await db.insert(comments).values({
       blog_post_id: blogPostId,
       body,
-      userId: currentSession.user.id,
+      userId: account.id,
     });
 
     if (pathname) {

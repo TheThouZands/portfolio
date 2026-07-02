@@ -30,7 +30,7 @@ function assertFirstIssue<T>(
 }
 
 test("username validation trims input and rejects email-shaped usernames", () => {
-  assert.equal(authUsernameSchema.parse("  author  "), "author");
+  assert.equal(authUsernameSchema.parse("  Author  "), "author");
 
   assertFirstIssue(
     authUsernameSchema,
@@ -45,16 +45,21 @@ test("username validation trims input and rejects email-shaped usernames", () =>
 });
 
 test("email and identifier validation enforce the selected identifier shape", () => {
-  assert.equal(authEmailSchema.parse("  author@example.com  "), "author@example.com");
-  assert.equal(authIdentifierSchema.parse("  author  "), "author");
+  assert.equal(authEmailSchema.parse("  AUTHOR@example.com  "), "author@example.com");
+  assert.equal(authIdentifierSchema.parse("  Author  "), "author");
   assert.equal(
-    authIdentifierSchema.parse("  author@example.com  "),
+    authIdentifierSchema.parse("  AUTHOR@example.com  "),
     "author@example.com",
   );
 
   assertFirstIssue(
     authIdentifierSchema,
     "author@",
+    "Enter a valid email address.",
+  );
+  assertFirstIssue(
+    authEmailSchema,
+    "account@users.invalid",
     "Enter a valid email address.",
   );
 });
@@ -82,7 +87,7 @@ test("password validation requires length, a letter, and a number", () => {
 test("sign-in allows existing passwords to fail verification outside validation", () => {
   assert.deepEqual(
     signInIdentifierBody.parse({
-      identifier: "author",
+      identifier: " Author ",
       password: "short",
     }),
     {
@@ -101,7 +106,7 @@ test("sign-up requires the missing counterpart for email-first identifiers", () 
   assert.deepEqual(
     signUpIdentifierBody.parse({
       identifier: "author@example.com",
-      otherIdentifier: "author",
+      otherIdentifier: "Author",
       password: "abc12345",
     }),
     {
@@ -137,7 +142,7 @@ test("sign-up keeps email optional for username-first identifiers", () => {
     signUpIdentifierBody,
     {
       identifier: "author",
-      otherIdentifier: "not-an-email",
+      otherIdentifier: "NOT-AN-EMAIL",
       password: "abc12345",
     },
     "Enter a valid email address.",

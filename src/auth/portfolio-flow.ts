@@ -7,12 +7,13 @@ import type { z } from "zod";
 
 import { hashPassword, verifyPassword } from "@/auth/password";
 import {
+  findAuthAccountByIdentifier,
   getAuthIdentifierKind,
-  findAuthIdentityByIdentifier,
   normalizeAuthIdentifier,
   resolveAuthIdentifierForFlow,
 } from "@/auth/identity";
 import { AUTH_RATE_LIMIT } from "@/auth/rate-limit";
+import type { AuthRole } from "@/auth/role-policy";
 import {
   authEmailSchema,
   authPasswordSchema,
@@ -22,8 +23,6 @@ import {
   signUpIdentifierBody,
   signUpUsernameBody,
 } from "@/auth/validation";
-import { db } from "@/db/client";
-import { authIdentities } from "@/db/schema";
 
 const USERNAME_TAKEN = {
   code: "USERNAME_TAKEN",
@@ -44,6 +43,8 @@ const SIGN_IN_FAILED = {
   code: "SIGN_IN_FAILED",
   message: "Could not sign in.",
 } as const;
+
+const DEFAULT_AUTH_ROLE = "reader" satisfies AuthRole;
 
 // Better Auth gives us the session/database primitives. This plugin keeps the
 // product-specific identifier shape outside app routes: username/email lookup,
@@ -114,11 +115,11 @@ async function createIdentifierAccount({
   const usernameNormalized = normalizeAuthIdentifier(parsedUsername);
   const emailNormalized = parsedEmail ? normalizeAuthIdentifier(parsedEmail) : null;
 
-  if (await findAuthIdentityByIdentifier(usernameNormalized)) {
+  if (await findAuthAccountByIdentifier(usernameNormalized)) {
     throw APIError.from("CONFLICT", USERNAME_TAKEN);
   }
 
-  if (emailNormalized && (await findAuthIdentityByIdentifier(emailNormalized))) {
+  if (emailNormalized && (await findAuthAccountByIdentifier(emailNormalized))) {
     throw APIError.from("CONFLICT", EMAIL_TAKEN);
   }
 
@@ -128,9 +129,11 @@ async function createIdentifierAccount({
   try {
     const createdUser = await ctx.context.internalAdapter.createUser({
       id: userId,
-      name: parsedUsername,
+      name: usernameNormalized,
+      username: usernameNormalized,
       email: parsedEmail ?? `${userId}@users.invalid`,
       emailVerified: false,
+      role: DEFAULT_AUTH_ROLE,
     });
     createdUserId = createdUser.id;
 
@@ -139,14 +142,6 @@ async function createIdentifierAccount({
       providerId: "credential",
       accountId: createdUser.id,
       password: await hashPassword(parsedPassword),
-    });
-
-    await db.insert(authIdentities).values({
-      userId: createdUser.id,
-      username: parsedUsername,
-      usernameNormalized,
-      email: parsedEmail,
-      emailNormalized,
     });
 
     const session = await ctx.context.internalAdapter.createSession(createdUser.id);
@@ -158,7 +153,8 @@ async function createIdentifierAccount({
 
     return {
       userId: createdUser.id,
-      username: parsedUsername,
+      username: usernameNormalized,
+      role: DEFAULT_AUTH_ROLE,
     };
   } catch (error) {
     if (createdUserId) {
@@ -197,7 +193,7 @@ export const portfolioAuthFlow = () =>
           return ctx.json({
             identifierType: resolution.kind,
             exists: resolution.exposesExistence
-              ? Boolean(resolution.identity)
+              ? Boolean(resolution.account)
               : null,
             nextStep: resolution.nextStep,
           });
@@ -209,15 +205,15 @@ export const portfolioAuthFlow = () =>
           body: signInIdentifierBody,
         },
         async (ctx) => {
-          const identity = await findAuthIdentityByIdentifier(ctx.body.identifier);
+          const account = await findAuthAccountByIdentifier(ctx.body.identifier);
           const password = ctx.body.password;
 
-          if (!identity || !password) {
+          if (!account || !password) {
             throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
           }
 
           const credentialAccount = (
-            await ctx.context.internalAdapter.findAccounts(identity.userId)
+            await ctx.context.internalAdapter.findAccounts(account.id)
           ).find((account) => account.providerId === "credential");
 
           if (
@@ -230,7 +226,7 @@ export const portfolioAuthFlow = () =>
             throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
           }
 
-          const user = await ctx.context.internalAdapter.findUserById(identity.userId);
+          const user = await ctx.context.internalAdapter.findUserById(account.id);
 
           if (!user) {
             throw APIError.from("UNAUTHORIZED", SIGN_IN_FAILED);
@@ -254,8 +250,9 @@ export const portfolioAuthFlow = () =>
           });
 
           return {
-            userId: identity.userId,
-            username: identity.username,
+            userId: account.id,
+            username: account.username,
+            role: account.role,
           };
         },
       ),

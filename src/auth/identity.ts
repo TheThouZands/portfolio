@@ -4,44 +4,50 @@ import { eq } from "drizzle-orm";
 
 import {
   getAuthIdentifierKind,
+  isInternalAuthEmail,
   normalizeAuthIdentifier,
   type AuthIdentifierKind,
 } from "@/auth/identifier";
 import { db } from "@/db/client";
-import { authIdentities } from "@/db/schema";
+import { user as authUser } from "@/db/schema";
 
 export {
   getAuthIdentifierKind,
+  isInternalAuthEmail,
   normalizeAuthIdentifier,
   type AuthIdentifierKind,
 } from "@/auth/identifier";
 
 export type AuthIdentifierNextStep = "email-otp" | "sign-in" | "sign-up";
 
-type AuthIdentity = typeof authIdentities.$inferSelect;
+export type AuthAccount = typeof authUser.$inferSelect;
 
 export type AuthIdentifierFlowResolution = {
   kind: AuthIdentifierKind;
   normalizedIdentifier: string;
-  identity: AuthIdentity | null;
+  account: AuthAccount | null;
   exposesExistence: boolean;
   nextStep: AuthIdentifierNextStep;
 };
 
-export async function findAuthIdentityByIdentifier(
+export async function findAuthAccountByIdentifier(
   identifier: string,
-): Promise<AuthIdentity | null> {
+): Promise<AuthAccount | null> {
   const normalizedIdentifier = normalizeAuthIdentifier(identifier);
   const kind = getAuthIdentifierKind(normalizedIdentifier);
 
+  if (kind === "email" && isInternalAuthEmail(normalizedIdentifier)) {
+    return null;
+  }
+
   const where =
     kind === "email"
-      ? eq(authIdentities.emailNormalized, normalizedIdentifier)
-      : eq(authIdentities.usernameNormalized, normalizedIdentifier);
+      ? eq(authUser.email, normalizedIdentifier)
+      : eq(authUser.username, normalizedIdentifier);
 
-  const [identity] = await db.select().from(authIdentities).where(where).limit(1);
+  const [account] = await db.select().from(authUser).where(where).limit(1);
 
-  return identity ?? null;
+  return account ?? null;
 }
 
 export async function resolveAuthIdentifierForFlow(
@@ -50,13 +56,13 @@ export async function resolveAuthIdentifierForFlow(
   const normalizedIdentifier = normalizeAuthIdentifier(identifier);
   const kind = getAuthIdentifierKind(normalizedIdentifier);
 
-  const identity = await findAuthIdentityByIdentifier(normalizedIdentifier);
+  const account = await findAuthAccountByIdentifier(normalizedIdentifier);
 
   return {
     kind,
     normalizedIdentifier,
-    identity,
+    account,
     exposesExistence: true,
-    nextStep: identity ? "sign-in" : "sign-up",
+    nextStep: account ? "sign-in" : "sign-up",
   };
 }

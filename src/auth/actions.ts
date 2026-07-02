@@ -9,6 +9,7 @@ import {
   normalizeAuthIdentifier,
 } from "@/auth/identity";
 import { AUTH_RATE_LIMIT, enforceAuthRateLimit } from "@/auth/rate-limit";
+import { normalizeAuthRole, type AuthRole } from "@/auth/role-policy";
 import { auth } from "@/auth/server";
 
 // UI-facing Server Actions. Forms submit here, but credential verification,
@@ -21,6 +22,7 @@ export type AuthActionState = {
   identifier?: string;
   identifierType?: AuthIdentifierKind;
   nextPath?: "login" | "signup";
+  role?: AuthRole;
   userId?: string;
   username?: string;
 };
@@ -41,18 +43,18 @@ function getAuthErrorMessage(error: unknown): string {
     return error.body.message;
   }
 
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
   return "Could not continue.";
+}
+
+function normalizeFormIdentifier(formData: FormData, key: string): string {
+  return normalizeAuthIdentifier(readFormString(formData, key));
 }
 
 export async function resolveIdentifierAction(
   previousState: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
-  const identifier = readFormString(formData, "identifier").trim();
+  const identifier = normalizeFormIdentifier(formData, "identifier");
 
   try {
     await enforceAuthRateLimit(
@@ -88,7 +90,7 @@ export async function signInAction(
   _previousState: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
-  const identifier = readFormString(formData, "identifier").trim();
+  const identifier = normalizeFormIdentifier(formData, "identifier");
   const identifierType = identifier
     ? getAuthIdentifierKind(normalizeAuthIdentifier(identifier))
     : undefined;
@@ -110,6 +112,7 @@ export async function signInAction(
       identifierType,
       userId: result.userId,
       username: result.username,
+      role: normalizeAuthRole(result.role),
     };
   } catch (error) {
     return {
@@ -125,7 +128,7 @@ export async function signUpAction(
   _previousState: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
-  const identifier = readFormString(formData, "identifier").trim();
+  const identifier = normalizeFormIdentifier(formData, "identifier");
   const identifierType = identifier
     ? getAuthIdentifierKind(normalizeAuthIdentifier(identifier))
     : undefined;
@@ -136,7 +139,7 @@ export async function signUpAction(
     const result = await auth.api.signUpIdentifier({
       body: {
         identifier,
-        otherIdentifier: readFormString(formData, "otherIdentifier"),
+        otherIdentifier: normalizeFormIdentifier(formData, "otherIdentifier"),
         password: readFormString(formData, "password"),
       },
     });
@@ -148,6 +151,7 @@ export async function signUpAction(
       identifierType,
       userId: result.userId,
       username: result.username,
+      role: normalizeAuthRole(result.role),
     };
   } catch (error) {
     return {

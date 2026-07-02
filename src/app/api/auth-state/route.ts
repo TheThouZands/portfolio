@@ -1,20 +1,14 @@
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { auth } from "@/auth/server";
+import { getCurrentAuthAccount } from "@/auth/roles";
 import type { AuthSessionSnapshot } from "@/auth/session-state";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const currentSession = await auth.api.getSession({
-    headers: await headers(),
-    query: {
-      disableCookieCache: true,
-    },
-  });
+  const account = await getCurrentAuthAccount();
 
-  if (!currentSession) {
+  if (!account) {
     return NextResponse.json({
       status: "unauthenticated",
       user: null,
@@ -24,9 +18,10 @@ export async function GET() {
   return NextResponse.json({
     status: "authenticated",
     user: {
-      id: currentSession.user.id,
-      name: currentSession.user.name,
-      username: currentSession.user.name,
+      id: account.id,
+      name: account.name,
+      role: account.role,
+      username: account.username,
     },
   } satisfies AuthSessionSnapshot);
 }

@@ -1,6 +1,9 @@
+import type { AuthRole } from "@/auth/role-policy";
+
 export type AuthSessionUser = {
   id: string;
   name: string;
+  role: AuthRole;
   username?: string | null;
 };
 

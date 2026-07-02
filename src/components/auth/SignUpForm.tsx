@@ -53,6 +53,7 @@ export function SignUpForm({
       setAuthenticated({
         id: state.userId,
         name: state.username ?? state.identifier ?? "Signed in",
+        role: state.role ?? "reader",
         username: state.username ?? null,
       });
     } else {

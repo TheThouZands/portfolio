@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { getAuthIdentifierKind } from "@/auth/identifier";
+import {
+  getAuthIdentifierKind,
+  isInternalAuthEmail,
+  normalizeAuthIdentifier,
+} from "@/auth/identifier";
 
 export const authUsernameSchema = z
   .string()
@@ -9,13 +13,18 @@ export const authUsernameSchema = z
   .min(3, "Username must be at least 3 characters.")
   .refine((username) => !username.includes("@"), {
     message: "Username cannot contain @.",
-  });
+  })
+  .transform(normalizeAuthIdentifier);
 
 export const authEmailSchema = z
   .string()
   .trim()
   .min(1, "Email is required.")
-  .email("Enter a valid email address.");
+  .email("Enter a valid email address.")
+  .refine((email) => !isInternalAuthEmail(email), {
+    message: "Enter a valid email address.",
+  })
+  .transform(normalizeAuthIdentifier);
 
 export const authIdentifierSchema = z
   .string()
@@ -35,7 +44,8 @@ export const authIdentifierSchema = z
           "Enter a valid email or username.",
       });
     }
-  });
+  })
+  .transform(normalizeAuthIdentifier);
 
 export const authPasswordSchema = z
   .string()
@@ -61,7 +71,13 @@ export const signUpUsernameBody = z.object({
 export const signUpIdentifierBody = z
   .object({
     identifier: authIdentifierSchema,
-    otherIdentifier: z.string().trim().optional(),
+    otherIdentifier: z
+      .string()
+      .trim()
+      .transform((identifier) =>
+        identifier ? normalizeAuthIdentifier(identifier) : identifier,
+      )
+      .optional(),
     password: authPasswordSchema,
   })
   .superRefine(({ identifier, otherIdentifier }, ctx) => {
