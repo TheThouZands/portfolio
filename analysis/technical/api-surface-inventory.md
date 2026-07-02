@@ -43,13 +43,14 @@ It supports ADR 0006 by separating three things:
 | ACT-003 | `signUpAction` | `src/auth/actions.ts` | Creates account through portfolio-specific signup flow with validation and rate limiting. | Server action | Keep internal until account API needs external clients. |
 | ACT-004 | `signOutAction` | `src/auth/actions.ts` | Signs out the current Better Auth session and clears browser session state. | Server action | Keep internal; do not expose as public contract. |
 | ACT-005 | `createBlogCommentAction` | `src/blog/actions.ts` | Creates an authenticated blog comment for the current post. | Server action / candidate public contract | Candidate if comments move to route handlers for API tests, moderation workflows, or external clients. |
+| ACT-006 | `deleteBlogCommentAction` | `src/blog/actions.ts` | Deletes a comment row, with child replies removed by database cascade, after rechecking Moderator-or-higher authorization. | Server action | Keep internal; this is the first simple moderation mutation before any public moderation API decision. |
 
 ## Candidate Future Public Contracts
 
 | Candidate | Current local evidence | Product decision needed | First spec trigger |
 | --- | --- | --- | --- |
 | Public portfolio content API | CMS queries, localized routes, project/skill/experience/blog models | Should the portfolio expose content as data, or only render pages? | External consumer or automation needs stable content JSON. |
-| Comment creation/moderation API | `createBlogCommentAction`, comments table, interaction policy, ADR 0005 | Should comments remain form-backed server actions or become stable route handlers? | Moderation UI, mobile/client integration, or contract tests require HTTP route semantics. |
+| Comment creation/moderation API | `createBlogCommentAction`, `deleteBlogCommentAction`, comments table, interaction policy, ADR 0005 | Should comments remain form-backed server actions or become stable route handlers? | Moderation UI, mobile/client integration, or contract tests require HTTP route semantics. |
 | Auth state API | `/api/auth-state`, `AuthSessionSnapshot`, current auth-state worktree files | Is this endpoint a durable app contract or just a UI refresh helper? | The auth-state slice is committed and multiple clients or tests depend on the snapshot shape. |
 | Health/readiness endpoint | Deployment workflow, Neon migration workflow, Vercel build process | What should readiness verify without exposing sensitive internals? | Deployment monitoring needs an HTTP status contract. |
 

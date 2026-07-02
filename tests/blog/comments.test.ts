@@ -78,3 +78,37 @@ test("comment thread renders authors, fallback author names, and nested bodies",
   assert.match(html, /<ol><li><article>/);
   assert.match(html, /<ol><li><article>.*<ol><li><article>/);
 });
+
+test("comment thread renders optional actions for each comment", () => {
+  const html = renderToStaticMarkup(
+    createElement(CommentThread, {
+      comments: [
+        {
+          authorName: "Ada",
+          body: "Root",
+          createdAt,
+          id: 1,
+          parentCommentId: null,
+        },
+        {
+          authorName: "Grace",
+          body: "Reply",
+          createdAt,
+          id: 2,
+          parentCommentId: 1,
+        },
+      ],
+      fallbackAuthorName: "Someone",
+      locale: "en",
+      renderActions: (comment) =>
+        createElement(
+          "button",
+          { type: "button" },
+          `Moderate ${comment.id}`,
+        ),
+    }),
+  );
+
+  assert.match(html, /Moderate 1/);
+  assert.match(html, /Moderate 2/);
+});

@@ -99,9 +99,13 @@ tester next to logout controls.
 | Current-role resolver | `src/auth/current-role-permission.server.ts` | Server-only capability resolver that returns the active account's role only after resolving the Better Auth session. |
 | Current-role endpoint | `src/app/api/permission-islands/current-role/route.ts` | Authenticated JSON read used by client-side refetch after login. |
 | Tester island | `src/components/auth/CurrentRoleIsland.tsx` | Shows `Current role: <role>` beside logout when the payload is visible. |
+| Role-only gate | `src/components/auth/useRoleGate.ts` | Uses the shared session role hint for simple RBAC shells that do not need a capability payload fetch. |
+| Comment delete island | `src/components/partials/blog/CommentDeleteButton.tsx` | Shows a delete affordance to Moderator-or-higher sessions while the server action rechecks authorization before deleting. |
 
-This tester is intentionally low-privilege: it proves the shell, SSR payload handoff, client refetch after login,
-denial reset after logout, and route-response normalization without exposing a real privileged action yet.
+The current-role tester is intentionally low-privilege: it proves the shell, SSR payload handoff, client refetch after
+login, denial reset after logout, and route-response normalization. The comment delete island proves the no-fetch RBAC
+variant for simple shells where the client role hint only controls visibility and the server action remains
+authoritative.
 
 ## Example: Post Status Selector
 

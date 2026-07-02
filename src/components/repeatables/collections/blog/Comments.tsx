@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import DateTime from "@/components/repeatables/singles/DateTime";
 
 export type CommentThreadItem = {
@@ -16,12 +18,14 @@ type CommentThreadProps = {
   comments: CommentThreadItem[];
   fallbackAuthorName: string;
   locale: string;
+  renderActions?: (comment: CommentThreadItem) => ReactNode;
 };
 
 type CommentListProps = {
   comments: CommentThreadNode[];
   fallbackAuthorName: string;
   locale: string;
+  renderActions?: (comment: CommentThreadItem) => ReactNode;
 };
 
 export function buildCommentTree(
@@ -64,6 +68,7 @@ function CommentList({
   comments,
   fallbackAuthorName,
   locale,
+  renderActions,
 }: CommentListProps) {
   return (
     <ol>
@@ -82,6 +87,7 @@ function CommentList({
               />
             </header>
             <p>{comment.body}</p>
+            {renderActions?.(comment)}
           </article>
 
           {comment.replies.length > 0 ? (
@@ -89,6 +95,7 @@ function CommentList({
               comments={comment.replies}
               fallbackAuthorName={fallbackAuthorName}
               locale={locale}
+              renderActions={renderActions}
             />
           ) : null}
         </li>
@@ -101,6 +108,7 @@ export default function CommentThread({
   comments,
   fallbackAuthorName,
   locale,
+  renderActions,
 }: CommentThreadProps) {
   const thread = buildCommentTree(comments);
 
@@ -113,6 +121,7 @@ export default function CommentThread({
       comments={thread}
       fallbackAuthorName={fallbackAuthorName}
       locale={locale}
+      renderActions={renderActions}
     />
   );
 }

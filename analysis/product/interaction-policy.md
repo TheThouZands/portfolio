@@ -100,6 +100,11 @@ Open decision: whether users should be able to delete or edit individual comment
 Recommended first step: owner-only hide/remove plus clear hidden/removed rendering behavior. ADR 0009 records this as a
 soft-state moderation decision.
 
+Implementation foothold: the first RBAC moderation proof uses a Moderator-or-higher hard-delete action and button. This
+is intentionally simpler than the accepted ADR 0009 soft-state model: deleting a parent comment removes its replies by
+database cascade. Treat it as a proving slice for authorization, island visibility, and server-side rechecks before the
+full hidden/removed moderation state is implemented.
+
 ## Data Model Implications
 
 ADR 0009 chooses a small soft-state model before heavier moderation workflows:
