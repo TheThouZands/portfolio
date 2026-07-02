@@ -79,20 +79,26 @@ export const mediaRole = pgEnum("media_role", [
 /** Access mode for assets stored in Vercel Blob. */
 export const blobAccess = pgEnum("blob_access", ["public", "private"]);
 
-/** Better Auth user identity. Login methods can be layered onto this later. */
+/** Account role used for server-side authorization decisions. */
+export const authRole = pgEnum("auth_role", ["reader", "moderator", "owner"]);
+
+/** Better Auth user row, extended as the portfolio account subject. */
 export const user = pgTable(
   "user",
   {
     id: uuid().defaultRandom().primaryKey(),
     name: text().notNull(),
+    username: varchar({ length: 80 }).notNull(),
     email: text().notNull(),
     emailVerified: boolean("email_verified").notNull().default(false),
     image: text(),
+    role: authRole().notNull().default("reader"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     uniqueIndex("user_email_idx").on(table.email),
+    uniqueIndex("user_username_idx").on(table.username),
   ],
 );
 
