@@ -87,6 +87,22 @@ but only where accepting that dynamic boundary is worth it. The default posture 
 client islands that fetch privileged payloads after mount or after auth state changes. This keeps public views quick
 while still allowing logged-in owner or moderator tools to feel responsive without refreshing the whole route.
 
+## Implementation Foothold
+
+The first implementation slice adds reusable payload and client-fetch plumbing plus a deliberately small current-role
+tester next to logout controls.
+
+| Piece | Source | Purpose |
+| --- | --- | --- |
+| Payload contract | `src/auth/permission-island.ts` | Shared `PermissionPayload<T>` shape, hidden payload helper, and route-response normalization. |
+| Client hook | `src/components/auth/usePermissionIsland.ts` | Watches shared auth state, fetches with `credentials: "same-origin"` and `cache: "no-store"`, hides on `401`/`403`, resets on logout, and ignores stale responses. |
+| Current-role resolver | `src/auth/current-role-permission.server.ts` | Server-only capability resolver that returns the active account's role only after resolving the Better Auth session. |
+| Current-role endpoint | `src/app/api/permission-islands/current-role/route.ts` | Authenticated JSON read used by client-side refetch after login. |
+| Tester island | `src/components/auth/CurrentRoleIsland.tsx` | Shows `Current role: <role>` beside logout when the payload is visible. |
+
+This tester is intentionally low-privilege: it proves the shell, SSR payload handoff, client refetch after login,
+denial reset after logout, and route-response normalization without exposing a real privileged action yet.
+
 ## Example: Post Status Selector
 
 | Step | Behavior |
