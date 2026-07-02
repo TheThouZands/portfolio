@@ -45,7 +45,7 @@ npm run db:branch:sync
 npm run db:migrate
 ```
 
-The sync command creates or reuses a Neon branch named `preview/<current-git-branch>`, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together. To target an existing legacy local branch or a manually named branch, pass `-- --neon-branch <branch-name>`; to change only the inferred prefix, pass `-- --branch-prefix local` or set `NEON_BRANCH_PREFIX=local`.
+The sync command creates or reuses a Neon branch named `preview/<current-git-branch>`, wakes an archived branch with a lightweight authenticated query when Neon reports it as archived, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together. To target an existing legacy local branch or a manually named branch, pass `-- --neon-branch <branch-name>`; to change only the inferred prefix, pass `-- --branch-prefix local` or set `NEON_BRANCH_PREFIX=local`.
 
 Before running local migrations, make sure the terminal does not already export `PF_DATABASE_URL` or `PF_DATABASE_URL_UNPOOLED` for another branch. Dotenv keeps existing process env values by default, so `npm run db:branch:sync` can write the correct `.env.local` while `npm run db:migrate` still uses a stale shell value. If Drizzle reports that it injected `0` values from `.env.local`, restart from a clean terminal or explicitly load the synced `.env.local` values.
 

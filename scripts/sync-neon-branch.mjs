@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { neon } from "@neondatabase/serverless";
 import { config } from "dotenv";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -79,16 +80,12 @@ const parentBranch = readFlag("--parent") ?? process.env.NEON_PARENT_BRANCH;
 console.log(`Syncing local env to Neon branch "${neonBranch}"...`);
 
 const existingBranch = await ensureBranch(neonBranch, parentBranch);
-await waitForBranchReady(existingBranch.name);
+const connectionArgs = buildConnectionStringArgs(existingBranch.name);
 
-const connectionArgs = [
-  "connection-string",
-  existingBranch.name,
-  "--role-name",
-  roleName,
-  "--database-name",
-  databaseName,
-];
+await waitForBranchReady(existingBranch.name, {
+  wakeArchived: () => wakeArchivedBranch(existingBranch.name, connectionArgs),
+});
+
 const unpooledUrl = runNeon(connectionArgs).trim();
 const pooledUrl = runNeon([...connectionArgs, "--pooled"]).trim();
 
@@ -137,18 +134,60 @@ function listBranches() {
   }
 }
 
-async function waitForBranchReady(branchName) {
+async function waitForBranchReady(branchName, { wakeArchived } = {}) {
+  let didWakeArchivedBranch = false;
+
   for (let attempt = 1; attempt <= 30; attempt += 1) {
     const branch = parseJson(runNeon(["branches", "get", branchName], { json: true }));
+    const state = getBranchState(branch);
 
-    if (branch.current_state === "ready") {
+    if (state === "ready") {
       return branch;
+    }
+
+    if (state === "archived" && !didWakeArchivedBranch && wakeArchived) {
+      didWakeArchivedBranch = true;
+      await wakeArchived();
     }
 
     await sleep(2000);
   }
 
   throw new Error(`Timed out waiting for Neon branch "${branchName}" to become ready.`);
+}
+
+function buildConnectionStringArgs(branchName) {
+  return [
+    "connection-string",
+    branchName,
+    "--role-name",
+    roleName,
+    "--database-name",
+    databaseName,
+  ];
+}
+
+async function wakeArchivedBranch(branchName, connectionArgs) {
+  console.log(
+    `Neon branch "${branchName}" is archived; opening a lightweight connection to wake it.`,
+  );
+
+  try {
+    const unpooledUrl = runNeon(connectionArgs).trim();
+    const query = neon(unpooledUrl);
+
+    await query`select 1`;
+  } catch (error) {
+    console.warn(
+      [
+        `Wake query for archived Neon branch "${branchName}" did not complete.`,
+        "Continuing to poll branch readiness because Neon may still be resuming it.",
+        sanitizeErrorMessage(error),
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
+  }
 }
 
 function buildEnvUpdates({ pooledUrl, projectId, unpooledUrl }) {
@@ -361,6 +400,10 @@ function normalizeBranches(value) {
   throw new Error(`Unexpected Neon branches response:\n${JSON.stringify(value, null, 2)}`);
 }
 
+function getBranchState(branch) {
+  return (branch.current_state ?? branch.state ?? "unknown").toLowerCase();
+}
+
 function addSearchParam(url, key, value) {
   const parsed = new URL(url);
 
@@ -386,6 +429,12 @@ function formatEnvValue(value) {
   }
 
   return JSON.stringify(value);
+}
+
+function sanitizeErrorMessage(error) {
+  const message = error instanceof Error ? error.message : String(error);
+
+  return message.replaceAll(/postgres(?:ql)?:\/\/[^@\s]+@/gi, "postgres://***@");
 }
 
 function relativeEnvPath(filePath) {
