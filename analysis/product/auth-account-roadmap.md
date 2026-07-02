@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-07-01  
+Last updated: 2026-07-02
 Target home: Confluence/Jira
 
 ## Purpose
@@ -17,6 +17,7 @@ Auth currently exists to support:
 - Reader identity for comments.
 - Portfolio-specific username/email flow.
 - Session-backed UI state.
+- Simple real-email verification for accounts that provide an email.
 - Future owner-only tools such as CMS authoring or moderation.
 
 Auth does not yet exist to support:
@@ -32,8 +33,8 @@ Auth does not yet exist to support:
 | Account type | Status | Product reason |
 | --- | --- | --- |
 | Reader account | Implemented/in progress | Allows authenticated comments and future reader trust controls. |
-| Moderator account | Planned in `PF-412` / `KAN-56` | Allows future moderation tools without treating every privileged action as owner-only. |
-| Owner account | Planned; authorization model accepted in ADR 0010 | Needed for moderation and CMS authoring. |
+| Moderator account | In progress in `PF-412` / `KAN-56` | Allows future moderation tools without treating every privileged action as owner-only. |
+| Owner account | Planned; role storage review active and authorization model accepted in ADR 0010 | Needed for moderation and CMS authoring. |
 | Client account | Needs decision | Could support private collaboration, but not yet justified. |
 | Collaborator account | Needs decision | Could support future development/content collaboration. |
 | Public profile | Deferred | Not needed for current service positioning. |
@@ -43,7 +44,8 @@ Auth does not yet exist to support:
 | Phase | Scope | Exit criteria |
 | --- | --- | --- |
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
-| A2 Role vocabulary and privileged-action boundaries | Define the first role model before adding schema, guards, or privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; implementation remains deferred. |
+| A1.5 Email identity and verification semantics | Keep username-first accounts compatible with Better Auth's required email field while treating generated placeholder emails as internal-only. | App-facing account helpers hide generated `.invalid` emails, login and verification reject placeholder identifiers before Better Auth handoff, and real emails can be verified through Better Auth's verification table and `emailVerified` flag. |
+| A2 Role vocabulary and privileged-action boundaries | Define the first role model before adding schema, guards, or privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; role storage and guard design are now in progress. |
 | A2.5 Permission-gated reactive islands | Define how privileged UI shells can appear reactively while fetching privileged payloads and submitting mutations through server authorization. | Pattern is documented in `PF-413` / `KAN-57`; FigJam flow `PF-DIAG-009` shows shell, payload, mutation, and rejection paths. |
 | A3 Owner and moderation controls | Moderator can perform moderation actions; owner can access protected owner tools. | Role-aware server guards exist and preserve the ADR 0010 owner allowlist migration path. |
 | A4 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
@@ -57,7 +59,7 @@ Current authorization model, accepted in ADR 0010:
 - Owner: is matched by an explicit server-side allowlist after Better Auth session resolution.
 - Anonymous visitor: can read public content.
 
-Planned first role vocabulary, tracked by `PF-412` / `KAN-56`:
+Active first role vocabulary, tracked by `PF-412` / `KAN-56`:
 
 | Role | Planned authority |
 | --- | --- |
@@ -85,6 +87,24 @@ but add a server-authorized data layer:
 - Prefer small authenticated payload reads for post-login island updates; reserve `router.refresh` for cases where the
   route tree itself needs to be recalculated.
 
+## Email Identity And Verification Flow
+
+Better Auth's core user model requires an email string. Username-only portfolio accounts may therefore keep a generated
+internal `.invalid` email in the Better Auth account row, but product code must treat that value as absent.
+
+App-facing rules:
+
+- Store real usernames and real emails in canonical lower-case form.
+- Treat generated `.invalid` emails as `null` in account/session/profile payloads.
+- Reject sign-in, lookup, OTP, OTL, and verification attempts that supply a generated placeholder domain before handing
+  the request to Better Auth email-oriented helpers.
+- Never send verification messages to placeholder emails.
+- Keep Better Auth's `emailVerified` boolean as the source of truth for real account email verification.
+- A username-only account starts with `emailVerified = false`; adding or changing a real email should reset it to
+  `false`, create a Better Auth verification value, and set it to `true` only after the verification callback succeeds.
+- Placeholder emails are persistence compatibility values only; they are not login identifiers, public profile data, or
+  contact data.
+
 ## Security And Trust Implications
 
 | Concern | Current or planned control |
@@ -93,6 +113,8 @@ but add a server-authorized data layer:
 | Abuse attempts | Auth rate limiting by scope and client IP. |
 | Account enumeration | Username/email flow separates behavior and avoids exposing email account existence. |
 | Session accuracy | Session state refresh and Better Auth session storage. |
+| Internal placeholder email leakage | Generated `.invalid` emails remain persistence-only; app-facing helpers map them to no email and auth entrypoints reject them before Better Auth handoff. |
+| Email verification | Use Better Auth verification values and `emailVerified` for real emails only; username-only placeholder emails cannot be verified. |
 | Comment trust | Authenticated comments plus planned moderation. |
 | Owner tools | Use the ADR 0010 explicit owner allowlist and server-only guard before protected tools ship; use ADR 0011 for the first CMS authoring boundary. |
 | Role escalation | Keep role resolution and guard decisions server-side; reject privileged writes without a valid session and role. |
@@ -106,7 +128,7 @@ but add a server-authorized data layer:
 | `FR-012` sessions are durable and refresh locally | Implemented/in progress. |
 | `FR-018` owner can moderate comments | Planned. |
 | `FR-020` owner-only account capabilities protect moderation and authoring tools | Planned; owner authorization decision accepted in ADR 0010. |
-| Future role-gated privileged actions | Planned in `PF-412` / `KAN-56` before schema and guard implementation. |
+| Future role-gated privileged actions | In progress in `PF-412` / `KAN-56`; schema and guard implementation must preserve server-authoritative checks. |
 | `NFR-015` auth scope should grow only when tied to product needs | Planned; ADR 0010 keeps role scope minimal. |
 
 ## Jira Impact
@@ -127,5 +149,5 @@ but add a server-authorized data layer:
 | Should reader accounts have profiles? | No. Keep reader accounts minimal. |
 | Should client accounts exist? | Defer until a client collaboration use case is real. |
 | Should OAuth providers be added? | Defer until password/identifier flow proves insufficient. |
-| Where should roles be stored? | Defer until `PF-412` reviews migration and guard design. |
+| Where should roles be stored? | Under active review in `PF-412`; preserve Better Auth core tables and the portfolio-owned identity boundary. |
 | Should Moderator remain separate from Owner? | Start with a planned role vocabulary; validate against real moderation tooling before implementation. |

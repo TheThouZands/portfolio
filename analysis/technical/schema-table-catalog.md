@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-06-29
+Last updated: 2026-07-02
 Target home: GitHub/Confluence
 
 ## Purpose
@@ -39,12 +39,12 @@ query code.
 
 | Table | Domain | Product purpose | Key relationships or notes |
 | --- | --- | --- | --- |
-| `user` | Auth | Better Auth user/account subject. | Referenced by `session`, `account`, and optionally by `comments`. |
+| `user` | Auth | Better Auth user/account subject. | Referenced by `session`, `account`, and optionally by `comments`; Better Auth requires an email string, so username-only account placeholders must stay internal-only if account identity is consolidated here. |
 | `session` | Auth | Better Auth session persistence. | Belongs to `user`; supports durable sign-in state. |
-| `account` | Auth | Better Auth provider/account linkage. | Belongs to `user`; stores provider account metadata. |
-| `verification` | Auth | Better Auth verification data. | Provider/framework-owned auth support table. |
+| `account` | Auth | Better Auth provider/login linkage. | Belongs to `user`; stores credential or provider login metadata and should be described as login records in product language. |
+| `verification` | Auth | Better Auth verification data. | Provider/framework-owned support table for short-lived email verification, password reset, OTP, or OTL values. |
 | `rate_limit` | Auth/security | Database-backed auth rate-limit counters. | Used by auth flows to reduce abuse risk. |
-| `auth_identities` | Auth | Portfolio-owned username/email identity resolution. | Separates portfolio identity from Better Auth provider records; see ADR 0004. Owner authorization stays config-backed first; see ADR 0010. |
+| `auth_identities` | Auth | Portfolio-owned username/email identity resolution. | Separates portfolio identity from Better Auth provider records; see ADR 0004. `PF-412` is reviewing whether this can merge into `user` with canonical lowercase identifiers, role storage, and placeholder-email safeguards. |
 | `wp_honeypot_logs` | Operations/security | Records fake WordPress installer probes. | Defensive telemetry for suspicious automated requests. |
 | `content_entities` | CMS identity | Shared identity layer for portfolio objects. | Enables cross-content references and mentions across content types. |
 | `media_assets` | Media | Reusable media metadata and storage references. | Translated alt text and use-specific join tables attach media to content; lifecycle rules live in ADR 0012. |

@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-07-02
 Target home: GitHub/Confluence
 
 ## Source Of Truth
@@ -61,6 +61,7 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 | Comment moderation model is not yet represented. | ADR 0009 defines the future soft-state direction; the Drizzle schema and migrations have not implemented it yet. |
 | CMS authoring fields are not represented yet. | ADR 0011 defines the first owner-only source-aware authoring boundary; add author/editor, audit, preview, or validation fields only through a planned implementation migration. |
 | Owner authorization is intentionally not schema-backed yet. | ADR 0010 uses an explicit owner allowlist before adding role or permission tables. |
+| Auth account consolidation and email semantics are under active review. | Better Auth's `user.email` is required. If username-only accounts move into the Better Auth user/account row, generated `.invalid` emails must remain internal-only, app helpers must expose them as no email, and email login/verification must reject placeholder identifiers before Better Auth handoff. |
 | Public API shape is undecided. | Route handlers and server actions exist, but OpenAPI should wait for an explicit API product boundary. |
 | Media upload tooling is not represented yet. | ADR 0012 defines the lifecycle; implementation may need upload state, owner id, retirement, checksum, or cleanup audit fields. |
 | Migration naming is generated and not semantic. | This is acceptable for Drizzle, but summary docs should keep human-readable grouping. |

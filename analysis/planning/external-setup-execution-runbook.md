@@ -89,8 +89,8 @@ Also confirm:
 - `analysis/jira/backlog.csv` imports or is manually recreated in batches.
 - Local story ids remain visible after Jira creates issue keys.
 - Parent epic links are set; the `PF-E01` through `PF-E07` batches verified `parent = KAN-1` through `parent = KAN-7`.
-- Status mapping is intentionally chosen and applied: created implemented stories are `Done`, current-worktree stories
-  `KAN-24` and `KAN-26` are `In Progress`, and planned created stories remain `To Do`.
+- Status mapping is intentionally chosen and applied: created implemented stories are `Done`, active stories
+  `KAN-24`, `KAN-26`, `KAN-56`, and `KAN-57` are `In Progress`, and planned created stories remain `To Do`.
 - Story key mapping is recorded in `analysis/jira/import-history.md`.
 
 ### EXT-004 FigJam
@@ -120,7 +120,7 @@ Before each external setup session, capture:
 | Source commit | Setup history spans the recorded Confluence, Jira, and FigJam batches: starter pages `86015e1`; Jira import and status records from `86a2d97` through `fd213fb`; product, planning, Jira, design, diagram, technical, and operations Confluence publication batches from `4ced0fc` through `bf2900b`; remaining FigJam generation batch `b5249e3`; diagram/page state sync `695e4d8`; remaining analysis-page publication `39b5f6a`. |
 | External tools touched | Confluence, Jira read/write checks, Figma/FigJam diagram generation |
 | Operator | Thouzands |
-| Result | EXT-001 starter pages created; product, planning, Jira, design, diagram, technical, and operations pages published in Confluence; all 58 current Confluence manifest rows have external URLs; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` generated from source commit `b5249e3`; diagram and page publication state synced from source commit `695e4d8`; remaining analysis pages published and recorded from source commit `39b5f6a`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-57` created under `KAN-1` through `KAN-7`; 40 implemented stories are `Done`; active stories `KAN-24`, `KAN-26`, and `KAN-57` are `In Progress`; planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-56` remain `To Do`; Jira Backlog Confluence page version 14 was synced; current Confluence manifest publication, Jira story import, and FigJam diagram generation are complete |
+| Result | EXT-001 starter pages created; product, planning, Jira, design, diagram, technical, and operations pages published in Confluence; all 58 current Confluence manifest rows have external URLs; remaining FigJam diagram batch `PF-DIAG-004`, `PF-DIAG-005`, and `PF-DIAG-006` generated from source commit `b5249e3`; diagram and page publication state synced from source commit `695e4d8`; remaining analysis pages published and recorded from source commit `39b5f6a`; Jira project `KAN` is visible; Jira epics `KAN-1` through `KAN-7` created; stories `KAN-8` through `KAN-57` created under `KAN-1` through `KAN-7`; 40 implemented stories are `Done`; active stories `KAN-24`, `KAN-26`, `KAN-56`, and `KAN-57` are `In Progress`; planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52` remain `To Do`; Jira Backlog Confluence page version 14 was synced; current Confluence manifest publication, Jira story import, and FigJam diagram generation are complete |
 
 Record the final values in the relevant logs after execution.
 

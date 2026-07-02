@@ -54,7 +54,7 @@ These are not analysis-suite handoff blockers; they are future product implement
 | Contact/intake UI is not implemented. | Service definition and proof-mapping artifacts are complete; focused intake implementation remains planned in `PF-702`. |
 | Comment moderation UI/schema is not implemented. | ADR 0009 defines the future soft-state model; implementation remains planned in `PF-407` and `PF-408`. |
 | CMS authoring UI is not implemented. | ADR 0011 defines the first owner-only source-aware boundary and ADR 0012 defines media lifecycle; implementation remains planned in `PF-206`, `PF-208`, and `PF-411`. |
-| Owner auth controls and role storage are not implemented. | ADR 0010 defines the current allowlist model; `PF-412` / `KAN-56` plans Reader, Moderator, and Owner roles before implementation. |
+| Owner auth controls and role storage are not implemented. | ADR 0010 defines the current allowlist model; `PF-412` / `KAN-56` is now active for Reader, Moderator, and Owner role storage and guard design. |
 
 ## Next Best Slices
 
