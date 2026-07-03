@@ -82,8 +82,8 @@ export const blobAccess = pgEnum("blob_access", ["public", "private"]);
 /** Account role used for server-side authorization decisions. */
 export const authRole = pgEnum("auth_role", ["reader", "moderator", "owner"]);
 
-/** Better Auth user row, extended as the portfolio account subject. */
-export const user = pgTable(
+/** Better Auth user model, stored as the portfolio account subject. */
+export const accounts = pgTable(
   "accounts",
   {
     id: uuid().defaultRandom().primaryKey(),
@@ -115,7 +115,7 @@ export const session = pgTable(
     userAgent: text("user_agent"),
     userId: uuid("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => accounts.id, { onDelete: "cascade" }),
   },
   (table) => [
     uniqueIndex("session_token_idx").on(table.token),
@@ -124,7 +124,7 @@ export const session = pgTable(
 );
 
 /** Better Auth provider or credential login record. */
-export const account = pgTable(
+export const logins = pgTable(
   "logins",
   {
     id: uuid().defaultRandom().primaryKey(),
@@ -132,7 +132,7 @@ export const account = pgTable(
     providerId: text("provider_id").notNull(),
     userId: uuid("user_id")
       .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
+      .references(() => accounts.id, { onDelete: "cascade" }),
     accessToken: text("access_token"),
     refreshToken: text("refresh_token"),
     idToken: text("id_token"),
@@ -660,7 +660,7 @@ export const comments = pgTable(
     blog_post_id: integer()
       .references(() => blogPosts.id, { onDelete: "cascade" })
       .notNull(),
-    userId: uuid("user_id").references(() => user.id, { onDelete: "set null" }),
+    userId: uuid("user_id").references(() => accounts.id, { onDelete: "set null" }),
     parent_comment_id: bigint({ mode: "number" }).references(
       (): AnyPgColumn => comments.id,
       { onDelete: "cascade" },

@@ -8,7 +8,7 @@ import {
   blogPosts,
   blogPostTranslations,
   comments,
-  user as authUser,
+  accounts as authAccounts,
 } from "@/db/schema";
 import { getVisibleCmsStatuses } from "@/db/queries/cms";
 
@@ -217,8 +217,8 @@ export async function getBlogPostComments({
 }: GetBlogPostCommentsOptions): Promise<BlogPostComment[]> {
   const rows = await db
     .select({
-      authorDisplayName: authUser.name,
-      authorUsername: authUser.username,
+      authorDisplayName: authAccounts.name,
+      authorUsername: authAccounts.username,
       body: comments.body,
       createdAt: comments.created_at,
       id: comments.id,
@@ -226,7 +226,7 @@ export async function getBlogPostComments({
       updatedAt: comments.updated_at,
     })
     .from(comments)
-    .leftJoin(authUser, eq(authUser.id, comments.userId))
+    .leftJoin(authAccounts, eq(authAccounts.id, comments.userId))
     .where(eq(comments.blog_post_id, blogPostId))
     .orderBy(asc(comments.created_at), asc(comments.id));
 

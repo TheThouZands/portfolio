@@ -14,7 +14,7 @@ const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 const FIVE_MINUTES_IN_SECONDS = 60 * 5;
 
 // Auth stack overview:
-// - Better Auth owns the durable user/session/account tables in Postgres.
+// - Better Auth owns the durable account/session/login tables in Postgres.
 // - portfolioAuthFlow adds this CMS' username/email identifier password flow.
 // - Auth rate limits are database-backed so serverless instances share buckets.
 // - nextCookies must stay last so Better Auth Set-Cookie headers become Next
@@ -30,6 +30,7 @@ export const auth = betterAuth({
     },
   },
   user: {
+    modelName: "accounts",
     additionalFields: {
       username: {
         type: "string",
@@ -43,6 +44,9 @@ export const auth = betterAuth({
         input: false,
       },
     },
+  },
+  account: {
+    modelName: "logins",
   },
   session: {
     expiresIn: THIRTY_DAYS_IN_SECONDS,

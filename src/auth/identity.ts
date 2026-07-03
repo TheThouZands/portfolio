@@ -9,7 +9,7 @@ import {
   type AuthIdentifierKind,
 } from "@/auth/identifier";
 import { db } from "@/db/client";
-import { user as authUser } from "@/db/schema";
+import { accounts } from "@/db/schema";
 
 export {
   getAuthIdentifierKind,
@@ -20,7 +20,7 @@ export {
 
 export type AuthIdentifierNextStep = "email-otp" | "sign-in" | "sign-up";
 
-export type AuthAccount = typeof authUser.$inferSelect;
+export type AuthAccount = typeof accounts.$inferSelect;
 
 export type AuthIdentifierFlowResolution = {
   kind: AuthIdentifierKind;
@@ -42,10 +42,10 @@ export async function findAuthAccountByIdentifier(
 
   const where =
     kind === "email"
-      ? eq(authUser.email, normalizedIdentifier)
-      : eq(authUser.username, normalizedIdentifier);
+      ? eq(accounts.email, normalizedIdentifier)
+      : eq(accounts.username, normalizedIdentifier);
 
-  const [account] = await db.select().from(authUser).where(where).limit(1);
+  const [account] = await db.select().from(accounts).where(where).limit(1);
 
   return account ?? null;
 }
