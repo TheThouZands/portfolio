@@ -1,7 +1,6 @@
 import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { HomeLogoutSlot } from "@/components/auth/HomeLogoutSlot";
 import WhoamiHero from "@/components/heroes/whoami";
 import FeaturedPosts from "@/components/partials/blog/FeaturedPosts";
 import JobsChart from "@/components/partials/jobs/Chart";
@@ -40,7 +39,6 @@ export default async function Home({ params }: HomeProps) {
       <JobsChart locale={locale} />
       <FeaturedProjects locale={locale} />
       <FeaturedPosts locale={locale} />
-      <HomeLogoutSlot />
     </main>
   );
 }

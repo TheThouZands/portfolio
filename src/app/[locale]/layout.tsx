@@ -7,6 +7,7 @@ import {
 } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { AuthSessionProvider } from "@/components/auth/AuthSessionProvider";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { routing } from "@/i18n/routing";
 
 type LocaleLayoutProps = Readonly<{
@@ -50,12 +51,31 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const messages = await getMessages();
+  const t = await getTranslations({ locale, namespace: "SiteHeader" });
 
   return (
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <AuthSessionProvider>{children}</AuthSessionProvider>
+          <AuthSessionProvider>
+            <SiteHeader
+              labels={{
+                account: t("account"),
+                blog: t("blog"),
+                brand: t("brand"),
+                experience: t("experience"),
+                home: t("home"),
+                login: t("login"),
+                logout: t("logout"),
+                logoutPending: t("logoutPending"),
+                primaryNavigation: t("primaryNavigation"),
+                projects: t("projects"),
+                skills: t("skills"),
+              }}
+              locale={locale}
+            />
+            {children}
+          </AuthSessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

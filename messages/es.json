@@ -3,6 +3,19 @@
     "title": "ThouZands - Ingeniero Fullstack - Portafolio",
     "description": "Sitio personal de portafolio"
   },
+  "SiteHeader": {
+    "account": "Cuenta",
+    "blog": "Blog",
+    "brand": "ThouZands",
+    "experience": "Experiencia",
+    "home": "Inicio",
+    "login": "Iniciar sesion",
+    "logout": "Cerrar sesion",
+    "logoutPending": "Cerrando sesion...",
+    "primaryNavigation": "Navegacion principal",
+    "projects": "Proyectos",
+    "skills": "Habilidades"
+  },
   "WhoamiHero": {
     "title": "Thouzands",
     "values": [

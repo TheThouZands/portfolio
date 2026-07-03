@@ -13,7 +13,15 @@ const initialState: SignOutActionState = {
   message: "",
 };
 
-export function LogoutButton() {
+type LogoutButtonProps = {
+  label?: string;
+  pendingLabel?: string;
+};
+
+export function LogoutButton({
+  label = "Log out",
+  pendingLabel = "Logging out...",
+}: LogoutButtonProps) {
   const { setUnauthenticated } = useAuthSession();
   const handledStateRef = useRef<SignOutActionState | null>(null);
   const [state, formAction, isPending] = useActionState(
@@ -33,7 +41,7 @@ export function LogoutButton() {
   return (
     <form action={formAction}>
       <button disabled={isPending} type="submit">
-        {isPending ? "Logging out..." : "Log out"}
+        {isPending ? pendingLabel : label}
       </button>
 
       {state.status === "error" ? (
