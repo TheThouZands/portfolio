@@ -1,8 +1,8 @@
 import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
-config({ path: ".env.local" });
 config();
+config({ path: ".env.local", override: true });
 
 const databaseUrl =
   process.env.PF_DATABASE_URL_UNPOOLED ?? process.env.PF_DATABASE_URL;
