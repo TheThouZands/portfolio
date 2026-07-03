@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Content from "@/components/repeatables/structural-content/Content";
 import DateTime from "@/components/repeatables/singles/DateTime";
+import { PostStatusSelectorIsland } from "@/components/partials/blog/PostStatusSelectorIsland";
 import { getBlogPostById } from "@/db/queries/blog";
 
 type PostProps = {
@@ -26,6 +27,7 @@ export default async function Post({ blogPostId, locale }: PostProps) {
             value={post.publishedAt.toISOString()}
           />
         )}
+        <PostStatusSelectorIsland blogPostId={blogPostId} />
         {post.excerpt ? <p>{post.excerpt}</p> : null}
       </header>
       <section>
