@@ -84,7 +84,7 @@ export const authRole = pgEnum("auth_role", ["reader", "moderator", "owner"]);
 
 /** Better Auth user row, extended as the portfolio account subject. */
 export const user = pgTable(
-  "user",
+  "accounts",
   {
     id: uuid().defaultRandom().primaryKey(),
     name: text().notNull(),
@@ -97,8 +97,8 @@ export const user = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    uniqueIndex("user_email_idx").on(table.email),
-    uniqueIndex("user_username_idx").on(table.username),
+    uniqueIndex("accounts_email_idx").on(table.email),
+    uniqueIndex("accounts_username_idx").on(table.username),
   ],
 );
 
@@ -123,9 +123,9 @@ export const session = pgTable(
   ],
 );
 
-/** Better Auth provider or credential account record. */
+/** Better Auth provider or credential login record. */
 export const account = pgTable(
-  "account",
+  "logins",
   {
     id: uuid().defaultRandom().primaryKey(),
     accountId: text("account_id").notNull(),
@@ -148,7 +148,7 @@ export const account = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    index("account_user_id_idx").on(table.userId),
+    index("logins_user_id_idx").on(table.userId),
   ],
 );
 
@@ -176,29 +176,6 @@ export const rateLimit = pgTable(
     count: integer().notNull(),
     lastRequest: bigint("last_request", { mode: "number" }).notNull(),
   },
-);
-
-/** CMS-owned login identity, kept separate from Better Auth's session user shape. */
-export const authIdentities = pgTable(
-  "auth_identities",
-  {
-    userId: uuid("user_id")
-      .primaryKey()
-      .references(() => user.id, { onDelete: "cascade" }),
-    username: varchar({ length: 80 }).notNull(),
-    usernameNormalized: varchar("username_normalized", { length: 80 }).notNull(),
-    email: text(),
-    emailNormalized: text("email_normalized"),
-    emailVerifiedAt: timestamp("email_verified_at", { withTimezone: true }),
-    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-  },
-  (table) => [
-    uniqueIndex("auth_identities_username_normalized_idx").on(
-      table.usernameNormalized,
-    ),
-    uniqueIndex("auth_identities_email_normalized_idx").on(table.emailNormalized),
-  ],
 );
 
 /** Rate-limited capture of /wp-admin/install.php probes and submitted payloads. */

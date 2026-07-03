@@ -155,6 +155,13 @@
       "when": 1782967398284,
       "tag": "0021_violet_arclight",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1783111829725,
+      "tag": "0022_simplify_auth_account_tables",
+      "breakpoints": true
     }
   ]
 }
