@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: Confluence/Jira
 
 ## Purpose
@@ -46,7 +46,7 @@ Auth does not yet exist to support:
 | A1 Reader auth baseline | Sign up, sign in, sign out, session refresh, validation, rate limiting. | Reader can comment and session state is reliable. |
 | A1.5 Email identity and verification semantics | Keep username-first accounts compatible with Better Auth's required email field while treating generated placeholder emails as internal-only. | App-facing account helpers hide generated `.invalid` emails, login and verification reject placeholder identifiers before Better Auth handoff, and real emails can be verified through Better Auth's verification table and `emailVerified` flag. |
 | A2 Role vocabulary and privileged-action boundaries | Define and begin implementing the first role model before privileged UI. | Reader, Moderator, and Owner responsibilities are documented in `PF-412` / `KAN-56`; role storage and shared server role helpers now exist, while privileged actions still need to adopt them. |
-| A2.5 Permission-gated reactive islands | Define how privileged UI shells can appear reactively while fetching privileged payloads and submitting mutations through server authorization. | Pattern is documented in `PF-413` / `KAN-57`; FigJam flow `PF-DIAG-009` shows shell, payload, mutation, and rejection paths; the first shared hook and current-role tester now prove SSR payload handoff and client refetch. |
+| A2.5 Permission-gated reactive islands | Define how privileged UI shells can appear reactively while fetching privileged payloads and submitting mutations through server authorization. | Pattern is documented in `PF-413` / `KAN-57`; FigJam flow `PF-DIAG-009` shows shell, payload, mutation, and rejection paths; the shared hook, current-role tester, persistent account header, and nested owner create link now prove client refetch, layout persistence, and simple RBAC child islands. |
 | A3 Owner and moderation controls | Moderator can perform moderation actions; owner can access protected owner tools. | First Moderator-or-higher hard-delete comment action and shell exist as a simple RBAC proof; fuller soft-state moderation still follows ADR 0009. |
 | A4 CMS authoring auth | Owner can draft, preview, and publish CMS content. | ADR 0011 defines owner-only source-aware authoring; protected routes and audit fields remain implementation work. |
 | A5 Client/private collaboration decision | Decide whether client accounts belong in this portfolio. | Decision recorded in ADR or product doc before implementation. |
@@ -88,10 +88,13 @@ but add a server-authorized data layer:
   for writer pages, owner workspaces, authenticated previews, and any route whose identity depends on authorization.
 - Prefer small authenticated payload reads for post-login island updates; reserve `router.refresh` for cases where the
   route tree itself needs to be recalculated.
-- The first implementation foothold is `usePermissionIsland` plus a current-role tester near logout controls; real
-  moderation, post-status, and CMS controls still need object-specific capability resolvers and mutation checks.
+- The first implementation foothold is `usePermissionIsland` plus a current-role tester near logout controls; the
+  locale layout header now proves a persistent parent account island, and its owner-only create link proves a nested
+  no-fetch RBAC child island.
 - Simple no-fetch RBAC shells can use the shared session role hint through `useRoleGate`, but the server action or
   route still repeats the role/capability check before doing anything authoritative.
+- The temporary create page is intentionally empty; the future writer needs a route-level server guard before privileged
+  authoring behavior ships.
 
 ## Email Identity And Verification Flow
 

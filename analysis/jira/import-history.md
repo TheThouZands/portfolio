@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: Jira/Confluence
 
 ## Purpose
@@ -29,6 +29,7 @@ should remain stable even after Jira assigns keys.
 | JIRA-DESC-PENDING-001 | 2026-07-02 | `KAN` | `analysis/jira/user-stories.md`, `analysis/jira/backlog.csv`, `analysis/product/auth-account-roadmap.md`, `analysis/technical/adr/0013-centralize-portfolio-account-fields-on-better-auth-user.md` | Pending implementation commit | Codex | Local `PF-412` acceptance/evidence now describes centralized `user` account data and shared server role helpers; refresh Jira issue `KAN-56` after the implementation commit is accepted. |
 | JIRA-DESC-PENDING-002 | 2026-07-02 | `KAN` | `analysis/jira/user-stories.md`, `analysis/jira/backlog.csv`, `analysis/product/auth-account-roadmap.md`, `analysis/technical/permission-gated-reactive-islands.md` | Pending implementation commit | Codex | Local `PF-413` acceptance/evidence now describes the shared permission-island hook and current-role tester; refresh Jira issue `KAN-57` after the implementation commit is accepted. |
 | JIRA-DESC-PENDING-003 | 2026-07-02 | `KAN` | `analysis/jira/user-stories.md`, `analysis/jira/backlog.csv`, `analysis/product/interaction-policy.md`, `analysis/technical/api-surface-inventory.md` | Pending implementation commit | Codex | Local `PF-407` acceptance/evidence now describes the Moderator-or-higher hard-delete action and button; transition/update Jira issue `KAN-29` after the implementation commit is accepted. |
+| JIRA-DESC-PENDING-004 | 2026-07-03 | `KAN` | `analysis/jira/user-stories.md`, `analysis/jira/backlog.csv`, `analysis/product/auth-account-roadmap.md`, `analysis/technical/permission-gated-reactive-islands.md` | Pending external sync | Codex | Local `PF-413` acceptance/evidence now includes the locale-layout account header island and nested owner create link proof; refresh Jira issue `KAN-57` from the accepted source commit. |
 
 ## Status Mapping Decision
 

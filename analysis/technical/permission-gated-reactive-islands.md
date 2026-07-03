@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: Confluence/Jira/FigJam
 
 ## Purpose
@@ -89,8 +89,8 @@ while still allowing logged-in owner or moderator tools to feel responsive witho
 
 ## Implementation Foothold
 
-The first implementation slice adds reusable payload and client-fetch plumbing plus a deliberately small current-role
-tester next to logout controls.
+The implementation foothold now includes reusable payload/client-fetch plumbing, simple role-only gates, and a
+layout-persistent account header that can host nested role-gated child controls.
 
 | Piece | Source | Purpose |
 | --- | --- | --- |
@@ -101,11 +101,17 @@ tester next to logout controls.
 | Tester island | `src/components/auth/CurrentRoleIsland.tsx` | Shows `Current role: <role>` beside logout when the payload is visible. |
 | Role-only gate | `src/components/auth/useRoleGate.ts` | Uses the shared session role hint for simple RBAC shells that do not need a capability payload fetch. |
 | Comment delete island | `src/components/partials/blog/CommentDeleteButton.tsx` | Shows a delete affordance to Moderator-or-higher sessions while the server action rechecks authorization before deleting. |
+| Persistent header shell | `src/components/layout/SiteHeader.tsx` | Places session-reactive account controls in the locale layout so they persist across App Router client navigations. |
+| Account header island | `src/components/auth/HeaderAccountIsland.tsx` | Shows login for anonymous sessions and account/logout controls for authenticated sessions. |
+| Nested owner create link | `src/components/auth/HeaderCreateLink.tsx` | Uses `useRoleGate("owner")` inside the authenticated header island to prove a simple RBAC child island can layer under a broader session-reactive parent. |
 
 The current-role tester is intentionally low-privilege: it proves the shell, SSR payload handoff, client refetch after
 login, denial reset after logout, and route-response normalization. The comment delete island proves the no-fetch RBAC
 variant for simple shells where the client role hint only controls visibility and the server action remains
-authoritative.
+authoritative. The header account island proves a layout-resident island can keep reacting while the route changes under
+it; the nested create link proves role-gated children can remain smaller than the authenticated parent island. The
+temporary `/[locale]/create` page is a placeholder only; the future writer route still needs a route-level server guard
+before exposing privileged authoring behavior.
 
 ## Example: Post Status Selector
 
