@@ -3,10 +3,8 @@
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
+import type { BlogPostCmsStatus } from "@/auth/blog-post-status-permission";
 import { isKnownBlogPostCmsStatus } from "@/auth/blog-post-status-permission.server";
-import {
-  type BlogPostCmsStatus,
-} from "@/auth/blog-post-status-permission";
 import {
   authorizeCurrentAuthRole,
   getCurrentAuthAccount,
@@ -15,7 +13,7 @@ import { db } from "@/db/client";
 import { blogPosts, comments } from "@/db/schema";
 
 export type CreateBlogCommentActionState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "success" | "error" | "auth_required";
   message: string;
 };
 
@@ -74,7 +72,7 @@ export async function createBlogCommentAction(
 
   if (!account) {
     return {
-      status: "error",
+      status: "auth_required",
       message: "Sign in to comment.",
     };
   }

@@ -12,14 +12,13 @@ export type CommentComposerLabels = {
   bodyLabel: string;
   bodyPlaceholder: string;
   postButton: string;
-  posterPrefix: string;
   postingButton: string;
 };
 
 type CommentComposerProps = {
   blogPostId: number;
   labels: CommentComposerLabels;
-  posterName: string;
+  locale: string;
 };
 
 const initialState: CreateBlogCommentActionState = {
@@ -30,7 +29,7 @@ const initialState: CreateBlogCommentActionState = {
 export default function CommentComposer({
   blogPostId,
   labels,
-  posterName,
+  locale,
 }: CommentComposerProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -43,23 +42,27 @@ export default function CommentComposer({
   const bodyId = `blog-comment-body-${blogPostId}`;
 
   useEffect(() => {
-    if (state.status !== "success" || handledStateRef.current === state) {
+    if (handledStateRef.current === state) {
       return;
     }
 
-    handledStateRef.current = state;
-    formRef.current?.reset();
-    router.refresh();
-  }, [router, state]);
+    if (state.status === "success") {
+      handledStateRef.current = state;
+      formRef.current?.reset();
+      router.refresh();
+      return;
+    }
+
+    if (state.status === "auth_required") {
+      handledStateRef.current = state;
+      router.push(`/${locale}/auth`);
+    }
+  }, [locale, router, state]);
 
   return (
     <form action={formAction} ref={formRef}>
       <input name="blogPostId" type="hidden" value={blogPostId} />
       <input name="pathname" type="hidden" value={pathname} />
-
-      <p>
-        {labels.posterPrefix} <strong>{posterName}</strong>
-      </p>
 
       <label htmlFor={bodyId}>{labels.bodyLabel}</label>
       <textarea
