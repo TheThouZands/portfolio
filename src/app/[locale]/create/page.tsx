@@ -2,6 +2,7 @@ import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { requireOwnerOrNotFound } from "@/auth/roles";
 import { routing } from "@/i18n/routing";
 
 type CreatePageProps = {
@@ -18,6 +19,7 @@ export default async function CreatePage({ params }: CreatePageProps) {
   }
 
   setRequestLocale(locale);
+  await requireOwnerOrNotFound();
 
   const t = await getTranslations("CreatePage");
 

@@ -61,17 +61,10 @@ export default async function LocaleLayout({
             <SiteHeader
               labels={{
                 account: t("account"),
-                blog: t("blog"),
-                brand: t("brand"),
                 create: t("create"),
-                experience: t("experience"),
-                home: t("home"),
                 login: t("login"),
                 logout: t("logout"),
                 logoutPending: t("logoutPending"),
-                primaryNavigation: t("primaryNavigation"),
-                projects: t("projects"),
-                skills: t("skills"),
               }}
               locale={locale}
             />

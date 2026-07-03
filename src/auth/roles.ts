@@ -1,6 +1,7 @@
 import "server-only";
 
 import { headers as nextHeaders } from "next/headers";
+import { notFound } from "next/navigation";
 
 import { toAppEmail } from "@/auth/identifier";
 import {
@@ -110,4 +111,23 @@ export async function authorizeCurrentAuthRole(
     authorized: true,
     reason: "authorized",
   };
+}
+
+export async function requireAuthRoleOrNotFound(
+  minimumRole: AuthRole,
+  options: GetCurrentAuthAccountOptions = {},
+) {
+  const decision = await authorizeCurrentAuthRole(minimumRole, options);
+
+  if (!decision.authorized) {
+    notFound();
+  }
+
+  return decision.account;
+}
+
+export async function requireOwnerOrNotFound(
+  options: GetCurrentAuthAccountOptions = {},
+) {
+  return requireAuthRoleOrNotFound("owner", options);
 }

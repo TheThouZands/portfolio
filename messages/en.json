@@ -5,17 +5,10 @@
   },
   "SiteHeader": {
     "account": "Account",
-    "blog": "Blog",
-    "brand": "ThouZands",
     "create": "Create",
-    "experience": "Experience",
-    "home": "Home",
     "login": "Log in",
     "logout": "Log out",
-    "logoutPending": "Logging out...",
-    "primaryNavigation": "Primary navigation",
-    "projects": "Projects",
-    "skills": "Skills"
+    "logoutPending": "Logging out..."
   },
   "CreatePage": {
     "title": "Create"
