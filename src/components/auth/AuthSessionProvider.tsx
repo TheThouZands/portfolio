@@ -27,6 +27,7 @@ type AuthSessionContextValue = {
 
 type AuthSessionProviderProps = {
   children: ReactNode;
+  initialSnapshot?: AuthSessionSnapshot;
 };
 
 const unauthenticatedSession = {
@@ -36,12 +37,19 @@ const unauthenticatedSession = {
 
 const AuthSessionContext = createContext<AuthSessionContextValue | null>(null);
 
-export function AuthSessionProvider({ children }: AuthSessionProviderProps) {
+const loadingSession = {
+  status: "loading",
+  user: null,
+} satisfies AuthSessionState;
+
+export function AuthSessionProvider({
+  children,
+  initialSnapshot,
+}: AuthSessionProviderProps) {
   const requestIdRef = useRef(0);
-  const [state, setState] = useState<AuthSessionState>({
-    status: "loading",
-    user: null,
-  });
+  const [state, setState] = useState<AuthSessionState>(
+    () => initialSnapshot ?? loadingSession,
+  );
 
   const refreshSession = useCallback(async () => {
     const requestId = requestIdRef.current + 1;

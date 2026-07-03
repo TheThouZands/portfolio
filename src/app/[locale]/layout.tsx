@@ -50,8 +50,10 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const messages = await getMessages();
-  const t = await getTranslations({ locale, namespace: "SiteHeader" });
+  const [messages, t] = await Promise.all([
+    getMessages(),
+    getTranslations({ locale, namespace: "SiteHeader" }),
+  ]);
 
   return (
     <html lang={locale}>
