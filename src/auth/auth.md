@@ -9,9 +9,10 @@ Better Auth reads `BETTER_AUTH_SECRET` and `BETTER_AUTH_URL` from the environmen
 Auth-owned ids are Postgres UUID columns. Better Auth is configured with `advanced.database.generateId: "uuid"`,
 so generated primary keys should come from the database defaults on the Drizzle schema.
 
-The portfolio-owned flow keeps app account fields on Better Auth's central `user` row. `user.username` is the canonical
-normalized username, `user.email` is either a real normalized email or an internal placeholder, and `user.role` is the
-server-side role vocabulary for privileged checks.
+The portfolio-owned flow keeps app account fields on Better Auth's user model, stored in the `accounts` table.
+`accounts.username` is the canonical normalized username, `accounts.email` is either a real normalized email or an
+internal placeholder, and `accounts.role` is the server-side role vocabulary for privileged checks. Better Auth's account
+model is mapped to the `logins` table for credential/provider login records.
 
 `POST /api/auth/portfolio-auth/resolve-identifier` returns the next auth step for a custom entry UI:
 

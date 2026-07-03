@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: GitHub
 
 ## Convention
@@ -38,7 +38,7 @@ Each ADR should include:
 | [0010](0010-use-explicit-owner-allowlist-for-protected-tools.md) | Use explicit owner allowlist for protected tools | Accepted |
 | [0011](0011-use-owner-only-source-aware-cms-authoring.md) | Use owner-only source-aware CMS authoring | Accepted |
 | [0012](0012-use-managed-media-asset-lifecycle-for-cms-authoring.md) | Use managed media asset lifecycle for CMS authoring | Accepted |
-| [0013](0013-centralize-portfolio-account-fields-on-better-auth-user.md) | Centralize portfolio account fields on Better Auth user | Accepted |
+| [0013](0013-centralize-portfolio-account-fields-on-better-auth-user.md) | Centralize portfolio account fields on the Better Auth user model | Accepted |
 
 ## Candidate ADRs
 

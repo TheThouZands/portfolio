@@ -2,7 +2,7 @@
 
 Status: Current diagram inventory generated
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: Figma/FigJam and Confluence
 
 ## Purpose
@@ -52,7 +52,7 @@ FigJam file or section URL exists.
 | 2026-06-29 | N/A | `PF-DIAG-001` through `PF-DIAG-007` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams | Renamed the FigJam file to `Portfolio Analysis Diagrams` and added visible section groupings. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
 | 2026-06-30 | N/A | `PF-DIAG-008` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=25-841 | Generated the planned Reader/Moderator/Owner role authorization model from the local Mermaid source and added a visible section grouping. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
 | 2026-07-01 | N/A | `PF-DIAG-009` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=27-929 | Generated the permission-gated reactive island flow from the local Mermaid source and added a visible section grouping. Generated shapes and connectors remain page-level so connector routing stays dynamic. |
-| 2026-07-02 | Pending implementation commit | `PF-DIAG-003`, `PF-DIAG-008` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW | Local Mermaid sources now show centralized `user` account lookup and active server role helpers. Regenerate or refresh FigJam after the implementation commit so the visual copy points to a stable source hash. |
+| 2026-07-03 | Current local sync | `PF-DIAG-008` | https://www.figma.com/board/s6bFSjN2FQ0mTvs75itGkW/Portfolio-Analysis-Diagrams?node-id=25-841 | Refreshed the role authorization model in place so the server role lookup points at `accounts.role` after the `0022_simplify_auth_account_tables.sql` table cleanup. |
 
 ## Generation Steps
 

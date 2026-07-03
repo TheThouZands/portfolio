@@ -57,7 +57,7 @@ Current authorization model, originally accepted in ADR 0010 and now evolving th
 
 - Reader: can manage their own session and post comments.
 - Moderator: can be distinguished from Reader before moderation actions are exposed.
-- Owner: is represented by the centralized `user.role` field; the explicit allowlist remains a bootstrap/fallback
+- Owner: is represented by the centralized `accounts.role` field; the explicit allowlist remains a bootstrap/fallback
   consideration for first owner-tool rollout.
 - Anonymous visitor: can read public content.
 
@@ -101,7 +101,7 @@ but add a server-authorized data layer:
 ## Email Identity And Verification Flow
 
 Better Auth's core user model requires an email string. Username-only portfolio accounts may therefore keep a generated
-internal `.invalid` email in the Better Auth account row, but product code must treat that value as absent.
+internal `.invalid` email in the `accounts` row, but product code must treat that value as absent.
 
 App-facing rules:
 
@@ -160,5 +160,5 @@ App-facing rules:
 | Should reader accounts have profiles? | No. Keep reader accounts minimal. |
 | Should client accounts exist? | Defer until a client collaboration use case is real. |
 | Should OAuth providers be added? | Defer until password/identifier flow proves insufficient. |
-| Where should roles be stored? | First implementation stores roles on the Better Auth `user` row as `user.role`; future cleanup should remove legacy `auth_identities` after preview verification. |
+| Where should roles be stored? | Roles are stored on the Better Auth user model in `accounts.role`; migration `0022_simplify_auth_account_tables.sql` removed legacy `auth_identities` and renamed credential/provider rows to `logins`. |
 | Should Moderator remain separate from Owner? | Start with a planned role vocabulary; validate against real moderation tooling before implementation. |

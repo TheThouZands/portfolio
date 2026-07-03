@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: GitHub/Confluence
 
 ## Source Of Truth
@@ -23,7 +23,7 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 
 | Domain | Tables/enums | Product purpose |
 | --- | --- | --- |
-| Auth | `user`, `session`, `account`, `verification`, `auth_identities`, `rate_limit`, `auth_role` | Account, credential, session, centralized username/email resolution, role vocabulary, legacy identity storage, and auth abuse controls. |
+| Auth | `accounts`, `session`, `logins`, `verification`, `rate_limit`, `auth_role` | Account profile, credential/provider login records, sessions, verification values, role vocabulary, and auth abuse controls. |
 | CMS identity | `content_entities`, `content_entity_type`, `status_cms` | Shared identity and lifecycle state for portfolio objects. |
 | Media | `media_assets`, `media_asset_translations`, `media_role`, `blob_access` | Reusable media metadata, localized alt text, and Vercel Blob-oriented storage hints. |
 | Companies and experience | `companies`, `company_translations`, `experience`, `experience_translations`, `experience_bullets`, `experience_bullet_translations`, `experience_media`, `experience_media_translations` | Professional background, organizations, localized copy, bullets, and attached media. |
@@ -43,7 +43,8 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 | `0013_drop_blog_revision_rendered_output.sql` to `0014_drop_project_revision_rendered_output.sql` | Structural content storage cleanup | Removed rendered output fields where structural source became the stronger source. |
 | `0015_mute_scarlet_spider.sql` to `0017_odd_captain_flint.sql` | Auth model | Added Better Auth tables, portfolio identities, UUID id generation, and auth-related schema shifts. |
 | `0018_thankful_black_bird.sql` to `0020_chilly_punisher.sql` | Auth hardening and comments | Added auth rate limiting and evolved comments/account relationships. |
-| `0021_violet_arclight.sql` | Account role and username consolidation step | Adds `auth_role`, `user.username`, and `user.role`, backfilled from `auth_identities`; runtime auth now resolves usernames, emails, comments, session hints, and role checks from `user`. |
+| `0021_violet_arclight.sql` | Account role and username consolidation step | Adds `auth_role`, username, and role fields to the Better Auth user model, backfilled from `auth_identities`; runtime auth now resolves usernames, emails, comments, session hints, and role checks from the centralized account model. |
+| `0022_simplify_auth_account_tables.sql` | Auth table naming cleanup | Renames Better Auth's user model table from `user` to `accounts`, renames credential/provider rows from `account` to `logins`, removes legacy `auth_identities`, and keeps migrations targeted to the synced `.env.local` branch. |
 
 ## Operational Workflow
 
@@ -64,7 +65,7 @@ Detailed catalog: [migration-catalog.md](migration-catalog.md).
 | Comment moderation model is not yet represented. | ADR 0009 defines the future soft-state direction; the Drizzle schema and migrations have not implemented it yet. |
 | CMS authoring fields are not represented yet. | ADR 0011 defines the first owner-only source-aware authoring boundary; add author/editor, audit, preview, or validation fields only through a planned implementation migration. |
 | Owner authorization is starting schema-backed role vocabulary work. | ADR 0010 remains the owner-tool bootstrap decision; `0021_violet_arclight.sql` adds Reader/Moderator/Owner storage and the runtime now has shared server-side role helpers. |
-| Auth account consolidation and email semantics are under active review. | Better Auth's `user.email` is required. Runtime auth now uses canonical lower-case `user.username`, real lower-case `user.email`, and `user.role`; generated `.invalid` emails remain internal-only and are rejected before Better Auth handoff. `auth_identities` remains only until a cleanup migration removes the legacy table. |
+| Auth account consolidation and email semantics are implemented for the current role foundation. | Better Auth's user model still requires an email, but the physical table is now `accounts`. Runtime auth uses canonical lower-case `accounts.username`, real or internal `accounts.email`, and `accounts.role`; generated `.invalid` emails remain internal-only and are rejected before Better Auth handoff. |
 | Public API shape is undecided. | Route handlers and server actions exist, but OpenAPI should wait for an explicit API product boundary. |
 | Media upload tooling is not represented yet. | ADR 0012 defines the lifecycle; implementation may need upload state, owner id, retirement, checksum, or cleanup audit fields. |
 | Migration naming is generated and not semantic. | This is acceptable for Drizzle, but summary docs should keep human-readable grouping. |

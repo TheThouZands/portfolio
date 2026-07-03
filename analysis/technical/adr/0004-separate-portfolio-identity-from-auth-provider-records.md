@@ -4,9 +4,10 @@ Status: Superseded by [ADR 0013](0013-centralize-portfolio-account-fields-on-bet
 Date: 2026-06-29  
 Owner: Thouzands
 
-Superseded note, 2026-07-02: `0021_violet_arclight.sql` added `user.username` and `user.role`, and ADR 0013 moves
-runtime signup, signin, session state, comment display, and role resolution to the centralized Better Auth `user` row.
-`auth_identities` remains only until a cleanup migration removes the legacy table.
+Superseded note, 2026-07-03: `0021_violet_arclight.sql` added username and role fields to the Better Auth user model.
+ADR 0013 then moved runtime signup, signin, session state, comment display, and role resolution to the centralized
+`accounts` table. `0022_simplify_auth_account_tables.sql` removed the legacy `auth_identities` table and renamed Better
+Auth credential/provider records to `logins`.
 
 ## Context
 

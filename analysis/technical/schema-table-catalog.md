@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: GitHub/Confluence
 
 ## Purpose
@@ -40,12 +40,11 @@ query code.
 
 | Table | Domain | Product purpose | Key relationships or notes |
 | --- | --- | --- | --- |
-| `user` | Auth | Better Auth user/account subject and portfolio account profile. | Referenced by `session`, `account`, and optionally by `comments`; runtime auth now uses canonical lower-case `username`, real or internal `email`, and `role` from this row. |
-| `session` | Auth | Better Auth session persistence. | Belongs to `user`; supports durable sign-in state. |
-| `account` | Auth | Better Auth provider/login linkage. | Belongs to `user`; stores credential or provider login metadata and should be described as login records in product language. |
+| `accounts` | Auth | Better Auth user model and portfolio account profile. | Referenced by `session`, `logins`, and optionally by `comments`; runtime auth uses canonical lower-case `username`, real or internal `email`, and `role` from this row. |
+| `session` | Auth | Better Auth session persistence. | Belongs to `accounts`; supports durable sign-in state. |
+| `logins` | Auth | Better Auth account model for provider/credential login linkage. | Belongs to `accounts`; stores credential or provider login metadata. |
 | `verification` | Auth | Better Auth verification data. | Provider/framework-owned support table for short-lived email verification, password reset, OTP, or OTL values. |
 | `rate_limit` | Auth/security | Database-backed auth rate-limit counters. | Used by auth flows to reduce abuse risk. |
-| `auth_identities` | Auth | Legacy portfolio-owned username/email identity resolution. | Remains in the database after `0021_violet_arclight.sql` for migration safety; current runtime lookup, signup, comments, and session role state use `user` directly, so a later cleanup migration can remove it. |
 | `wp_honeypot_logs` | Operations/security | Records fake WordPress installer probes. | Defensive telemetry for suspicious automated requests. |
 | `content_entities` | CMS identity | Shared identity layer for portfolio objects. | Enables cross-content references and mentions across content types. |
 | `media_assets` | Media | Reusable media metadata and storage references. | Translated alt text and use-specific join tables attach media to content; lifecycle rules live in ADR 0012. |
@@ -82,7 +81,7 @@ query code.
 | Structured rich content | `project_revisions`, `blog_post_revisions` | Rich bodies stay stored as structural JSON rather than unsafe rendered HTML. |
 | Evidence graph | `content_entities`, mentions, skill joins | Projects, posts, experience, and skills can support each other as proof. |
 | Managed media lifecycle | `media_assets`, media translations, media joins | Media should be uploaded, attached, replaced, retired, and cleaned up through owner-reviewed rules. |
-| Account-backed interaction | Better Auth user/session/account tables, `comments` | Readers can authenticate and comment while preserving discussion context; app account display and role data resolve from `user`. |
+| Account-backed interaction | Better Auth `accounts`/`session`/`logins` tables, `comments` | Readers can authenticate and comment while preserving discussion context; app account display and role data resolve from `accounts`. |
 | Operational safety | `rate_limit`, `wp_honeypot_logs`, migrations | Abuse controls and operational records are part of the product, not afterthoughts. |
 
 ## Update Rules

@@ -2,7 +2,7 @@
 
 Status: Draft source  
 Owner: Thouzands  
-Last updated: 2026-07-02
+Last updated: 2026-07-03
 Target home: FigJam and Confluence
 
 ## Purpose
@@ -25,7 +25,7 @@ flowchart LR
   A -->|"Sign up or sign in"| C["Better Auth session"]
 
   C -->|"Default signup role"| D["Reader"]
-  C -->|"Server role lookup"| E{"user.role"}
+  C -->|"Server role lookup"| E{"accounts.role"}
   E -->|"Reader"| D
   E -->|"Moderator"| F["Moderator"]
   E -->|"Owner"| G["Owner"]

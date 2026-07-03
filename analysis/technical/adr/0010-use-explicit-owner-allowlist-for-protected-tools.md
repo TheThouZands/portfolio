@@ -7,8 +7,8 @@ Owner: Thouzands
 ## Context
 
 The portfolio has reader authentication for comments and a portfolio-specific username/email identity layer. Better Auth
-owns durable users, sessions, accounts, and verification records. The portfolio owns `auth_identities` so product-level
-identifier choices stay separate from provider/session internals.
+owns durable account subjects, sessions, login records, and verification records. The current schema stores the Better
+Auth user model in `accounts` and credential/provider account records in `logins`.
 
 Future moderation and CMS authoring tools need owner-only access. The product does not yet justify client accounts,
 collaborator accounts, public profiles, teams, or a general role/permission system. Adding a role table before those use
