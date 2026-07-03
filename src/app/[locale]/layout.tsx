@@ -63,6 +63,7 @@ export default async function LocaleLayout({
                 account: t("account"),
                 blog: t("blog"),
                 brand: t("brand"),
+                create: t("create"),
                 experience: t("experience"),
                 home: t("home"),
                 login: t("login"),

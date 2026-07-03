@@ -3,10 +3,12 @@
 import Link from "next/link";
 
 import { useAuthSession } from "@/components/auth/AuthSessionProvider";
+import { HeaderCreateLink } from "@/components/auth/HeaderCreateLink";
 import { LogoutButton } from "@/components/auth/LogoutButton";
 
 export type HeaderAccountLabels = {
   account: string;
+  create: string;
   login: string;
   logout: string;
   logoutPending: string;
@@ -34,6 +36,7 @@ export function HeaderAccountIsland({
   return (
     <div aria-live="polite">
       <Link href={`/${locale}/auth`}>{labels.account}</Link>
+      <HeaderCreateLink label={labels.create} locale={locale} />
       <LogoutButton label={labels.logout} pendingLabel={labels.logoutPending} />
     </div>
   );

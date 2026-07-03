@@ -7,6 +7,7 @@
     "account": "Account",
     "blog": "Blog",
     "brand": "ThouZands",
+    "create": "Create",
     "experience": "Experience",
     "home": "Home",
     "login": "Log in",
@@ -15,6 +16,9 @@
     "primaryNavigation": "Primary navigation",
     "projects": "Projects",
     "skills": "Skills"
+  },
+  "CreatePage": {
+    "title": "Create"
   },
   "WhoamiHero": {
     "title": "Thouzands",
