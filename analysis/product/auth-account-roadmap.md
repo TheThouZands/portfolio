@@ -86,15 +86,17 @@ but add a server-authorized data layer:
   approval.
 - Use the island model when the base route remains valid without the privileged control; use route-level server guards
   for writer pages, owner workspaces, authenticated previews, and any route whose identity depends on authorization.
+- Owner-only pages use `requireOwnerOrNotFound()` from `src/auth/roles.ts`; more general protected pages can use
+  `requireAuthRoleOrNotFound(...)` with the minimum role and receive the authorized account for page-specific work.
 - Prefer small authenticated payload reads for post-login island updates; reserve `router.refresh` for cases where the
   route tree itself needs to be recalculated.
 - The first implementation foothold is `usePermissionIsland` plus a current-role tester near logout controls; the
-  locale layout header now proves a persistent parent account island, and its owner-only create link proves a nested
-  no-fetch RBAC child island.
+  locale layout header now proves a persistent parent account island without introducing static header navigation, and
+  its owner-only create link proves a nested no-fetch RBAC child island.
 - Simple no-fetch RBAC shells can use the shared session role hint through `useRoleGate`, but the server action or
   route still repeats the role/capability check before doing anything authoritative.
-- The temporary create page is intentionally empty; the future writer needs a route-level server guard before privileged
-  authoring behavior ships.
+- The temporary create page is intentionally empty but already uses the owner-only route guard; the future writer still
+  needs object-level authorization before privileged authoring behavior ships.
 
 ## Email Identity And Verification Flow
 
