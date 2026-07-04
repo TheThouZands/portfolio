@@ -10,22 +10,23 @@ uniform vec2 u_res;
 uniform float u_time;
 
 const int N = 7;
+const float GLOW_INTENSITY = 0.33;
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
 }
 
 vec3 palette(float t) {
-  vec3 blue = vec3(0.10, 0.35, 0.95);
-  vec3 violet = vec3(0.45, 0.25, 0.95);
-  vec3 cyan = vec3(0.05, 0.70, 0.95);
+  vec3 ember = vec3(0.95, 0.34, 0.08);
+  vec3 amber = vec3(1.00, 0.58, 0.16);
+  vec3 copper = vec3(0.76, 0.22, 0.07);
   float u = fract(t);
 
   if (u < 0.5) {
-    return mix(blue, violet, u * 2.0);
+    return mix(ember, amber, u * 2.0);
   }
 
-  return mix(violet, cyan, (u - 0.5) * 2.0);
+  return mix(amber, copper, (u - 0.5) * 2.0);
 }
 
 void main() {
@@ -58,7 +59,7 @@ void main() {
     float glow = mix(body, disc, 0.30);
     float amp = 0.20 + 0.25 * h3;
 
-    amp *= 0.8 + 0.3 * sin(t * (0.2 + 0.3 * h1) + h2 * 6.2831);
+    amp *= GLOW_INTENSITY * (0.8 + 0.3 * sin(t * (0.2 + 0.3 * h1) + h2 * 6.2831));
     col += palette(h1 + 0.15 * fi) * glow * amp;
   }
 
@@ -78,6 +79,8 @@ void main() {
 }`;
 
 type StopAnimation = () => void;
+
+const fallbackGlowIntensity = 0.33;
 
 function getTimeScale() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0.25 : 1;
@@ -206,13 +209,13 @@ function start2D(canvas: HTMLCanvasElement): StopAnimation {
 
   const drawingContext: CanvasRenderingContext2D = context;
   const colors = [
-    [40, 100, 245],
-    [115, 65, 245],
-    [15, 180, 240],
-    [60, 130, 250],
-    [140, 90, 245],
-    [25, 160, 235],
-    [80, 80, 250],
+    [242, 87, 20],
+    [255, 148, 41],
+    [194, 56, 18],
+    [252, 118, 32],
+    [216, 74, 16],
+    [255, 167, 59],
+    [180, 50, 16],
   ];
   const lights = colors.map((color, index) => ({
     color,
@@ -266,6 +269,7 @@ function start2D(canvas: HTMLCanvasElement): StopAnimation {
         (0.15 + 0.85 * intro);
       const alpha =
         (0.1 + 0.14 * light.h3) *
+        fallbackGlowIntensity *
         (0.8 + 0.3 * Math.sin(time * (0.2 + 0.3 * light.h1)));
       const gradient = drawingContext.createRadialGradient(x, y, 0, x, y, radius);
       const [red, green, blue] = light.color;
