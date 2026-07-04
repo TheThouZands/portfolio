@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-06-29
+Last updated: 2026-07-03
 Target home: Confluence/Jira
 
 ## Purpose
@@ -133,6 +133,7 @@ scope through intake.
 | `PF-702` | Intake should use offer/risk routing questions from this catalog. |
 | `PF-703` | Projects and posts should map proof content to offers. |
 | `PF-705` | Catalog itself should remain maintained as a product/business artifact. |
+| `PF-706` / `KAN-62` | Recruiter experiments should stay bounded to offer-proof demos, strict rate limits, and safe sandbox behavior. |
 
 ## Open Decisions
 

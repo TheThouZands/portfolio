@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-07-03
 Target home: Confluence
 
 ## Purpose
@@ -131,9 +131,11 @@ The first migration should avoid reader report records, reader edit history, tru
 
 | Story | Need |
 | --- | --- |
-| `PF-406` | Define comment moderation states and owner actions. |
-| `PF-407` | Add owner hide/remove moderation workflow. |
-| `PF-408` | Define reader comment edit/delete/report rules. |
+| `PF-406` / `KAN-28` | Define comment moderation states and owner actions. |
+| `PF-407` / `KAN-29` | Add owner hide/remove moderation workflow. |
+| `PF-408` / `KAN-30` | Define reader comment edit/delete/report rules. |
+| `PF-412` / `KAN-56` | Keep moderation authority tied to the shared Reader/Moderator/Owner role model. |
+| `PF-413` / `KAN-57` | Use permission-gated reactive islands for moderation affordances that can appear on otherwise public blog pages. |
 
 ## Open Questions
 

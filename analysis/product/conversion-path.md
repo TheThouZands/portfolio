@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-07-03
 Target home: Confluence
 
 ## Purpose
@@ -91,11 +91,12 @@ form.
 
 | Story | Need |
 | --- | --- |
-| `PF-701` | Define service entry points and CTA copy. |
-| `PF-702` | Add contact/intake route or component. |
-| `PF-703` | Link projects and posts to service wedges. |
-| `PF-704` | Create visitor journey diagram in FigJam. |
-| `PF-705` | Maintain the service offer catalog as the source for offer labels, outputs, and scope boundaries. |
+| `PF-701` / `KAN-51` | Define service entry points and CTA copy. |
+| `PF-702` / `KAN-52` | Add contact/intake route or component. |
+| `PF-703` / `KAN-53` | Link projects and posts to service wedges. |
+| `PF-704` / `KAN-54` | Create visitor journey diagram in FigJam. |
+| `PF-705` / `KAN-55` | Maintain the service offer catalog as the source for offer labels, outputs, and scope boundaries. |
+| `PF-706` / `KAN-62` | Add a bounded recruiter experiment sandbox as a conversion proof surface with strict rate limiting. |
 
 ## Measurement
 

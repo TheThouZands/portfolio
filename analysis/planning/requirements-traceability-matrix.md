@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-06-29
+Last updated: 2026-07-03
 Target home: Confluence/Jira/GitHub
 
 ## Purpose
@@ -44,20 +44,20 @@ the two aligned as the portfolio keeps changing.
 | `FR-001` Public homepage communicates personal/service identity. | Implemented | `PERS-001`, `PERS-004` | `PF-101` | `693b93f`, `5a4bcd2`, `fd7329f`, `a8397c1` | Manual homepage review, route composition review, future visual/accessibility checks. |
 | `FR-002` Localized routing and content. | Implemented | `PERS-001`, `PERS-003`, `PERS-004` | `PF-301`, `PF-302`, `PF-303` | `4f41de7`, `bc4f459`, `7fd2f33`, `154ad9d` | Locale route checks, not-found behavior, localized metadata checks. |
 | `FR-003` CMS portfolio content stored in PostgreSQL with migrations. | Implemented | `PERS-002`, `PERS-003` | `PF-201`, `PF-501` | `734bc11`, `a4e903c`, `819f946`, ADR 0002 | `npm run db:check`, migration review, schema documentation review. |
-| `FR-004` Professional experience entries render from CMS data. | Implemented | `PERS-004` | `PF-102` | `7e4d781`, `fd7329f`, `ce8e785` | Experience route review, empty-state review when content changes. |
+| `FR-004` Professional experience entries render from CMS data. | Implemented | `PERS-004` | `PF-102`, `PF-105` / `KAN-63` | `7e4d781`, `fd7329f`, `ce8e785` | Experience route review, empty-state review, candlestick chart accessibility and mobile fallback review when the planned design slice ships. |
 | `FR-005` Skills render and connect to related experience. | Implemented | `PERS-004` | `PF-103` | `a8397c1`, `453a504`, `0555e11`, `b87e6ab` | Skill list/detail route review, related work query review. |
 | `FR-006` Projects list and detail pages explain concrete work. | Implemented | `PERS-001`, `PERS-002`, `PERS-004` | `PF-104`, `PF-703` | `94504e1`, `403c727`, `51f33ee` | Project route review, structured narrative review, service-proof mapping. |
 | `FR-007` Blog previews, detail pages, and canonical post routes. | Implemented with indirect story coverage | `PERS-004`, `PERS-005` | `PF-302`, `PF-303`, `PF-703` | `0e5d518`, `27c9bc0`, `154ad9d`, `90efd64` | Blog route review, canonical redirect review, metadata review. |
 | `FR-008` Blog and project bodies use structural content instead of unsafe raw HTML. | Implemented | `PERS-002`, `PERS-003` | `PF-203` | `1646dd0`, `41794d8`, `5fbd111`, `5640a29`, ADR 0003 | `tests/structural-content/rendering.test.ts`, renderer fallback review. |
 | `FR-009` Blog posts mention portfolio entities and render related content. | Implemented | `PERS-003`, `PERS-004` | `PF-201`, `PF-703` | `c973703`, `b9ac923`, `b0785ee` | Content entity query review, related content rendering review. |
-| `FR-010` Visitors can sign up, sign in, and sign out. | Implemented | `PERS-005` | `PF-401`, `PF-402` | `85d63d3`, `e9077c4`, `42d0cb8`, `1c96224`, `d843b43` | Auth route/action review, sign-in/sign-out manual check. |
-| `FR-011` Auth flows validate credentials and apply rate limiting. | Implemented | `PERS-005`, owner | `PF-403` | `c0fa0fc`, `7333bb1`, `bbdf312` | `tests/auth/validation.test.ts`, `tests/auth/rate-limit-keys.test.ts`. |
+| `FR-010` Visitors can sign up, sign in, and sign out. | Implemented | `PERS-005` | `PF-401`, `PF-402`, `PF-415` / `KAN-59` | `85d63d3`, `e9077c4`, `42d0cb8`, `1c96224`, `d843b43`, `analysis/product/auth-account-roadmap.md` | Auth route/action review, sign-in/sign-out manual check, future Better Auth OTP/email-link flow review. |
+| `FR-011` Auth flows validate credentials and apply rate limiting. | Implemented | `PERS-005`, owner | `PF-403`, `PF-414` / `KAN-58`, `PF-415` / `KAN-59` | `c0fa0fc`, `7333bb1`, `bbdf312`, `analysis/product/auth-account-roadmap.md` | `tests/auth/validation.test.ts`, `tests/auth/rate-limit-keys.test.ts`, future email sender and OTP/link anti-enumeration checks. |
 | `FR-012` Auth sessions are durable and local session state refreshes after changes. | Implemented/in progress | `PERS-005` | `PF-402` | `6a7ccc8`, `2c0f322`, `d6e1fc6`, `ba94255`, current worktree | Session persistence review, local auth-state refresh check. |
 | `FR-013` Authenticated readers can comment on blog posts. | Implemented/in progress | `PERS-005` | `PF-404` | `4083894`, `1033065`, `cc9073d`, `3d145da`, `94566f8`, current worktree | `tests/blog/comments.test.ts`, comment action/rendering review. |
 | `FR-014` Comment discussion context survives account deletion. | Implemented | `PERS-005` | `PF-405` | `cc9073d`, ADR 0005 | Comment foreign-key behavior review, orphaned author fallback tests. |
 | `FR-015` Branch-isolated Neon database workflows. | Implemented | `PERS-002`, owner | `PF-502` | `5a50321`, `888fbdf` | Manual Neon branch sync, env review, migration build review. |
 | `FR-016` Development-only integration metadata for fixed route placement. | Implemented with indirect story coverage | `PERS-002` | `PF-503` | `d98aff7` | Route placement review, architecture boundary review. |
-| `FR-017` Scoped service entry points are defined for visitors with different service needs. | Documented | `PERS-001` | `PF-701`, `PF-702`, `PF-703`, `PF-704` | `analysis/product/conversion-path.md` | Service entry definition review, future CTA/intake route review. |
+| `FR-017` Scoped service entry points are defined for visitors with different service needs. | Documented | `PERS-001` | `PF-701`, `PF-702`, `PF-703`, `PF-704`, `PF-706` / `KAN-62` | `analysis/product/conversion-path.md` | Service entry definition review, future CTA/intake route review, recruiter experiment sandbox review. |
 | `FR-018` Owner can moderate blog comments without breaking thread context. | Planned | owner, `PERS-005` | `PF-406`, `PF-407`, `PF-408` | `analysis/product/interaction-policy.md`, ADR 0005, ADR 0009, ADR 0010 | Future moderation schema/action/rendering tests. |
 | `FR-019` Owner can author, preview, and publish CMS content through a managed workflow. | Planned | owner, `PERS-003` | `PF-205`, `PF-206`, `PF-207`, `PF-208` | `analysis/product/cms-authoring-workflow.md`, `analysis/product/media-asset-lifecycle.md`, ADR 0011, ADR 0012 | Future owner admin route, authenticated preview, validation, media upload, and audit checks. |
 | `FR-020` Owner-only account capabilities protect moderation and authoring tools. | Planned | owner, `PERS-003` | `PF-409`, `PF-411` | `analysis/product/auth-account-roadmap.md`, ADR 0010, ADR 0011 | Future authorization tests and protected-route review. |
@@ -81,7 +81,7 @@ the two aligned as the portfolio keeps changing.
 | `NFR-012` Conversion claims stay tied to implementation evidence. | Documented | `PERS-001`, `PERS-002`, `PERS-004` | `PF-701`, `PF-702`, `PF-703`, `PF-704` | `analysis/product/conversion-path.md`, `analysis/product/positioning-brief.md` | Service CTA review, proof-to-service mapping, future intake route check. |
 | `NFR-013` Future work stays traceable to personas, risks, requirements, and validation. | Implemented baseline | owner, `PERS-002` | `PF-605`, `PF-606`, `PF-607`, `PF-608`, `PF-609`, `PF-610` | Planning suite, this matrix | Traceability checklist, PR/change template, review cadence. |
 | `NFR-014` CMS authoring preserves structural safety, localization, and previewability. | Planned | owner, `PERS-003` | `PF-203`, `PF-205`, `PF-206`, `PF-207`, `PF-208` | `analysis/product/cms-authoring-workflow.md`, `analysis/product/media-asset-lifecycle.md`, ADR 0003, ADR 0011, ADR 0012 | Future authoring validation tests, preview workflow review, media cleanup reference checks. |
-| `NFR-015` Auth scope grows only with reader, owner, or client product needs. | Planned | owner, `PERS-005` | `PF-409`, `PF-410`, `PF-411` | `analysis/product/auth-account-roadmap.md`, ADR 0010 | Future account-scope decision review, authorization tests. |
+| `NFR-015` Auth scope grows only with reader, owner, or client product needs. | Planned | owner, `PERS-005` | `PF-409`, `PF-410`, `PF-411`, `PF-414` / `KAN-58`, `PF-415` / `KAN-59`, `PF-416` / `KAN-60`, `PF-417` / `KAN-61` | `analysis/product/auth-account-roadmap.md`, ADR 0010 | Future account-scope decision review, authorization tests, email/profile scope review. |
 | `NFR-016` API boundaries distinguish internal app behavior from public contracts before OpenAPI. | Documented | `PERS-002` | `PF-506` | `analysis/technical/openapi.md`, `analysis/technical/api-surface-inventory.md`, ADR 0006 | API inventory review before adding public route contracts or OpenAPI files. |
 
 ## Coverage Notes

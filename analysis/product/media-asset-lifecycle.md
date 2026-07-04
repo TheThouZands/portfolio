@@ -2,7 +2,7 @@
 
 Status: Draft
 Owner: Thouzands
-Last updated: 2026-06-29
+Last updated: 2026-07-03
 Target home: Confluence/Jira
 
 ## Purpose
@@ -84,8 +84,9 @@ Do not add those fields until owner upload or cleanup tooling is being implement
 
 | Story | Need |
 | --- | --- |
-| `PF-207` | Media lifecycle decision is defined before upload tooling. |
-| `PF-208` | Owner-only media upload, attachment, replacement, and cleanup tooling remains future implementation work. |
+| `PF-207` / `KAN-18` | Media lifecycle decision is defined before upload tooling. |
+| `PF-208` / `KAN-19` | Owner-only media upload, attachment, replacement, and cleanup tooling remains future implementation work. |
+| `PF-416` / `KAN-60` | Reader profile pictures should reuse the managed upload lifecycle rather than creating a second unmanaged media path. |
 
 ## Deferred Decisions
 

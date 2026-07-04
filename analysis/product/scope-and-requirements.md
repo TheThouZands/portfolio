@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-07-03
 Target home: Confluence
 
 ## Product Scope
@@ -60,6 +60,16 @@ content editing, and stronger moderation/observability.
 | NFR-014 | CMS authoring should preserve structural content safety, localization, and previewability. | Planned | `analysis/product/cms-authoring-workflow.md`, `analysis/product/media-asset-lifecycle.md`, ADR 0003, ADR 0011, ADR 0012 | Authoring workflow should not weaken the structural content or media accessibility contracts. |
 | NFR-015 | Auth scope should grow only when tied to reader, owner, or client product needs. | Planned | `analysis/product/auth-account-roadmap.md`, ADR 0010 | Avoid building generic account features or role tables without a portfolio use case. |
 | NFR-016 | API boundaries should distinguish internal app routes/actions from public contracts before creating OpenAPI. | Documented | `analysis/technical/openapi.md`, `analysis/technical/api-surface-inventory.md`, ADR 0006 | Do not promote internal framework or server-action behavior into public API promises by accident. |
+
+## Current Jira-Backed Requirement Links
+
+| Requirement area | Jira stories | Confluence context |
+| --- | --- | --- |
+| Public experience visualization | `PF-105` / `KAN-63` | Requirements traceability and public portfolio discovery docs should guide the horizontal candlestick-style experience chart. |
+| CMS authoring and media workflows | `PF-206` / `KAN-17`, `PF-208` / `KAN-19`, `PF-411` / `KAN-33` | CMS Authoring Workflow, Media Asset Lifecycle, and Auth And Account Roadmap define the protected authoring boundaries. |
+| Comment moderation and reader controls | `PF-408` / `KAN-30` | Interaction Policy defines deferred reader edit/delete/report behavior before implementation. |
+| Email auth, profile pictures, and notifications | `PF-414` / `KAN-58`, `PF-415` / `KAN-59`, `PF-416` / `KAN-60`, `PF-417` / `KAN-61` | Auth And Account Roadmap and Media Asset Lifecycle keep these additions tied to real account/product needs. |
+| Service conversion and recruiter experiments | `PF-702` / `KAN-52`, `PF-706` / `KAN-62` | Conversion Path Brief and Service Offer Catalog define the intake and bounded experiment context. |
 
 ## Out Of Current Scope
 

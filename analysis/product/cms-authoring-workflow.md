@@ -2,7 +2,7 @@
 
 Status: Draft  
 Owner: Thouzands  
-Last updated: 2026-06-29  
+Last updated: 2026-07-03
 Target home: Confluence/Jira
 
 ## Purpose
@@ -97,9 +97,12 @@ Do not add these fields one by one without a migration plan.
 
 | Story | Need |
 | --- | --- |
-| `PF-205` | CMS authoring workflow and first implementation boundary are defined. |
-| `PF-206` | Owner-only draft, preview, and publish flow is bounded; implementation remains future work. |
-| `PF-207` | Media asset lifecycle is defined before upload tooling. |
+| `PF-205` / `KAN-16` | CMS authoring workflow and first implementation boundary are defined. |
+| `PF-206` / `KAN-17` | Owner-only draft, preview, and publish flow is bounded; implementation remains future work. |
+| `PF-207` / `KAN-18` | Media asset lifecycle is defined before upload tooling. |
+| `PF-208` / `KAN-19` | Owner-only media upload tooling should follow the managed media lifecycle when authoring surfaces ship. |
+| `PF-411` / `KAN-33` | Owner auth must be connected to moderation and CMS authoring workflows before protected authoring routes become real tools. |
+| `PF-412` / `KAN-56` | Shared Reader/Moderator/Owner role storage supplies the first authorization vocabulary for owner-only authoring. |
 
 ## Open Questions
 

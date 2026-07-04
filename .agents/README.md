@@ -7,6 +7,7 @@ analysis suite; they point agents to the right source files and sync rules.
 
 | File | Use |
 | --- | --- |
+| `atlassian-rest-helper.md` | How to use the ignored local Atlassian REST helper when the connector lacks a write operation. |
 | `cross-tool-sync.md` | Required read before changing Git, Confluence, Jira, or FigJam analysis artifacts. |
 | `detailing-backlog.md` | Small implementation/detailing notes that should not be lost between turns. |
 

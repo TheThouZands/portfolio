@@ -59,7 +59,7 @@ Execution checklist: `analysis/planning/external-setup-execution-runbook.md`.
 | Batch | Scope | Current result |
 | --- | --- | --- |
 | Batch 1 | Confluence root, product, planning, Jira, design, technical, and operations pages. | All 58 current rows in `analysis/confluence/page-manifest.csv` are published with Confluence URLs. |
-| Batch 2 | Jira project `KAN`, epics, story import, key mapping, and status mapping. | Seven epics and 50 stories exist as `KAN-1` through `KAN-57`; 40 implemented stories are `Done`, `KAN-24`, `KAN-26`, `KAN-56`, and `KAN-57` are `In Progress`, and planned stories `KAN-17`, `KAN-19`, `KAN-29`, `KAN-30`, `KAN-33`, and `KAN-52` remain `To Do`. |
+| Batch 2 | Jira project `KAN`, epics, story import, key mapping, and status mapping. | Seven epics and 56 stories exist as `KAN-1` through `KAN-63`; 45 implemented stories are `Done`, no stories are currently `In Progress`, and planned stories `KAN-17`, `KAN-19`, `KAN-30`, `KAN-33`, `KAN-52`, and `KAN-58` through `KAN-63` remain `To Do`. |
 | Batch 3 | Generated FigJam diagrams for the current Mermaid source inventory. | All nine current diagram rows are generated in the FigJam board and recorded in the section manifest and creation log. |
 | Batch 4 | Technical reference pages or links. | ADR, schema, migration, API surface, verification, and traceability pages are published while Git remains authoritative. |
 
