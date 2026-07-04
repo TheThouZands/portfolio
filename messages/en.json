@@ -13,6 +13,9 @@
   "CreatePage": {
     "title": "Create"
   },
+  "LandingPage": {
+    "building": "Building..."
+  },
   "WhoamiHero": {
     "title": "Thouzands",
     "values": [

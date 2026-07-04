@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import styles from "./oobe-landing.module.scss";
 
@@ -296,6 +297,7 @@ function start2D(canvas: HTMLCanvasElement): StopAnimation {
 }
 
 export default function OobeLandingHero() {
+  const t = useTranslations("LandingPage");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -309,14 +311,12 @@ export default function OobeLandingHero() {
   }, []);
 
   return (
-    <main className={styles.hero} aria-labelledby="production-landing-title">
+    <section className={styles.container} aria-labelledby="production-landing-title">
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-      <div className={styles.content}>
-        <h1 id="production-landing-title" className={styles.title}>
-          Building...
-        </h1>
-        <span className={styles.brand}>TZ</span>
-      </div>
-    </main>
+      <h1 id="production-landing-title" className={styles.main}>
+        {t("building")}
+      </h1>
+      <span className={styles.brand}>TZ</span>
+    </section>
   );
 }

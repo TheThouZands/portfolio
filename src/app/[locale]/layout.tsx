@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
-import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Instrument_Serif, Supermercado_One } from "next/font/google";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { notFound } from "next/navigation";
 import OobeLandingHero from "@/components/heroes/oobe-landing";
 import { routing } from "@/i18n/routing";
+import styles from "./layout.module.scss";
+
+const instrument = Instrument_Serif({
+  weight: ["400"],
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+});
+
+const supermercado = Supermercado_One({
+  weight: ["400"],
+  variable: "--font-supermercado-one",
+  subsets: ["latin"],
+});
 
 type LocaleLayoutProps = Readonly<{
   children: React.ReactNode;
@@ -43,11 +61,18 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body style={{ margin: 0, background: "#02040c" }}>
-        <OobeLandingHero />
+      <body
+        className={`${instrument.variable} ${supermercado.variable} ${styles.body}`}
+      >
+        <NextIntlClientProvider messages={messages}>
+          <main className={styles.content}>
+            <OobeLandingHero />
+          </main>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

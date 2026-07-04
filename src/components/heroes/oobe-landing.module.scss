@@ -1,12 +1,13 @@
-.hero {
+.container {
   position: relative;
   min-height: 100svh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  display: grid;
-  place-items: center;
-  padding: clamp(2rem, 7vw, 5rem);
   background: #02040c;
-  color: #ffffff;
   isolation: isolate;
 }
 
@@ -19,7 +20,7 @@
   z-index: -2;
 }
 
-.hero::after {
+.container::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -30,28 +31,17 @@
   pointer-events: none;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.85rem;
-  text-align: center;
-  user-select: none;
-}
-
-.title {
+.main {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 400;
-  line-height: 0.95;
-  text-shadow: 0 0 48px rgb(170 195 255 / 36%);
+  font-size: 72px;
 }
 
 .brand {
-  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(1.25rem, 3vw, 1.55rem);
-  color: rgb(235 240 255 / 68%);
-  text-shadow: 0 0 24px rgb(120 170 255 / 28%);
+  position: relative;
+  z-index: 1;
+  font-size: 24px;
+  font-family: var(--font-supermercado-one), serif;
+  color: #777777;
 }
