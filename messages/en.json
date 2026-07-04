@@ -1,0 +1,94 @@
+{
+  "Metadata": {
+    "title": "ThouZands - Fullstack Engineer - Portfolio Site",
+    "description": "Personal portfolio site"
+  },
+  "SiteHeader": {
+    "account": "Account",
+    "create": "Create",
+    "login": "Log in",
+    "logout": "Log out",
+    "logoutPending": "Logging out..."
+  },
+  "CreatePage": {
+    "title": "Create"
+  },
+  "LandingPage": {
+    "building": "Building..."
+  },
+  "WhoamiHero": {
+    "title": "Thouzands",
+    "values": [
+      "Systems",
+      "Stability",
+      "Maintainability",
+      "Responsiveness",
+      "Accessibility",
+      "Efficiency",
+      "Tools, not just websites"
+    ]
+  },
+  "HomePage": {
+    "experienceCurrent": "Present",
+    "experienceTitle": "Experience",
+    "featuredProjectsTitle": "Featured projects",
+    "introTitle": "I am Paulo S\u00e1nchez",
+    "introDescription": "Fullstack Engineer with 2 years of experience building web-based systems",
+    "featuredPostsTitle": "Featured posts"
+  },
+  "Experience": {
+    "allJobs": "All jobs",
+    "companyContextTitle": "Company context",
+    "current": "Present",
+    "highlightsTitle": "Highlights",
+    "mediaTitle": "Media",
+    "metadataTitle": "{positionTitle} at {companyName}",
+    "notFoundTitle": "Experience not found",
+    "notFoundDescription": "We could not find that experience entry.",
+    "overviewTitle": "Overview",
+    "skillsTitle": "Skills",
+    "title": "Experience"
+  },
+  "Skills": {
+    "notFoundTitle": "I haven't learnt that yet",
+    "notFoundDescription": "That skill is not in the portfolio yet.",
+    "relatedJobsTitle": "Related jobs",
+    "title": "Skills"
+  },
+  "Projects": {
+    "allProjects": "All projects",
+    "highlightsTitle": "Highlights",
+    "notFoundTitle": "Project not found",
+    "notFoundDescription": "We could not find that project.",
+    "overviewTitle": "Overview",
+    "skillsTitle": "Skills",
+    "title": "Projects"
+  },
+  "NotFoundPage": {
+    "title": "404 - Page Not Found"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "retry": "Try again"
+  },
+  "GlobalError": {
+    "title": "Something went wrong globally!",
+    "retry": "Try again"
+  },
+  "Blog": {
+    "title": "Blog",
+    "allPosts": "All Posts",
+    "commentsTitle": "Comments",
+    "commentAuthorFallback": "Someone",
+    "commentBodyLabel": "Comment",
+    "commentBodyPlaceholder": "Write a comment",
+    "commentPostButton": "Post",
+    "commentReplyButton": "Reply",
+    "commentReplyCancelButton": "Cancel reply",
+    "commentPosterPrefix": "Posting as",
+    "commentPostingButton": "Posting...",
+    "mentioningPostsTitle": "As Seen In",
+    "notFoundTitle": "Blog post not found",
+    "notFoundDescription": "We could not find that blog post."
+  }
+}

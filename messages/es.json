@@ -1,0 +1,94 @@
+{
+  "Metadata": {
+    "title": "ThouZands - Ingeniero Fullstack - Portafolio",
+    "description": "Sitio personal de portafolio"
+  },
+  "SiteHeader": {
+    "account": "Cuenta",
+    "create": "Crear",
+    "login": "Iniciar sesion",
+    "logout": "Cerrar sesion",
+    "logoutPending": "Cerrando sesion..."
+  },
+  "CreatePage": {
+    "title": "Crear"
+  },
+  "LandingPage": {
+    "building": "En construcción..."
+  },
+  "WhoamiHero": {
+    "title": "Thouzands",
+    "values": [
+      "Sistemas",
+      "Estabilidad",
+      "Mantenibilidad",
+      "Adaptabilidad",
+      "Accesibilidad",
+      "Eficiencia",
+      "Herramientas, no solo sitios web"
+    ]
+  },
+  "HomePage": {
+    "experienceCurrent": "Presente",
+    "experienceTitle": "Experiencia",
+    "featuredProjectsTitle": "Proyectos destacados",
+    "introTitle": "Soy Paulo S\u00e1nchez",
+    "introDescription": "Ingeniero fullstack con 2 a\u00f1os de experiencia creando sistemas web",
+    "featuredPostsTitle": "Publicaciones destacadas"
+  },
+  "Experience": {
+    "allJobs": "Todos los trabajos",
+    "companyContextTitle": "Contexto de la compa\u00f1\u00eda",
+    "current": "Presente",
+    "highlightsTitle": "Puntos destacados",
+    "mediaTitle": "Medios",
+    "metadataTitle": "{positionTitle} en {companyName}",
+    "notFoundTitle": "Experiencia no encontrada",
+    "notFoundDescription": "No encontramos esa entrada de experiencia.",
+    "overviewTitle": "Resumen",
+    "skillsTitle": "Habilidades",
+    "title": "Experiencia"
+  },
+  "Skills": {
+    "notFoundTitle": "A\u00fan no he aprendido eso",
+    "notFoundDescription": "Esa habilidad todav\u00eda no est\u00e1 en el portafolio.",
+    "relatedJobsTitle": "Trabajos relacionados",
+    "title": "Habilidades"
+  },
+  "Projects": {
+    "allProjects": "Todos los proyectos",
+    "highlightsTitle": "Puntos destacados",
+    "notFoundTitle": "Proyecto no encontrado",
+    "notFoundDescription": "No encontramos ese proyecto.",
+    "overviewTitle": "Resumen",
+    "skillsTitle": "Habilidades",
+    "title": "Proyectos"
+  },
+  "NotFoundPage": {
+    "title": "404 - P\u00e1gina no encontrada"
+  },
+  "Error": {
+    "title": "Algo sali\u00f3 mal",
+    "retry": "Intentar de nuevo"
+  },
+  "GlobalError": {
+    "title": "Algo sali\u00f3 mal globalmente.",
+    "retry": "Intentar de nuevo"
+  },
+  "Blog": {
+    "title": "Blog",
+    "allPosts": "Todas las publicaciones",
+    "commentsTitle": "Comentarios",
+    "commentAuthorFallback": "Alguien",
+    "commentBodyLabel": "Comentario",
+    "commentBodyPlaceholder": "Escribe un comentario",
+    "commentPostButton": "Publicar",
+    "commentReplyButton": "Responder",
+    "commentReplyCancelButton": "Cancelar respuesta",
+    "commentPosterPrefix": "Publicando como",
+    "commentPostingButton": "Publicando...",
+    "mentioningPostsTitle": "Visto en",
+    "notFoundTitle": "Publicacion no encontrada",
+    "notFoundDescription": "No encontramos esa publicacion."
+  }
+}

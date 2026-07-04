@@ -1,4 +1,6 @@
+import { sql } from "drizzle-orm";
 import {
+  type AnyPgColumn,
   bigint,
   boolean,
   date,
@@ -12,21 +14,17 @@ import {
   text,
   timestamp,
   uniqueIndex,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 import { geometry } from "drizzle-orm/pg-core/columns/postgis_extension/geometry";
+import type { StructuralContentDocument } from "../cms/structural-content/types";
 
-/** Asset usage extracted from a writer document for validation, rendering, and preloading. */
-export type WriterAssetReference = {
+/** Asset usage extracted from structural content for validation, rendering, and preloading. */
+export type StructuralContentAssetReference = {
   assetId: number;
   blockId?: string;
   role: "cover" | "inline" | "gallery" | "attachment" | "logo" | "screenshot";
-};
-
-/** Editable source shape produced by the custom writer before it is compiled to HTML/CSS. */
-export type WriterDocument = {
-  type: "doc";
-  blocks: Record<string, unknown>[];
 };
 
 /** Captured request details from the fake WordPress installer. */
@@ -41,6 +39,15 @@ export const locationType = pgEnum("location_type", ["remote", "hybrid", "onsite
 
 /** Publication lifecycle shared by CMS-managed content. */
 export const statusCMS = pgEnum("status_cms", ["published", "hidden", "draft", "testing"]);
+
+/** Common identity types for portfolio objects that can be referenced by rich content. */
+export const contentEntityType = pgEnum("content_entity_type", [
+  "blog_post",
+  "company",
+  "experience",
+  "project",
+  "skill",
+]);
 
 /** Employment relationship used to classify CV experience. */
 export const employmentType = pgEnum("employment_type", [
@@ -72,15 +79,104 @@ export const mediaRole = pgEnum("media_role", [
 /** Access mode for assets stored in Vercel Blob. */
 export const blobAccess = pgEnum("blob_access", ["public", "private"]);
 
-/** Existing simple comments table from the starting database. */
-export const comments = pgTable("comments", {
-  comment: text(),
-  id: bigint({ mode: "number" })
-    .primaryKey()
-    .generatedByDefaultAsIdentity({
-      name: "comments_id_seq",
+/** Account role used for server-side authorization decisions. */
+export const authRole = pgEnum("auth_role", ["reader", "moderator", "owner"]);
+
+/** Better Auth user model, stored as the portfolio account subject. */
+export const accounts = pgTable(
+  "accounts",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    name: text().notNull(),
+    username: varchar({ length: 80 }).notNull(),
+    email: text().notNull(),
+    emailVerified: boolean("email_verified").notNull().default(false),
+    image: text(),
+    role: authRole().notNull().default("reader"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("accounts_email_idx").on(table.email),
+    uniqueIndex("accounts_username_idx").on(table.username),
+  ],
+);
+
+/** Better Auth database-backed session source of truth. */
+export const session = pgTable(
+  "session",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    token: text().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => accounts.id, { onDelete: "cascade" }),
+  },
+  (table) => [
+    uniqueIndex("session_token_idx").on(table.token),
+    index("session_user_id_idx").on(table.userId),
+  ],
+);
+
+/** Better Auth provider or credential login record. */
+export const logins = pgTable(
+  "logins",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => accounts.id, { onDelete: "cascade" }),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at", {
+      withTimezone: true,
     }),
-});
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", {
+      withTimezone: true,
+    }),
+    scope: text(),
+    password: text(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("logins_user_id_idx").on(table.userId),
+  ],
+);
+
+/** Better Auth short-lived verification values for flows such as email checks. */
+export const verification = pgTable(
+  "verification",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    identifier: text().notNull(),
+    value: text().notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("verification_identifier_idx").on(table.identifier),
+  ],
+);
+
+/** Better Auth database-backed request rate limit buckets. */
+export const rateLimit = pgTable(
+  "rate_limit",
+  {
+    key: text().primaryKey(),
+    count: integer().notNull(),
+    lastRequest: bigint("last_request", { mode: "number" }).notNull(),
+  },
+);
 
 /** Rate-limited capture of /wp-admin/install.php probes and submitted payloads. */
 export const wpHoneypotLogs = pgTable(
@@ -114,6 +210,21 @@ export const wpHoneypotLogs = pgTable(
       table.ip_address,
       table.created_at,
     ),
+  ],
+);
+
+/** Shared identity row for content that can be referenced across CMS surfaces. */
+export const contentEntities = pgTable(
+  "content_entities",
+  {
+    id: integer().primaryKey().generatedByDefaultAsIdentity({
+      name: "content_entities_id_seq",
+    }),
+    type: contentEntityType().notNull(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("content_entities_type_idx").on(table.type),
   ],
 );
 
@@ -167,6 +278,9 @@ export const companies = pgTable(
   "companies",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     company_name: varchar({ length: 100 }).notNull(),
     slug: varchar({ length: 120 }).notNull(),
     website_url: text(),
@@ -176,6 +290,7 @@ export const companies = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("companies_entity_id_idx").on(table.entity_id),
     uniqueIndex("companies_slug_idx").on(table.slug),
   ],
 );
@@ -203,6 +318,9 @@ export const experience = pgTable(
   "experience",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     position_title: varchar({ length: 100 }).notNull(),
     employment_type: employmentType().notNull().default("full_time"),
     is_current: boolean().notNull().default(false),
@@ -221,6 +339,7 @@ export const experience = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("experience_entity_id_idx").on(table.entity_id),
     index("experience_company_id_idx").on(table.company_id),
     index("experience_status_sort_order_idx").on(table.status, table.sort_order),
   ],
@@ -283,12 +402,17 @@ export const skills = pgTable(
   "skills",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     name: varchar({ length: 80 }).notNull(),
     slug: varchar({ length: 100 }).notNull(),
     category: varchar({ length: 80 }),
+    description: text(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("skills_entity_id_idx").on(table.entity_id),
     uniqueIndex("skills_slug_idx").on(table.slug),
   ],
 );
@@ -303,6 +427,7 @@ export const skillTranslations = pgTable(
     locale: varchar({ length: 16 }).notNull(),
     name: varchar({ length: 80 }).notNull(),
     category_label: varchar({ length: 80 }),
+    description: text(),
   },
   (table) => [
     primaryKey({ columns: [table.skill_id, table.locale] }),
@@ -365,11 +490,142 @@ export const experienceMediaTranslations = pgTable(
   ],
 );
 
+/** Portfolio project/case-study metadata shown in project lists and detail pages. */
+export const projects = pgTable(
+  "projects",
+  {
+    id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
+    title: varchar({ length: 160 }).notNull(),
+    short_description: text(),
+    overview: text(),
+    cover_asset_id: integer().references(() => mediaAssets.id),
+    status: statusCMS().notNull().default("draft"),
+    featured: boolean().notNull().default(false),
+    started_on: date(),
+    completed_on: date(),
+    sort_order: integer().notNull().default(0),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("projects_entity_id_idx").on(table.entity_id),
+    index("projects_status_sort_order_idx").on(table.status, table.sort_order),
+    index("projects_featured_status_sort_order_idx").on(
+      table.featured,
+      table.status,
+      table.sort_order,
+    ),
+  ],
+);
+
+/** Locale-specific project metadata while keeping shared project identity stable. */
+export const projectTranslations = pgTable(
+  "project_translations",
+  {
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    title: varchar({ length: 160 }).notNull(),
+    short_description: text(),
+    overview: text(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_id, table.locale] }),
+  ],
+);
+
+/** Ordered project highlights rendered as quick evidence before long-form content. */
+export const projectHighlights = pgTable(
+  "project_highlights",
+  {
+    id: smallserial().primaryKey(),
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    body: text().notNull(),
+    sort_order: integer().notNull().default(0),
+  },
+  (table) => [
+    index("project_highlights_project_id_idx").on(table.project_id),
+  ],
+);
+
+/** Locale-specific body text for an ordered project highlight. */
+export const projectHighlightTranslations = pgTable(
+  "project_highlight_translations",
+  {
+    project_highlight_id: integer()
+      .references(() => projectHighlights.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull(),
+    body: text().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_highlight_id, table.locale] }),
+    index("project_highlight_translations_locale_idx").on(table.locale),
+  ],
+);
+
+/** Many-to-many link between portfolio projects and reusable skills. */
+export const projectSkills = pgTable(
+  "project_skills",
+  {
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    skill_id: integer()
+      .references(() => skills.id, { onDelete: "cascade" })
+      .notNull(),
+    sort_order: integer().notNull().default(0),
+  },
+  (table) => [
+    primaryKey({ columns: [table.project_id, table.skill_id] }),
+    index("project_skills_skill_id_idx").on(table.skill_id),
+  ],
+);
+
+/** Versioned project narrative content, storing editable source plus rendered text-only output. */
+export const projectRevisions = pgTable(
+  "project_revisions",
+  {
+    id: smallserial().primaryKey(),
+    project_id: integer()
+      .references(() => projects.id, { onDelete: "cascade" })
+      .notNull(),
+    locale: varchar({ length: 16 }).notNull().default("en"),
+    version: integer().notNull().default(1),
+    is_current: boolean().notNull().default(false),
+    source_json: jsonb().$type<StructuralContentDocument>().notNull(),
+    rendered_text: text().notNull(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("project_revisions_project_id_idx").on(table.project_id),
+    uniqueIndex("project_revisions_project_locale_version_idx").on(
+      table.project_id,
+      table.locale,
+      table.version,
+    ),
+    // At most one current revision per project + locale.
+    uniqueIndex("project_revisions_current_idx")
+      .on(table.project_id, table.locale)
+      .where(sql`${table.is_current}`),
+  ],
+);
+
 /** Blog/article metadata; the body itself lives in revision records. */
 export const blogPosts = pgTable(
   "blog_posts",
   {
     id: smallserial().primaryKey(),
+    entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
     title: varchar({ length: 160 }).notNull(),
     slug: varchar({ length: 180 }).notNull(),
     excerpt: text(),
@@ -381,6 +637,7 @@ export const blogPosts = pgTable(
     updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
+    uniqueIndex("blog_posts_entity_id_idx").on(table.entity_id),
     uniqueIndex("blog_posts_slug_idx").on(table.slug),
     index("blog_posts_featured_status_published_at_idx").on(
       table.featured,
@@ -388,6 +645,40 @@ export const blogPosts = pgTable(
       table.published_at,
     ),
     index("blog_posts_status_published_at_idx").on(table.status, table.published_at),
+  ],
+);
+
+/** Reader comments attached to a blog post, optionally nested as replies. */
+export const comments = pgTable(
+  "comments",
+  {
+    id: bigint({ mode: "number" })
+      .primaryKey()
+      .generatedByDefaultAsIdentity({
+        name: "comments_id_seq",
+      }),
+    blog_post_id: integer()
+      .references(() => blogPosts.id, { onDelete: "cascade" })
+      .notNull(),
+    userId: uuid("user_id").references(() => accounts.id, { onDelete: "set null" }),
+    parent_comment_id: bigint({ mode: "number" }).references(
+      (): AnyPgColumn => comments.id,
+      { onDelete: "cascade" },
+    ),
+    body: text("comment").notNull(),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    updated_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("comments_blog_post_created_at_idx").on(
+      table.blog_post_id,
+      table.created_at,
+    ),
+    index("comments_user_id_idx").on(table.userId),
+    index("comments_parent_comment_created_at_idx").on(
+      table.parent_comment_id,
+      table.created_at,
+    ),
   ],
 );
 
@@ -410,7 +701,7 @@ export const blogPostTranslations = pgTable(
   ],
 );
 
-/** Versioned writer output for a blog post, keeping editable source plus compiled HTML/CSS. */
+/** Versioned structural content for a blog post, keeping editable source plus extracted assets. */
 export const blogPostRevisions = pgTable(
   "blog_post_revisions",
   {
@@ -421,10 +712,8 @@ export const blogPostRevisions = pgTable(
     locale: varchar({ length: 16 }).notNull().default("en"),
     version: integer().notNull().default(1),
     is_current: boolean().notNull().default(false),
-    source_json: jsonb().$type<WriterDocument>().notNull(),
-    rendered_html: text().notNull(),
-    rendered_css: text(),
-    asset_manifest: jsonb().$type<WriterAssetReference[]>().notNull(),
+    source_json: jsonb().$type<StructuralContentDocument>().notNull(),
+    asset_manifest: jsonb().$type<StructuralContentAssetReference[]>().notNull(),
     created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
     compiled_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
@@ -434,6 +723,37 @@ export const blogPostRevisions = pgTable(
       table.blog_post_id,
       table.locale,
       table.version,
+    ),
+    // At most one current revision per blog post + locale.
+    uniqueIndex("blog_post_revisions_current_idx")
+      .on(table.blog_post_id, table.locale)
+      .where(sql`${table.is_current}`),
+  ],
+);
+
+/** Entity references extracted from rendered blog writer content. */
+export const blogPostMentions = pgTable(
+  "blog_post_mentions",
+  {
+    id: integer().primaryKey().generatedByDefaultAsIdentity({
+      name: "blog_post_mentions_id_seq",
+    }),
+    blog_post_revision_id: integer()
+      .references(() => blogPostRevisions.id, { onDelete: "cascade" })
+      .notNull(),
+    mentioned_entity_id: integer()
+      .references(() => contentEntities.id, { onDelete: "cascade" })
+      .notNull(),
+    source_block_id: varchar({ length: 120 }),
+    sort_order: integer().notNull().default(0),
+    created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("blog_post_mentions_revision_id_idx").on(table.blog_post_revision_id),
+    index("blog_post_mentions_entity_id_idx").on(table.mentioned_entity_id),
+    uniqueIndex("blog_post_mentions_revision_entity_idx").on(
+      table.blog_post_revision_id,
+      table.mentioned_entity_id,
     ),
   ],
 );

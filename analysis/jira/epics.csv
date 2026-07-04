@@ -1,0 +1,8 @@
+Issue Type,Epic Name,Summary,Description,Priority,Labels,Status
+Epic,"PF-E01 Public Portfolio Discovery","PF-E01 Public Portfolio Discovery","Public portfolio discovery across homepage, experience, skills, projects, and proof browsing.","High","portfolio","Implemented"
+Epic,"PF-E02 CMS Content Foundation","PF-E02 CMS Content Foundation","CMS content model, structured content, seed data, authoring workflow, and media lifecycle planning.","High","cms,db","Implemented/in progress"
+Epic,"PF-E03 Internationalized Content","PF-E03 Internationalized Content","Localized routes, canonical blog redirects, translated slugs, and localized metadata.","High","i18n,cms","Implemented"
+Epic,"PF-E04 Authenticated Interaction","PF-E04 Authenticated Interaction","Reader identity, sessions, auth hardening, comments, moderation planning, and owner account controls.","High","auth,blog,security","Implemented/in progress"
+Epic,"PF-E05 Quality Operations And Architecture","PF-E05 Quality Operations And Architecture","Migration workflow, Neon branch operations, architecture boundaries, tests, and analysis maintenance.","High","db,ops,docs","Implemented"
+Epic,"PF-E06 Forward Planning","PF-E06 Forward Planning","Confluence, Jira, FigJam, ADR, stakeholder, risk, validation, traceability, and operations planning.","Medium","docs,requirements,ops","Implemented"
+Epic,"PF-E07 Service Conversion","PF-E07 Service Conversion","Service offers, conversion path, intake flow, proof linking, and visitor journey diagrams.","High","portfolio,docs","Implemented/in progress"

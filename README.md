@@ -1,6 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thouzands' fullstack portfolio
+
+This is a personal portfolio that displays fullstack capabilities using Next.js, and PostgreSQL via Neon serverless DB, handled with Drizzle ORM for DB versioning bound to repo.
+
+It is hosted in Vercel, but is fully runnable as standalone server, only needs adapting (if not using neon, switching driver dependency), likewise, via Drizzle, it is compatible with self-served databases.
 
 ## Getting Started
+
+Use the project Node version or upper before installing or running scripts:
+
+```bash
+nvm use 24
+```
+
+On some Windows setups, bare `nvm use` does not read `.nvmrc`, so `npm run node:use` is available as a project shortcut. This repo also includes `.nvmrc` and `.node-version` for tools that read those conventions.
 
 First, run the development server:
 
@@ -16,21 +28,36 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Migrations
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Drizzle is configured for a Neon PostgreSQL database in `.env.local` via `PF_DATABASE_URL_UNPOOLED` or `PF_DATABASE_URL`.
 
-## Learn More
+The source of truth for schema changes is `src/db/schema.ts`. Make table additions, removals, and modifications there, generate a reviewable SQL migration with `npm run db:generate`, then apply committed migrations with `npm run db:migrate`.
 
-To learn more about Next.js, take a look at the following resources:
+Use `npm run db:pull` only when you need to introspect an existing database state for review or bootstrap work. Normal development should stay codebase-first so `drizzle/` contains the SQL migration history and snapshots that belong in version control.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Vercel uses `npm run build:vercel`, which applies committed Drizzle migrations before `next build`. With Neon preview branching enabled, preview deployments receive branch-scoped database URLs from Neon before that migration step runs. The local sync workflow uses the same `preview/<git-branch>` Neon branch naming convention, so local development and Vercel preview deployments share one database branch per Git branch. Production deployments continue to use the Vercel production database environment after changes land on the production Git branch.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For local branch-isolated development, create a Neon API key and make it available as `NEON_API_KEY` in your shell or ignored `.env.local`, then run:
 
-## Deploy on Vercel
+```bash
+npm run db:branch:sync
+npm run db:migrate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The sync command creates or reuses a Neon branch named `preview/<current-git-branch>`, wakes an archived branch with a lightweight authenticated query when Neon reports it as archived, writes the branch connection URLs to `.env.local`, and leaves committed env files untouched. Use `npm run db:branch:migrate` to do both steps together. To target an existing legacy local branch or a manually named branch, pass `-- --neon-branch <branch-name>`; to change only the inferred prefix, pass `-- --branch-prefix local` or set `NEON_BRANCH_PREFIX=local`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Drizzle loads `.env` first and then lets `.env.local` override database URLs, so the synced branch URL wins for local migrations. If you intentionally need to target a different database, update `.env.local` or pass the intended `PF_DATABASE_URL_UNPOOLED`/`PF_DATABASE_URL` explicitly for that shell.
+
+Useful commands:
+
+```bash
+npm run db:branch:sync
+npm run db:branch:migrate
+npm run db:pull
+npm run db:generate
+npm run db:check
+npm run db:migrate
+npm run db:seed:demo
+npm run db:studio
+```

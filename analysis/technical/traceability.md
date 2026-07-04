@@ -1,0 +1,69 @@
+# Technical Traceability
+
+Status: Draft  
+Owner: Thouzands  
+Last updated: 2026-06-29  
+Target home: GitHub/Confluence
+
+## Purpose
+
+This document connects product capabilities to the codebase, database schema, tests, and delivery commits.
+It is intentionally practical: it should help a reviewer move from "why does this exist?" to "where is it implemented?"
+
+## Commit Clusters
+
+| Cluster | Representative commits | Product meaning |
+| --- | --- | --- |
+| Foundation and UI shell | `34df7a2`, `693b93f`, `5a4bcd2`, `0dcfab6` | Started portfolio app, created main hero/sections, and clarified component naming. |
+| Architecture documentation | `2b8b48c`, `0becf78`, `8a37c2b`, `7482d77` | Added local docs and route/component/db layering guidance. |
+| Internationalization | `4f41de7`, `bc4f459`, `7fd2f33`, `154ad9d` | Moved app into locale-aware routing and content translations. |
+| CMS and content model | `734bc11`, `a4e903c`, `819f946`, `c973703`, `94504e1` | Established Drizzle, CMS entities, seed data, content mentions, and project model. |
+| Portfolio surfaces | `7e4d781`, `a8397c1`, `0555e11`, `403c727` | Rendered experience, skills, skill details, related work, and project pages. |
+| Structural content | `1646dd0`, `41794d8`, `5fbd111`, `5640a29`, `c76456a` | Defined and stress-tested a safe structural content contract. |
+| Auth foundation | `7b91dd3`, `85d63d3`, `30739e4`, `e9077c4`, `42d0cb8`, `1c96224` | Added Better Auth, portfolio identity, custom identifier flow, and signup/signin routes. |
+| Auth hardening | `c0fa0fc`, `7333bb1`, `bbdf312`, `ca983df` | Added validation, auth rate limiting, and baseline security headers. |
+| Blog comments | `4083894`, `8af92b5`, `1033065`, `cc9073d`, `3d145da`, `94566f8` | Attached comments to blog posts, associated comments with accounts, preserved orphaned comments, and rendered/composed comments. |
+| Operations and quality | `5a50321`, `888fbdf`, `fe788f7`, `213d7a7`, `2870f75` | Added Neon branch sync, cleanup job, unit tests, and CI workflow. |
+| Analysis and planning source | `88702ce` through current docs commits | Established product analysis, tool setup, diagrams, ADRs, risks, validation, and readiness artifacts locally. |
+
+## Capability To Code Map
+
+| Capability | Requirements | Code areas | Verification |
+| --- | --- | --- | --- |
+| Homepage and public portfolio browsing | `FR-001`, `FR-004`, `FR-005`, `FR-006` | `src/app/[locale]`, `src/components/heroes`, `src/components/partials`, `src/components/repeatables` | Manual route checks; future visual/a11y checks. |
+| Internationalized routes and content | `FR-002`, `NFR-006` | `src/i18n`, `messages`, `src/app/[locale]`, translation tables | Existing route behavior; future metadata tests. |
+| CMS data model | `FR-003`, `NFR-002` | `src/db/schema.ts`, `src/db/queries`, `drizzle`, `analysis/technical/schema-table-catalog.md` | `npm run db:check`, schema catalog review, migrations, query tests as added. |
+| Structural content rendering | `FR-008`, `NFR-003` | `src/cms/structural-content`, `src/components/repeatables/structural-content` | `tests/structural-content/rendering.test.ts` |
+| Blog publishing and comments | `FR-007`, `FR-013`, `FR-014` | `src/db/queries/blog.ts`, `src/blog/actions.ts`, `src/components/partials/blog`, `comments` table | `tests/blog/comments.test.ts`; future action tests. |
+| Comment moderation and trust | `FR-018`, `NFR-011` | Future comment moderation schema/actions/rendering | Planned; policy in `analysis/product/interaction-policy.md`; soft-state model in ADR 0009; owner guard model in ADR 0010. |
+| Auth and session flows | `FR-010`, `FR-011`, `FR-012` | `src/auth`, `src/components/auth`, `src/app/api/auth/[...all]`, `src/app/api/auth-state` | `tests/auth`; future integration tests. |
+| Service conversion path | `FR-017`, `FR-021`, `NFR-012` | Future contact/intake route or component, homepage CTA, service offer links | Service definitions and proof mapping are documented; focused intake implementation remains planned in `PF-702`. |
+| CMS authoring workflow | `FR-019`, `NFR-014` | Future owner-only CMS authoring routes, preview flow, validation, media upload, audit fields | Planned implementation; workflow in `analysis/product/cms-authoring-workflow.md`, media lifecycle in `analysis/product/media-asset-lifecycle.md`, boundary in ADR 0011, and media decision in ADR 0012. |
+| Owner account controls | `FR-020`, `NFR-015` | Future owner authorization helper for moderation and authoring tools | Planned; roadmap in `analysis/product/auth-account-roadmap.md`; explicit allowlist model in ADR 0010; CMS authoring guard use in ADR 0011. |
+| Database branch operations | `FR-015`, `NFR-009` | `scripts/sync-neon-branch.mjs`, `drizzle.config.ts`, `README.md` | Manual Neon branch sync; migration checks. |
+| Architecture governance | `NFR-001`, `NFR-007` | `ARCHITECTURE.md`, local docs, `analysis/technical/adr` | Code review and ADR updates; ADR 0007 records route/component boundaries. |
+| Planning governance | `NFR-013` | `analysis/product/stakeholders-and-personas.md`, `analysis/planning/risk-register.md`, `analysis/planning/validation-strategy.md`, `analysis/planning/requirements-traceability-matrix.md`, external tool manifests | Docs validate with CSV/import checks; future implementation slices should cite persona, requirement, story, risk, and validation evidence. ADR 0008 records manifest ownership. |
+
+## Tests Inventory
+
+Detailed command selection, CI coverage, and coverage gaps live in `analysis/technical/verification-catalog.md`.
+
+| Test file | Behavior covered |
+| --- | --- |
+| `tests/auth/validation.test.ts` | Username, email, identifier, password, sign-in, and sign-up validation shapes. |
+| `tests/auth/rate-limit-keys.test.ts` | Client IP resolution and scoped rate-limit key generation. |
+| `tests/structural-content/rendering.test.ts` | Nested structural content rendering, unknown element fallback, unsafe attribute filtering, and null content placeholder. |
+| `tests/blog/comments.test.ts` | Nested comment tree behavior, orphaned replies, author fallback names, and rendered nested bodies. |
+
+## Current Gaps
+
+| Gap | Why it matters | Candidate story |
+| --- | --- | --- |
+| External documentation needs freshness upkeep | Jira import is complete and the current Confluence manifest is published; source changes still need small-batch Confluence sync and source-commit metadata updates. | `PF-601`, `PF-602`, `PF-608`, `PF-610` |
+| FigJam cross-linking is partial | The FigJam board and all current generated diagrams exist; Confluence backlinks and section-specific anchors still need cleanup when durable links are available. | `PF-603` |
+| ADR baseline exists, but future intake and public preview sharing decisions remain uncovered | Route composition is covered by ADR 0007, comment moderation by ADR 0009, owner authorization by ADR 0010, first CMS authoring by ADR 0011, and media lifecycle by ADR 0012. | `PF-604`, `PF-702` |
+| No formal public OpenAPI contract | Current route handlers and server actions are inventoried, but ADR 0006 intentionally defers a spec until public API intent is decided. | `PF-506` or future API decision story |
+| Comment moderation decision exists, but implementation is not built | ADR 0009 defines the soft-state model; schema, owner actions, and rendering tests remain future work. | `PF-407`, `PF-408` |
+| Service conversion path is defined, but no contact/intake surface exists yet | The portfolio can prove capability but still needs a business action path. | `PF-702` |
+| Risk, validation, requirement traceability, and verification catalog artifacts exist, but they are not yet connected to automated PR or Jira workflow | Planning quality has a current baseline; automation can be considered after the manual cadence proves useful. | Future tooling story if needed |
+| CMS authoring and owner auth are planned, but not implemented | ADR 0010 defines the guard strategy, ADR 0011 defines the first authoring boundary, and ADR 0012 defines media lifecycle, but protected helpers/routes/actions are not built. | `PF-206`, `PF-208`, `PF-411` |

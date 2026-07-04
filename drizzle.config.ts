@@ -1,14 +1,15 @@
 import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
-config({ path: ".env.local" });
 config();
+config({ path: ".env.local", override: true });
 
-const databaseUrl = process.env.PF_DATABASE_URL;
+const databaseUrl =
+  process.env.PF_DATABASE_URL_UNPOOLED ?? process.env.PF_DATABASE_URL;
 
 if (!databaseUrl) {
   throw new Error(
-    "Missing PF_DATABASE_URL. Add it to .env.local or .env before running Drizzle commands.",
+    "Missing PF_DATABASE_URL_UNPOOLED or PF_DATABASE_URL. Add it to .env.local before running Drizzle commands.",
   );
 }
 
