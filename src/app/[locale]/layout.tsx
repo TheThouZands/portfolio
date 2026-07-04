@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import {
-  getMessages,
-  getTranslations,
-  setRequestLocale,
-} from "next-intl/server";
+import { hasLocale } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { AuthSessionProvider } from "@/components/auth/AuthSessionProvider";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import OobeLandingHero from "@/components/heroes/oobe-landing";
 import { routing } from "@/i18n/routing";
 
 type LocaleLayoutProps = Readonly<{
@@ -39,7 +34,6 @@ export async function generateMetadata({
 }
 
 export default async function LocaleLayout({
-  children,
   params,
 }: LocaleLayoutProps) {
   const { locale } = await params;
@@ -50,29 +44,10 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const [messages, t] = await Promise.all([
-    getMessages(),
-    getTranslations({ locale, namespace: "SiteHeader" }),
-  ]);
-
   return (
     <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <AuthSessionProvider>
-            <SiteHeader
-              labels={{
-                account: t("account"),
-                create: t("create"),
-                login: t("login"),
-                logout: t("logout"),
-                logoutPending: t("logoutPending"),
-              }}
-              locale={locale}
-            />
-            {children}
-          </AuthSessionProvider>
-        </NextIntlClientProvider>
+      <body style={{ margin: 0, background: "#02040c" }}>
+        <OobeLandingHero />
       </body>
     </html>
   );
