@@ -80,6 +80,8 @@
     "commentBodyLabel": "Comentario",
     "commentBodyPlaceholder": "Escribe un comentario",
     "commentPostButton": "Publicar",
+    "commentReplyButton": "Responder",
+    "commentReplyCancelButton": "Cancelar respuesta",
     "commentPosterPrefix": "Publicando como",
     "commentPostingButton": "Publicando...",
     "mentioningPostsTitle": "Visto en",

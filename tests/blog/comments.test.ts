@@ -4,9 +4,14 @@ import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import type * as CommentPolicy from "../../src/blog/comment-policy";
 import type * as BlogComments from "../../src/components/repeatables/collections/blog/Comments";
 
 const require = createRequire(import.meta.url);
+const {
+  BLOG_COMMENT_BODY_MAX_LENGTH,
+  validateBlogCommentBody,
+} = require("../../src/blog/comment-policy.ts") as typeof CommentPolicy;
 const {
   buildCommentTree,
   default: CommentThread,
@@ -45,6 +50,31 @@ test("comment tree nests replies and keeps orphaned replies visible", () => {
   assert.equal(thread[0]?.id, 1);
   assert.equal(thread[0]?.replies[0]?.id, 2);
   assert.equal(thread[1]?.id, 3);
+});
+
+test("comment body validation trims content and caps stored length", () => {
+  assert.deepEqual(validateBlogCommentBody("  hello  "), {
+    body: "hello",
+    reason: null,
+    valid: true,
+  });
+  assert.deepEqual(validateBlogCommentBody("   "), {
+    body: "",
+    reason: "empty",
+    valid: false,
+  });
+  assert.equal(
+    validateBlogCommentBody("x".repeat(BLOG_COMMENT_BODY_MAX_LENGTH)).valid,
+    true,
+  );
+  assert.deepEqual(
+    validateBlogCommentBody("x".repeat(BLOG_COMMENT_BODY_MAX_LENGTH + 1)),
+    {
+      body: "x".repeat(BLOG_COMMENT_BODY_MAX_LENGTH + 1),
+      reason: "too_long",
+      valid: false,
+    },
+  );
 });
 
 test("comment thread renders authors, fallback author names, and nested bodies", () => {

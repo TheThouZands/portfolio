@@ -1,6 +1,6 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 import type { BlogPostCmsStatus } from "@/auth/blog-post-status-permission";
@@ -9,6 +9,7 @@ import {
   authorizeCurrentAuthRole,
   getCurrentAuthAccount,
 } from "@/auth/roles";
+import { validateBlogCommentBody } from "@/blog/comment-policy";
 import { db } from "@/db/client";
 import { blogPosts, comments } from "@/db/schema";
 
@@ -64,6 +65,51 @@ function readBlogIndexPathname(pathname: string | null): string | null {
   return `/${segments[0]}/blog`;
 }
 
+type OptionalPositiveIntegerParse =
+  | {
+      valid: false;
+      value: null;
+    }
+  | {
+      valid: true;
+      value: number | null;
+    };
+
+function readOptionalPositiveInteger(
+  formData: FormData,
+  key: string,
+): OptionalPositiveIntegerParse {
+  const rawValue = readFormString(formData, key);
+
+  if (!rawValue) {
+    return {
+      valid: true,
+      value: null,
+    };
+  }
+
+  if (!/^\d+$/.test(rawValue)) {
+    return {
+      valid: false,
+      value: null,
+    };
+  }
+
+  const value = Number.parseInt(rawValue, 10);
+
+  if (!Number.isSafeInteger(value) || value <= 0) {
+    return {
+      valid: false,
+      value: null,
+    };
+  }
+
+  return {
+    valid: true,
+    value,
+  };
+}
+
 export async function createBlogCommentAction(
   _previousState: CreateBlogCommentActionState,
   formData: FormData,
@@ -78,27 +124,67 @@ export async function createBlogCommentAction(
   }
 
   const blogPostId = Number.parseInt(readFormString(formData, "blogPostId"), 10);
-  const body = readFormString(formData, "body").trim();
+  const bodyValidation = validateBlogCommentBody(readFormString(formData, "body"));
+  const parentCommentIdParse = readOptionalPositiveInteger(
+    formData,
+    "parentCommentId",
+  );
   const pathname = readSafePathname(formData);
 
-  if (!Number.isSafeInteger(blogPostId) || blogPostId <= 0) {
+  if (
+    !Number.isSafeInteger(blogPostId) ||
+    blogPostId <= 0 ||
+    !parentCommentIdParse.valid
+  ) {
     return {
       status: "error",
       message: "Could not post comment.",
     };
   }
 
-  if (!body) {
+  if (bodyValidation.reason === "empty") {
     return {
       status: "error",
       message: "Write a comment first.",
     };
   }
 
+  if (bodyValidation.reason === "too_long") {
+    return {
+      status: "error",
+      message: "Keep comments under 5000 characters.",
+    };
+  }
+
+  const parentCommentId = parentCommentIdParse.value;
+
   try {
+    if (parentCommentId !== null) {
+      const [parentComment] = await db
+        .select({
+          id: comments.id,
+        })
+        .from(comments)
+        .where(
+          and(
+            eq(comments.id, parentCommentId),
+            eq(comments.blog_post_id, blogPostId),
+          ),
+        )
+        .limit(1);
+
+      if (!parentComment) {
+        return {
+          status: "error",
+          message: "Could not post comment.",
+        };
+      }
+    }
+
     await db.insert(comments).values({
       blog_post_id: blogPostId,
-      body,
+      body: bodyValidation.body,
+      parent_comment_id: parentCommentId,
       userId: account.id,
     });
 

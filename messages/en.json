@@ -80,6 +80,8 @@
     "commentBodyLabel": "Comment",
     "commentBodyPlaceholder": "Write a comment",
     "commentPostButton": "Post",
+    "commentReplyButton": "Reply",
+    "commentReplyCancelButton": "Cancel reply",
     "commentPosterPrefix": "Posting as",
     "commentPostingButton": "Posting...",
     "mentioningPostsTitle": "As Seen In",

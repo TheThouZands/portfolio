@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import CommentsSessionSection from "@/components/partials/blog/CommentsSessionSection";
 import { CommentDeleteButton } from "@/components/partials/blog/CommentDeleteButton";
+import { CommentReplyIsland } from "@/components/partials/blog/CommentReplyIsland";
 import CommentThread from "@/components/repeatables/collections/blog/Comments";
 import { getBlogPostComments } from "@/db/queries/blog";
 
@@ -34,7 +35,22 @@ export default async function Comments({ blogPostId, locale }: CommentsProps) {
           fallbackAuthorName={t("commentAuthorFallback")}
           locale={locale}
           renderActions={(comment) => (
-            <CommentDeleteButton commentId={comment.id} />
+            <>
+              <CommentReplyIsland
+                blogPostId={blogPostId}
+                commentId={comment.id}
+                labels={{
+                  bodyLabel: t("commentBodyLabel"),
+                  bodyPlaceholder: t("commentBodyPlaceholder"),
+                  cancelReplyButton: t("commentReplyCancelButton"),
+                  postButton: t("commentPostButton"),
+                  postingButton: t("commentPostingButton"),
+                  replyButton: t("commentReplyButton"),
+                }}
+                locale={locale}
+              />
+              <CommentDeleteButton commentId={comment.id} />
+            </>
           )}
         />
       ) : null}

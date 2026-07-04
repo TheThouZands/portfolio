@@ -7,6 +7,7 @@ import {
   createBlogCommentAction,
   type CreateBlogCommentActionState,
 } from "@/blog/actions";
+import { BLOG_COMMENT_BODY_MAX_LENGTH } from "@/blog/comment-policy";
 
 export type CommentComposerLabels = {
   bodyLabel: string;
@@ -19,6 +20,8 @@ type CommentComposerProps = {
   blogPostId: number;
   labels: CommentComposerLabels;
   locale: string;
+  onSuccess?: () => void;
+  parentCommentId?: number;
 };
 
 const initialState: CreateBlogCommentActionState = {
@@ -30,6 +33,8 @@ export default function CommentComposer({
   blogPostId,
   labels,
   locale,
+  onSuccess,
+  parentCommentId,
 }: CommentComposerProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -39,7 +44,9 @@ export default function CommentComposer({
     createBlogCommentAction,
     initialState,
   );
-  const bodyId = `blog-comment-body-${blogPostId}`;
+  const bodyId = parentCommentId
+    ? `blog-comment-reply-${blogPostId}-${parentCommentId}`
+    : `blog-comment-body-${blogPostId}`;
 
   useEffect(() => {
     if (handledStateRef.current === state) {
@@ -49,6 +56,7 @@ export default function CommentComposer({
     if (state.status === "success") {
       handledStateRef.current = state;
       formRef.current?.reset();
+      onSuccess?.();
       router.refresh();
       return;
     }
@@ -57,16 +65,20 @@ export default function CommentComposer({
       handledStateRef.current = state;
       router.push(`/${locale}/auth`);
     }
-  }, [locale, router, state]);
+  }, [locale, onSuccess, router, state]);
 
   return (
     <form action={formAction} ref={formRef}>
       <input name="blogPostId" type="hidden" value={blogPostId} />
+      {parentCommentId ? (
+        <input name="parentCommentId" type="hidden" value={parentCommentId} />
+      ) : null}
       <input name="pathname" type="hidden" value={pathname} />
 
       <label htmlFor={bodyId}>{labels.bodyLabel}</label>
       <textarea
         id={bodyId}
+        maxLength={BLOG_COMMENT_BODY_MAX_LENGTH}
         name="body"
         placeholder={labels.bodyPlaceholder}
         required
